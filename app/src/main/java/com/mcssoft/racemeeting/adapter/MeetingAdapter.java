@@ -1,0 +1,131 @@
+package com.mcssoft.racemeeting.adapter;
+
+import android.database.Cursor;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.mcssoft.racemeeting.database.SchemaConstants;
+import com.mcssoft.racemeeting.utility.MeetingTime;
+
+import mcssoft.com.racemeeting3.R;
+
+public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingViewHolder> {
+
+    //<editor-fold defaultstate="collapsed" desc="Region: MeetingViewHolder">
+    public class MeetingViewHolder extends RecyclerView.ViewHolder {
+
+        public MeetingViewHolder(View view) {
+            super(view);
+            tvCityCode = (TextView) view.findViewById(R.id.tv_city_code);
+            tvRaceCode = (TextView) view.findViewById(R.id.tv_race_code);
+            tvRaceNo = (TextView) view.findViewById(R.id.tv_race_no);
+            tvRaceSel = (TextView) view.findViewById(R.id.tv_race_sel);
+            tvRaceTime = (TextView) view.findViewById(R.id.tv_race_time);
+            tvDChange = (TextView) view.findViewById(R.id.tv_dchange_testing);
+        }
+
+        public TextView tvCityCode;
+        public TextView tvRaceCode;
+        public TextView tvRaceNo;
+        public TextView tvRaceSel;
+        public TextView tvRaceTime;
+        public TextView tvDChange;
+    }
+    //</editor-fold>
+
+    public MeetingAdapter() {
+        setHasStableIds(true);
+    }
+
+    @Override
+    public MeetingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Log.d(LOG_TAG, "onCreateViewHolder");
+        if ( parent instanceof RecyclerView ) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.racemeet_row, parent, false);
+            view.setFocusable(true);
+            return new MeetingViewHolder(view);
+        } else {
+            throw new RuntimeException("Not bound to RecyclerView");
+        }
+    }
+
+    @Override
+    public void onBindViewHolder(MeetingViewHolder holder, int position) {
+        Log.d(LOG_TAG, "onBindViewHolder");
+        if (!cursor.moveToPosition(position)) {
+            throw new IllegalStateException("Couldn't move cursor to position: " + position);
+        }
+        adapaterOnBindViewHolder(holder, position);
+    }
+
+    @Override
+    public int getItemCount() {
+        return cursor != null ? cursor.getCount() : 0;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        Log.d(LOG_TAG, "getItemId");
+        cursor.moveToPosition(position);
+        return cursor.getLong(idColNdx);
+    }
+
+    public void swapCursor(Cursor newCursor) {
+        Log.d(LOG_TAG, "swapCursor");
+        cursor = newCursor;
+
+        if(cursor != null) {
+            cursor.moveToFirst();
+            idColNdx = cursor.getColumnIndex(SchemaConstants.COLUMN_ROWID);
+            cityCodeColNdx = cursor.getColumnIndex(SchemaConstants.COLUMN_CITY_CODE);
+            raceCodeColNdx = cursor.getColumnIndex(SchemaConstants.COLUMN_RACE_CODE);
+            raceNumColNdx = cursor.getColumnIndex(SchemaConstants.COLUMN_RACE_NUM);
+            raceSelColNdx = cursor.getColumnIndex(SchemaConstants.COLUMN_RACE_SEL);
+            dateTimeColNdx = cursor.getColumnIndex(SchemaConstants.COLUMN_DATE_TIME);
+            chgReqColNdx = cursor.getColumnIndex(SchemaConstants.COLUMN_D_CHG_REQ);
+        }
+        notifyDataSetChanged();
+    }
+
+    public Cursor getCursor() {
+        return cursor;
+    }
+
+    private void adapaterOnBindViewHolder(MeetingViewHolder holder, int position) {
+        cursor.moveToPosition(position);
+
+        holder.tvCityCode.setText(cursor.getString(cityCodeColNdx));
+        holder.tvRaceCode.setText(cursor.getString(raceCodeColNdx));
+        holder.tvRaceNo.setText(cursor.getString(raceNumColNdx));
+        holder.tvRaceSel.setText(cursor.getString(raceSelColNdx));
+
+        String raceTime = MeetingTime.getInstance().getTimeFromMillis(cursor.getLong(dateTimeColNdx),true);
+        holder.tvRaceTime.setText(raceTime);
+
+        String dChangeReq = cursor.getString(chgReqColNdx);
+        holder.tvDChange.setText(dChangeReq);
+
+        if (dChangeReq.equals("Y")) {
+            view.setBackgroundResource(R.drawable.et_basic);
+        } else {
+            view.setBackgroundResource(0);
+        }
+    }
+
+    private View view;
+    private Cursor cursor;
+
+    private int idColNdx;
+    private int cityCodeColNdx;
+    private int raceCodeColNdx;
+    private int raceNumColNdx;
+    private int raceSelColNdx;
+    private int dateTimeColNdx;
+    private int chgReqColNdx;
+
+    private String LOG_TAG = this.getClass().getCanonicalName();
+}

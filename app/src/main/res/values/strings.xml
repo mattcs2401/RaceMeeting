@@ -1,0 +1,151 @@
+<resources>
+    <string name="app_name">Race Meeting</string>
+    <string name="action_settings">Settings</string>
+    <string name="app_name_prefs">Preferences</string>
+    <string name="app_name_edit">Edit</string>
+    <string name="app_name_review">Review</string>
+    <string name="edit_reminder_title">Race Meeting - Edit</string>
+    <string name="no_meetings">No Meetings Yet</string>
+    <string name="title">Title</string>
+    <string name="body">Body</string>
+    <!-- <string name="confirm">Save</string> -->
+    <string name="edit">Edit</string>
+    <string name="edit_reminder">Edit Meeting</string>
+    <string name="date">Date:</string>
+    <string name="time">Time</string>
+    <string name="time_change">Change</string>
+
+    <!-- Menu -->
+    <string name="lbl_menu_insert">Add a meeting</string>
+    <string name="lbl_menu_settings">Settings</string>
+    <string name="lbl_ctx_menu_delete">Delete this meeting</string>
+    <string name="lbl_ctx_menu_edit">Edit this meeting</string>
+
+    <!-- Toasts -->
+    <string name="meeting_saved">Meeting Saved.</string>
+    <string name="meeting_saved_message">Meeting has been saved.</string>
+    <string name="meeting_removed">Meeting Removed.</string>
+    <string name="meeting_removed_message">Meeting has been removed.</string>
+    <string name="meeting_updated">Meeting Updated.</string>
+
+    <!-- Notification Bar (TBA) -->
+    <!--<string name="notify_upcoming_meeting_message">A race meeting is nearing start time.</string>
+    <string name="notify_upcoming_meeting_title">Meeting Reminder</string>
+    <string name="notify_upcoming_meeting_reminder">Meeting reminder!</string>-->
+
+    <!-- Preferences. -->
+    <string name="pref_meeting_notifications_key">"pref_meeting_notifications_key</string>
+    <string name="pref_meeting_notifications_title">Preference Notifications</string>
+    <string name="pref_meeting_notifications_summary">Enable notifications when preferences change.</string>
+    <string name="pref_meeting_notifications_default">0</string>
+
+    <string name="pref_time_format_key">time_format_pref_key</string>
+    <string name="pref_time_format_title">Meeting Time Format</string>
+    <string name="pref_time_format_summary">Sets the default race time format (12/24 HR).</string>
+    <string name="pref_time_format_default">0</string>
+
+    <string name="pref_default_race_code_key">default_race_code_pref_key</string>
+    <string name="pref_default_race_code_title">Deafault Race Code</string>
+    <string name="pref_default_race_code_summary">Sets the default race code.</string>
+    <string name="pref_default_race_code_default">1</string>
+
+    <string name="time_actions_prefcat_key">time_actions_prefcat_key</string>
+    <string name="pref_category_time_title">Meeting Time Actions</string>
+
+    <string name="pref_time_prior_key">time_prior_pref_key</string>
+    <string name="pref_time_prior_title">Meeting Prior Reminder Time</string>
+    <string name="pref_time_prior_summary">Sets the default prior to race time for a reminder.</string>
+    <string name="pref_time_prior_default">0</string>
+
+    <string name="pref_time_past_key">time_past_pref_key</string>
+    <string name="pref_time_past_title">Meeting Past Race Time</string>
+    <string name="pref_time_past_summary">Sets the default past race time action.</string>
+    <string name="pref_time_past_default">0</string>
+
+    <!-- Generic (button text) -->
+    <string name="lbl_ok">OK</string>
+    <string name="lbl_cancel">Cancel</string>
+    <string name="lbl_delete">Delete</string>
+    <string name="lbl_save">Save</string>
+    <string name="lbl_edit">Edit</string>
+
+    <!-- Edit Fragment field labels. -->
+    <string name="lbl_city_code">City Code:</string>
+    <string name="lbl_race_code">Race Code:</string>
+    <string name="lbl_race_no">Race No:</string>
+    <string name="lbl_race_sel">Race Sel:</string>
+    <string name="lbl_race_time">Race Time:</string>
+
+    <!-- ** Fragments ** -->
+    <!-- City Codes -->
+    <string name="lbl_sel_city_code">Select City Code</string>
+    <string name="lbl_sel_city_code_msg">Please select a City Code.</string>   <!-- Toast -->
+    <string name="cc_A">A</string>
+    <string name="cc_B">B</string>
+    <string name="cc_C">C</string>
+    <string name="cc_D">D</string>
+    <string name="cc_E">E</string>
+    <string name="cc_F">F</string>
+    <string name="cc_I">I</string>
+    <string name="cc_L">L</string>
+    <string name="cc_M">M</string>
+    <string name="cc_N">N</string>
+    <string name="cc_O">O</string>
+    <string name="cc_P">P</string>
+    <string name="cc_Q">Q</string>
+    <string name="cc_S">S</string>
+    <string name="cc_T">T</string>
+    <string name="cc_V">V</string>
+    <string name="cc_X">X</string>
+    <string name="cc_Z">Z</string>
+
+    <!-- Race Codes -->
+    <string name="lbl_sel_race_code">Select Race Code</string>
+    <string name="lbl_sel_race_code_msg">Please select a Race Code.</string>   <!-- Toast -->
+    <string name="rc_R">R</string>
+    <string name="rc_T">T</string>
+    <string name="rc_G">G</string>
+    <string name="rc_S">S</string>
+
+    <!-- Dialog Delete -->
+    <string name="lbl_delete_dialog_header">Delete Meeting</string>
+    <string name="lbl_delete_dialog_msg">Delete this meeting (TBA meeting details) ?</string>
+
+    <!-- Dialog title. -->
+    <string name="dialog_title_icon_desc"></string>
+
+    <!-- Meeting keyboard. -->
+    <string name="lbl_value_required">A value is required.</string>  <!-- Toast -->
+
+    <!-- Other -->
+    <string name="do_nothing"></string>
+    <string name="invalid_orientation">Invalid orientation.</string>
+
+    <!-- MeetingDatabase exception messages. -->
+    <string name="database_already_init">Object MeetingDatabase already initialised: call getInstance().method()</string>
+    <string name="database_not_init">Object MeetingDatabase not initialised: call MeetingDatabase.getInstance(Context) first.</string>
+
+    <!-- MeetingTime exception messages. -->
+    <string name="meeting_time_already_init">Object MeetingTime already initialised: call getInstance().method()</string>
+    <string name="meeting_time_not_init">Object MeetingTime not initialised: call MeetingTime.getInstance(Context) first.</string>
+
+    <!-- MeetingDisplay exception messages. -->
+    <string name="meeting_display_already_init">Object MeetingDisplay already initialised: call getInstance().method()</string>
+    <string name="meeting_display_not_init">Object MeetingDisplay not initialised: call MeetingDisplay.getInstance(Context) first.</string>
+
+    <!-- MeetingPreferences exception messages. -->
+    <string name="meeting_pref_already_init">Object MeetingPreference already initialised: call getInstance().method()</string>
+    <string name="meeting_pref_not_init">Object MeetingPreference not initialised: call MeetingTime.getInstance(Context) first.</string>
+
+    <!-- ListingService exception. -->
+    <string name="listing_service_exception">Unable to pass the ListingService object back to the ListingFragment.</string>
+
+    <!-- NotifyService exception. -->
+    <string name="notify_service_exception">Unable to pass the NotifyService object back to the ListingFragment.</string>
+
+    <!-- EditFragment save() exception messages. -->
+    <string name="state_except">Unable to update; path=</string>
+    <string name="state_except_multi_row">Unable to update RaceMeeting: more than one rows match rowId: </string>
+
+    <string name="empty_string"></string>
+</resources>

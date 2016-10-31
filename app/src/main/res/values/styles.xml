@@ -1,0 +1,199 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ll1_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
+
+    <style name="ll2_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_gravity">right</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
+
+    <style name="ll3_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_gravity">left</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
+
+    <!-- RadioGroup text style. -->
+    <style name="text_style_base" parent="android:TextAppearance.Large">
+        <item name="android:textStyle">bold</item>
+        <item name="android:typeface">normal</item>
+        <item name="android:padding">8dp</item>
+    </style>
+
+    <!-- TextView (Edit) style. -->
+    <style name="tv_text_style" parent="text_style_base">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="tv1_text_style" parent="text_style_base">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:layout_marginStart">32dp</item>
+    </style>
+
+    <!-- EditView (Edit) style. -->
+    <style name="et_text_style" parent="text_style_base">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#000000</item><!--black-->
+        <item name="android:gravity">center</item>
+        <item name="android:minWidth">64sp</item>
+    </style>
+
+    <style name="et1_text_style" parent="text_style_base">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#000000</item><!--black-->
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/et_basic</item>
+        <item name="android:layout_weight">0.5</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_marginEnd">32dp</item>
+    </style>
+
+    <style name="et2_text_style" parent="et1_text_style">
+        <item name="android:layout_weight">0.7</item>
+    </style>
+
+    <style name="btn_style" parent="text_style_base">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="btn1_style" parent="text_style_base">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1.25</item>
+        <item name="android:layout_marginEnd">32dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="btn_dialog_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">#00BCD4</item>
+        <item name="android:background">#424242</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:padding">8dp</item>
+    </style>
+
+    <style name="btn1_dialog_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">#00BCD4</item>
+        <item name="android:background">#424242</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_weight">0.75</item>
+        <item name="android:layout_marginEnd">32dp</item>
+    </style>
+
+    <style name="btn_dialog_style_number">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#00BCD4</item>
+        <item name="android:background">#424242</item>
+        <!-- doesn't work <item name="android:layout_margin">8dp</item> -->
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- Generic layout styles. -->
+
+    <style name="layout_wrap_both">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="layout_match_both">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="layout_wrap_match">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="layout_match_wrap_h">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="layout_fill_both">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+
+    <style name="layout_fill_both_v">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <!-- Spacer -->
+    <style name="space_2col_8dp_fill_h">
+        <item name="android:layout_column">0</item>
+        <item name="android:layout_columnSpan">2</item>
+        <item name="android:layout_height">8dp</item>
+        <item name="android:layout_gravity">fill_horizontal</item>
+    </style>
+
+    <!-- Spacer -->
+    <style name="space_3col_8dp_fill_h">
+        <item name="android:layout_column">0</item>
+        <item name="android:layout_columnSpan">3</item>
+        <item name="android:layout_height">8dp</item>
+        <item name="android:layout_gravity">fill_horizontal</item>
+    </style>
+
+    <style name="FloatingActionButtonLarge" parent="android:Widget.Material.Button">
+        <item name="android:background">@drawable/fab_background</item>
+        <item name="android:stateListAnimator">@drawable/fab_state_list_anim</item>
+        <item name="android:layout_width">56dp</item>
+        <item name="android:layout_height">56dp</item>
+    </style>
+
+    <style name="FloatingActionButtonMedium" parent="android:Widget.Material.Button">
+        <item name="android:background">@drawable/fab_background</item>
+        <item name="android:stateListAnimator">@drawable/fab_state_list_anim</item>
+        <item name="android:layout_width">45dp</item>
+        <item name="android:layout_height">45dp</item>
+    </style>
+
+    <style name="FloatingActionButtonSmall" parent="android:Widget.Material.Button">
+        <item name="android:background">@drawable/fab_background</item>
+        <item name="android:stateListAnimator">@drawable/fab_state_list_anim</item>
+        <item name="android:layout_width">34dp</item>
+        <item name="android:layout_height">34dp</item>
+    </style>
+
+</resources>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Meeting Past Race Time. -->
+    <string-array name="meetingPastRaceTimeVals">
+        <item>Take no action at this time</item>
+        <item>Auto delete the meeting entry</item>
+        <item>Highlight the meeting entry</item>
+    </string-array>
+    <string-array name="meetingPastRaceTime">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Meeting Time Format. -->
+    <string-array name="meetingTimeFormatVals">
+        <item>24 HR</item>
+        <item>12 HR</item>
+    </string-array>
+    <string-array name="meetingTimeFormat">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <!-- Meeting Prior Reminder Time. -->
+    <string-array name="meetingPriorReminderTimeVals">
+        <item>No reminder</item>
+        <item>1 minute</item>
+        <item>3 minutes</item>
+        <item>5 minutes</item>
+    </string-array>
+    <string-array name="meetingPriorReminderTime">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- Meeting Default Race Code. -->
+    <string-array name="meetingDefaultRaceCodeVals">
+        <item>None</item>
+        <item>R</item>
+        <item>G</item>
+        <item>T</item>
+        <item>S</item>
+    </string-array>
+    <string-array name="meetingDefaultRaceCode">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <!-- Default ? -->
+    <string-array name="empty_array"></string-array>
+</resources>

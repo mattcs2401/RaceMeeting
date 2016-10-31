@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/id_city_codes_detail"
+    style="@style/layout_fill_both"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_race_code_label"
+        style="@style/text_style_base"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:text="@string/lbl_sel_city_code"
+        android:gravity="center_horizontal"
+        android:textColor="?attr/colorPrimary"
+        android:background="?android:attr/colorBackground" />
+
+    <ScrollView
+        android:id="@+id/sv_city_codes"
+        style="@style/layout_wrap_both"
+        android:clickable="true"
+        android:layout_gravity="center">
+
+        <RadioGroup
+            android:id="@+id/rg_city_codes"
+            style="@style/layout_wrap_both" >
+
+            <RadioButton
+                android:id="@+id/rb_A"
+                style="@style/text_style_base"
+                android:button="@drawable/rb_custom_select"
+                android:text="@string/cc_A" />
+
+            <RadioButton
+                android:id="@+id/rb_B"
+                style="@style/text_style_base"
+                android:button="@drawable/rb_custom_select"
+                android:text="@string/cc_B" />
+
+            <RadioButton
+                android:id="@+id/rb_C"
+                style="@style/text_style_base"
+                android:button="@drawable/rb_custom_select"
+                android:text="@string/cc_C" />
+
+            <RadioButton
+                android:id="@+id/rb_D"
+                style="@style/text_style_base"
+                android:button="@drawable/rb_custom_select"
+                android:text="@string/cc_D" />
+
+            <RadioButton
+                android:id="@+id/rb_E"
+                style="@style/text_style_base"
+                android:button="@drawable/rb_custom_select"
+                android:text="@string/cc_E" />
+
+            <RadioButton
+                android:id="@+id/rb_F"
+                style="@style/text_style_base"
+                android:button="@drawable/rb_custom_select"
+                android:text="@string/cc_F" />
+
+            <RadioButton
+                android:id="@+id/rb_I"
+                style="@style/text_style_base"
+                android:button="@drawable/rb_custom_select"
+                android:text="@string/cc_I" />
+
+            <RadioButton
+                android:id="@+id/rb_L"
+                style="@style/text_style_base"
+                android:button="@drawable/rb_custom_select"
+                android:text="@string/cc_L" />
+
+            <RadioButton
+                android:id="@+id/rb_M"
+                style="@style/text_style_base"
+                android:button="@drawable/rb_custom_select"
+                android:text="@string/cc_M" />
+
+            <RadioButton
+                android:id="@+id/rb_N"
+                style="@style/text_style_base"
+                android:button="@drawable/rb_custom_select"
+                android:text="@string/cc_N" />
+
+            <RadioButton
+                android:id="@+id/rb_O"
+                style="@style/text_style_base"
+                android:button="@drawable/rb_custom_select"
+                android:text="@string/cc_O" />
+
+            <RadioButton
+                android:id="@+id/rb_P"
+                style="@style/text_style_base"
+                android:button="@drawable/rb_custom_select"
+                android:text="@string/cc_P" />
+
+            <RadioButton
+                android:id="@+id/rb_Q"
+                style="@style/text_style_base"
+                android:button="@drawable/rb_custom_select"
+                android:text="@string/cc_Q" />
+
+            <RadioButton
+                android:id="@+id/rb_S"
+                style="@style/text_style_base"
+                android:button="@drawable/rb_custom_select"
+                android:text="@string/cc_S" />
+
+            <RadioButton
+                android:id="@+id/rb_T"
+                style="@style/text_style_base"
+                android:button="@drawable/rb_custom_select"
+                android:text="@string/cc_T" />
+
+            <RadioButton
+                android:id="@+id/rb_V"
+                style="@style/text_style_base"
+                android:button="@drawable/rb_custom_select"
+                android:text="@string/cc_V" />
+
+            <RadioButton
+                android:id="@+id/rb_X"
+                style="@style/text_style_base"
+                android:button="@drawable/rb_custom_select"
+                android:text="@string/cc_X" />
+
+            <RadioButton
+                android:id="@+id/rb_Z"
+                style="@style/text_style_base"
+                android:button="@drawable/rb_custom_select"
+                android:text="@string/cc_Z" />
+
+        </RadioGroup>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/id_city_codes"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/city_codes_detail" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/id_fab_city_codes"
+        style="@style/FloatingActionButtonMedium"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@android:drawable/ic_input_add"
+        app:layout_anchor="@id/id_city_codes"
+        app:layout_anchorGravity="top|end"
+        android:visibility="invisible" />
+
+</android.support.design.widget.CoordinatorLayout>

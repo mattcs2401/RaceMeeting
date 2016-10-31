@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_title"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="2"
+    android:rowCount="1"
+    android:useDefaultMargins="true"
+    android:background="#FFFFFF" >
+
+    <ImageView
+        android:id="@+id/iv_dialog_delete_title"
+        style="@style/layout_wrap_both"
+        android:layout_gravity="start"
+        android:contentDescription="@string/dialog_title_icon_desc" />
+
+    <TextView
+        android:id="@+id/tv_dialog_delete_title"
+        style="@style/layout_wrap_both"
+        android:gravity="center"
+        android:layout_gravity="start"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        android:padding="10dp"
+        android:text="" />
+
+</GridLayout>

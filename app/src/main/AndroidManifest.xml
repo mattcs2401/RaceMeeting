@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="mcssoft.com.racemeeting3">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar"> <!-- using custom toolbar -->
+        <activity android:name="com.mcssoft.racemeeting.activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.mcssoft.racemeeting.activity.EditActivity"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity android:name="com.mcssoft.racemeeting.activity.DetailActivity" />
+        <activity android:name="com.mcssoft.racemeeting.activity.PreferencesActivity" />
+        <service android:name="com.mcssoft.racemeeting.services.ListingService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="false" />
+        <service android:name="com.mcssoft.racemeeting.services.NotifyService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="false" />
+        <provider
+            android:name="com.mcssoft.racemeeting.database.MeetingProvider"
+            android:authorities="com.mcssoft.racemeeting.database.MeetingProvider"
+            android:exported="false" />
+    </application>
+
+</manifest>
