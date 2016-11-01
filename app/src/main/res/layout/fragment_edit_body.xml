@@ -31,8 +31,7 @@
         app:layout_constraintLeft_toRightOf="@+id/tvRaceCity"
         android:textColor="#000000"
         android:textStyle="bold"
-        android:typeface="normal"
-        tools:layout_editor_absoluteY="0dp" />
+        android:typeface="normal" />
 
     <TextView
         android:text="Race Code"
