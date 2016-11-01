@@ -6,36 +6,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.mcssoft.racemeeting.database.SchemaConstants;
 import com.mcssoft.racemeeting.utility.MeetingTime;
 
 import mcssoft.com.racemeeting3.R;
 
-public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingViewHolder> {
-
-    //<editor-fold defaultstate="collapsed" desc="Region: MeetingViewHolder">
-    public class MeetingViewHolder extends RecyclerView.ViewHolder {
-
-        public MeetingViewHolder(View view) {
-            super(view);
-            tvCityCode = (TextView) view.findViewById(R.id.tv_city_code);
-            tvRaceCode = (TextView) view.findViewById(R.id.tv_race_code);
-            tvRaceNo = (TextView) view.findViewById(R.id.tv_race_no);
-            tvRaceSel = (TextView) view.findViewById(R.id.tv_race_sel);
-            tvRaceTime = (TextView) view.findViewById(R.id.tv_race_time);
-            tvDChange = (TextView) view.findViewById(R.id.tv_dchange_testing);
-        }
-
-        public TextView tvCityCode;
-        public TextView tvRaceCode;
-        public TextView tvRaceNo;
-        public TextView tvRaceSel;
-        public TextView tvRaceTime;
-        public TextView tvDChange;
-    }
-    //</editor-fold>
+    public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
 
     public MeetingAdapter() {
         setHasStableIds(true);
@@ -47,7 +24,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
         if ( parent instanceof RecyclerView ) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.racemeet_row, parent, false);
             view.setFocusable(true);
-            return new MeetingViewHolder(view);
+            return new MeetingViewHolder(view); // don't need to keep a local copy, framework now supplies.
         } else {
             throw new RuntimeException("Not bound to RecyclerView");
         }
@@ -87,8 +64,8 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
             raceSelColNdx = cursor.getColumnIndex(SchemaConstants.COLUMN_RACE_SEL);
             dateTimeColNdx = cursor.getColumnIndex(SchemaConstants.COLUMN_DATE_TIME);
             chgReqColNdx = cursor.getColumnIndex(SchemaConstants.COLUMN_D_CHG_REQ);
+            notifyDataSetChanged();
         }
-        notifyDataSetChanged();
     }
 
     public Cursor getCursor() {
@@ -98,16 +75,16 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
     private void adapaterOnBindViewHolder(MeetingViewHolder holder, int position) {
         cursor.moveToPosition(position);
 
-        holder.tvCityCode.setText(cursor.getString(cityCodeColNdx));
-        holder.tvRaceCode.setText(cursor.getString(raceCodeColNdx));
-        holder.tvRaceNo.setText(cursor.getString(raceNumColNdx));
-        holder.tvRaceSel.setText(cursor.getString(raceSelColNdx));
+        holder.getCityCode().setText(cursor.getString(cityCodeColNdx));
+        holder.getRaceCode().setText(cursor.getString(raceCodeColNdx));
+        holder.getRaceNo().setText(cursor.getString(raceNumColNdx));
+        holder.getRaceSel().setText(cursor.getString(raceSelColNdx));
 
         String raceTime = MeetingTime.getInstance().getTimeFromMillis(cursor.getLong(dateTimeColNdx),true);
-        holder.tvRaceTime.setText(raceTime);
+        holder.getRaceTime().setText(raceTime);
 
         String dChangeReq = cursor.getString(chgReqColNdx);
-        holder.tvDChange.setText(dChangeReq);
+        holder.getDChange().setText(dChangeReq);
 
         if (dChangeReq.equals("Y")) {
             view.setBackgroundResource(R.drawable.et_basic);
