@@ -1,7 +1,20 @@
 package com.mcssoft.racemeeting.dialogs;
 
 
-import mcssoft.com.racemeeting3.R;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.ContentUris;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.mcssoft.racemeeting.database.DatabaseHelper;
 import com.mcssoft.racemeeting.database.MeetingProvider;
@@ -10,18 +23,7 @@ import com.mcssoft.racemeeting.interfaces.IDeleteDialog;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingTime;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
-import android.content.ContentUris;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
+import mcssoft.com.racemeeting3.R;
 
 public class DeleteDialog extends DialogFragment
         implements View.OnClickListener {
@@ -31,13 +33,12 @@ public class DeleteDialog extends DialogFragment
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);
-        activity = getActivity();
         rowId = getArguments().getLong(MeetingConstants.DELETE_DIALOG_ROWID);
     }
 
     @Override
     public Dialog onCreateDialog(Bundle state) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(R.layout.dialog_delete)
                 .setCustomTitle(setDialogTitleView())
                 .setPositiveButton(null, null)
@@ -49,7 +50,6 @@ public class DeleteDialog extends DialogFragment
     @Override
     public void onStart() {
         super.onStart();
-
         initialise();
     }
 
@@ -69,13 +69,13 @@ public class DeleteDialog extends DialogFragment
     //@SuppressLint("InflateParams")
     private View setDialogTitleView() {
 
-        View view = activity.getLayoutInflater().inflate(R.layout.dialog_delete_title, null);
+        View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_delete_title, null);
 
-        ImageView iv = (ImageView) view.findViewById(R.id.iv_dialog_delete_title);
-        iv.setImageResource(R.drawable.ic_warning_black_24dp);
+        ImageView imageView = (ImageView) view.findViewById(R.id.iv_dialog_delete_title);
+        imageView.setImageResource(R.drawable.ic_warning_black_24dp);
 
-        TextView tv = (TextView) view.findViewById(R.id.tv_dialog_delete_title);
-        tv.setText(R.string.lbl_delete_dialog_header);
+        TextView textView = (TextView) view.findViewById(R.id.tv_dialog_delete_title);
+        textView.setText(R.string.lbl_delete_dialog_header);
 
         return view;
     }
@@ -100,8 +100,10 @@ public class DeleteDialog extends DialogFragment
     private void initialiseComponents() {
         Cursor cursor = getCursor();
 
-        tvCityCode.setText(cursor.getString(cursor.getColumnIndexOrThrow(SchemaConstants.COLUMN_CITY_CODE)));
-        tvRaceCode.setText(cursor.getString(cursor.getColumnIndexOrThrow(SchemaConstants.COLUMN_RACE_CODE)));
+        String cityCode = cursor.getString(cursor.getColumnIndexOrThrow(SchemaConstants.COLUMN_CITY_CODE));
+        String raceCode = cursor.getString(cursor.getColumnIndexOrThrow(SchemaConstants.COLUMN_RACE_CODE));
+        tvRaceCodes.setText(cityCode + " " + raceCode);
+
         tvRaceNum.setText(cursor.getString(cursor.getColumnIndexOrThrow(SchemaConstants.COLUMN_RACE_NUM)));
         tvRaceSel.setText(cursor.getString(cursor.getColumnIndexOrThrow(SchemaConstants.COLUMN_RACE_SEL)));
 
@@ -114,11 +116,13 @@ public class DeleteDialog extends DialogFragment
     }
 
     private void enableComponents() {
-        tvCityCode = (TextView) dialog.findViewById(R.id.tv_city_code);
-        tvRaceCode = (TextView) dialog.findViewById(R.id.tv_race_code);
-        tvRaceNum = (TextView) dialog.findViewById(R.id.tv_race_no);
-        tvRaceSel = (TextView) dialog.findViewById(R.id.tv_race_sel);
-        tvRaceTime = (TextView) dialog.findViewById(R.id.tv_race_time);
+        tvRaceCodes = (TextView) dialog.findViewById(R.id.tvRaceCodes);
+
+        tvRaceNum = (TextView) dialog.findViewById(R.id.tvRaceNo);
+        tvRaceSel = (TextView) dialog.findViewById(R.id.tvRaceSel);
+
+        tvRaceTime = (TextView) dialog.findViewById(R.id.tvRaceTime);
+
         btnDDCancel = (Button) dialog.findViewById(R.id.btn_cancel);
         btnDDDelete = (Button) dialog.findViewById(R.id.btn_delete);
     }
@@ -126,24 +130,23 @@ public class DeleteDialog extends DialogFragment
     private Cursor getCursor() {
         Uri contentUri = ContentUris.withAppendedId(MeetingProvider.contentUri, rowId);
         return getActivity().getContentResolver()
-                .query(contentUri,
-                        DatabaseHelper.getMeetingListItemProjection(),
-                        SchemaConstants.SELECT_ALL_MLI,
-                        new String[] {Long.toString(rowId)},
-                        null);
+                            .query(contentUri,
+                                   DatabaseHelper.getMeetingListItemProjection(),
+                                   SchemaConstants.SELECT_ALL_MLI,
+                                   new String[] {Long.toString(rowId)},
+                                   null);
     }
 
     private long rowId;
     private Dialog dialog;
-    private Activity activity;
 
-    TextView tvCityCode;
-    TextView tvRaceCode;
-    TextView tvRaceNum;
-    TextView tvRaceSel;
-    TextView tvRaceTime;
-    Button btnDDCancel;
-    Button btnDDDelete;
+    private TextView tvRaceCodes;
+    private TextView tvRaceNum;
+    private TextView tvRaceSel;
+    private TextView tvRaceTime;
+
+    private Button btnDDCancel;
+    private Button btnDDDelete;
 
 }
 

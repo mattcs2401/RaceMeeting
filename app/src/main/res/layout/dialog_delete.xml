@@ -1,50 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- TODO: Styling/layout etc -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/delete_dialog"
-    style="@style/layout_wrap_both"
-    android:layout_gravity="top|center"
-    android:useDefaultMargins="true"
-    android:orientation="vertical">
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dialog_delete_constraintLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/ll_delete_row_container"
-        style="@style/layout_wrap_both"
-        android:orientation="horizontal" >
+    <TextView
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Note: Cannot be undone."
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvCaution"
+        android:layout_marginTop="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
-        <TextView
-            android:id="@+id/tv_city_code"
-            style="@style/tv_text_style" />
+    <TextView
+        android:gravity="center_vertical|center_horizontal"
+        android:text="BR"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvRaceCodes"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/tvCaution"
+        android:layout_marginTop="16dp" />
 
-        <TextView
-            android:id="@+id/tv_race_code"
-            style="@style/tv_text_style" />
+    <TextView
+        android:gravity="center_vertical|center_horizontal"
+        android:text="No"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvRaceNoText"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/tvRaceNo"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvRaceCodes" />
 
-        <TextView
-            android:id="@+id/tv_race_no"
-            style="@style/tv_text_style" />
+    <TextView
+        android:gravity="center_vertical|center_horizontal"
+        android:text="8"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvRaceNo"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/tvRaceCodes"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvRaceCodes" />
 
-        <TextView
-            android:id="@+id/tv_race_sel"
-            style="@style/tv_text_style" />
+    <TextView
+        android:gravity="center_vertical|center_horizontal"
+        android:text="8"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvRaceSel"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/tvRaceNoText"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvRaceCodes" />
 
-        <TextView
-            android:id="@+id/tv_race_time"
-            style="@style/tv_text_style" />
-    </LinearLayout>
+    <TextView
+        android:gravity="center_vertical|center_horizontal"
+        android:text="13:00"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvRaceTime"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/tvRaceSel"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvRaceNoText" />
 
-    <LinearLayout
-        style="@style/layout_wrap_both"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/btn_delete"
-            style="@style/btn_dialog_style"
-            android:text="@string/lbl_delete" />
+    <Button
+        android:text="Cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_cancel"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/tvRaceCodes"
+        android:layout_marginTop="32dp" />
 
-        <Button
-            android:id="@+id/btn_cancel"
-            style="@style/btn_dialog_style"
-            android:text="@string/lbl_cancel" />
-    </LinearLayout>
+    <Button
+        android:text="Delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_delete"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/btn_cancel"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btn_cancel" />
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

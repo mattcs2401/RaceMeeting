@@ -85,9 +85,7 @@ public class MainActivity extends AppCompatActivity
         args.putLong(MeetingConstants.DELETE_DIALOG_ROWID, rowId);
         df.setArguments(args);
 
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.add(df, MeetingConstants.DEFAULT_DELETE_DIALOG_FRAGMENT_TAG);
-        ft.commit();
+        df.show(getFragmentManager(), MeetingConstants.DEFAULT_DELETE_DIALOG_FRAGMENT_TAG);
     }
     //</editor-fold>
 
