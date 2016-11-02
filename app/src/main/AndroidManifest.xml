@@ -17,6 +17,7 @@
         <activity android:name="com.mcssoft.racemeeting.activity.EditActivity"
             android:windowSoftInputMode="adjustResize"/>
         <activity android:name="com.mcssoft.racemeeting.activity.DetailActivity" />
+        <activity android:name="com.mcssoft.racemeeting.activity.DeleteActivity" />
         <activity android:name="com.mcssoft.racemeeting.activity.PreferencesActivity" />
         <service android:name="com.mcssoft.racemeeting.services.ListingService"
             android:permission="android.permission.BIND_JOB_SERVICE"

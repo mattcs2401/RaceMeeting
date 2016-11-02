@@ -1,7 +1,5 @@
 package com.mcssoft.racemeeting.activity;
 
-import android.app.DialogFragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,9 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.mcssoft.racemeeting.dialogs.DeleteDialog;
 import com.mcssoft.racemeeting.fragment.ListingFragment;
-import com.mcssoft.racemeeting.interfaces.IDeleteDialog;
 import com.mcssoft.racemeeting.interfaces.IDeleteMeeting;
 import com.mcssoft.racemeeting.interfaces.IEditMeeting;
 import com.mcssoft.racemeeting.interfaces.IShowMeeting;
@@ -20,7 +16,7 @@ import com.mcssoft.racemeeting.utility.MeetingConstants;
 import mcssoft.com.racemeeting3.R;
 
 public class MainActivity extends AppCompatActivity
-    implements IEditMeeting, IShowMeeting, IDeleteMeeting, IDeleteDialog {
+    implements IEditMeeting, IShowMeeting, IDeleteMeeting {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +66,7 @@ public class MainActivity extends AppCompatActivity
 
     //<editor-fold defaultstate="collapsed" desc="Region: Interface - IShowMeeting">
     @Override
-    public void onShowMeeting(long id) { //}, MeetingAdapter.MeetingViewHolder vh) {
+    public void onShowMeeting(long id) {
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra(MeetingConstants.SHOW_SUMMARY, id);
         startActivity(intent);
@@ -79,21 +75,12 @@ public class MainActivity extends AppCompatActivity
 
     //<editor-fold defaultstate="collapsed" desc="Region: Interface - IDeleteMeeting">
     public void onDeleteMeeting(long rowId) {
-        DialogFragment df = new DeleteDialog();
-
-        Bundle args = new Bundle();
-        args.putLong(MeetingConstants.DELETE_DIALOG_ROWID, rowId);
-        df.setArguments(args);
-
-        df.show(getFragmentManager(), MeetingConstants.DEFAULT_DELETE_DIALOG_FRAGMENT_TAG);
+        Intent intent = new Intent(this, DeleteActivity.class);
+        intent.putExtra(MeetingConstants.DELETE_DIALOG_ROWID, rowId);
+        startActivity(intent);
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Region: Interface - IDeleteDialog">
-    public void onDeleteDialog(Bundle args) {
-        String bp = "";
-    }
-    //</editor-fold>
 
     private ListingFragment listingFragment;
     private String LOG_TAG = this.getClass().getCanonicalName();

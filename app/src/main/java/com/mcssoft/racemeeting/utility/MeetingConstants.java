@@ -43,6 +43,7 @@ public class MeetingConstants {
     public static final String DEFAULT_LISTING_FRAGMENT_TAG = "listing_fragment_tag";
     public static final String DEFAULT_LISTING_FRAGMENT2_TAG = "listing_fragment2_tag";
     public static final String DEFAULT_DELETE_DIALOG_FRAGMENT_TAG = "delete_dialog_fragment_tag";
+    public static final String DEFAULT_DELETE_FRAGMENT_TAG = "delete_fragment_tag";
 
     // Preferences (general)
     public static final String MEETING_NOTIFICATIONS_KEY = "pref_meeting_notifications_key";
