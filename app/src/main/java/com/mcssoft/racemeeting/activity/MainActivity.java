@@ -1,5 +1,7 @@
 package com.mcssoft.racemeeting.activity;
 
+import android.app.FragmentTransaction;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.mcssoft.racemeeting.dialogs.DeleteDialog;
 import com.mcssoft.racemeeting.fragment.ListingFragment;
 import com.mcssoft.racemeeting.interfaces.IDeleteMeeting;
 import com.mcssoft.racemeeting.interfaces.IEditMeeting;
@@ -75,9 +78,14 @@ public class MainActivity extends AppCompatActivity
 
     //<editor-fold defaultstate="collapsed" desc="Region: Interface - IDeleteMeeting">
     public void onDeleteMeeting(long rowId) {
-        Intent intent = new Intent(this, DeleteActivity.class);
-        intent.putExtra(MeetingConstants.DELETE_DIALOG_ROWID, rowId);
-        startActivity(intent);
+        DialogFragment df = new DeleteDialog();
+
+        Bundle args = new Bundle();
+        args.putLong(MeetingConstants.DELETE_DIALOG_ROWID, rowId);
+        df.setArguments(args);
+
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        df.show(ft, MeetingConstants.DEFAULT_DELETE_DIALOG_FRAGMENT_TAG);
     }
     //</editor-fold>
 

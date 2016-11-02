@@ -1,10 +1,10 @@
-package com.mcssoft.racemeeting.fragment;
+package com.mcssoft.racemeeting.dialogs;
 
-import android.app.Fragment;
 import android.content.ContentUris;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +14,14 @@ import android.widget.TextView;
 import com.mcssoft.racemeeting.database.DatabaseHelper;
 import com.mcssoft.racemeeting.database.MeetingProvider;
 import com.mcssoft.racemeeting.database.SchemaConstants;
-import com.mcssoft.racemeeting.interfaces.IDeleteMeeting;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingTime;
 
 import mcssoft.com.racemeeting3.R;
 
-public class DeleteFragment extends Fragment implements View.OnClickListener {
+public class DeleteDialog extends DialogFragment implements View.OnClickListener {
+
+    public DeleteDialog() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,7 @@ public class DeleteFragment extends Fragment implements View.OnClickListener {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_delete, container, false);
+        View view = inflater.inflate(R.layout.dialog_delete, container, false);
 
         initialise(view);
 
@@ -41,11 +42,13 @@ public class DeleteFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         int viewId = view.getId();
         switch(viewId) {
+            case R.id.btn_cancel:
+                break;
             case R.id.btn_delete:
                 deleteItem();
                 break;
         }
-//        dismiss();
+        dismiss();
     }
 
     private void deleteItem() {
@@ -57,12 +60,12 @@ public class DeleteFragment extends Fragment implements View.OnClickListener {
         if(count == 1) {
             vals.putInt(MeetingConstants.DELETE_ITEM_COUNT_KEY, count);
         }
-//        ((IDeleteMeeting) getActivity()).onDeleteMeeting(vals);
     }
 
     private void initialise(View view) {
         enableComponents(view);
         initialiseComponents();
+        setStyle(DialogFragment.STYLE_NO_TITLE, 0);
     }
 
     private void initialiseComponents() {
@@ -80,6 +83,7 @@ public class DeleteFragment extends Fragment implements View.OnClickListener {
         tvRaceTime.setText(time.replace("am","").replace("pm",""));
 
         btnDDDelete.setOnClickListener(this);
+        btnDDCancel.setOnClickListener(this);
     }
 
     private void enableComponents(View view) {
@@ -91,6 +95,7 @@ public class DeleteFragment extends Fragment implements View.OnClickListener {
         tvRaceTime = (TextView) view.findViewById(R.id.tvRaceTime);
 
         btnDDDelete = (Button) view.findViewById(R.id.btn_delete);
+        btnDDCancel = (Button) view.findViewById(R.id.btn_cancel);
     }
 
     private Cursor getCursor() {
@@ -111,5 +116,5 @@ public class DeleteFragment extends Fragment implements View.OnClickListener {
     private TextView tvRaceTime;
 
     private Button btnDDDelete;
-
+    private Button btnDDCancel;
 }
