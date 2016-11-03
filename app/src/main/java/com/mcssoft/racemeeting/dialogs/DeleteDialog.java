@@ -21,11 +21,11 @@ import mcssoft.com.racemeeting3.R;
 
 public class DeleteDialog extends DialogFragment implements View.OnClickListener {
 
-    public DeleteDialog() {}
-
+    //<editor-fold defaultstate="collapsed" desc="Region: Lifecycle">
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NO_TITLE, 0);
         rowId = getArguments().getLong(MeetingConstants.DELETE_DIALOG_ROWID);
     }
 
@@ -34,10 +34,11 @@ public class DeleteDialog extends DialogFragment implements View.OnClickListener
         View view = inflater.inflate(R.layout.dialog_delete, container, false);
 
         initialise(view);
-
         return view;
     }
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Region: Listener">
     @Override
     public void onClick(View view) {
         int viewId = view.getId();
@@ -45,31 +46,25 @@ public class DeleteDialog extends DialogFragment implements View.OnClickListener
             case R.id.btn_cancel:
                 break;
             case R.id.btn_delete:
-                deleteItem();
+                getActivity().getContentResolver().
+                        delete(ContentUris.withAppendedId(MeetingProvider.contentUri, rowId), null, null);
                 break;
         }
         dismiss();
     }
+    //</editor-fold>
 
-    private void deleteItem() {
-        Bundle vals = new Bundle();
-        vals.putString(MeetingConstants.DELETE_DIALOG_SELECT_POSITIVE, null);
-
-        int count = getActivity().getContentResolver().delete(ContentUris.withAppendedId(MeetingProvider.contentUri, rowId), null, null);
-
-        if(count == 1) {
-            vals.putInt(MeetingConstants.DELETE_ITEM_COUNT_KEY, count);
-        }
-    }
-
+    //<editor-fold defaultstate="collapsed" desc="Region: Utility">
     private void initialise(View view) {
         enableComponents(view);
         initialiseComponents();
-        setStyle(DialogFragment.STYLE_NO_TITLE, 0);
     }
 
     private void initialiseComponents() {
-        Cursor cursor = getCursor();
+        Uri contentUri = ContentUris.withAppendedId(MeetingProvider.contentUri, rowId);
+        Cursor cursor =  getActivity().getContentResolver()
+                .query(contentUri, DatabaseHelper.getMeetingListItemProjection(),
+                       SchemaConstants.SELECT_ALL_MLI, new String[] {Long.toString(rowId)}, null);
 
         String cityCode = cursor.getString(cursor.getColumnIndexOrThrow(SchemaConstants.COLUMN_CITY_CODE));
         String raceCode = cursor.getString(cursor.getColumnIndexOrThrow(SchemaConstants.COLUMN_RACE_CODE));
@@ -97,24 +92,15 @@ public class DeleteDialog extends DialogFragment implements View.OnClickListener
         btnDDDelete = (Button) view.findViewById(R.id.btn_delete);
         btnDDCancel = (Button) view.findViewById(R.id.btn_cancel);
     }
+    //</editor-fold>
 
-    private Cursor getCursor() {
-        Uri contentUri = ContentUris.withAppendedId(MeetingProvider.contentUri, rowId);
-        return getActivity().getContentResolver()
-                .query(contentUri,
-                        DatabaseHelper.getMeetingListItemProjection(),
-                        SchemaConstants.SELECT_ALL_MLI,
-                        new String[] {Long.toString(rowId)},
-                        null);
-    }
-
+    //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
     private long rowId;
-
     private TextView tvRaceCodes;
     private TextView tvRaceNum;
     private TextView tvRaceSel;
     private TextView tvRaceTime;
-
     private Button btnDDDelete;
     private Button btnDDCancel;
+    //</editor-fold>
 }
