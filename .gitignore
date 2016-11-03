@@ -18,6 +18,5 @@ captures/
 *.jks
 .idea/
 app/src/main/java/com/mcssoft/racemeeting/Git Notes
-app/src/main/java/com/mcssoft/racemeeting/Notes
 gradle/
 /local.properties

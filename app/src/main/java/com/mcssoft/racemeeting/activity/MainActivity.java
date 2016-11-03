@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity
         } else {
             // TBA
         }
-
     }
 
     @Override
