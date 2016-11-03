@@ -1,32 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ll_row_container"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal" >
+    android:layout_height="wrap_content">
 
     <TextView
+        android:text="B"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:id="@+id/tv_city_code"
-        style="@style/tv_text_style" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:layout_marginStart="24dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_race_code" />
 
     <TextView
+        android:text="R"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:id="@+id/tv_race_code"
-        style="@style/tv_text_style" />
+        app:layout_constraintLeft_toRightOf="@+id/tv_city_code"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_race_no" />
 
     <TextView
+        android:text="8"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:id="@+id/tv_race_no"
-        style="@style/tv_text_style" />
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/tv_race_code"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_race_sel" />
 
     <TextView
+        android:text="8"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:id="@+id/tv_race_sel"
-        style="@style/tv_text_style" />
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toRightOf="@+id/tv_race_no"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_race_time"/>
 
     <TextView
+        android:text="23:59"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:id="@+id/tv_race_time"
-        style="@style/tv_text_style" />
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toRightOf="@+id/tv_race_sel"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_dchange_testing" />
 
     <TextView
+        android:text="N"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:id="@+id/tv_dchange_testing"
-        style="@style/tv_text_style" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/tv_race_time"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"/>
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
