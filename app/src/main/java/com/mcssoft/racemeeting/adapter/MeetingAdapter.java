@@ -15,7 +15,7 @@ import mcssoft.com.racemeeting3.R;
     public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
 
     public MeetingAdapter() {
-        setHasStableIds(true);
+//         setHasStableIds(true);
     }
 
     @Override
