@@ -59,8 +59,8 @@ public class PreferencesActivity extends PreferenceActivity
     //<editor-fold defaultstate="collapsed" desc="Region: Listeners">
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        // Notes: 1. This is called when the 'Meeting Time Actions' CheckBoxPreference is pressed.
-        //        2. This will fire 1st, then the onSharedPreferenceChanged().
+        // 1. This is called when the 'Meeting Time Actions' CheckBoxPreference is pressed.
+        // 2. This will fire 1st, then the onSharedPreferenceChanged().
         Log.d(LOG_TAG, "onPreferenceChange");
         if(preference.getKey().equals(MeetingConstants.TIME_ACTIONS_PREF_KEY)) {
             cbpUseDefaults.setChecked((boolean) newValue);
@@ -72,8 +72,8 @@ public class PreferencesActivity extends PreferenceActivity
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sp, String key) {
         Log.d(LOG_TAG, "onSharedpreferenceChanged");
-        // Notes: 1. If the user simply cancels (selects back), then this method isn't called.
-        //        2. Method basically just shows notifications.
+        // 1. If the user simply cancels (selects back), then this method isn't called.
+        // 2. Method basically just shows notifications.
 
         if(MeetingPreferences.getInstance().meetingNotificationPref()) {
 

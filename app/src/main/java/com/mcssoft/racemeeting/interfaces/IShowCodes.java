@@ -8,18 +8,20 @@ import android.view.View;
  */
 public interface IShowCodes {
     /**
-     *
-     * @param dId
-     * @param view
+     * Call back to xxx.
+     * @param fragId The codes fragment identifier.
+     * @param view Used to instantiate a particular view (EditText).
      */
-    public void onShowCodes(int dId, View view);
+    void onShowCodes(int fragId, View view);
+
+    /**
+     * Call back to return the selected code from the particular codes fragment.
+     * @param args Key/Value pair of the selected code.
+     */
+    void onFinishCodes(Bundle args);
 
     /**
      *
-     * @param args
      */
-    public void onFinishCodes(Bundle args);
-
-
-    public void onFinish();
+    void onFinish();
 }

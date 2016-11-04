@@ -6,5 +6,5 @@ public interface IEditMeeting {
      * @param dbRowId The database row id corredsponding to the selected item in the listing, or a
      *                value of 0 to indicate a new meeting..
      */
-    public void onEditMeeting(long dbRowId);
+    void onEditMeeting(long dbRowId);
 }

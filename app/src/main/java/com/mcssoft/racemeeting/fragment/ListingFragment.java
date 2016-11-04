@@ -141,7 +141,7 @@ public class ListingFragment extends Fragment
         meetingAdapter = new MeetingAdapter();
         recyclerView.setAdapter(meetingAdapter);
 
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), recyclerView, new IClickListener() {
+        RecyclerTouchListener rtl = new RecyclerTouchListener(getActivity().getApplicationContext(), recyclerView, new IClickListener() {
             @Override
             public void onClick(View view, int position) {
                 ((IShowMeeting) getActivity()).onShowMeeting(getDbRowId(position));
@@ -150,7 +150,9 @@ public class ListingFragment extends Fragment
             public void onLongClick(View view, int position) {
                 ((IDeleteMeeting) getActivity()).onDeleteMeeting(getDbRowId(position));
             }
-        }));
+        });
+
+        recyclerView.addOnItemTouchListener(rtl);
     }
 
     private int getDbRowId(int position) {

@@ -1,0 +1,31 @@
+
+Issues:
+-------
+->
+
+
+To Do:
+-----
+(no particular order)
+-> Image for left of listing item, e.g. if code BR then image of horse.
+-> Format / style of DeleteDialog.
+-> Meeting Prior Reminder Time. maybe replace with spinner ?
+-> Start updating documentation / comments etc.
+
+Resources:
+----------
+Fragments:
+http://www.vogella.com/tutorials/AndroidFragments/article.html#usingfragments_fragmentmanager
+
+Recycler View:
+https://developer.android.com/training/material/lists-cards.html
+
+Swipe:
+http://java-lang-programming.com/en/articles/18?ref=ara
+
+Divider:
+https://www.bignerdranch.com/blog/a-view-divided-adding-dividers-to-your-recyclerview-with-itemdecoration/
+http://java-lang-programming.com/en/articles/19?ref=ara
+
+
+
