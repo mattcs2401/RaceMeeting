@@ -6,7 +6,7 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,7 +23,6 @@ import com.mcssoft.racemeeting.database.MeetingProvider;
 import com.mcssoft.racemeeting.database.SchemaConstants;
 import com.mcssoft.racemeeting.interfaces.IClickListener;
 import com.mcssoft.racemeeting.interfaces.IDeleteMeeting;
-import com.mcssoft.racemeeting.interfaces.IEditMeeting;
 import com.mcssoft.racemeeting.interfaces.IShowMeeting;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingDisplay;
@@ -34,8 +33,7 @@ import com.mcssoft.racemeeting.listener.RecyclerTouchListener;
 import mcssoft.com.racemeeting3.R;
 
 public class ListingFragment extends Fragment
-    implements LoaderManager.LoaderCallbacks<Cursor>,
-               View.OnClickListener {
+    implements LoaderManager.LoaderCallbacks<Cursor> {
 
     //<editor-fold defaultstate="collapsed" desc="Region: LifeCycle">
     @Override
@@ -54,7 +52,7 @@ public class ListingFragment extends Fragment
         if(!MeetingDisplay.instanceExists()) {
             MeetingDisplay.getInstance(getActivity().getApplicationContext());
         }
-//        setHasOptionsMenu(true);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -69,10 +67,6 @@ public class ListingFragment extends Fragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.id_fab_frag_main);
-        fab.setOnClickListener(this);
-
         getLoaderManager().initLoader(MeetingConstants.MEETING_LOADER, null, this);
     }
 
@@ -86,18 +80,6 @@ public class ListingFragment extends Fragment
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-    }
-    //</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="Region: User Actions">
-    @Override
-    public void onClick(View view) {
-        int id = view.getId();
-        switch (id){
-            case R.id.id_fab_frag_main:
-                ((IEditMeeting) getActivity()).onEditMeeting(MeetingConstants.NEW_MEETING);
-                break;
-        }
     }
     //</editor-fold>
 

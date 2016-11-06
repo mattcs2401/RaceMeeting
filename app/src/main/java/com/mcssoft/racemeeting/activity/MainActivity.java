@@ -47,6 +47,9 @@ public class MainActivity extends AppCompatActivity
         Log.d(LOG_TAG, "onOptionsItemSelected");
 
         switch (item.getItemId()) {
+            case R.id.menu_insert:
+                onEditMeeting(0);
+                break;
             case R.id.preference_settings:
                 Intent paIntent = new Intent(this, PreferencesActivity.class);
                 startActivityForResult(paIntent, MeetingConstants.PREFERENCES_ACTIVITY_REQUEST_CODE);

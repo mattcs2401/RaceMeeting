@@ -2,12 +2,16 @@
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <!--<item android:id="@+id/menu_insert"
+    <item android:id="@+id/menu_insert"
         android:icon="@android:drawable/ic_menu_add"
         android:title="@string/lbl_menu_insert"
-        app:showAsAction="always" /> -->
+        app:showAsAction="always" />
     <item android:id="@+id/preference_settings"
         android:icon="@android:drawable/ic_menu_preferences"
         android:title="@string/lbl_menu_settings"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
+<!--    <item android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        app:showAsAction="never"/>
+-->
 </menu>

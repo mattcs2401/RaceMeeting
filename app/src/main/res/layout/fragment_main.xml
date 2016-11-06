@@ -24,12 +24,4 @@
 
     <include layout="@layout/racemeet_row" />
 
-   <android.support.design.widget.FloatingActionButton
-        android:id="@+id/id_fab_frag_main"
-        style="@style/FloatingActionButtonLarge"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_input_add"
-        app:layout_anchor="@id/id_toolbar_frag_main"
-        app:layout_anchorGravity="bottom|end" />
-
 </android.support.design.widget.CoordinatorLayout>
