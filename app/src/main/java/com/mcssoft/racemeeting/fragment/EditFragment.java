@@ -16,6 +16,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
@@ -57,10 +58,10 @@ public class EditFragment extends Fragment
         Log.d(LOG_TAG, "onCreateView");
         View rootView = inflater.inflate(R.layout.fragment_edit, container, false);
 
-        Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.id_toolbar_frag_edit);
+        Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.id_toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-
-//        meetKbd = new MeetingKeyboard(getActivity(), rootView, R.id.keyboardview, R.xml.meeting_keyboard);
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         onCreateInitialise(rootView);
 
@@ -68,6 +69,7 @@ public class EditFragment extends Fragment
         launchAction = intent.getAction();
 
         if(launchAction.equals(MeetingConstants.EDIT_ACTION_NEW)) {
+            actionBar.setTitle(R.string.app_name_new);
             updateBackground(MeetingConstants.NEW_MEETING);
             timeInMillis = MeetingTime.getInstance().getCurrentTimeInMillis();
             updateRaceTime(timeInMillis);
@@ -76,6 +78,7 @@ public class EditFragment extends Fragment
                 setRaceCodeFromPreference();
             }
         } else if(launchAction.equals(MeetingConstants.EDIT_ACTION_EXISTING)) {
+            actionBar.setTitle(R.string.app_name_edit);
             updateBackground(MeetingConstants.EDIT_MEETING);
 
             Bundle args = new Bundle();
@@ -418,6 +421,7 @@ public class EditFragment extends Fragment
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private vars">
     // This fragment's components as local variables.
+    private ActionBar actionBar;
     private EditText etCityCode;
     private EditText etRaceCode;
     private EditText etRaceNum;
