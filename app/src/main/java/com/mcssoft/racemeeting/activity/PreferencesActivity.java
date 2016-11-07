@@ -7,7 +7,12 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.mcssoft.racemeeting.utility.MeetingConstants;
@@ -17,14 +22,22 @@ import mcssoft.com.racemeeting3.R;
 
 
 public class PreferencesActivity extends PreferenceActivity
-        implements Preference.OnPreferenceChangeListener,
-        SharedPreferences.OnSharedPreferenceChangeListener {
+        implements View.OnClickListener,
+                   Preference.OnPreferenceChangeListener,
+                   SharedPreferences.OnSharedPreferenceChangeListener {
 
     //<editor-fold defaultstate="collapsed" desc="Region: Lifecycle">
     @Override
     protected void onCreate(Bundle savedState) {
         Log.d(LOG_TAG, "onCreate");
         super.onCreate(savedState);
+
+        // Need to set preferences toolbar navigation manually as have no access to AppCompatActivity.
+        setContentView(R.layout.preferences_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.id_toolbar);
+        toolbar.setTitle(R.string.app_name_prefs);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_18dp);
+        toolbar.setNavigationOnClickListener(this);
 
         addPreferencesFromResource(R.xml.meeting_preferences);
 
@@ -100,6 +113,11 @@ public class PreferencesActivity extends PreferenceActivity
             }
         }
         setResult(MeetingConstants.PREFERENCES_CHANGED);
+    }
+
+    @Override
+    public void onClick(View v) {
+        finish();
     }
     //</editor-fold>
 

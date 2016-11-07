@@ -8,6 +8,7 @@ Issues:
 To Do:
 -----
 (no particular order)
+-> Use PreferencesFragment (see resource link below)..
 -> Image for left of listing item, e.g. if code BR then image of horse.
 -> Format / style of DeleteDialog.
 -> Meeting Prior Reminder Time. maybe replace with spinner ?
@@ -15,6 +16,9 @@ To Do:
 
 Resources:
 ----------
+Material Icons:
+https://github.com/google/material-design-icons
+
 Fragments:
 http://www.vogella.com/tutorials/AndroidFragments/article.html#usingfragments_fragmentmanager
 
@@ -27,6 +31,9 @@ http://java-lang-programming.com/en/articles/18?ref=ara
 Divider:
 https://www.bignerdranch.com/blog/a-view-divided-adding-dividers-to-your-recyclerview-with-itemdecoration/
 http://java-lang-programming.com/en/articles/19?ref=ara
+
+Preferences:
+https://developer.android.com/reference/android/preference/PreferenceActivity.html
 
 
 
