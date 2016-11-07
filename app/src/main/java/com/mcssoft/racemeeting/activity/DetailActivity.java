@@ -3,6 +3,7 @@ package com.mcssoft.racemeeting.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.mcssoft.racemeeting.fragment.DetailFragment;
@@ -11,7 +12,7 @@ import com.mcssoft.racemeeting.utility.MeetingConstants;
 
 import mcssoft.com.racemeeting3.R;
 
-public class DetailActivity extends Activity implements IEditMeeting {
+public class DetailActivity extends AppCompatActivity implements IEditMeeting {
 
     //<editor-fold defaultstate="collapsed" desc="Region: LifeCycle">
     @Override
