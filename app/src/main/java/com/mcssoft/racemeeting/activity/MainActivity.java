@@ -1,5 +1,6 @@
 package com.mcssoft.racemeeting.activity;
 
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.DialogFragment;
 import android.content.Intent;
@@ -25,12 +26,13 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        fragmentManager = getFragmentManager();
 
         if(savedInstanceState == null) {
-            listingFragment = new ListingFragment();
-            getFragmentManager().beginTransaction()
-                    .add(R.id.listing_container, listingFragment, null)
-                    .commit();
+            fragmentManager.beginTransaction()
+                           .replace(R.id.listing_container, new ListingFragment(), null)
+                           .addToBackStack(null)
+                           .commit();
         } else {
             // TBA
         }
@@ -55,7 +57,6 @@ public class MainActivity extends AppCompatActivity
                 startActivityForResult(paIntent, MeetingConstants.PREFERENCES_ACTIVITY_REQUEST_CODE);
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -91,7 +92,6 @@ public class MainActivity extends AppCompatActivity
     }
     //</editor-fold>
 
-
-    private ListingFragment listingFragment;
+    private FragmentManager fragmentManager;
     private String LOG_TAG = this.getClass().getCanonicalName();
 }
