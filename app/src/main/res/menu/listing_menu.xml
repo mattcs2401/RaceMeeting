@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
+<menu xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/menu_insert"
@@ -10,8 +10,9 @@
         android:icon="@android:drawable/ic_menu_preferences"
         android:title="@string/lbl_menu_settings"
         app:showAsAction="always" />
-<!--    <item android:id="@+id/action_settings"
-        android:title="@string/action_settings"
-        app:showAsAction="never"/>
--->
+    <item android:id="@+id/dev_opts"
+        android:icon="@android:drawable/star_off"
+        android:title="Dev Opts"
+        app:showAsAction="always">
+    </item>
 </menu>

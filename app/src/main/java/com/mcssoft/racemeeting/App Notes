@@ -8,7 +8,7 @@ Issues:
 To Do:
 -----
 (no particular order)
--> Use PreferencesFragment (see resource link below)..
+-> Dev options; create dummy listing for testing.
 -> Image for left of listing item, e.g. if code BR then image of horse.
 -> Format / style of DeleteDialog.
 -> Meeting Prior Reminder Time. maybe replace with spinner ?
