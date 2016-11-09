@@ -14,6 +14,9 @@ To Do:
 
 Resources:
 ----------
+Vogella:
+http://www.vogella.com/tutorials/android.html
+
 Material Icons:
 https://github.com/google/material-design-icons
 
@@ -32,6 +35,10 @@ http://java-lang-programming.com/en/articles/19?ref=ara
 
 Preferences:
 https://developer.android.com/reference/android/preference/PreferenceActivity.html
+
+KVM (to try):
+https://software.intel.com/en-us/blogs/2012/03/12/how-to-start-intel-hardware-assisted-virtualization-hypervisor-on-linux-to-speed-up-intel-android-x86-emulator
+
 
 
 
