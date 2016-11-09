@@ -56,8 +56,6 @@ public class MainActivity extends AppCompatActivity
                 Intent paIntent = new Intent(this, PreferencesActivity.class);
                 startActivityForResult(paIntent, MeetingConstants.PREFERENCES_ACTIVITY_REQUEST_CODE);
                 return true;
-            case R.id.dev_opts:
-                break;
         }
         return super.onOptionsItemSelected(item);
     }
