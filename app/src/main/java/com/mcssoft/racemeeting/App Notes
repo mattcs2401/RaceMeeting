@@ -1,14 +1,12 @@
 
 Issues:
 -------
--> Recycler view last item not showing.
--> Lose FAB on main listng, go back to toolbar menu.
+-> Recycler view last item not showing properly.
 
 
 To Do:
 -----
 (no particular order)
--> Dev options; create dummy listing for testing.
 -> Image for left of listing item, e.g. if code BR then image of horse.
 -> Format / style of DeleteDialog.
 -> Meeting Prior Reminder Time. maybe replace with spinner ?
