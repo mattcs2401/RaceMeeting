@@ -2,6 +2,7 @@
 Issues:
 -------
 -> Recycler view last item not showing properly.
+-> MeetingPreferences toolbar overlaying system icons, should be down a bit.
 
 
 To Do:
