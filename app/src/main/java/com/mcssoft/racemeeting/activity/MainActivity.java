@@ -16,6 +16,11 @@ import com.mcssoft.racemeeting.interfaces.IDeleteMeeting;
 import com.mcssoft.racemeeting.interfaces.IEditMeeting;
 import com.mcssoft.racemeeting.interfaces.IShowMeeting;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
+import com.mcssoft.racemeeting.utility.MeetingDisplay;
+import com.mcssoft.racemeeting.utility.MeetingPreferences;
+import com.mcssoft.racemeeting.utility.MeetingTime;
+
+import java.util.Map;
 
 import mcssoft.com.racemeeting3.R;
 
@@ -25,12 +30,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        fragmentManager = getFragmentManager();
+
+        initialise();
+
+        Bundle prefsState = setStateFromPreferences();
+        listingFragment.setArguments(prefsState);
 
         if(savedInstanceState == null) {
             fragmentManager.beginTransaction()
-                           .replace(R.id.listing_container, new ListingFragment(), null)
+                           .replace(R.id.listing_container, listingFragment, null)
                            .addToBackStack(null)
                            .commit();
         } else {
@@ -92,6 +100,50 @@ public class MainActivity extends AppCompatActivity
     }
     //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Region: Interface - Utility">
+    private void initialise() {
+        setContentView(R.layout.activity_main);
+        fragmentManager = getFragmentManager();
+        listingFragment = new ListingFragment();
+
+        if(!MeetingPreferences.instanceExists()) {
+            MeetingPreferences.getInstance(getApplicationContext());
+        }
+        if(!MeetingTime.instanceExists()) {
+            MeetingTime.getInstance(getApplicationContext());
+        }
+        if(!MeetingDisplay.instanceExists()) {
+            MeetingDisplay.getInstance(getApplicationContext());
+        }
+    }
+
+    /**
+     * Get state values based on what's currently in the SharedPreferences.
+     * @return The state bundle containg the preferences (as strings).
+     */
+    private Bundle setStateFromPreferences() {
+
+        Map<String,?> prefsMap = MeetingPreferences.getInstance().getAllPreferences();
+
+        // No SharedPreferences set yet. App has probably been uninstalled then re-installed and/or
+        // cache and data cleared. Set the app preferences defaults.
+        if(prefsMap.isEmpty()) {
+            MeetingPreferences.getInstance().setDefaultValues();
+            prefsMap = MeetingPreferences.getInstance().getAllPreferences();
+        }
+
+        Bundle prefsState = new Bundle();
+
+        for (String key : prefsMap.keySet()) {
+            Object obj = prefsMap.get(key);
+            prefsState.putString(key, obj.toString());
+        }
+
+        return prefsState;
+    }
+    //</editor-fold>
+
+    private ListingFragment listingFragment;
     private FragmentManager fragmentManager;
     private String LOG_TAG = this.getClass().getCanonicalName();
 }

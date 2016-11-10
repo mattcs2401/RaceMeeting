@@ -40,19 +40,22 @@ public class ListingFragment extends Fragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Set the meeting preferences component.
-        if(!MeetingPreferences.instanceExists()) {
-            MeetingPreferences.getInstance(getActivity().getApplicationContext());
-        }
-        // Set the meeting time component.
-        if(!MeetingTime.instanceExists()) {
-            MeetingTime.getInstance(getActivity().getApplicationContext());
-        }
-        // Set the meeting display helper.
-        if(!MeetingDisplay.instanceExists()) {
-            MeetingDisplay.getInstance(getActivity().getApplicationContext());
-        }
-        setHasOptionsMenu(true);
+//        // Set the meeting preferences component.
+//        if(!MeetingPreferences.instanceExists()) {
+//            MeetingPreferences.getInstance(getActivity().getApplicationContext());
+//        }
+
+        prefsState = getArguments();
+
+//        // Set the meeting time component.
+//        if(!MeetingTime.instanceExists()) {
+//            MeetingTime.getInstance(getActivity().getApplicationContext());
+//        }
+//        // Set the meeting display helper.
+//        if(!MeetingDisplay.instanceExists()) {
+//            MeetingDisplay.getInstance(getActivity().getApplicationContext());
+//        }
+//        setHasOptionsMenu(true);
     }
 
     @Override
@@ -145,6 +148,7 @@ public class ListingFragment extends Fragment
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
+    private Bundle prefsState;
     private RecyclerView recyclerView;
     private MeetingAdapter meetingAdapter;
 
