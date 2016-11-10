@@ -37,7 +37,7 @@ public class MeetingScheduler {
                 case MeetingConstants.MSG_LISTING_SERVICE:
                     Log.d(LOG_TAG, "handleMessage - listing service");
                     listingSvc = (ListingService) message.obj;
-//                    listingSvc.setUiCallback(ListingFragment.this);
+//                    listingSvc.setUiCallback(MainFragment.this);
 
                     if(!lsJobSchld) {
                         scheduleJob(MeetingConstants.LISTING_SERVICE);
@@ -46,7 +46,7 @@ public class MeetingScheduler {
                 case MeetingConstants.MSG_NOTIFY_SERVICE:
                     Log.d(LOG_TAG, "handleMessage - notify service");
                     notifySvc = (NotifyService) message.obj;
-//                    notifySvc.setUiCallback(ListingFragment.this);
+//                    notifySvc.setUiCallback(MainFragment.this);
 
                     if(!nsJobSchld) {
                         scheduleJob(MeetingConstants.NOTIFY_SERVICE);

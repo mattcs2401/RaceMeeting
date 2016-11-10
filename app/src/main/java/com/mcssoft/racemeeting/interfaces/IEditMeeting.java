@@ -2,7 +2,7 @@ package com.mcssoft.racemeeting.interfaces;
 
 public interface IEditMeeting {
     /**
-     * Replace the ListingFragment with the EditFragment (called in MainActivity).
+     * Replace the MainFragment with the EditFragment (called in MainActivity).
      * Replace the DetailFragment with the EditFragment (called in DetailActivity)
      * @param dbRowId The database row id corredsponding to the selected item in the listing, or a
      *                value of 0 to indicate a new meeting.

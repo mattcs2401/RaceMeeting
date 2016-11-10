@@ -32,7 +32,7 @@ import com.mcssoft.racemeeting.listener.RecyclerTouchListener;
 
 import mcssoft.com.racemeeting3.R;
 
-public class ListingFragment extends Fragment
+public class MainFragment extends Fragment
     implements LoaderManager.LoaderCallbacks<Cursor> {
 
     //<editor-fold defaultstate="collapsed" desc="Region: LifeCycle">

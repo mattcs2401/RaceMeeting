@@ -3,7 +3,7 @@ package com.mcssoft.racemeeting.services;
 
 import mcssoft.com.racemeeting3.R;
 
-import com.mcssoft.racemeeting.fragment.ListingFragment;
+import com.mcssoft.racemeeting.fragment.MainFragment;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 
 import android.app.job.JobInfo;
@@ -27,7 +27,7 @@ public class ListingService extends JobService {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(LOG_TAG, "onStartComand");
 
-        // the messenger object is effectively a reference to the handler in the ListingFragment.
+        // the messenger object is effectively a reference to the handler in the MainFragment.
         Messenger messenger = intent.getParcelableExtra(MeetingConstants.LISTING_SERVICE_HANDLER);
 
         // Dev doco: ... the best way to get one of these is to call Message.obtain()
@@ -89,12 +89,12 @@ public class ListingService extends JobService {
         }
     }
 
-//    public void setUiCallback(ListingFragment lFrag) {
+//    public void setUiCallback(MainFragment lFrag) {
 //        this.lFrag = lFrag;
 //    }
 
     private ListingTask lTask;
-    private ListingFragment lFrag;
+    private MainFragment lFrag;
 
     private String LOG_TAG = this.getClass().getCanonicalName();
 

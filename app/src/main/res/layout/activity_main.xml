@@ -1,6 +1,6 @@
 <!--<fragment xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/listing_container"
-    android:name="com.mcssoft.racemeeting3.fragment.ListingFragment"
+    android:name="com.mcssoft.racemeeting3.fragment.MainFragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" />
 -->

@@ -1,7 +1,7 @@
 package com.mcssoft.racemeeting.interfaces;
 
 /**
- * Interface between the ListingFragment and the MainActivity.
+ * Interface between the MainFragment and the MainActivity.
  */
 public interface IShowMeeting {
     /**

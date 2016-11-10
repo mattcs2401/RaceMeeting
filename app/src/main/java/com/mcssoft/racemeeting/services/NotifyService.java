@@ -22,7 +22,7 @@ public class NotifyService extends JobService {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(LOG_TAG, "onStartComand");
 
-        // the messenger object is effectively a reference to the handler in the ListingFragment.
+        // the messenger object is effectively a reference to the handler in the MainFragment.
         Messenger messenger = intent.getParcelableExtra(MeetingConstants.NOTIFY_SERVICE_HANDLER);
 
         // Dev doco: ... the best way to get one of these is to call Message.obtain()
@@ -96,12 +96,12 @@ public class NotifyService extends JobService {
         return false;
     }
 
-//    public void setUiCallback(ListingFragment lFrag) {
+//    public void setUiCallback(MainFragment lFrag) {
 //        this.lFrag = lFrag;
 //    }
 
 //    private NotifyTask nTask;
-//    private ListingFragment lFrag;
+//    private MainFragment lFrag;
 
     private String LOG_TAG = this.getClass().getCanonicalName();
 

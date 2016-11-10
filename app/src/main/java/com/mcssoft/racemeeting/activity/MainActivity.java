@@ -11,7 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.mcssoft.racemeeting.dialogs.DeleteDialog;
-import com.mcssoft.racemeeting.fragment.ListingFragment;
+import com.mcssoft.racemeeting.fragment.MainFragment;
 import com.mcssoft.racemeeting.interfaces.IDeleteMeeting;
 import com.mcssoft.racemeeting.interfaces.IEditMeeting;
 import com.mcssoft.racemeeting.interfaces.IShowMeeting;
@@ -34,11 +34,11 @@ public class MainActivity extends AppCompatActivity
         initialise();
 
         Bundle prefsState = setStateFromPreferences();
-        listingFragment.setArguments(prefsState);
+        mainFragment.setArguments(prefsState);
 
         if(savedInstanceState == null) {
             fragmentManager.beginTransaction()
-                           .replace(R.id.listing_container, listingFragment, null)
+                           .replace(R.id.listing_container, mainFragment, null)
                            .addToBackStack(null)
                            .commit();
         } else {
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity
     private void initialise() {
         setContentView(R.layout.activity_main);
         fragmentManager = getFragmentManager();
-        listingFragment = new ListingFragment();
+        mainFragment = new MainFragment();
 
         if(!MeetingPreferences.instanceExists()) {
             MeetingPreferences.getInstance(getApplicationContext());
@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity
     }
     //</editor-fold>
 
-    private ListingFragment listingFragment;
+    private MainFragment mainFragment;
     private FragmentManager fragmentManager;
     private String LOG_TAG = this.getClass().getCanonicalName();
 }

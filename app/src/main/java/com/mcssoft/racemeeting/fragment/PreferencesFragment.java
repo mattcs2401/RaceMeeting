@@ -62,7 +62,7 @@ public class PreferencesFragment extends PreferenceFragment
 
     @Override
     public void onStop() {
-        // Note: Can't put result Intent here as ListingFragment.onStart() is called before this.
+        // Note: Can't put result Intent here as MainFragment.onStart() is called before this.
         Log.d(LOG_TAG, "onStop");
         super.onStop();
 
