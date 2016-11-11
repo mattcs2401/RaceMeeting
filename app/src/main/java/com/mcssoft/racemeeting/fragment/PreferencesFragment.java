@@ -54,6 +54,7 @@ public class PreferencesFragment extends PreferenceFragment
         Log.d(LOG_TAG, "onStart");
         super.onStart();
 
+        meetingPreferences = new MeetingPreferences(getActivity().getApplicationContext());
         sharedPrefs.registerOnSharedPreferenceChangeListener(this);
         boolean tdpk = sharedPrefs.getBoolean(MeetingConstants.TIME_ACTIONS_PREF_KEY, false);
         cbpUseDefaults.setChecked(tdpk);
@@ -88,31 +89,38 @@ public class PreferencesFragment extends PreferenceFragment
         // 1. If the user simply cancels (selects back), then this method isn't called.
         // 2. Method basically just shows notifications.
 
-        if(MeetingPreferences.getInstance().meetingNotificationPref()) {
+//        if(MeetingPreferences.getInstance().meetingNotificationPref()) {
+          if(meetingPreferences.meetingNotificationPref()) {
 
             String prefVal; // the preference value.
 
             if(key.equals(MeetingConstants.MEETING_SHOW_KEY)) {
-                prefVal = MeetingPreferences.getInstance().meetingShowPref()[1];
+//                prefVal = MeetingPreferences.getInstance().meetingShowPref()[1];
+                prefVal = meetingPreferences.meetingShowPref()[1];
                 Toast.makeText(getActivity(), "Meeting show preference changed to " + prefVal + ".", Toast.LENGTH_SHORT).show();
             }
             else if (key.equals(MeetingConstants.TIME_FORMAT_PREF_KEY)) {
-                prefVal = MeetingPreferences.getInstance().meetingTimeFormatPref()[1];
+//                prefVal = MeetingPreferences.getInstance().meetingTimeFormatPref()[1];
+                prefVal = meetingPreferences.meetingTimeFormatPref()[1];
                 Toast.makeText(getActivity(), "Time format preference changed to " + prefVal + ".", Toast.LENGTH_SHORT).show();
             } else if (key.equals(MeetingConstants.DEFAULT_RACE_CODE_PREF_KEY)) {
-                prefVal = MeetingPreferences.getInstance().meetingDefaultRaceCodePref()[1];
+//                prefVal = MeetingPreferences.getInstance().meetingDefaultRaceCodePref()[1];
+                prefVal = meetingPreferences.meetingDefaultRaceCodePref()[1];
                 Toast.makeText(getActivity(), "Default race code preference changed to " + prefVal + ".", Toast.LENGTH_SHORT).show();
             } else if (key.equals(MeetingConstants.TIME_ACTIONS_PREF_KEY)) {
-                if (MeetingPreferences.getInstance().meetingTimePastPrior()) {
+//                if (MeetingPreferences.getInstance().meetingTimePastPrior()) {
+                if (meetingPreferences.meetingTimePastPrior()) {
                     Toast.makeText(getActivity(), "Meeting past and prior time defaults enabled.", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), "Meeting past and prior time defaults disabled.", Toast.LENGTH_SHORT).show();
                 }
             } else if (key.equals(MeetingConstants.TIME_PAST_PREF_KEY)) {
-                prefVal = MeetingPreferences.getInstance().meetingPastTimePref()[1];
+//                prefVal = MeetingPreferences.getInstance().meetingPastTimePref()[1];
+                prefVal = meetingPreferences.meetingPastTimePref()[1];
                 Toast.makeText(getActivity(), "Past race time preference changed to '" + prefVal + "'.", Toast.LENGTH_SHORT).show();
             } else if (key.equals(MeetingConstants.TIME_PRIOR_PREF_KEY)) {
-                prefVal = MeetingPreferences.getInstance().meetingPriorTimePref()[1];
+//                prefVal = MeetingPreferences.getInstance().meetingPriorTimePref()[1];
+                prefVal = meetingPreferences.meetingPriorTimePref()[1];
                 Toast.makeText(getActivity(), "Prior reminder time preference changed to '" + prefVal + "'.", Toast.LENGTH_SHORT).show();
             }
         }
@@ -136,6 +144,7 @@ public class PreferencesFragment extends PreferenceFragment
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private vars">
+    private MeetingPreferences meetingPreferences;
     private SharedPreferences sharedPrefs;
     private CheckBoxPreference cbpUseDefaults;
     private PreferenceCategory meetingPrefCat;

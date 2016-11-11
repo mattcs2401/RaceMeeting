@@ -103,9 +103,9 @@ public class MainActivity extends AppCompatActivity
         fragmentManager = getFragmentManager();
         mainFragment = new MainFragment();
 
-        if(!MeetingPreferences.instanceExists()) {
-            MeetingPreferences.getInstance(getApplicationContext());
-        }
+//        if(!MeetingPreferences.instanceExists()) {
+//            MeetingPreferences.getInstance(getApplicationContext());
+//        }
         if(!MeetingTime.instanceExists()) {
             MeetingTime.getInstance(getApplicationContext());
         }

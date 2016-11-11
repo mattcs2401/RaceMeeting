@@ -179,7 +179,9 @@ public class MeetingTime {
         String formatKey = PreferenceManager.getDefaultSharedPreferences(context)
                 .getString(MeetingConstants.TIME_FORMAT_PREF_KEY, null);
 
-        if(formatKey.equals(MeetingConstants.TIME_FORMAT_PREF_12HR_KEY)) {
+        if(formatKey == null) {
+            timeFormat = MeetingConstants.TIME_FORMAT_PREF_24HR;
+        } else if(formatKey.equals(MeetingConstants.TIME_FORMAT_PREF_12HR_KEY)) {
             timeFormat = MeetingConstants.TIME_FORMAT_PREF_12HR;
         } else if(formatKey.equals(MeetingConstants.TIME_FORMAT_PREF_24HR_KEY)) {
             timeFormat = MeetingConstants.TIME_FORMAT_PREF_24HR;

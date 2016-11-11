@@ -14,28 +14,28 @@ import mcssoft.com.racemeeting3.R;
  */
 public class MeetingPreferences {
 
-    private MeetingPreferences(Context context) {
-        this.context = context;
+//    private MeetingPreferences(Context context) {
+      public MeetingPreferences(Context context) {this.context = context;
         if(getAllPreferences().isEmpty()) {
             setDefaultValues();
         }
     }
 
-    public static synchronized MeetingPreferences getInstance(Context context) {
-        // Note: Instantiated in the ListingActivty.onCreate method.
-        if(instance == null) {
-            instance = new MeetingPreferences(context);
-            return instance;
-        }
-        throw new IllegalStateException(R.string.meeting_pref_already_init + "");
-    }
-
-    public static synchronized MeetingPreferences getInstance() {
-        if(instance != null) {
-            return instance;
-        }
-        throw new IllegalStateException(R.string.meeting_pref_not_init + "");
-    }
+//    public static synchronized MeetingPreferences getInstance(Context context) {
+//        // Note: Instantiated in the ListingActivty.onCreate method.
+//        if(instance == null) {
+//            instance = new MeetingPreferences(context);
+//            return instance;
+//        }
+//        throw new IllegalStateException(R.string.meeting_pref_already_init + "");
+//    }
+//
+//    public static synchronized MeetingPreferences getInstance() {
+//        if(instance != null) {
+//            return instance;
+//        }
+//        throw new IllegalStateException(R.string.meeting_pref_not_init + "");
+//    }
 
     public static boolean instanceExists() {
         return instance != null ? true : false;
@@ -151,7 +151,8 @@ public class MeetingPreferences {
         // No SharedPreferences set yet. App has probably been uninstalled then re-installed and/or
         // cache and data cleared. Set the app preferences defaults.
         if(prefsMap.isEmpty()) {
-            MeetingPreferences.getInstance().setDefaultValues();
+//            MeetingPreferences.getInstance().setDefaultValues();
+            setDefaultValues();
             prefsMap = PreferenceManager.getDefaultSharedPreferences(context).getAll();
         }
 

@@ -63,7 +63,9 @@ public class MainFragment extends Fragment
     public void onStart() {
         Log.d(LOG_TAG, "onStart");
         super.onStart();
-        preferences = MeetingPreferences.getInstance().getAllPreferences();
+//        preferences = MeetingPreferences.getInstance().getAllPreferences();
+        meetingPreferences = new MeetingPreferences(getActivity().getApplicationContext());
+        preferences = meetingPreferences.getAllPreferences();
         int action;
 
         // If the 'Meeting Time Actions' checkbox is ticked.
@@ -111,7 +113,7 @@ public class MainFragment extends Fragment
     @Override
     public void onDestroy() {
         super.onDestroy();
-        MeetingPreferences.getInstance().destroy();
+        meetingPreferences.destroy();
     }
 
     @Override
@@ -199,6 +201,7 @@ public class MainFragment extends Fragment
     private RecyclerView recyclerView;
     private MeetingAdapter meetingAdapter;
     private MeetingScheduler meetingScheduler;
+    private MeetingPreferences meetingPreferences;
 
     private String LOG_TAG = this.getClass().getCanonicalName();
     //</editor-fold>
