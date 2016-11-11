@@ -47,6 +47,7 @@ public class MeetingConstants {
 
     // Preferences (general)
     public static final String MEETING_NOTIFICATIONS_KEY = "pref_meeting_notifications_key";
+    public static final String MEETING_SHOW_KEY = "pref_today_meeting_key";
 
     public static final String MEETING_PREFERENCES_KEY = "meeting_preferences_key";
     public static final int PREFERENCES_CHANGED = 1;

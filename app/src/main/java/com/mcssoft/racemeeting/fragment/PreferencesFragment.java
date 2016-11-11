@@ -92,7 +92,11 @@ public class PreferencesFragment extends PreferenceFragment
 
             String prefVal; // the preference value.
 
-            if (key.equals(MeetingConstants.TIME_FORMAT_PREF_KEY)) {
+            if(key.equals(MeetingConstants.MEETING_SHOW_KEY)) {
+                prefVal = MeetingPreferences.getInstance().meetingShowPref()[1];
+                Toast.makeText(getActivity(), "Meeting show preference changed to " + prefVal + ".", Toast.LENGTH_SHORT).show();
+            }
+            else if (key.equals(MeetingConstants.TIME_FORMAT_PREF_KEY)) {
                 prefVal = MeetingPreferences.getInstance().meetingTimeFormatPref()[1];
                 Toast.makeText(getActivity(), "Time format preference changed to " + prefVal + ".", Toast.LENGTH_SHORT).show();
             } else if (key.equals(MeetingConstants.DEFAULT_RACE_CODE_PREF_KEY)) {

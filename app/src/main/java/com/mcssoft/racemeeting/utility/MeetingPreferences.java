@@ -50,6 +50,14 @@ public class MeetingPreferences {
                 .getBoolean(MeetingConstants.MEETING_NOTIFICATIONS_KEY, false);
     }
 
+    public String[] meetingShowPref() {
+        prefVals = new String[2];
+        prefVals[0] = PreferenceManager.getDefaultSharedPreferences(context)
+                .getString(MeetingConstants.MEETING_SHOW_KEY, null);
+        prefVals[1] = context.getResources().getStringArray(R.array.meetingShowWhichVals)[Integer.parseInt(prefVals[0])];
+        return prefVals;
+    }
+
     /**
      * Get the details for the 'Meeting Time Format' preference.
      * @return [0] preference (array) value, [1] preference text.
@@ -131,7 +139,7 @@ public class MeetingPreferences {
     }
 
     public void destroy() {
-        // Called in the ListingActivity.onDestroy().
+        // Called in the MainFragment.onDestroy().
         context = null;
         instance = null;
     }
