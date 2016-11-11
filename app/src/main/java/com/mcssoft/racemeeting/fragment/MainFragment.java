@@ -63,7 +63,7 @@ public class MainFragment extends Fragment
     public void onStart() {
         Log.d(LOG_TAG, "onStart");
         super.onStart();
-        preferences = getPreferences();
+        preferences = MeetingPreferences.getInstance().getAllPreferences();
         int action;
 
         // If the 'Meeting Time Actions' checkbox is ticked.
@@ -185,31 +185,6 @@ public class MainFragment extends Fragment
                         null,
                         null,
                         SchemaConstants.SORT_ORDER);
-    }
-
-    /**
-     * Get state values based on what's currently in the SharedPreferences.
-     * @return The state bundle containg the preferences (as strings).
-     */
-    private Bundle getPreferences() {
-
-        Map<String,?> prefsMap = MeetingPreferences.getInstance().getAllPreferences();
-
-        // No SharedPreferences set yet. App has probably been uninstalled then re-installed and/or
-        // cache and data cleared. Set the app preferences defaults.
-        if(prefsMap.isEmpty()) {
-            MeetingPreferences.getInstance().setDefaultValues();
-            prefsMap = MeetingPreferences.getInstance().getAllPreferences();
-        }
-
-        Bundle prefsState = new Bundle();
-
-        for (String key : prefsMap.keySet()) {
-            Object obj = prefsMap.get(key);
-            prefsState.putString(key, obj.toString());
-        }
-
-        return prefsState;
     }
     //</editor-fold>
 

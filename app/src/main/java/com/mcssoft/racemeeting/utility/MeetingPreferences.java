@@ -2,6 +2,7 @@ package com.mcssoft.racemeeting.utility;
 
 
 import android.content.Context;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 
 import java.util.Map;
@@ -108,10 +109,10 @@ public class MeetingPreferences {
 
     /**
      * Get a listing of all the preferences (as currently set).
-     * @return The preference list.
+     * @return The preference listing in a bundle.
      */
-    public Map<String,?> getAllPreferences() {
-        return PreferenceManager.getDefaultSharedPreferences(context).getAll();
+    public Bundle getAllPreferences() {
+        return getPreferences();
     }
 
     /**
@@ -133,6 +134,27 @@ public class MeetingPreferences {
         // Called in the ListingActivity.onDestroy().
         context = null;
         instance = null;
+    }
+
+    private Bundle getPreferences() {
+
+        Map<String,?> prefsMap = PreferenceManager.getDefaultSharedPreferences(context).getAll();
+
+        // No SharedPreferences set yet. App has probably been uninstalled then re-installed and/or
+        // cache and data cleared. Set the app preferences defaults.
+        if(prefsMap.isEmpty()) {
+            MeetingPreferences.getInstance().setDefaultValues();
+            prefsMap = PreferenceManager.getDefaultSharedPreferences(context).getAll();
+        }
+
+        Bundle prefsState = new Bundle();
+
+        for (String key : prefsMap.keySet()) {
+            Object obj = prefsMap.get(key);
+            prefsState.putString(key, obj.toString());
+        }
+
+        return prefsState;
     }
 
     String [] prefVals;      // general array value used where array is return type.
