@@ -31,7 +31,8 @@
         app:layout_constraintLeft_toRightOf="@+id/tvRaceCity"
         android:textColor="#000000"
         android:textStyle="bold"
-        android:typeface="normal" />
+        android:typeface="normal"
+        tools:layout_editor_absoluteY="0dp" />
 
     <TextView
         android:text="Race Code"
@@ -85,7 +86,7 @@
         android:typeface="normal"
         android:inputType="number"
         android:imeOptions="actionDone"
-        android:maxLength="1"/>
+        android:maxLength="2"/>
 
     <TextView
         android:text="Race Sel"
@@ -113,7 +114,7 @@
         android:typeface="normal"
         android:inputType="number"
         android:imeOptions="actionDone"
-        android:maxLength="1"/>
+        android:maxLength="2"/>
 
 
     <TextView
