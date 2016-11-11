@@ -24,7 +24,7 @@ import java.util.Set;
 
 public class MeetingScheduler {
 
-    public MeetingScheduler(Activity activity, Context context) {
+    public MeetingScheduler(Activity activity) {
         this.activity = activity;
     }
 
@@ -98,7 +98,7 @@ public class MeetingScheduler {
         }
     }
 
-    private boolean isSvcRunning(int svcId) {
+    public boolean isSvcRunning(int svcId) {
         boolean retVal = false;
         switch(svcId) {
             case MeetingConstants.LISTING_SERVICE:
@@ -113,7 +113,7 @@ public class MeetingScheduler {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Task/Job">
-    private void cancelStopAll() {
+    public void cancelStopAll() {
         Log.d(LOG_TAG, "cancelStopAll");
         if(isSvcRunning(MeetingConstants.LISTING_SERVICE)) {
             cancelJobs(MeetingConstants.LISTING_SERVICE);
@@ -127,7 +127,7 @@ public class MeetingScheduler {
         }
     }
 
-    private void cancelJobs(int svcId) {
+    public void cancelJobs(int svcId) {
         JobScheduler js = (JobScheduler) activity.getSystemService(Context.JOB_SCHEDULER_SERVICE);
         List<JobInfo> lJobInfo = js.getAllPendingJobs();
 
@@ -163,7 +163,6 @@ public class MeetingScheduler {
             if(results.getInt(MeetingConstants.PAST_TIME_JOB_KEY) == MeetingConstants.LISTING_CHANGE_REQUIRED) {
 //                // Do the actual work required.
                 // TODO - interface.
-//                getLoaderManager().restartLoader(0, null, this);
             }
         }
 

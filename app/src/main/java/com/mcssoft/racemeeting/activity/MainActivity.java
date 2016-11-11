@@ -33,9 +33,6 @@ public class MainActivity extends AppCompatActivity
 
         initialise();
 
-        Bundle prefsState = setStateFromPreferences();
-        mainFragment.setArguments(prefsState);
-
         if(savedInstanceState == null) {
             fragmentManager.beginTransaction()
                            .replace(R.id.listing_container, mainFragment, null)
@@ -115,31 +112,6 @@ public class MainActivity extends AppCompatActivity
         if(!MeetingDisplay.instanceExists()) {
             MeetingDisplay.getInstance(getApplicationContext());
         }
-    }
-
-    /**
-     * Get state values based on what's currently in the SharedPreferences.
-     * @return The state bundle containg the preferences (as strings).
-     */
-    private Bundle setStateFromPreferences() {
-
-        Map<String,?> prefsMap = MeetingPreferences.getInstance().getAllPreferences();
-
-        // No SharedPreferences set yet. App has probably been uninstalled then re-installed and/or
-        // cache and data cleared. Set the app preferences defaults.
-        if(prefsMap.isEmpty()) {
-            MeetingPreferences.getInstance().setDefaultValues();
-            prefsMap = MeetingPreferences.getInstance().getAllPreferences();
-        }
-
-        Bundle prefsState = new Bundle();
-
-        for (String key : prefsMap.keySet()) {
-            Object obj = prefsMap.get(key);
-            prefsState.putString(key, obj.toString());
-        }
-
-        return prefsState;
     }
     //</editor-fold>
 

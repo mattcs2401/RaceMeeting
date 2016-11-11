@@ -5,8 +5,8 @@ import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,10 +25,11 @@ import com.mcssoft.racemeeting.interfaces.IClickListener;
 import com.mcssoft.racemeeting.interfaces.IDeleteMeeting;
 import com.mcssoft.racemeeting.interfaces.IShowMeeting;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
-import com.mcssoft.racemeeting.utility.MeetingDisplay;
 import com.mcssoft.racemeeting.utility.MeetingPreferences;
-import com.mcssoft.racemeeting.utility.MeetingTime;
+import com.mcssoft.racemeeting.utility.MeetingScheduler;
 import com.mcssoft.racemeeting.listener.RecyclerTouchListener;
+
+import java.util.Map;
 
 import mcssoft.com.racemeeting3.R;
 
@@ -39,8 +40,8 @@ public class MainFragment extends Fragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        prefsState = getArguments();
 //        setHasOptionsMenu(true);
+        meetingScheduler = new MeetingScheduler(getActivity());
     }
 
     @Override
@@ -59,10 +60,52 @@ public class MainFragment extends Fragment
     }
 
     @Override
-    public void onResume() {
-        Log.d(LOG_TAG, "onResume");
-        super.onResume();
-//        getLoaderManager().restartLoader(MeetingConstants.MEETING_LOADER, null, this);
+    public void onStart() {
+        Log.d(LOG_TAG, "onStart");
+        super.onStart();
+        preferences = getPreferences();
+        int action;
+
+        // If the 'Meeting Time Actions' checkbox is ticked.
+        if(preferences.getString(MeetingConstants.TIME_ACTIONS_PREF_KEY).equals("true")) {
+            // If there are items listed.
+            if(recordsExist()) {
+
+                action = Integer.parseInt(preferences.getString(MeetingConstants.TIME_PRIOR_PREF_KEY));
+
+                // If anything other than the "No reminder" preference is selected.
+                if (action != MeetingConstants.TIME_PRIOR_PREF_DEFAULT) {
+                    meetingScheduler.startService(MeetingConstants.NOTIFY_SERVICE, action);
+                } else {
+                    // "No reminder." preference is selected.
+                    if (meetingScheduler.isSvcRunning(MeetingConstants.NOTIFY_SERVICE)) {
+                        meetingScheduler.cancelJobs(MeetingConstants.NOTIFY_SERVICE);
+                    }
+                }
+
+                action = Integer.parseInt(preferences.getString(MeetingConstants.TIME_PAST_PREF_KEY));
+
+                // If anything other than the "Take no action ..." preference is selected, and records exist.
+                if (action != MeetingConstants.TIME_PAST_PREF_DEFAULT) {
+                    meetingScheduler.startService(MeetingConstants.LISTING_SERVICE, action);
+                } else {
+                    // "Take no action ..." preference is selected, cancel any jobs.
+                    if (meetingScheduler.isSvcRunning(MeetingConstants.LISTING_SERVICE)) {
+                        meetingScheduler.cancelJobs(MeetingConstants.LISTING_SERVICE);
+                    }
+                }
+            }
+        } else {
+            // 'Meeting Time Actions' checkbox is not ticked.
+            meetingScheduler.cancelStopAll();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        Log.d(LOG_TAG, "onStop");
+        super.onStop();
+        meetingScheduler.cancelStopAll();
     }
 
     @Override
@@ -97,7 +140,7 @@ public class MainFragment extends Fragment
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Region: Private Methods">
+    //<editor-fold defaultstate="collapsed" desc="Region: Utility">
     private void setRecyclerView(View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.id_recyclerview_listing);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
@@ -130,12 +173,51 @@ public class MainFragment extends Fragment
         Cursor cursor = meetingAdapter.getCursor();
         return  cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_ROWID));
     }
+
+    private boolean recordsExist() {
+        return (queryAll().getCount() > 0) ? true : false;
+    }
+
+    private Cursor queryAll() {
+        return getActivity().getContentResolver()
+                .query(Uri.parse(SchemaConstants.CONTENT_URI),
+                        DatabaseHelper.getDatabaseSchemaProjection(),
+                        null,
+                        null,
+                        SchemaConstants.SORT_ORDER);
+    }
+
+    /**
+     * Get state values based on what's currently in the SharedPreferences.
+     * @return The state bundle containg the preferences (as strings).
+     */
+    private Bundle getPreferences() {
+
+        Map<String,?> prefsMap = MeetingPreferences.getInstance().getAllPreferences();
+
+        // No SharedPreferences set yet. App has probably been uninstalled then re-installed and/or
+        // cache and data cleared. Set the app preferences defaults.
+        if(prefsMap.isEmpty()) {
+            MeetingPreferences.getInstance().setDefaultValues();
+            prefsMap = MeetingPreferences.getInstance().getAllPreferences();
+        }
+
+        Bundle prefsState = new Bundle();
+
+        for (String key : prefsMap.keySet()) {
+            Object obj = prefsMap.get(key);
+            prefsState.putString(key, obj.toString());
+        }
+
+        return prefsState;
+    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
-    private Bundle prefsState;
+    private Bundle preferences;
     private RecyclerView recyclerView;
     private MeetingAdapter meetingAdapter;
+    private MeetingScheduler meetingScheduler;
 
     private String LOG_TAG = this.getClass().getCanonicalName();
     //</editor-fold>

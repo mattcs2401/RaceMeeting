@@ -33,10 +33,10 @@ public class PreferencesFragment extends PreferenceFragment
 
         View rootView = inflater.inflate(R.layout.preferences_main, container, false);
 
-        Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.id_toolbar);
-        toolbar.setTitle(R.string.app_name_prefs);
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_18dp);
-        toolbar.setNavigationOnClickListener(this);
+//        Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.id_toolbar);
+//        toolbar.setTitle(R.string.app_name_prefs);
+//        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_18dp);
+//        toolbar.setNavigationOnClickListener(this);
 
         addPreferencesFromResource(R.xml.meeting_preferences);
 
