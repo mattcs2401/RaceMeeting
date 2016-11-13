@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.listing_menu, menu);
+        getMenuInflater().inflate(R.menu.listing_toolbar_menu, menu);
         return true;
     }
 
@@ -54,10 +54,10 @@ public class MainActivity extends AppCompatActivity
         Log.d(LOG_TAG, "onOptionsItemSelected");
 
         switch (item.getItemId()) {
-            case R.id.menu_insert:
+            case R.id.toolbar_menu_insert:
                 onEditMeeting(0);
                 break;
-            case R.id.preference_settings:
+            case R.id.toolbar_preference_settings:
                 Intent paIntent = new Intent(this, PreferencesActivity.class);
                 startActivityForResult(paIntent, MeetingConstants.PREFERENCES_ACTIVITY_REQUEST_CODE);
                 return true;
