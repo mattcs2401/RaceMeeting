@@ -2,11 +2,11 @@
 <menu xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/menu_insert"
+    <item android:id="@+id/toolbar_menu_insert"
         android:icon="@android:drawable/ic_menu_add"
         android:title="@string/lbl_menu_insert"
         app:showAsAction="always" />
-    <item android:id="@+id/preference_settings"
+    <item android:id="@+id/toolbar_preference_settings"
         android:icon="@android:drawable/ic_menu_preferences"
         android:title="@string/lbl_menu_settings"
         app:showAsAction="always" />
