@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity
 
         switch (item.getItemId()) {
             case R.id.toolbar_menu_insert:
-                onEditMeeting(MeetingConstants.NEW_MEETING);
+                onEditMeeting(0, MeetingConstants.NEW_MEETING);
                 break;
             case R.id.toolbar_preference_settings:
                 Intent paIntent = new Intent(this, PreferencesActivity.class);
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity
 
     //<editor-fold defaultstate="collapsed" desc="Region: Interface - IEditMeeting">
     @Override
-    public void onEditMeeting(long id) {
+    public void onEditMeeting(long id, int editType) {
         Intent intent = new Intent(this, EditActivity.class);
         if(id == MeetingConstants.NEW_MEETING) {
             intent.putExtra(MeetingConstants.EDIT_NEW, id);

@@ -111,8 +111,9 @@ public class MeetingConstants {
     public static final String RACE_CODE_S = "S";
 
     // Misc.
-    public static final long NEW_MEETING = 0x0;
-    public static final long EDIT_MEETING = 0x01;
+    public static final int NEW_MEETING = 0x0;
+    public static final int EDIT_MEETING = 0x01;
+    public static final int COPY_MEETING = 0x02;
     public static final int EDIT_ACTIVITY_REQUEST_CODE = 0x03;
     public static final int EDIT_ACTIVITY_RESULT_SAVE = 0x04;
     public static final int INIT_DEFAULT = -1;              // arbitrary initialiser value.
