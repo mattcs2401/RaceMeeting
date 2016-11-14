@@ -67,14 +67,20 @@ public class MainActivity extends AppCompatActivity
 
     //<editor-fold defaultstate="collapsed" desc="Region: Interface - IEditMeeting">
     @Override
-    public void onEditMeeting(long id, int editType) {
+    public void onEditMeeting(int editType, long dbRowId) {
         Intent intent = new Intent(this, EditActivity.class);
-        if(id == MeetingConstants.NEW_MEETING) {
-            intent.putExtra(MeetingConstants.EDIT_NEW, id);
-            intent.setAction(MeetingConstants.EDIT_ACTION_NEW);
-        } else {
-            intent.putExtra(MeetingConstants.EDIT_EXISTING, id);
-            intent.setAction(MeetingConstants.EDIT_ACTION_EXISTING);
+        switch (editType) {
+            case MeetingConstants.NEW_MEETING:
+                intent.setAction(MeetingConstants.EDIT_ACTION_NEW);
+                break;
+            case MeetingConstants.EDIT_MEETING:
+                intent.putExtra(MeetingConstants.EDIT_EXISTING, dbRowId);
+                intent.setAction(MeetingConstants.EDIT_ACTION_EXISTING);
+                break;
+            case MeetingConstants.COPY_MEETING:
+                intent.putExtra(MeetingConstants.EDIT_COPY, dbRowId);
+                intent.setAction(MeetingConstants.EDIT_ACTION_COPY);
+                break;
         }
         startActivity(intent);
     }

@@ -60,37 +60,15 @@ public class EditFragment extends Fragment
 
         Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.id_toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         onCreateInitialise(rootView);
 
-        Intent intent = getActivity().getIntent();
-        launchAction = intent.getAction();
+        intent = getActivity().getIntent();
+        editAction = intent.getAction();
 
-        if(launchAction.equals(MeetingConstants.EDIT_ACTION_NEW)) {
-            actionBar.setTitle(R.string.app_name_new);
-            updateBackground(MeetingConstants.NEW_MEETING);
-            timeInMillis = MeetingTime.getInstance().getCurrentTimeInMillis();
-            updateRaceTime(timeInMillis);
-
-            if(checkUseRaceCodePreference()) {
-                setRaceCodeFromPreference();
-            }
-        } else if(launchAction.equals(MeetingConstants.EDIT_ACTION_EXISTING)) {
-            actionBar.setTitle(R.string.app_name_edit);
-            updateBackground(MeetingConstants.EDIT_MEETING);
-
-            Bundle args = new Bundle();
-            long rowId = intent.getLongExtra(MeetingConstants.EDIT_EXISTING, MeetingConstants.INIT_DEFAULT);
-
-            if(rowId != MeetingConstants.INIT_DEFAULT) {
-                args.putLong(MeetingConstants.EDIT_EXISTING, rowId);
-                getLoaderManager().initLoader(0, args, this);
-            } else {
-                // TBA
-            }
-        }
+        doEditAction();
 
         return rootView;
     }
@@ -117,9 +95,9 @@ public class EditFragment extends Fragment
         Log.d(LOG_TAG, "onClick");
         switch(view.getId()) {
             case R.id.btnSave:
-                if(checkFields()) {
+                if(checkFieldLength() && checkAgainstCache()) {
                     // save values and tell activity to finish.
-                    saveValuesForResult();
+                    saveValues();
                     ((IShowCodes) getActivity()).onFinish();
                     break;
                 }
@@ -181,14 +159,21 @@ public class EditFragment extends Fragment
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         Log.d(LOG_TAG, "onCreateLoader");
+        long dbRowId = MeetingConstants.INIT_DEFAULT;  // simply an initialiser.
 
-        long rowId = args.getLong(MeetingConstants.EDIT_EXISTING);
-        Uri contentUri = ContentUris.withAppendedId(MeetingProvider.contentUri, rowId);
+        if(editAction.equals(MeetingConstants.EDIT_ACTION_EXISTING)) {
+            dbRowId = args.getLong(MeetingConstants.EDIT_EXISTING);
+        } else if(editAction.equals(MeetingConstants.EDIT_ACTION_COPY)) {
+            dbRowId = args.getLong(MeetingConstants.EDIT_COPY);
+        }
+
+        Uri contentUri = ContentUris.withAppendedId(MeetingProvider.contentUri, dbRowId);
+
         return new CursorLoader(getActivity(),
                 contentUri,
                 DatabaseHelper.getMeetingListItemProjection(),
                 SchemaConstants.SELECT_ALL_MLI,
-                new String[] {Long.toString(rowId)},
+                new String[] {Long.toString(dbRowId)},
                 null);
     }
 
@@ -207,6 +192,10 @@ public class EditFragment extends Fragment
         etRaceTime.setText(time.replace("am","").replace("pm",""));
 
         dChange = cursor.getString(cursor.getColumnIndexOrThrow(SchemaConstants.COLUMN_D_CHG_REQ));
+
+        if(editAction.equals(MeetingConstants.EDIT_ACTION_COPY)) {
+            setCache();
+        }
     }
 
     @Override
@@ -239,15 +228,62 @@ public class EditFragment extends Fragment
     }
     //</editor-fold>
 
-    ///<editor-fold defaultstate="collapsed" desc="Region: Utility">
+    //<editor-fold defaultstate="collapsed" desc="Region: Utility">
+    //<editor-fold defaultstate="collapsed" desc="Region: Utility - Edit actions">
+    private void doEditAction() {
+        if(editAction.equals(MeetingConstants.EDIT_ACTION_NEW)) {
+            doEditActionNew();
+        } else if(editAction.equals(MeetingConstants.EDIT_ACTION_EXISTING)) {
+            doEditActionExisting();
+        } else if(editAction.equals(MeetingConstants.EDIT_ACTION_COPY)) {
+            doEditActionCopy();
+        }
+    }
+
+    private void doEditActionNew() {
+        actionBar.setTitle(R.string.app_name_new);
+        updateBackground(MeetingConstants.NEW_MEETING);
+        timeInMillis = MeetingTime.getInstance().getCurrentTimeInMillis();
+        updateRaceTime(timeInMillis);
+
+        if(checkUseRaceCodePreference()) {
+            setRaceCodeFromPreference();
+        }
+    }
+
+    private void doEditActionExisting() {
+        actionBar.setTitle(R.string.app_name_edit);
+        updateBackground(MeetingConstants.EDIT_MEETING);
+
+        Bundle args = new Bundle();
+        long rowId = intent.getLongExtra(MeetingConstants.EDIT_EXISTING, 0);
+
+        args.putLong(MeetingConstants.EDIT_EXISTING, rowId);
+        getLoaderManager().initLoader(0, args, this);
+    }
+
+    private void doEditActionCopy() {
+        actionBar.setTitle(R.string.app_name_copy);
+        updateBackground(MeetingConstants.EDIT_MEETING);
+
+        Bundle args = new Bundle();
+        long rowId = intent.getLongExtra(MeetingConstants.EDIT_COPY, 0);
+
+        args.putLong(MeetingConstants.EDIT_COPY, rowId);
+        getLoaderManager().initLoader(0, args, this);
+
+        //setCache();
+    }
+    //</editor-fold>
+    
     /**
      * Save the edit values to the database.
      * @return Intent with either:
      * 1) For new entry; key==EDIT_ACTION_NEW, value==row id in database.
      * 2) For existing entry:  key==EDIT_ACTION_EXISTING, value==row id in database.
      */
-    private Intent saveValuesForResult() {
-        //Log.d(LOG_TAG, "saveValuesForResult");
+    private Intent saveValues() {
+        //Log.d(LOG_TAG, "saveValues");
         Intent intent = new Intent();
         long dbRowId = MeetingConstants.INIT_DEFAULT;
         ContentValues contentValues = new ContentValues();
@@ -258,7 +294,7 @@ public class EditFragment extends Fragment
         contentValues.put(SchemaConstants.COLUMN_RACE_SEL, etRaceSel.getText().toString());
         contentValues.put(SchemaConstants.COLUMN_DATE_TIME, timeInMillis);
 
-        if(launchAction.equals(MeetingConstants.EDIT_ACTION_NEW)) {
+        if(editAction.equals(MeetingConstants.EDIT_ACTION_NEW)) {
             contentValues.put(SchemaConstants.COLUMN_D_CHG_REQ, "N");
             contentValues.put(SchemaConstants.COLUMN_NOTIFIED, "N");
 
@@ -267,10 +303,8 @@ public class EditFragment extends Fragment
             dbRowId = ContentUris.parseId(itemUri);
             if(dbRowId < 1) {
                 throw new IllegalStateException("Unable to update; path=" + itemUri.toString());
-            } else {
-                intent.putExtra(launchAction, dbRowId);
             }
-        } else if(launchAction.equals(MeetingConstants.EDIT_ACTION_EXISTING)) {
+        } else if(editAction.equals(MeetingConstants.EDIT_ACTION_EXISTING)) {
             if ((timeInMillis > MeetingTime.getInstance().getCurrentTimeInMillis()) && (dChange.equals("Y"))) {
                 contentValues.put(SchemaConstants.COLUMN_D_CHG_REQ, "N");
             }
@@ -280,8 +314,18 @@ public class EditFragment extends Fragment
             if (count != 1) {
                 throw new IllegalStateException("Unable to update RaceMeeting: more than one rows match rowId: " + dbRowId);
             }
+        } else if(editAction.equals(MeetingConstants.EDIT_ACTION_COPY)) {
+            contentValues.put(SchemaConstants.COLUMN_D_CHG_REQ, "N");
+            contentValues.put(SchemaConstants.COLUMN_NOTIFIED, "N");
+
+            Uri itemUri = getActivity().getContentResolver().insert(MeetingProvider.contentUri, contentValues);
+
+            dbRowId = ContentUris.parseId(itemUri);
+            if(dbRowId < 1) {
+                throw new IllegalStateException("Unable to update; path=" + itemUri.toString());
+            }
         }
-        intent.putExtra(launchAction, dbRowId);
+        intent.putExtra(editAction, dbRowId);
         return intent;
     }
 
@@ -304,13 +348,10 @@ public class EditFragment extends Fragment
         etRaceCode.setRawInputType(InputType.TYPE_NULL);
         etRaceCode.setOnTouchListener(this);
 
-//        etRaceNum = (EditText) view.findViewById(R.id.etRaceNum);
         etRaceNum = (MeetingEditText) view.findViewById(R.id.etRaceNum);
-//        meetKbd.register(R.id.etRaceNum);
         etRaceNum.setOnEditorActionListener(this);
 
         etRaceSel = (EditText) view.findViewById(R.id.etRaceSel);
-//        meetKbd.register(R.id.etRaceSel);
         etRaceSel.setOnEditorActionListener(this);
 
         etRaceTime = (EditText) view.findViewById(R.id.etRaceTime);
@@ -320,8 +361,6 @@ public class EditFragment extends Fragment
 
         btnSave = (Button) view.findViewById(R.id.btnSave);
         btnSave.setOnClickListener(this);
-
-//        meetKbd.prepareOnKeyboard(new int [] {R.id.btnSave});
     }
 
     /**
@@ -353,17 +392,29 @@ public class EditFragment extends Fragment
      * Simple sanity check there is something in all the fields.
      * @return True if values exist in all fields.
      */
-    private boolean checkFields() {
+    private boolean checkFieldLength() {
         if ((etCityCode.getText().length() > 0) &&
                 (etRaceCode.getText().length() > 0) &&
                 (etRaceNum.getText().length() > 0) &&
                 (etRaceSel.getText().length() > 0) &&
                 (etRaceTime.getText().length() > 0)) {
             return true;
-        } else {
-            Toast.makeText(getActivity(), "All fields are required.", Toast.LENGTH_SHORT).show();
         }
+        Toast.makeText(getActivity(), "All fields are required.", Toast.LENGTH_SHORT).show();
         return false;
+    }
+
+    private boolean checkAgainstCache() {
+        if(etCityCodeCache.equals(etCityCode.getText().toString()) &&
+           etRaceCodeCache.equals(etRaceCode.getText().toString()) &&
+           etRaceNumCache.equals(etRaceNum.getText().toString()) &&
+           etRaceSelCache.equals(etRaceSel.getText().toString()) &&
+           etRaceTimeCache.equals(etRaceTime.getText().toString())) {
+           // nothing chnaged.
+            Toast.makeText(getActivity(), "Fields are identical.", Toast.LENGTH_SHORT).show();
+           return false;
+        }
+        return true;
     }
 
     /**
@@ -417,21 +468,36 @@ public class EditFragment extends Fragment
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
+
+    private void setCache() {
+        etCityCodeCache = etCityCode.getText().toString();
+        etRaceCodeCache = etRaceCode.getText().toString();
+        etRaceNumCache = etRaceNum.getText().toString();
+        etRaceSelCache = etRaceSel.getText().toString();
+        etRaceTimeCache = etRaceTime.getText().toString();
+    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private vars">
     // This fragment's components as local variables.
-    private ActionBar actionBar;
     private EditText etCityCode;
+    private String etCityCodeCache;
     private EditText etRaceCode;
+    private String etRaceCodeCache;
     private EditText etRaceNum;
-    private MeetingEditText etRaceNumCust;
+    private String  etRaceNumCache;
     private EditText etRaceSel;
+    private String  etRaceSelCache;
     private EditText etRaceTime;
+    private String  etRaceTimeCache;
     private Button btnSave;
+
+    private Intent intent;
+    private ActionBar actionBar;
+
     private long timeInMillis;         // time in milli sec.
     private String dChange;            // display change required flag.
-    private String launchAction;       // activity action tag.
+    private String editAction;       // activity action tag.
 
     private String LOG_TAG = this.getClass().getCanonicalName();
     //</editor-fold>

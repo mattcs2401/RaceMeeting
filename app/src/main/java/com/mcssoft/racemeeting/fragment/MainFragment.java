@@ -144,10 +144,11 @@ public class MainFragment extends Fragment
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.context_menu_edit:
-                ((IEditMeeting) getActivity()).onEditMeeting(getDbRowId(position), MeetingConstants.EDIT_MEETING);
+                ((IEditMeeting) getActivity()).onEditMeeting(MeetingConstants.EDIT_MEETING, getDbRowId(position));
                 break;
             case R.id.context_menu_copy:
-                Toast.makeText(getActivity(), "copy menu item clicked", Toast.LENGTH_SHORT).show();
+                ((IEditMeeting) getActivity()).onEditMeeting(MeetingConstants.COPY_MEETING, getDbRowId(position));
+                //Toast.makeText(getActivity(), "copy menu item clicked", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.context_menu_details:
                 ((IShowMeeting) getActivity()).onShowMeeting(getDbRowId(position));

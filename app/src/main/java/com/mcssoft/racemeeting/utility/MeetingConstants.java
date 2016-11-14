@@ -128,8 +128,10 @@ public class MeetingConstants {
     public static final String SAVE_VALUES_NEW = "save_values_new";
     public static final String EDIT_EXISTING = "edit_existing";
     public static final String EDIT_NEW = "edit_new";
+    public static final String EDIT_COPY = "edit_copy";
     public static final String EDIT_ACTION_EXISTING = "edit_action_existing";
     public static final String EDIT_ACTION_NEW = "edit_action_new";
+    public static final String EDIT_ACTION_COPY = "edit_action_copy";
     public static final String SELECTED_KEY = "selected_key";
     public static final String LIST_ROW_NUMBER = "list_row_number";
     public static final String SHOW_SUMMARY = "show_summary";

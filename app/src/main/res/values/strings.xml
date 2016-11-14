@@ -4,6 +4,7 @@
     <string name="app_name_prefs">Preferences</string>
     <string name="app_name_edit">Edit Meeting</string>
     <string name="app_name_new">New Meeting</string>
+    <string name="app_name_copy">Copy Meeting</string>
     <string name="app_name_review">Review Meeting</string>
     <string name="edit_reminder_title">Race Meeting - Edit</string>
     <string name="no_meetings">No Meetings Yet</string>
