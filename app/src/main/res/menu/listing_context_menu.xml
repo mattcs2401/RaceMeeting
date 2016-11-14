@@ -7,6 +7,6 @@
         android:id="@+id/context_menu_copy"
         android:title="Copy" />
     <item
-        android:id="@+id/context_menu_delete"
-        android:title="Delete" />
+        android:id="@+id/context_menu_details"
+        android:title="Details" />
 </menu>

@@ -27,6 +27,8 @@ import com.mcssoft.racemeeting.database.SchemaConstants;
 import com.mcssoft.racemeeting.interfaces.IEditMeeting;
 import com.mcssoft.racemeeting.interfaces.IItemClickListener;
 import com.mcssoft.racemeeting.interfaces.IDeleteMeeting;
+import com.mcssoft.racemeeting.interfaces.IItemLongClickListener;
+import com.mcssoft.racemeeting.interfaces.IShowMeeting;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingPreferences;
 import com.mcssoft.racemeeting.utility.MeetingScheduler;
@@ -34,7 +36,10 @@ import com.mcssoft.racemeeting.utility.MeetingScheduler;
 import mcssoft.com.racemeeting3.R;
 
 public class MainFragment extends Fragment
-    implements LoaderManager.LoaderCallbacks<Cursor>, IItemClickListener, PopupMenu.OnMenuItemClickListener {
+    implements LoaderManager.LoaderCallbacks<Cursor>,
+               IItemClickListener,
+               IItemLongClickListener,
+               PopupMenu.OnMenuItemClickListener {
 
     //<editor-fold defaultstate="collapsed" desc="Region: LifeCycle">
     @Override
@@ -131,6 +136,11 @@ public class MainFragment extends Fragment
     }
 
     @Override
+    public void onItemLongClick(View view, int position) {
+        ((IDeleteMeeting) getActivity()).onDeleteMeeting(getDbRowId(position));
+    }
+
+    @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.context_menu_edit:
@@ -139,8 +149,8 @@ public class MainFragment extends Fragment
             case R.id.context_menu_copy:
                 Toast.makeText(getActivity(), "copy menu item clicked", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.context_menu_delete:
-                ((IDeleteMeeting) getActivity()).onDeleteMeeting(getDbRowId(position));
+            case R.id.context_menu_details:
+                ((IShowMeeting) getActivity()).onShowMeeting(getDbRowId(position));
                 break;
         }
         return false;
@@ -185,6 +195,7 @@ public class MainFragment extends Fragment
 
         meetingAdapter = new MeetingAdapter();
         meetingAdapter.setOnItemClickListener(this);
+        meetingAdapter.setOnItemLongClickListener(this);
         recyclerView.setAdapter(meetingAdapter);
     }
 
