@@ -29,8 +29,6 @@ import com.mcssoft.racemeeting.utility.MeetingPreferences;
 import com.mcssoft.racemeeting.utility.MeetingScheduler;
 import com.mcssoft.racemeeting.listener.RecyclerTouchListener;
 
-import java.util.Map;
-
 import mcssoft.com.racemeeting3.R;
 
 public class MainFragment extends Fragment
@@ -40,7 +38,6 @@ public class MainFragment extends Fragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setHasOptionsMenu(true);
         meetingScheduler = new MeetingScheduler(getActivity());
     }
 

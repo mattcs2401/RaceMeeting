@@ -12,11 +12,9 @@ import com.mcssoft.racemeeting.utility.MeetingTime;
 
 import mcssoft.com.racemeeting3.R;
 
-    public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
+public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
 
-    public MeetingAdapter() {
-//         setHasStableIds(true);
-    }
+    public MeetingAdapter() { }
 
     @Override
     public MeetingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
