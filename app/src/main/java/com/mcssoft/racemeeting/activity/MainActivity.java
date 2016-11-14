@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity
 
         switch (item.getItemId()) {
             case R.id.toolbar_menu_insert:
-                onEditMeeting(0);
+                onEditMeeting(MeetingConstants.NEW_MEETING);
                 break;
             case R.id.toolbar_preference_settings:
                 Intent paIntent = new Intent(this, PreferencesActivity.class);
@@ -69,8 +69,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onEditMeeting(long id) {
         Intent intent = new Intent(this, EditActivity.class);
-        intent.putExtra(MeetingConstants.EDIT_NEW, id);
-        intent.setAction(MeetingConstants.EDIT_ACTION_NEW);
+        if(id == MeetingConstants.NEW_MEETING) {
+            intent.putExtra(MeetingConstants.EDIT_NEW, id);
+            intent.setAction(MeetingConstants.EDIT_ACTION_NEW);
+        } else {
+            intent.putExtra(MeetingConstants.EDIT_EXISTING, id);
+            intent.setAction(MeetingConstants.EDIT_ACTION_EXISTING);
+        }
         startActivity(intent);
     }
     //</editor-fold>

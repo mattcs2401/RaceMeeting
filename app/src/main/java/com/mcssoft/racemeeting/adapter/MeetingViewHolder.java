@@ -4,11 +4,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.mcssoft.racemeeting.interfaces.IItemClickListener;
+
 import mcssoft.com.racemeeting3.R;
 
-public class MeetingViewHolder extends RecyclerView.ViewHolder {
+public class MeetingViewHolder extends RecyclerView.ViewHolder
+        implements View.OnClickListener {
 
-    public MeetingViewHolder(View view) {
+    public MeetingViewHolder(View view, IItemClickListener listener) {
         super(view);
         // Set the ViewHolder components.
         tvCityCode = (TextView) view.findViewById(R.id.tv_city_code);
@@ -17,6 +20,15 @@ public class MeetingViewHolder extends RecyclerView.ViewHolder {
         tvRaceSel = (TextView) view.findViewById(R.id.tv_race_sel);
         tvRaceTime = (TextView) view.findViewById(R.id.tv_race_time);
         tvDChange = (TextView) view.findViewById(R.id.tv_dchange_testing);
+        meetingClickListener = listener;
+        view.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(meetingClickListener != null){
+            meetingClickListener.onItemClick(view, getAdapterPosition());
+        }
     }
 
     public TextView getCityCode() {
@@ -49,5 +61,7 @@ public class MeetingViewHolder extends RecyclerView.ViewHolder {
     private TextView tvRaceSel;
     private TextView tvRaceTime;
     private TextView tvDChange;
+
+    private IItemClickListener meetingClickListener;
 }
 

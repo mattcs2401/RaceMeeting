@@ -10,29 +10,31 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.mcssoft.racemeeting.adapter.MeetingAdapter;
 import com.mcssoft.racemeeting.database.DatabaseHelper;
 import com.mcssoft.racemeeting.database.MeetingProvider;
 import com.mcssoft.racemeeting.database.SchemaConstants;
-import com.mcssoft.racemeeting.interfaces.IClickListener;
+import com.mcssoft.racemeeting.interfaces.IEditMeeting;
+import com.mcssoft.racemeeting.interfaces.IItemClickListener;
 import com.mcssoft.racemeeting.interfaces.IDeleteMeeting;
-import com.mcssoft.racemeeting.interfaces.IShowMeeting;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingPreferences;
 import com.mcssoft.racemeeting.utility.MeetingScheduler;
-import com.mcssoft.racemeeting.listener.RecyclerTouchListener;
 
 import mcssoft.com.racemeeting3.R;
 
 public class MainFragment extends Fragment
-    implements LoaderManager.LoaderCallbacks<Cursor> {
+    implements LoaderManager.LoaderCallbacks<Cursor>, IItemClickListener, PopupMenu.OnMenuItemClickListener {
 
     //<editor-fold defaultstate="collapsed" desc="Region: LifeCycle">
     @Override
@@ -119,6 +121,31 @@ public class MainFragment extends Fragment
     }
     //</editor-fold>
 
+    @Override
+    public void onItemClick(View view, int position) {
+        this.position = position;
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
+        popupMenu.inflate(R.menu.listing_context_menu);
+        popupMenu.setOnMenuItemClickListener(this);
+        popupMenu.show();
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.context_menu_edit:
+                ((IEditMeeting) getActivity()).onEditMeeting(getDbRowId(position));
+                break;
+            case R.id.context_menu_copy:
+                Toast.makeText(getActivity(), "copy menu item clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.context_menu_delete:
+                ((IDeleteMeeting) getActivity()).onDeleteMeeting(getDbRowId(position));
+                break;
+        }
+        return false;
+    }
+
     //<editor-fold defaultstate="collapsed" desc="Region: Loader Callbacks">
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
@@ -157,20 +184,8 @@ public class MainFragment extends Fragment
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         meetingAdapter = new MeetingAdapter();
+        meetingAdapter.setOnItemClickListener(this);
         recyclerView.setAdapter(meetingAdapter);
-
-        RecyclerTouchListener rtl = new RecyclerTouchListener(getActivity().getApplicationContext(), recyclerView, new IClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                ((IShowMeeting) getActivity()).onShowMeeting(getDbRowId(position));
-            }
-            @Override
-            public void onLongClick(View view, int position) {
-                ((IDeleteMeeting) getActivity()).onDeleteMeeting(getDbRowId(position));
-            }
-        });
-
-        recyclerView.addOnItemTouchListener(rtl);
     }
 
     private int getDbRowId(int position) {
@@ -194,6 +209,8 @@ public class MainFragment extends Fragment
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
+    private int position;
+
     private Bundle preferences;
     private RecyclerView recyclerView;
     private MeetingAdapter meetingAdapter;

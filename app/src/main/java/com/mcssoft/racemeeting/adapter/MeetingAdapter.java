@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mcssoft.racemeeting.database.SchemaConstants;
+import com.mcssoft.racemeeting.interfaces.IItemClickListener;
 import com.mcssoft.racemeeting.utility.MeetingTime;
 
 import mcssoft.com.racemeeting3.R;
@@ -22,7 +23,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
         if ( parent instanceof RecyclerView ) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.racemeet_row, parent, false);
             view.setFocusable(true);
-            return new MeetingViewHolder(view); // don't need to keep a local copy, framework now supplies.
+            return new MeetingViewHolder(view, meetingCliclListener); // don't need to keep a local copy, framework now supplies.
         } else {
             throw new RuntimeException("Not bound to RecyclerView");
         }
@@ -47,6 +48,10 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
         Log.d(LOG_TAG, "getItemId");
         cursor.moveToPosition(position);
         return cursor.getLong(idColNdx);
+    }
+
+    public void setOnItemClickListener(IItemClickListener listener) {
+        this.meetingCliclListener = listener;
     }
 
     public void swapCursor(Cursor newCursor) {
@@ -93,6 +98,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
 
     private View view;
     private Cursor cursor;
+    private IItemClickListener meetingCliclListener;
 
     private int idColNdx;
     private int cityCodeColNdx;
