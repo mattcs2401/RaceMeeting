@@ -66,8 +66,7 @@ public class DetailFragment extends Fragment
         Log.d(LOG_TAG, "onClick");
         switch(view.getId()) {
             case R.id.btnEdit:
-                ((IEditMeeting) getActivity()).onEditMeeting(rowId);
-//                Toast.makeText(getActivity(), "edit buttn click", Toast.LENGTH_SHORT).show();
+                ((IEditMeeting) getActivity()).onEditMeeting(rowId,MeetingConstants.SHOW_MEETING);
                 break;
             }
     }

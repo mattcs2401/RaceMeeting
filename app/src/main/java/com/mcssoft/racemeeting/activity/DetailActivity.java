@@ -43,7 +43,7 @@ public class DetailActivity extends AppCompatActivity implements IEditMeeting {
      * @param id Database row id: value==0 new meeting, else the database row id used in a select query.
      */
     @Override
-    public void onEditMeeting(long id) {
+    public void onEditMeeting(long id, int editType) {
         Intent intent = new Intent(this, EditActivity.class);
         intent.putExtra(MeetingConstants.EDIT_EXISTING, id);
         intent.setAction(MeetingConstants.EDIT_ACTION_EXISTING);
