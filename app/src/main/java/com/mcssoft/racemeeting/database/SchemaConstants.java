@@ -14,7 +14,7 @@ public class SchemaConstants {
     public static final int MEETING_RECORD = 1;
 
     // Database columns
-    public static final String COLUMN_ROWID = "_id";           // Note: Has to be like this (upper case _ID ?).
+    public static final String COLUMN_ROWID = "_id"; // Note: Has to be like this (upper case _ID ?).
     public static final int COLUMN_ROWID_NDX = 0;
     public static final String COLUMN_CITY_CODE = "CITY_CODE";
     public static final int COLUMN_CITY_CODE_NDX = 1;
@@ -50,15 +50,14 @@ public class SchemaConstants {
             + COLUMN_D_CHG_REQ + " TEXT NOT NULL, "
             + COLUMN_NOTIFIED  + " TEXT NOT NULL)";
 
-    public static final String SORT_ORDER = COLUMN_DATE_TIME + " ASC";
+    public static final String SORT_ORDER = COLUMN_DATE_TIME + " ASC, " + COLUMN_RACE_SEL;
 
     // Partial select, get all records where a display change is required.
     public final static String SELECT_ALL_DCHANGE =
-            "SELECT " + COLUMN_ROWID + "," +
-                    COLUMN_D_CHG_REQ +
-                    " FROM " + DATABASE_TABLE +
-                    " WHERE " + COLUMN_D_CHG_REQ + "='N'" +
-                    " AND " + COLUMN_DATE_TIME + " < ";
+            "SELECT " + COLUMN_ROWID + "," + COLUMN_D_CHG_REQ +
+            " FROM " + DATABASE_TABLE +
+            " WHERE " + COLUMN_D_CHG_REQ + "='N'" +
+            " AND " + COLUMN_DATE_TIME + " < ";
 
     // Select all.
     public static final String SELECT_ALL =
@@ -90,6 +89,4 @@ public class SchemaConstants {
             " WHERE " + COLUMN_D_CHG_REQ + "='N'" +
             " AND " + COLUMN_NOTIFIED + "='N'" +
             " AND " + COLUMN_DATE_TIME + " BETWEEN ";
-
-    public static final String WHERE_CLAUSE_ROWID_EQUALS = SchemaConstants.COLUMN_ROWID + "=?";
 }
