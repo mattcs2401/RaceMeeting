@@ -23,7 +23,6 @@ import com.mcssoft.racemeeting.database.MeetingProvider;
 import com.mcssoft.racemeeting.database.SchemaConstants;
 import com.mcssoft.racemeeting.interfaces.IEditMeeting;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
-import com.mcssoft.racemeeting.utility.MeetingDisplay;
 import com.mcssoft.racemeeting.utility.MeetingTime;
 
 import mcssoft.com.racemeeting3.R;
@@ -94,7 +93,7 @@ public class DetailFragment extends Fragment
         tvRaceCity.setText(cursor.getString(cursor.getColumnIndexOrThrow(SchemaConstants.COLUMN_CITY_CODE)));
 
         String raceCode = cursor.getString(cursor.getColumnIndexOrThrow(SchemaConstants.COLUMN_RACE_CODE));
-        tvRaceCode.setText(MeetingDisplay.getInstance().raceCodeToString(raceCode));
+        tvRaceCode.setText(raceCodeToString(raceCode));
 
         tvRaceNoText.setText("Race:");
         tvRaceNo.setText(cursor.getString(cursor.getColumnIndexOrThrow(SchemaConstants.COLUMN_RACE_NUM)));
@@ -124,6 +123,23 @@ public class DetailFragment extends Fragment
         tvRaceTime = (TextView) view.findViewById(R.id.tvRaceTime);
         btnEdit = (Button) view.findViewById(R.id.btnEdit);
         btnEdit.setOnClickListener(this);
+    }
+
+    public String raceCodeToString(String code) {
+        String r = "";
+        if(code == null || code == "")
+            return r;
+        else {
+            if(code.equals("R"))
+                r = "Races";
+            else if(code.equals("G"))
+                r = "Greyhounds";
+            else if(code.equals("T"))
+                r = "Trots";
+            else if(code.equals("S"))
+                r = "Other";
+        }
+        return r;
     }
     //</editor-fold>
 

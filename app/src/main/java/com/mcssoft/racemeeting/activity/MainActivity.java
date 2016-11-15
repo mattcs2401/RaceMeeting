@@ -16,11 +16,7 @@ import com.mcssoft.racemeeting.interfaces.IDeleteMeeting;
 import com.mcssoft.racemeeting.interfaces.IEditMeeting;
 import com.mcssoft.racemeeting.interfaces.IShowMeeting;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
-import com.mcssoft.racemeeting.utility.MeetingDisplay;
-import com.mcssoft.racemeeting.utility.MeetingPreferences;
 import com.mcssoft.racemeeting.utility.MeetingTime;
-
-import java.util.Map;
 
 import mcssoft.com.racemeeting3.R;
 
@@ -114,14 +110,8 @@ public class MainActivity extends AppCompatActivity
         fragmentManager = getFragmentManager();
         mainFragment = new MainFragment();
 
-//        if(!MeetingPreferences.instanceExists()) {
-//            MeetingPreferences.getInstance(getApplicationContext());
-//        }
         if(!MeetingTime.instanceExists()) {
             MeetingTime.getInstance(getApplicationContext());
-        }
-        if(!MeetingDisplay.instanceExists()) {
-            MeetingDisplay.getInstance(getApplicationContext());
         }
     }
     //</editor-fold>
