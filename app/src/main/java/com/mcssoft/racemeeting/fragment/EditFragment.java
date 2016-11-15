@@ -95,7 +95,7 @@ public class EditFragment extends Fragment
         Log.d(LOG_TAG, "onClick");
         switch(view.getId()) {
             case R.id.btnSave:
-                if(checkFieldLength() && checkAgainstCache()) {
+                if(checkFieldLengths() && checkAgainstCache()) {
                     // save values and tell activity to finish.
                     saveValues();
                     ((IShowCodes) getActivity()).onFinish();
@@ -275,16 +275,49 @@ public class EditFragment extends Fragment
         //setCache();
     }
     //</editor-fold>
-    
+
+    //<editor-fold defaultstate="collapsed" desc="Region: Utility - Validation">
+    /**
+     * Simple sanity check there is something in all the fields.
+     * @return True if values exist in all fields.
+     */
+    private boolean checkFieldLengths() {
+        if ((etCityCode.getText().length() > 0) &&
+                (etRaceCode.getText().length() > 0) &&
+                (etRaceNum.getText().length() > 0) &&
+                (etRaceSel.getText().length() > 0) &&
+                (etRaceTime.getText().length() > 0)) {
+            return true;
+        }
+        Toast.makeText(getActivity(), "All fields are required.", Toast.LENGTH_SHORT).show();
+        return false;
+    }
+
+    private boolean checkAgainstCache() {
+        boolean isValid = true;
+        if(editAction.equals(MeetingConstants.EDIT_ACTION_COPY)) {
+            if(etCityCodeCache.equals(etCityCode.getText().toString()) &&
+                    etRaceCodeCache.equals(etRaceCode.getText().toString()) &&
+                    etRaceNumCache.equals(etRaceNum.getText().toString()) &&
+                    etRaceSelCache.equals(etRaceSel.getText().toString()) &&
+                    etRaceTimeCache.equals(etRaceTime.getText().toString())) {
+                // nothing chnaged.
+                Toast.makeText(getActivity(), "Fields are identical.", Toast.LENGTH_SHORT).show();
+                isValid = false;
+            }
+        }
+        return isValid;
+    }
+    //</editor-fold>
+
     /**
      * Save the edit values to the database.
      * @return Intent with either:
      * 1) For new entry; key==EDIT_ACTION_NEW, value==row id in database.
      * 2) For existing entry:  key==EDIT_ACTION_EXISTING, value==row id in database.
      */
-    private Intent saveValues() {
+    private void saveValues() {
         //Log.d(LOG_TAG, "saveValues");
-        Intent intent = new Intent();
         long dbRowId = MeetingConstants.INIT_DEFAULT;
         ContentValues contentValues = new ContentValues();
 
@@ -294,7 +327,9 @@ public class EditFragment extends Fragment
         contentValues.put(SchemaConstants.COLUMN_RACE_SEL, etRaceSel.getText().toString());
         contentValues.put(SchemaConstants.COLUMN_DATE_TIME, timeInMillis);
 
-        if(editAction.equals(MeetingConstants.EDIT_ACTION_NEW)) {
+        if(editAction.equals(MeetingConstants.EDIT_ACTION_NEW) ||
+           editAction.equals(MeetingConstants.EDIT_ACTION_COPY)) {
+
             contentValues.put(SchemaConstants.COLUMN_D_CHG_REQ, "N");
             contentValues.put(SchemaConstants.COLUMN_NOTIFIED, "N");
 
@@ -305,6 +340,7 @@ public class EditFragment extends Fragment
                 throw new IllegalStateException("Unable to update; path=" + itemUri.toString());
             }
         } else if(editAction.equals(MeetingConstants.EDIT_ACTION_EXISTING)) {
+
             if ((timeInMillis > MeetingTime.getInstance().getCurrentTimeInMillis()) && (dChange.equals("Y"))) {
                 contentValues.put(SchemaConstants.COLUMN_D_CHG_REQ, "N");
             }
@@ -314,19 +350,7 @@ public class EditFragment extends Fragment
             if (count != 1) {
                 throw new IllegalStateException("Unable to update RaceMeeting: more than one rows match rowId: " + dbRowId);
             }
-        } else if(editAction.equals(MeetingConstants.EDIT_ACTION_COPY)) {
-            contentValues.put(SchemaConstants.COLUMN_D_CHG_REQ, "N");
-            contentValues.put(SchemaConstants.COLUMN_NOTIFIED, "N");
-
-            Uri itemUri = getActivity().getContentResolver().insert(MeetingProvider.contentUri, contentValues);
-
-            dbRowId = ContentUris.parseId(itemUri);
-            if(dbRowId < 1) {
-                throw new IllegalStateException("Unable to update; path=" + itemUri.toString());
-            }
         }
-        intent.putExtra(editAction, dbRowId);
-        return intent;
     }
 
     /**
@@ -386,35 +410,6 @@ public class EditFragment extends Fragment
             etRaceNum.setBackgroundResource(R.drawable.et_basic_green_outline);
             etRaceSel.setBackgroundResource(R.drawable.et_basic_green_outline);
         }
-    }
-
-    /**
-     * Simple sanity check there is something in all the fields.
-     * @return True if values exist in all fields.
-     */
-    private boolean checkFieldLength() {
-        if ((etCityCode.getText().length() > 0) &&
-                (etRaceCode.getText().length() > 0) &&
-                (etRaceNum.getText().length() > 0) &&
-                (etRaceSel.getText().length() > 0) &&
-                (etRaceTime.getText().length() > 0)) {
-            return true;
-        }
-        Toast.makeText(getActivity(), "All fields are required.", Toast.LENGTH_SHORT).show();
-        return false;
-    }
-
-    private boolean checkAgainstCache() {
-        if(etCityCodeCache.equals(etCityCode.getText().toString()) &&
-           etRaceCodeCache.equals(etRaceCode.getText().toString()) &&
-           etRaceNumCache.equals(etRaceNum.getText().toString()) &&
-           etRaceSelCache.equals(etRaceSel.getText().toString()) &&
-           etRaceTimeCache.equals(etRaceTime.getText().toString())) {
-           // nothing chnaged.
-            Toast.makeText(getActivity(), "Fields are identical.", Toast.LENGTH_SHORT).show();
-           return false;
-        }
-        return true;
     }
 
     /**
