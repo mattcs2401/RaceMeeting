@@ -14,31 +14,9 @@ import mcssoft.com.racemeeting3.R;
  */
 public class MeetingPreferences {
 
-//    private MeetingPreferences(Context context) {
-      public MeetingPreferences(Context context) {this.context = context;
-        if(getAllPreferences().isEmpty()) {
-            setDefaultValues();
-        }
-    }
-
-//    public static synchronized MeetingPreferences getInstance(Context context) {
-//        // Note: Instantiated in the ListingActivty.onCreate method.
-//        if(instance == null) {
-//            instance = new MeetingPreferences(context);
-//            return instance;
-//        }
-//        throw new IllegalStateException(R.string.meeting_pref_already_init + "");
-//    }
-//
-//    public static synchronized MeetingPreferences getInstance() {
-//        if(instance != null) {
-//            return instance;
-//        }
-//        throw new IllegalStateException(R.string.meeting_pref_not_init + "");
-//    }
-
-    public static boolean instanceExists() {
-        return instance != null ? true : false;
+    public MeetingPreferences(Context context) {
+        this.context = context;
+        getPreferences();
     }
 
     /**
@@ -50,6 +28,10 @@ public class MeetingPreferences {
                 .getBoolean(MeetingConstants.MEETING_NOTIFICATIONS_KEY, false);
     }
 
+    /**
+     * Get the details for the 'Meetings To Show' preference.
+     * @return [0] preference (array) value, [1] preference text.
+     */
     public String[] meetingShowPref() {
         prefVals = new String[2];
         prefVals[0] = PreferenceManager.getDefaultSharedPreferences(context)
@@ -124,35 +106,22 @@ public class MeetingPreferences {
     }
 
     /**
-     * Set the preference default values.
+     * Utility to null out the context parameter. Called in the MainFragment.onDestroy(), basically
+     * so don't leak context.
      */
-    public void setDefaultValues() {
-        PreferenceManager.setDefaultValues(context, R.xml.meeting_preferences, false);
-    }
-
-    public boolean checkPreferencesEmpty() {
-        boolean isEmpty = false;
-        if(getAllPreferences().isEmpty()) {
-            isEmpty = true;
-        }
-        return isEmpty;
-    }
-
     public void destroy() {
-        // Called in the MainFragment.onDestroy().
         context = null;
-        instance = null;
     }
 
     private Bundle getPreferences() {
 
         Map<String,?> prefsMap = PreferenceManager.getDefaultSharedPreferences(context).getAll();
 
-        // No SharedPreferences set yet. App has probably been uninstalled then re-installed and/or
-        // cache and data cleared. Set the app preferences defaults.
         if(prefsMap.isEmpty()) {
-//            MeetingPreferences.getInstance().setDefaultValues();
-            setDefaultValues();
+            // No SharedPreferences set yet. App has probably been uninstalled then re-installed
+            // and/or cache and data cleared. Set the app preferences defaults.
+//            setDefaultValues();
+            PreferenceManager.setDefaultValues(context, R.xml.meeting_preferences, false);
             prefsMap = PreferenceManager.getDefaultSharedPreferences(context).getAll();
         }
 
@@ -168,5 +137,4 @@ public class MeetingPreferences {
 
     String [] prefVals;      // general array value used where array is return type.
     private Context context;
-    private static volatile MeetingPreferences instance = null;
 }
