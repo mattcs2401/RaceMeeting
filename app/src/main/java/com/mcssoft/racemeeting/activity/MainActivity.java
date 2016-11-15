@@ -29,10 +29,10 @@ public class MainActivity extends AppCompatActivity
         initialise();
 
         if(savedInstanceState == null) {
-            fragmentManager.beginTransaction()
-                           .replace(R.id.listing_container, mainFragment, null)
-                           .addToBackStack(null)
-                           .commit();
+            getFragmentManager().beginTransaction()
+                                .replace(R.id.listing_container, mainFragment, null)
+                                .addToBackStack(null)
+                                .commit();
         } else {
             // TBA
         }
@@ -101,7 +101,6 @@ public class MainActivity extends AppCompatActivity
     //<editor-fold defaultstate="collapsed" desc="Region: Interface - Utility">
     private void initialise() {
         setContentView(R.layout.activity_main);
-        fragmentManager = getFragmentManager();
         mainFragment = new MainFragment();
 
         if(!MeetingTime.instanceExists()) {
@@ -111,6 +110,5 @@ public class MainActivity extends AppCompatActivity
     //</editor-fold>
 
     private MainFragment mainFragment;
-    private FragmentManager fragmentManager;
     private String LOG_TAG = this.getClass().getCanonicalName();
 }

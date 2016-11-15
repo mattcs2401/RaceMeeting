@@ -1,18 +1,23 @@
 
 Issues:
 -------
--> Recycler view last item not showing properly.
+-> Recycler view last item not showing properly, bottom cut off.
 -> MeetingPreferences toolbar overlaying system icons, should be down a bit.
 
 
 To Do:
 -----
 (no particular order)
+-> Services / Tasks.
+-> Instance states, implement properly.
+-> Rotation, have landscape view of main fragment left side and detail fragment right side.
+-> Determine if time is yesterday, today or tom,orrow.
 -> What to do about a meeting entry from a previous day ?
--> Image for left of listing item, e.g. if code BR then image of horse.
+-> Image for left of listing item, e.g. if race code is R then image of horse.
 -> Format / style of DeleteDialog.
 -> Meeting Prior Reminder Time. maybe replace with spinner ?
 -> Start updating documentation / comments etc.
+
 
 Resources:
 ----------

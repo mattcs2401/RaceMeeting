@@ -38,10 +38,6 @@ public class DetailActivity extends AppCompatActivity implements IEditMeeting {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Interface - IEditMeeting">
-    /**
-     * Start the Edit activity.
-     * @param dbRowId Database row id: value==0 new meeting, else the database row id used in a select query.
-     */
     @Override
     public void onEditMeeting(int editType, long dbRowId) {
         Intent intent = new Intent(this, EditActivity.class);

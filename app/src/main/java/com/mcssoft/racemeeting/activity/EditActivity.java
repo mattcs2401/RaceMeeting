@@ -26,14 +26,11 @@ public class EditActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(LOG_TAG, "onCreate");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit); // <-- simple FrameLayout
 
-        Bundle args = getIntent().getExtras();
-        editFragment = new EditFragment();
-        fragmentManager = getFragmentManager();
+        initialise();
 
         if (savedInstanceState == null) {
-            editFragment.setArguments(args);
+            editFragment.setArguments(getIntent().getExtras());
 
             fragmentManager.beginTransaction()
                     .add(R.id.edit_detail_container, editFragment, MeetingConstants.DEFAULT_EDIT_FRAGMENT_TAG)
@@ -62,8 +59,6 @@ public class EditActivity extends AppCompatActivity
             fragmentManager.popBackStack();
         }
     }
-
-
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Interface - IShowCodes">
@@ -135,6 +130,12 @@ public class EditActivity extends AppCompatActivity
         ft.addToBackStack(null);
         ft.hide(editFragment);
         ft.commit();
+    }
+
+    private void initialise() {
+        setContentView(R.layout.activity_edit); // <-- simple FrameLayout
+        editFragment = new EditFragment();
+        fragmentManager = getFragmentManager();
     }
     //</editor-fold>
 

@@ -1,21 +1,17 @@
 package com.mcssoft.racemeeting.database;
 
-
 import android.content.ContentProvider;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import android.util.Log;
 
 public class MeetingProvider extends ContentProvider {
 
-    private String LOG_TAG = this.getClass().getCanonicalName();
-
+    //<editor-fold defaultstate="collapsed" desc="Region: Public static">
     public static final Uri contentUri = Uri.parse(SchemaConstants.CONTENT_URI);
 
     // MIME type - Table.
@@ -24,10 +20,11 @@ public class MeetingProvider extends ContentProvider {
     // MIME type - Record.
     public static final String MEETING_RECORD_TYPE =
             ContentResolver.CURSOR_ITEM_BASE_TYPE + SchemaConstants.CURSOR_BASE_TYPE;
+    //</editor-fold>
 
     @Override
     public boolean onCreate() {
-//        Log.d(LOG_TAG, "onCreate");
+        //Log.d(LOG_TAG, "onCreate");
         initialise();
         return true;
     }
@@ -52,7 +49,7 @@ public class MeetingProvider extends ContentProvider {
                 throw new IllegalArgumentException("Unknown Uri: " + uri);
         }
 
-        cursor.setNotificationUri(context.getContentResolver(), uri);
+        cursor.setNotificationUri(getContext().getContentResolver(), uri);
         return cursor;
     }
 
@@ -62,7 +59,7 @@ public class MeetingProvider extends ContentProvider {
         values.remove(SchemaConstants.COLUMN_ROWID);
 
         long id = dB.insertOrThrow(SchemaConstants.DATABASE_TABLE, null, values);
-        context.getContentResolver().notifyChange(uri, null);
+        getContext().getContentResolver().notifyChange(uri, null);
         return ContentUris.withAppendedId(uri, id);
     }
 
@@ -73,7 +70,7 @@ public class MeetingProvider extends ContentProvider {
         int count = dB.delete(SchemaConstants.DATABASE_TABLE, SchemaConstants.COLUMN_ROWID + "=?", id);
 
         if (count > 0)
-            context.getContentResolver().notifyChange(uri, null);
+            getContext().getContentResolver().notifyChange(uri, null);
         return count;
     }
 
@@ -84,15 +81,13 @@ public class MeetingProvider extends ContentProvider {
         int count = dB.update(SchemaConstants.DATABASE_TABLE, values, SchemaConstants.COLUMN_ROWID + "=?", id);
 
         if (count > 0)
-            context.getContentResolver().notifyChange(uri, null);
+            getContext().getContentResolver().notifyChange(uri, null);
         return count;
     }
 
     @Override
     public String getType(Uri uri) {
-
-        Log.d(LOG_TAG, "getType");
-
+//        Log.d(LOG_TAG, "getType");
         switch (uriMatcher.match(uri)) {
             case SchemaConstants.MEETING_TABLE:
                 return MEETING_TABLE_TYPE;
@@ -103,11 +98,7 @@ public class MeetingProvider extends ContentProvider {
         }
     }
 
-    private Context context;
-    private SQLiteDatabase dB;
-    private UriMatcher uriMatcher;
-    private DatabaseHelper dBHelper;
-
+    //<editor-fold defaultstate="collapsed" desc="Region: Utility">
     private static UriMatcher buildUriMatcher() {
         UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         matcher.addURI(SchemaConstants.AUTHORITY, SchemaConstants.MEETING, SchemaConstants.MEETING_TABLE);
@@ -120,9 +111,16 @@ public class MeetingProvider extends ContentProvider {
     }
 
     private void initialise() {
-        context = getContext();
         uriMatcher = buildUriMatcher();
-        dBHelper = new DatabaseHelper(context);
+        dBHelper = new DatabaseHelper(getContext());
         dB = dBHelper.getWritableDatabase();
     }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Region: Private vars">
+    private SQLiteDatabase dB;
+    private UriMatcher uriMatcher;
+    private DatabaseHelper dBHelper;
+    //private String LOG_TAG = this.getClass().getCanonicalName();
+    //</editor-fold>
 }

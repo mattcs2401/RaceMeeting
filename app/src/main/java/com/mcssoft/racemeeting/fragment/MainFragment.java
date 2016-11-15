@@ -124,6 +124,7 @@ public class MainFragment extends Fragment
     }
     //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Region: Click handlers">
     @Override
     public void onItemClick(View view, int position) {
         this.position = position;
@@ -154,6 +155,7 @@ public class MainFragment extends Fragment
         }
         return false;
     }
+    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Loader Callbacks">
     @Override
