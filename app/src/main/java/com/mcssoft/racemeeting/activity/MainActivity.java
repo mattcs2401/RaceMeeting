@@ -14,14 +14,13 @@ import com.mcssoft.racemeeting.dialogs.DeleteDialog;
 import com.mcssoft.racemeeting.fragment.MainFragment;
 import com.mcssoft.racemeeting.interfaces.IDeleteMeeting;
 import com.mcssoft.racemeeting.interfaces.IEditMeeting;
-import com.mcssoft.racemeeting.interfaces.IShowMeeting;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingTime;
 
 import mcssoft.com.racemeeting3.R;
 
 public class MainActivity extends AppCompatActivity
-    implements IEditMeeting, IShowMeeting, IDeleteMeeting {
+    implements IEditMeeting, IDeleteMeeting {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,16 +76,11 @@ public class MainActivity extends AppCompatActivity
                 intent.putExtra(MeetingConstants.EDIT_COPY, dbRowId);
                 intent.setAction(MeetingConstants.EDIT_ACTION_COPY);
                 break;
+            case MeetingConstants.SHOW_MEETING:
+                intent = new Intent(this, DetailActivity.class);
+                intent.putExtra(MeetingConstants.SHOW_SUMMARY, dbRowId);
+                break;
         }
-        startActivity(intent);
-    }
-    //</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="Region: Interface - IShowMeeting">
-    @Override
-    public void onShowMeeting(long id) {
-        Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(MeetingConstants.SHOW_SUMMARY, id);
         startActivity(intent);
     }
     //</editor-fold>

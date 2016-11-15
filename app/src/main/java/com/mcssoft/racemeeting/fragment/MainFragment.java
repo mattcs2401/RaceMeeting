@@ -18,7 +18,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.mcssoft.racemeeting.adapter.MeetingAdapter;
 import com.mcssoft.racemeeting.database.DatabaseHelper;
@@ -28,7 +27,6 @@ import com.mcssoft.racemeeting.interfaces.IEditMeeting;
 import com.mcssoft.racemeeting.interfaces.IItemClickListener;
 import com.mcssoft.racemeeting.interfaces.IDeleteMeeting;
 import com.mcssoft.racemeeting.interfaces.IItemLongClickListener;
-import com.mcssoft.racemeeting.interfaces.IShowMeeting;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingPreferences;
 import com.mcssoft.racemeeting.utility.MeetingScheduler;
@@ -151,7 +149,7 @@ public class MainFragment extends Fragment
                 //Toast.makeText(getActivity(), "copy menu item clicked", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.context_menu_details:
-                ((IShowMeeting) getActivity()).onShowMeeting(getDbRowId(position));
+                ((IEditMeeting) getActivity()).onEditMeeting(MeetingConstants.SHOW_MEETING, getDbRowId(position));
                 break;
         }
         return false;

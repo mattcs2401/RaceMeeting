@@ -92,13 +92,6 @@ public class MeetingConstants {
     // Review.
     public static final String REVIEW_VALUES_KEY = "review_values_key";
 
-    // Custom keyboard key codes.
-    public static final int KEYCODE_CANCEL = -3;
-    public static final int KEYCODE_DONE = -4;
-    public static final int KEYCODE_DELETE = -5;
-    //public static final int KEYCODE_CLEAR = 1001;
-    //public static final int KEYCODE_COMMA = 1002;
-
     // Meeting race codes.
     public static final String RACE_CODE_ID_NONE = "0";  // maps to default race code array.
     public static final String RACE_CODE_ID_R = "1";     //
@@ -132,6 +125,7 @@ public class MeetingConstants {
     public static final String EDIT_ACTION_EXISTING = "edit_action_existing";
     public static final String EDIT_ACTION_NEW = "edit_action_new";
     public static final String EDIT_ACTION_COPY = "edit_action_copy";
+    public static final String EDIT_ACTION_SHOW = "edit_action_show";
     public static final String SELECTED_KEY = "selected_key";
     public static final String LIST_ROW_NUMBER = "list_row_number";
     public static final String SHOW_SUMMARY = "show_summary";
