@@ -159,7 +159,7 @@ public class MeetingScheduler {
     }
 
     public void onReceivedStopJob(PersistableBundle results) {
-        Log.d(LOG_TAG, "onReceivedStopJob");
+        Log.d(LOG_TAG, "onReceivedStopJobListing");
         Set<String> keys = results.keySet();
 
         if(keys.contains(MeetingConstants.PAST_TIME_JOB_KEY)) {

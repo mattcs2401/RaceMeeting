@@ -78,22 +78,6 @@ public class NotifyTask extends AsyncTask<JobParameters, Void, JobParameters> {
 
     private String LOG_TAG = this.getClass().getCanonicalName();
 }
-
-// Can't seem to get this to work, keeps retuning a result.
-/*
-Uri contentUri = Uri.parse(SchemaConstants.CONTENT_URI);
-String[] schema = DatabaseHelper.getDatabaseSchemaProjection();
-Cursor cursor = notifySvc.getApplicationContext()
-        .getContentResolver()
-        .query(contentUri,
-                schema,
-                SchemaConstants.SELECT_ALL_NOTIFY +
-                        MeetingTime.getInstance().getTimeMinus(reminderTime) +
-                        " AND " +
-                        MeetingTime.getInstance().getTimeInMillis(),
-                null,
-                null);
-*/
 /*
 Android dev: AsyncTask's generic types:
 

@@ -91,7 +91,7 @@ public class MainFragment extends Fragment
 
                 action = Integer.parseInt(preferences.getString(MeetingConstants.TIME_PAST_PREF_KEY));
 
-                // If anything other than the "Take no action ..." preference is selected, and records exist.
+                // If anything other than the "Take no action ..." preference is selected.
                 if (action != MeetingConstants.TIME_PAST_PREF_DEFAULT) {
                     meetingScheduler.startService(MeetingConstants.LISTING_SERVICE, action);
                 } else {
@@ -121,14 +121,26 @@ public class MainFragment extends Fragment
     }
     //</editor-fold>
 
-    public void onReceivedStartJob(PersistableBundle bundle) {
-
-        Toast.makeText(getActivity(), "onReceivedStartJob", Toast.LENGTH_SHORT).show();
+    public void onReceivedStartJobListing(PersistableBundle bundle) {
+        // TBA
+        //Toast.makeText(getActivity(), "onReceivedStartJobListing", Toast.LENGTH_SHORT).show();
     }
 
-    public void onReceivedStopJob(PersistableBundle bundle) {
+    public void onReceivedStopJobListing(PersistableBundle bundle) {
+        // The listing service returns back to here when the listing task is done.
 
-        Toast.makeText(getActivity(), "onReceivedStopJob", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "onReceivedStopJobListing", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onReceivedStartJobNotify(PersistableBundle bundle) {
+        // TBA
+        //Toast.makeText(getActivity(), "onReceivedStartJobListing", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onReceivedStopJobNotify(PersistableBundle bundle) {
+        // The notify service returns back to here when the notify task is done.
+
+        //Toast.makeText(getActivity(), "onReceivedStopJobNotify", Toast.LENGTH_SHORT).show();
     }
 
     //<editor-fold defaultstate="collapsed" desc="Region: Click handlers">

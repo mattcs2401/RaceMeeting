@@ -66,6 +66,7 @@ public class NotifyService extends JobService {
                 }
 
                 notifyTask = new NotifyTask(this, iReminder);
+                mainFragment.onReceivedStartJobNotify(jobParams.getExtras());
                 notifyTask.execute(jobParams);
                 retVal = true;
             }
@@ -89,16 +90,15 @@ public class NotifyService extends JobService {
             return false;
         } else {
             Log.d(LOG_TAG, "onStopJob");
-            // TODO - if there is nothing to notify about, then don't call this.
             if(jobParams.getExtras().getInt(MeetingConstants.NOTIFY_REQUIRED_KEY) == MeetingConstants.NOTIFY_REQUIRED) {
-                mainFragment.onReceivedStopJob(jobParams.getExtras());
+                mainFragment.onReceivedStopJobNotify(jobParams.getExtras());
             }
             return true; // indicates to job manager to reschedule.
         }
     }
 
-    public void setUiCallback(MainFragment lFrag) {
-        this.mainFragment = lFrag;
+    public void setUiCallback(MainFragment mainFragment) {
+        this.mainFragment = mainFragment;
     }
 
     private NotifyTask notifyTask;

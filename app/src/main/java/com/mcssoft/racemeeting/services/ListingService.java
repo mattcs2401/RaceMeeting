@@ -55,7 +55,7 @@ public class ListingService extends JobService {
         } else {
             Log.d(LOG_TAG, "onStartJob");
             listingTask = new ListingTask(this);
-            mainFragment.onReceivedStartJob(jobParams.getExtras());
+            mainFragment.onReceivedStartJobListing(jobParams.getExtras());
             listingTask.execute(jobParams);
             return true;
         }
@@ -67,7 +67,7 @@ public class ListingService extends JobService {
             return false;
         } else {
             Log.d(LOG_TAG, "onStopJob");
-            mainFragment.onReceivedStopJob(result.getExtras());
+            mainFragment.onReceivedStopJobListing(result.getExtras());
             return true; // indicates to job manager to reschedule.
         }
     }
