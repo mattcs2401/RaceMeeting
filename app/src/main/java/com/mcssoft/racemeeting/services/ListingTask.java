@@ -2,8 +2,18 @@ package com.mcssoft.racemeeting.services;
 
 import android.app.job.JobParameters;
 import android.app.job.JobService;
+import android.content.ContentUris;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.mcssoft.racemeeting.database.DatabaseHelper;
+import com.mcssoft.racemeeting.database.MeetingProvider;
+import com.mcssoft.racemeeting.database.SchemaConstants;
+import com.mcssoft.racemeeting.utility.MeetingConstants;
+import com.mcssoft.racemeeting.utility.MeetingTime;
 
 // https://androidresearch.wordpress.com/2013/05/10/dealing-with-asynctask-and-screen-orientation/
 
@@ -32,13 +42,14 @@ public class ListingTask extends AsyncTask<JobParameters, Void, JobParameters> {
 
             for (JobParameters jp : jParams) {
                 result = jp;
+                Uri uri = Uri.parse(SchemaConstants.CONTENT_URI);
+                Cursor cursor = jobSvc.getContentResolver()
+                        .query(MeetingProvider.contentUri,
+                                DatabaseHelper.getDChangeProjection(),
+                                null, //SchemaConstants.SELECT_FOR_DCHANGE,
+                                null, //new String[] {Long.toString(MeetingTime.getInstance().getCurrentTimeInMillis())},
+                                null);
 
-                // Work around, having issues with doing this via content resolver. Content resolver
-                // wants selection arguments as string; but then we have column_value (int) < string.
-
-//                Cursor cursor = DatabaseHelper.rawQuery(SchemaConstants.SELECT_ALL_DCHANGE +
-//                    MeetingTime.getInstance().getCurrentTimeInMillis(), null);
-//
 //                if (cursor.getCount() > 0) {
 //                    int rowId;
 //                    String dChange;
@@ -54,18 +65,19 @@ public class ListingTask extends AsyncTask<JobParameters, Void, JobParameters> {
 //
 //                            result.getExtras().putInt(MeetingConstants.PAST_TIME_JOB_KEY, MeetingConstants.LISTING_CHANGE_REQUIRED);
 //
-////                            if(updated == false) {
-////                                updated = true;
-////                            }
+//                            if(updated == false) {
+//                                updated = true;
+//                            }
 //                        }
 //                    }
 //                    cursor.close();
-
+//
 //                    if(updated) {
-//                        result.getExtras().putInt(MeetingConstants.PAST_TIME_JOB_KEY, MeetingConstants.LISTING_CHANGE_REQUIRED);
-//                    } /*else {
+//                        result.getExtras().putInt(MeetingConstants.PAST_TIME_JOB_KEY,
+//                                MeetingConstants.LISTING_CHANGE_REQUIRED);
+//                    } else {
 //                        result.getExtras().putInt(MeetingConstants.PAST_TIME_JOB_KEY, 0);
-//                    }*/
+//                    }
 //                }
             }
         }
@@ -87,19 +99,6 @@ public class ListingTask extends AsyncTask<JobParameters, Void, JobParameters> {
 
     private String LOG_TAG = this.getClass().getCanonicalName();
 }
-
-// Can't seem to get this to work.
-
-//   Uri contentUri = Uri.parse(SchemaConstants.CONTENT_URI);
-//   String[] schema = DatabaseHelper.getDatabaseSchemaProjection();
-//   Cursor cursor = context.getContentResolver()
-//                          .query(contentUri,
-//                                 schema,
-//                                 SchemaConstants.COLUMN_DATE_TIME + "<?", // + (int) MeetingTime.getInstance().getCurrentTimeInMillis(),
-//                                 new String[] {Long.toString(MeetingTime.getInstance().getCurrentTimeInMillis())},
-//                                 SchemaConstants.SORT_ORDER);
-
-
 /*
 Android dev: AsyncTask's generic types:
 

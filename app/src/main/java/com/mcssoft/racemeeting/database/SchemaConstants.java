@@ -53,8 +53,8 @@ public class SchemaConstants {
     public static final String SORT_ORDER = COLUMN_DATE_TIME + " ASC, " + COLUMN_RACE_SEL;
 
     // Partial select, get all records where a display change is required.
-    public final static String SELECT_ALL_DCHANGE =
-            "SELECT " + COLUMN_ROWID + "," + COLUMN_D_CHG_REQ +
+    public final static String SELECT_FOR_DCHANGE =
+            "SELECT " + COLUMN_ROWID + "," + COLUMN_DATE_TIME + "," + COLUMN_D_CHG_REQ +
             " FROM " + DATABASE_TABLE +
             " WHERE " + COLUMN_D_CHG_REQ + "='N'" +
             " AND " + COLUMN_DATE_TIME + " < ";

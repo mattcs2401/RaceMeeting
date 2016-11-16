@@ -75,6 +75,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         };
     }
 
+    public static final String [] getDChangeProjection () {
+        return new String[] {
+            SchemaConstants.COLUMN_ROWID,
+            SchemaConstants.COLUMN_DATE_TIME,
+            SchemaConstants.COLUMN_D_CHG_REQ
+        };
+    }
+
     private Context context;
     private String LOG_TAG = this.getClass().getCanonicalName();
 }

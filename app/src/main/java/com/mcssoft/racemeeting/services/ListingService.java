@@ -62,12 +62,12 @@ public class ListingService extends JobService {
     }
 
     @Override
-    public boolean onStopJob(JobParameters jobParams) {
+    public boolean onStopJob(JobParameters result) {
         if (mainFragment == null) {
             return false;
         } else {
             Log.d(LOG_TAG, "onStopJob");
-            mainFragment.onReceivedStopJob(jobParams.getExtras());
+            mainFragment.onReceivedStopJob(result.getExtras());
             return true; // indicates to job manager to reschedule.
         }
     }
