@@ -42,43 +42,40 @@ public class ListingTask extends AsyncTask<JobParameters, Void, JobParameters> {
 
             for (JobParameters jp : jParams) {
                 result = jp;
-                Uri uri = Uri.parse(SchemaConstants.CONTENT_URI);
                 Cursor cursor = jobSvc.getContentResolver()
                         .query(MeetingProvider.contentUri,
-                                DatabaseHelper.getDChangeProjection(),
-                                null, //SchemaConstants.SELECT_FOR_DCHANGE,
-                                null, //new String[] {Long.toString(MeetingTime.getInstance().getCurrentTimeInMillis())},
-                                null);
+                               DatabaseHelper.getDChangeProjection(),
+                               SchemaConstants.WHERE_FOR_DCHANGE,
+                               new String[] {"N"}, //Long.toString(MeetingTime.getInstance().getCurrentTimeInMillis())},
+                               null);
 
-//                if (cursor.getCount() > 0) {
-//                    int rowId;
-//                    String dChange;
-//
-//                    while (cursor.moveToNext()) {
-//                        dChange = cursor.getString(cursor.getColumnIndex(SchemaConstants.COLUMN_D_CHG_REQ));
-//
-//                        if(dChange.equals("N")) {
-//                            ContentValues cVals = new ContentValues();
-//                            cVals.put(SchemaConstants.COLUMN_D_CHG_REQ, "Y");
-//                            rowId = cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_ROWID));
+                if (cursor.getCount() > 0) {
+                    int rowId;
+                    //String dChange;
+                    String dateTime;
+                    while (cursor.moveToNext()) {
+                        dateTime = cursor.getString(cursor.getColumnIndex(SchemaConstants.COLUMN_DATE_TIME));
+
+                        if(!checkDateValue(dateTime)) {
+                            ContentValues cVals = new ContentValues();
+                            cVals.put(SchemaConstants.COLUMN_D_CHG_REQ, "Y");
+                            rowId = cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_ROWID));
 //                            jobSvc.getContentResolver().update(ContentUris.withAppendedId(MeetingProvider.contentUri, rowId), cVals, null, null);
-//
-//                            result.getExtras().putInt(MeetingConstants.PAST_TIME_JOB_KEY, MeetingConstants.LISTING_CHANGE_REQUIRED);
-//
-//                            if(updated == false) {
-//                                updated = true;
-//                            }
-//                        }
-//                    }
-//                    cursor.close();
-//
-//                    if(updated) {
-//                        result.getExtras().putInt(MeetingConstants.PAST_TIME_JOB_KEY,
-//                                MeetingConstants.LISTING_CHANGE_REQUIRED);
-//                    } else {
-//                        result.getExtras().putInt(MeetingConstants.PAST_TIME_JOB_KEY, 0);
-//                    }
-//                }
+
+                            if(updated == false) {
+                                updated = true;
+                            }
+                        }
+                    }
+                    cursor.close();
+
+                    if(updated) {
+                        result.getExtras().putInt(MeetingConstants.PAST_TIME_JOB_KEY,
+                                MeetingConstants.LISTING_CHANGE_REQUIRED);
+                    } else {
+                        result.getExtras().putInt(MeetingConstants.PAST_TIME_JOB_KEY, 0);
+                    }
+                }
             }
         }
         return result;
@@ -92,6 +89,11 @@ public class ListingTask extends AsyncTask<JobParameters, Void, JobParameters> {
     	Log.d(LOG_TAG, "onPostExecute");
         jobSvc.jobFinished(result, false);
         jobSvc.onStopJob(result);
+    }
+
+    private boolean checkDateValue(String time) {
+
+        return false;
     }
 
     private boolean updated;
