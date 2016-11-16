@@ -5,7 +5,6 @@ import android.app.job.JobService;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -46,25 +45,19 @@ public class ListingTask extends AsyncTask<JobParameters, Void, JobParameters> {
                         .query(MeetingProvider.contentUri,
                                DatabaseHelper.getDChangeProjection(),
                                SchemaConstants.WHERE_FOR_DCHANGE,
-                               new String[] {"N"}, Long.toString(MeetingTime.getInstance().getCurrentTimeInMillis()),
+                               new String[] {"N", Long.toString(MeetingTime.getInstance().getTimeInMillis())},
                                null);
 
                 if (cursor.getCount() > 0) {
                     int rowId;
-                    //String dChange;
-                    String dateTime;
                     while (cursor.moveToNext()) {
-                        dateTime = cursor.getString(cursor.getColumnIndex(SchemaConstants.COLUMN_DATE_TIME));
+                        ContentValues cVals = new ContentValues();
+                        cVals.put(SchemaConstants.COLUMN_D_CHG_REQ, "Y");
+                        rowId = cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_ROWID));
+//                        jobSvc.getContentResolver().update(ContentUris.withAppendedId(MeetingProvider.contentUri, rowId), cVals, null, null);
 
-                        if(!checkDateValue(dateTime)) {
-                            ContentValues cVals = new ContentValues();
-                            cVals.put(SchemaConstants.COLUMN_D_CHG_REQ, "Y");
-                            rowId = cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_ROWID));
-//                            jobSvc.getContentResolver().update(ContentUris.withAppendedId(MeetingProvider.contentUri, rowId), cVals, null, null);
-
-                            if(updated == false) {
-                                updated = true;
-                            }
+                        if(updated == false) {
+                            updated = true;
                         }
                     }
                     cursor.close();
@@ -89,11 +82,6 @@ public class ListingTask extends AsyncTask<JobParameters, Void, JobParameters> {
     	Log.d(LOG_TAG, "onPostExecute");
         jobSvc.jobFinished(result, false);
         jobSvc.onStopJob(result);
-    }
-
-    private boolean checkDateValue(String time) {
-
-        return false;
     }
 
     private boolean updated;

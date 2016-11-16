@@ -243,7 +243,7 @@ public class EditFragment extends Fragment
     private void doEditActionNew() {
         actionBar.setTitle(R.string.app_name_new);
         updateBackground(MeetingConstants.NEW_MEETING);
-        timeInMillis = MeetingTime.getInstance().getCurrentTimeInMillis();
+        timeInMillis = MeetingTime.getInstance().getTimeInMillis();
         updateRaceTime(timeInMillis);
 
         if(checkUseRaceCodePreference()) {
@@ -341,7 +341,7 @@ public class EditFragment extends Fragment
             }
         } else if(editAction.equals(MeetingConstants.EDIT_ACTION_EXISTING)) {
 
-            if ((timeInMillis > MeetingTime.getInstance().getCurrentTimeInMillis()) && (dChange.equals("Y"))) {
+            if ((timeInMillis > MeetingTime.getInstance().getTimeInMillis()) && (dChange.equals("Y"))) {
                 contentValues.put(SchemaConstants.COLUMN_D_CHG_REQ, "N");
             }
             dbRowId = getArguments().getLong(MeetingConstants.EDIT_EXISTING);

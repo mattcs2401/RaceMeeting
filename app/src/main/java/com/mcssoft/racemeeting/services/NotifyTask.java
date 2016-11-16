@@ -34,7 +34,7 @@ public class NotifyTask extends AsyncTask<JobParameters, Void, JobParameters> {
 //                Cursor cursor = DatabaseHelper.rawQuery(SchemaConstants.SELECT_ALL_NOTIFY +
 //                        MeetingTime.getInstance().getTimeMinus(reminderTime) +
 //                        " AND " +
-//                        MeetingTime.getInstance().getCurrentTimeInMillis(), null);
+//                        MeetingTime.getInstance().getTimeInMillis(), null);
 //
 //                if (cursor.getCount() > 0) {
 //                    int cols = cursor.getColumnCount();
@@ -90,7 +90,7 @@ Cursor cursor = notifySvc.getApplicationContext()
                 SchemaConstants.SELECT_ALL_NOTIFY +
                         MeetingTime.getInstance().getTimeMinus(reminderTime) +
                         " AND " +
-                        MeetingTime.getInstance().getCurrentTimeInMillis(),
+                        MeetingTime.getInstance().getTimeInMillis(),
                 null,
                 null);
 */

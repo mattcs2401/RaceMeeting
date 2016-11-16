@@ -104,7 +104,7 @@ public class MeetingTime {
      * Get the current time in milli seconds. Internally sets the value for chaining toString().
      * @return The time in milli seconds.
      */
-    public long getCurrentTimeInMillis() {
+    public long getTimeInMillis() {
         return Calendar.getInstance(Locale.getDefault()).getTimeInMillis();
     }
 
