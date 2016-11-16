@@ -188,7 +188,7 @@ public class EditFragment extends Fragment
         etRaceSel.setText(cursor.getString(cursor.getColumnIndexOrThrow(SchemaConstants.COLUMN_RACE_SEL)));
 
         timeInMillis = cursor.getLong(cursor.getColumnIndexOrThrow(SchemaConstants.COLUMN_DATE_TIME));
-        String time = MeetingTime.getInstance().getTimeFromMillis(timeInMillis,false);
+        String time = MeetingTime.getInstance().getFormattedTimeFromMillis(timeInMillis,false);
         etRaceTime.setText(time.replace("am","").replace("pm",""));
 
         dChange = cursor.getString(cursor.getColumnIndexOrThrow(SchemaConstants.COLUMN_D_CHG_REQ));
@@ -357,7 +357,7 @@ public class EditFragment extends Fragment
      * Update the text displayed on the (race) time field.
      */
     private void updateRaceTime(long timeInMillis) {
-        etRaceTime.setText(MeetingTime.getInstance().getTimeFromMillis(timeInMillis,false));
+        etRaceTime.setText(MeetingTime.getInstance().getFormattedTimeFromMillis(timeInMillis,false));
     }
 
     /**

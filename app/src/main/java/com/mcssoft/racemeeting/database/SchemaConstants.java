@@ -54,8 +54,8 @@ public class SchemaConstants {
 
     // Partial select, get all records where a display change is required.
     public final static String WHERE_FOR_DCHANGE =
-            SchemaConstants.COLUMN_D_CHG_REQ + " = ?"; // AND " +
-            //SchemaConstants.COLUMN_DATE_TIME + " < ?";
+            SchemaConstants.COLUMN_D_CHG_REQ + " = ? AND " +
+            SchemaConstants.COLUMN_DATE_TIME + " < ?";
 
     // Select all.
     public static final String SELECT_ALL =

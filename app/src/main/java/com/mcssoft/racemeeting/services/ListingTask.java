@@ -46,7 +46,7 @@ public class ListingTask extends AsyncTask<JobParameters, Void, JobParameters> {
                         .query(MeetingProvider.contentUri,
                                DatabaseHelper.getDChangeProjection(),
                                SchemaConstants.WHERE_FOR_DCHANGE,
-                               new String[] {"N"}, //Long.toString(MeetingTime.getInstance().getCurrentTimeInMillis())},
+                               new String[] {"N"}, Long.toString(MeetingTime.getInstance().getCurrentTimeInMillis()),
                                null);
 
                 if (cursor.getCount() > 0) {
