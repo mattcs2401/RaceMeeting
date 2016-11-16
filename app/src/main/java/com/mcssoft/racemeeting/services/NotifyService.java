@@ -10,10 +10,12 @@ import android.content.Intent;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import mcssoft.com.racemeeting3.R;
 
+import com.mcssoft.racemeeting.fragment.MainFragment;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 
 public class NotifyService extends JobService {
@@ -46,28 +48,28 @@ public class NotifyService extends JobService {
     @Override
     public boolean onStartJob(JobParameters jobParams) {
         boolean retVal = false;
-//        if(lFrag != null) {
-//            Log.d(LOG_TAG, "onStartJob");
-//
-//            int iReminder = MeetingConstants.INT_DEFAULT;
-//            String sReminder = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
-//                    .getString(MeetingConstants.TIME_PRIOR_PREF_KEY, null);
-//
-//            String[] mprt = getResources().getStringArray(R.array.meetingPriorReminderTime);
-//
-//            if(!sReminder.equals(mprt[0])) {
-//                for(String s : mprt) {
-//                    if(s.equals(sReminder)) {
-//                        iReminder = Integer.parseInt(sReminder) * 1000;   // milli seconds.
-//                        break;
-//                    }
-//                }
-//
-//                nTask = new NotifyTask(this, iReminder);
-//                nTask.execute(jobParams);
-//                retVal = true;
-//            }
-//        }
+        if(mainFragment != null) {
+            Log.d(LOG_TAG, "onStartJob");
+
+            int iReminder = MeetingConstants.INIT_DEFAULT;
+            String sReminder = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                    .getString(MeetingConstants.TIME_PRIOR_PREF_KEY, null);
+
+            String[] mprt = getResources().getStringArray(R.array.meetingPriorReminderTime);
+
+            if(!sReminder.equals(mprt[0])) {
+                for(String s : mprt) {
+                    if(s.equals(sReminder)) {
+                        iReminder = Integer.parseInt(sReminder) * 1000;   // milli seconds.
+                        break;
+                    }
+                }
+
+                notifyTask = new NotifyTask(this, iReminder);
+                notifyTask.execute(jobParams);
+                retVal = true;
+            }
+        }
         return retVal;
     }
 
@@ -83,25 +85,24 @@ public class NotifyService extends JobService {
 
     @Override
     public boolean onStopJob(JobParameters jobParams) {
-//        if (lFrag == null) {
-//            return false;
-//        } else {
-//            Log.d(LOG_TAG, "onStopJob");
-//            // TODO - if there is nothing to notify about, then don't call this.
-//            if(jobParams.getExtras().getInt(MeetingConstants.NOTIFY_REQUIRED_KEY) == MeetingConstants.NOTIFY_REQUIRED) {
-//                lFrag.onReceivedStopJob(jobParams.getExtras());
-//            }
-//            return true; // indicates to job manager to reschedule.
-//        }
-        return false;
+        if (mainFragment == null) {
+            return false;
+        } else {
+            Log.d(LOG_TAG, "onStopJob");
+            // TODO - if there is nothing to notify about, then don't call this.
+            if(jobParams.getExtras().getInt(MeetingConstants.NOTIFY_REQUIRED_KEY) == MeetingConstants.NOTIFY_REQUIRED) {
+                mainFragment.onReceivedStopJob(jobParams.getExtras());
+            }
+            return true; // indicates to job manager to reschedule.
+        }
     }
 
-//    public void setUiCallback(MainFragment lFrag) {
-//        this.lFrag = lFrag;
-//    }
+    public void setUiCallback(MainFragment lFrag) {
+        this.mainFragment = lFrag;
+    }
 
-//    private NotifyTask nTask;
-//    private MainFragment lFrag;
+    private NotifyTask notifyTask;
+    private MainFragment mainFragment;
 
     private String LOG_TAG = this.getClass().getCanonicalName();
 

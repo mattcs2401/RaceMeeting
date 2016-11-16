@@ -7,6 +7,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.mcssoft.racemeeting.adapter.MeetingAdapter;
 import com.mcssoft.racemeeting.database.DatabaseHelper;
@@ -65,14 +67,14 @@ public class MainFragment extends Fragment
     public void onStart() {
         Log.d(LOG_TAG, "onStart");
         super.onStart();
-//        preferences = MeetingPreferences.getInstance().getAllPreferences();
+
         meetingPreferences = new MeetingPreferences(getActivity().getApplicationContext());
         preferences = meetingPreferences.getAllPreferences();
-        int action;
 
         // If the 'Meeting Time Actions' checkbox is ticked.
         if(preferences.getString(MeetingConstants.TIME_ACTIONS_PREF_KEY).equals("true")) {
             // If there are items listed.
+            int action;
             if(recordsExist()) {
 
                 action = Integer.parseInt(preferences.getString(MeetingConstants.TIME_PRIOR_PREF_KEY));
@@ -110,11 +112,6 @@ public class MainFragment extends Fragment
         Log.d(LOG_TAG, "onStop");
         super.onStop();
         meetingScheduler.cancelStopAll();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
         meetingPreferences.destroy();
     }
 
@@ -123,6 +120,16 @@ public class MainFragment extends Fragment
         super.onSaveInstanceState(outState);
     }
     //</editor-fold>
+
+    public void onReceivedStartJob(PersistableBundle bundle) {
+
+        Toast.makeText(getActivity(), "onReceivedStartJob", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onReceivedStopJob(PersistableBundle bundle) {
+
+        Toast.makeText(getActivity(), "onReceivedStopJob", Toast.LENGTH_SHORT).show();
+    }
 
     //<editor-fold defaultstate="collapsed" desc="Region: Click handlers">
     @Override

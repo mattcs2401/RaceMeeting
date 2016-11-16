@@ -30,7 +30,8 @@ public class MainActivity extends AppCompatActivity
 
         if(savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                                .replace(R.id.listing_container, mainFragment, null)
+                                .replace(R.id.listing_container, mainFragment,
+                                        MeetingConstants.DEFAULT_LISTING_FRAGMENT_TAG)
                                 .addToBackStack(null)
                                 .commit();
         } else {

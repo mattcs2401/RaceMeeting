@@ -50,28 +50,26 @@ public class ListingService extends JobService {
 
     @Override
     public boolean onStartJob(JobParameters jobParams) {
-        if(lFrag == null) {
-//            return false;
+        if(mainFragment == null) {
+            return false;
         } else {
-//            Log.d(LOG_TAG, "onStartJob");
-//            lTask = new ListingTask(this);
-//            lFrag.onReceivedStartJob(jobParams.getExtras());
-//            lTask.execute(jobParams);
-//            return true;
+            Log.d(LOG_TAG, "onStartJob");
+            listingTask = new ListingTask(this);
+            mainFragment.onReceivedStartJob(jobParams.getExtras());
+            listingTask.execute(jobParams);
+            return true;
         }
-        return false;
     }
 
     @Override
     public boolean onStopJob(JobParameters jobParams) {
-//        if (lFrag == null) {
-//            return false;
-//        } else {
-//            Log.d(LOG_TAG, "onStopJob");
-//            lFrag.onReceivedStopJob(jobParams.getExtras());
-//            return true; // indicates to job manager to reschedule.
-//        }
-        return false;
+        if (mainFragment == null) {
+            return false;
+        } else {
+            Log.d(LOG_TAG, "onStopJob");
+            mainFragment.onReceivedStopJob(jobParams.getExtras());
+            return true; // indicates to job manager to reschedule.
+        }
     }
 
     /**
@@ -89,12 +87,12 @@ public class ListingService extends JobService {
         }
     }
 
-//    public void setUiCallback(MainFragment lFrag) {
-//        this.lFrag = lFrag;
-//    }
+    public void setUiCallback(MainFragment mainFragment) {
+        this.mainFragment = mainFragment;
+    }
 
-    private ListingTask lTask;
-    private MainFragment lFrag;
+    private ListingTask listingTask;
+    private MainFragment mainFragment;
 
     private String LOG_TAG = this.getClass().getCanonicalName();
 

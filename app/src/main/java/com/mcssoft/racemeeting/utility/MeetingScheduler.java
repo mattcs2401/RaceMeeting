@@ -15,6 +15,7 @@ import android.os.PersistableBundle;
 import android.util.Log;
 
 import com.mcssoft.racemeeting.adapter.MeetingAdapter;
+import com.mcssoft.racemeeting.fragment.MainFragment;
 import com.mcssoft.racemeeting.services.ListingService;
 import com.mcssoft.racemeeting.services.NotifyService;
 
@@ -37,7 +38,8 @@ public class MeetingScheduler {
                 case MeetingConstants.MSG_LISTING_SERVICE:
                     Log.d(LOG_TAG, "handleMessage - listing service");
                     listingSvc = (ListingService) message.obj;
-//                    listingSvc.setUiCallback(MainFragment.this);
+                    listingSvc.setUiCallback((MainFragment) activity.getFragmentManager()
+                            .findFragmentByTag(MeetingConstants.DEFAULT_LISTING_FRAGMENT_TAG));
 
                     if(!lsJobSchld) {
                         scheduleJob(MeetingConstants.LISTING_SERVICE);
@@ -46,7 +48,8 @@ public class MeetingScheduler {
                 case MeetingConstants.MSG_NOTIFY_SERVICE:
                     Log.d(LOG_TAG, "handleMessage - notify service");
                     notifySvc = (NotifyService) message.obj;
-//                    notifySvc.setUiCallback(MainFragment.this);
+                    notifySvc.setUiCallback((MainFragment) activity.getFragmentManager()
+                            .findFragmentByTag(MeetingConstants.DEFAULT_LISTING_FRAGMENT_TAG));
 
                     if(!nsJobSchld) {
                         scheduleJob(MeetingConstants.NOTIFY_SERVICE);
