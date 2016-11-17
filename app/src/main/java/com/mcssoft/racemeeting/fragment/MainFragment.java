@@ -29,6 +29,7 @@ import com.mcssoft.racemeeting.interfaces.IEditMeeting;
 import com.mcssoft.racemeeting.interfaces.IItemClickListener;
 import com.mcssoft.racemeeting.interfaces.IDeleteMeeting;
 import com.mcssoft.racemeeting.interfaces.IItemLongClickListener;
+import com.mcssoft.racemeeting.interfaces.INotifier;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingPreferences;
 import com.mcssoft.racemeeting.utility.MeetingScheduler;
@@ -160,7 +161,7 @@ public class MainFragment extends Fragment
                     al.add(results.getStringArray(key));
                 }
 
-//                ((INotifier) activity).onNotify(al);
+                ((INotifier) getActivity()).onNotify(al);
             }
         }
     }
