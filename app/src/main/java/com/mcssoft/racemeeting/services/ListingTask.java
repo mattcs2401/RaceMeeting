@@ -38,7 +38,6 @@ public class ListingTask extends AsyncTask<JobParameters, Void, JobParameters> {
             Log.d(LOG_TAG, "doInBackground");
 
 //            int size = jParams.length;  // what if this is > 1 ?
-
             for (JobParameters jp : jParams) {
                 result = jp;
                 Cursor cursor = jobSvc.getContentResolver()
@@ -54,7 +53,7 @@ public class ListingTask extends AsyncTask<JobParameters, Void, JobParameters> {
                         ContentValues cVals = new ContentValues();
                         cVals.put(SchemaConstants.COLUMN_D_CHG_REQ, "Y");
                         rowId = cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_ROWID));
-//                        jobSvc.getContentResolver().update(ContentUris.withAppendedId(MeetingProvider.contentUri, rowId), cVals, null, null);
+                        jobSvc.getContentResolver().update(ContentUris.withAppendedId(MeetingProvider.contentUri, rowId), cVals, null, null);
 
                         if(updated == false) {
                             updated = true;

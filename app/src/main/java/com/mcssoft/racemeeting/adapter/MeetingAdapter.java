@@ -96,9 +96,9 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
         holder.getDChange().setText(dChangeReq);
 
         if (dChangeReq.equals("Y")) {
-            view.setBackgroundResource(R.drawable.et_basic);
+            holder.itemView.setBackgroundResource(R.drawable.et_basic);
         } else {
-            view.setBackgroundResource(0);
+            holder.itemView.setBackgroundResource(0);
         }
     }
 
