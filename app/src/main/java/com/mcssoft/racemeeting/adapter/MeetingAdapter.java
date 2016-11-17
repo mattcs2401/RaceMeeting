@@ -1,6 +1,7 @@
 package com.mcssoft.racemeeting.adapter;
 
 import android.database.Cursor;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -96,9 +97,20 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
         holder.getDChange().setText(dChangeReq);
 
         if (dChangeReq.equals("Y")) {
-            holder.itemView.setBackgroundResource(R.drawable.et_basic);
+//            holder.itemView.setBackgroundResource(R.drawable.et_basic);
+            holder.getCityCode().setTextColor(Color.RED);
+            holder.getRaceCode().setTextColor(Color.RED);
+            holder.getRaceNo().setTextColor(Color.RED);
+            holder.getRaceSel().setTextColor(Color.RED);
+            holder.getRaceTime().setTextColor(Color.RED);
+
         } else {
-            holder.itemView.setBackgroundResource(0);
+//            holder.itemView.setBackgroundResource(0);
+            holder.getCityCode().setTextColor(Color.BLACK);
+            holder.getRaceCode().setTextColor(Color.BLACK);
+            holder.getRaceNo().setTextColor(Color.BLACK);
+            holder.getRaceSel().setTextColor(Color.BLACK);
+            holder.getRaceTime().setTextColor(Color.BLACK);
         }
     }
 
