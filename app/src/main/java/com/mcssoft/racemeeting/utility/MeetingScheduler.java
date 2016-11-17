@@ -38,8 +38,7 @@ public class MeetingScheduler {
                 case MeetingConstants.MSG_LISTING_SERVICE:
                     Log.d(LOG_TAG, "handleMessage - listing service");
                     listingSvc = (ListingService) message.obj;
-                    listingSvc.setUiCallback((MainFragment) activity.getFragmentManager()
-                            .findFragmentByTag(MeetingConstants.DEFAULT_LISTING_FRAGMENT_TAG));
+                    listingSvc.setUiCallback(getListingFragment());
 
                     if(!lsJobSchld) {
                         scheduleJob(MeetingConstants.LISTING_SERVICE);
@@ -48,8 +47,7 @@ public class MeetingScheduler {
                 case MeetingConstants.MSG_NOTIFY_SERVICE:
                     Log.d(LOG_TAG, "handleMessage - notify service");
                     notifySvc = (NotifyService) message.obj;
-                    notifySvc.setUiCallback((MainFragment) activity.getFragmentManager()
-                            .findFragmentByTag(MeetingConstants.DEFAULT_LISTING_FRAGMENT_TAG));
+                    notifySvc.setUiCallback(getListingFragment());
 
                     if(!nsJobSchld) {
                         scheduleJob(MeetingConstants.NOTIFY_SERVICE);
@@ -158,35 +156,6 @@ public class MeetingScheduler {
         }
     }
 
-    public void onReceivedStopJob(PersistableBundle results) {
-        Log.d(LOG_TAG, "onReceivedStopJobListing");
-        Set<String> keys = results.keySet();
-
-        if(keys.contains(MeetingConstants.PAST_TIME_JOB_KEY)) {
-            if(results.getInt(MeetingConstants.PAST_TIME_JOB_KEY) == MeetingConstants.LISTING_CHANGE_REQUIRED) {
-//                // Do the actual work required.
-                // TODO - interface.
-            }
-        }
-
-        if(keys.contains(MeetingConstants.PRIOR_TIME_JOB_KEY)) {
-            if(results.getInt(MeetingConstants.NOTIFY_REQUIRED_KEY) == MeetingConstants.NOTIFY_REQUIRED) {
-
-                // strip out the "non race value" keys.
-                keys.remove(MeetingConstants.PRIOR_TIME_JOB_KEY);
-                keys.remove(MeetingConstants.NOTIFY_REQUIRED_KEY);
-
-                ArrayList<String[]> al = new ArrayList<>();
-
-                for(String key : keys) {
-                    al.add(results.getStringArray(key));
-                }
-                // TODO - interface.
-//                ((INotifier) activity).onNotify(al);
-            }
-        }
-    }
-
     public void scheduleJob(int svcId) {
         JobInfo.Builder builder = null;
         PersistableBundle bundle = null;
@@ -234,19 +203,26 @@ public class MeetingScheduler {
     }
     //</editor-fold>
 
-    private int lsJobId;                // arbitary listing job number, incremented.
-    private int nsJobId;
-    private long listItemPos;          // position in the listing.
-    private boolean lsJobSchld;     // flag, listing job scheduled.
-    private boolean nsJobSchld;
+    //<editor-fold defaultstate="collapsed" desc="Region: Utility">
+    private MainFragment getListingFragment() {
+        return (MainFragment) activity.getFragmentManager()
+                .findFragmentByTag(MeetingConstants.DEFAULT_LISTING_FRAGMENT_TAG);
+    }
+    //</editor-fold>
 
-    private Intent listingSvcIntent;         // listing service intent.
-    private Intent notifySvcIntent;
+    //<editor-fold defaultstate="collapsed" desc="Region: Private vars">
+    private int lsJobId;               // arbitary listing job number, incremented.
+    private boolean lsJobSchld;        // flag, listing job scheduled.
+    private boolean nsJobSchld;        // flag, notify job scheduled.
+
+    private Intent listingSvcIntent;   // listing service intent.
+    private Intent notifySvcIntent;    // notify service intent.
+
     private Activity activity;         // the parent activity.
-    private MeetingAdapter mca;        // custom cursor adapter.
-    private Bundle prefsState;       //
-    private ListingService listingSvc;       // the listing service.
-    private NotifyService notifySvc;
+
+    private NotifyService notifySvc;   // the notify service.
+    private ListingService listingSvc; // the listing service.
 
     private String LOG_TAG = this.getClass().getCanonicalName();
+    //</editor-fold>
 }
