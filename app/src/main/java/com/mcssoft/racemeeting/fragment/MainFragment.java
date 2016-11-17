@@ -33,6 +33,9 @@ import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingPreferences;
 import com.mcssoft.racemeeting.utility.MeetingScheduler;
 
+import java.util.ArrayList;
+import java.util.Set;
+
 import mcssoft.com.racemeeting3.R;
 
 public class MainFragment extends Fragment
@@ -126,10 +129,40 @@ public class MainFragment extends Fragment
         //Toast.makeText(getActivity(), "onReceivedStartJobListing", Toast.LENGTH_SHORT).show();
     }
 
-    public void onReceivedStopJobListing(PersistableBundle bundle) {
-        // The listing service returns back to here when the listing task is done.
-
+    public void onReceivedStopJobListing(PersistableBundle results) {
         Toast.makeText(getActivity(), "onReceivedStopJobListing", Toast.LENGTH_SHORT).show();
+
+        // The listing service returns back to here when the listing task is done.
+        // ListingTask will have set the D_CHG_REQ column to Y on applicable records.
+
+        Log.d(LOG_TAG, "onReceivedStopJob");
+        Set<String> keys = results.keySet();
+
+        if(keys.contains(MeetingConstants.PAST_TIME_JOB_KEY)) {
+            if(results.getInt(MeetingConstants.PAST_TIME_JOB_KEY) == MeetingConstants.LISTING_CHANGE_REQUIRED) {
+                Bundle bundle = new Bundle();
+                bundle.putInt(MeetingConstants.PAST_TIME_JOB_KEY, MeetingConstants.LISTING_CHANGE_REQUIRED);
+                // Do the actual work required.
+                getLoaderManager().restartLoader(0, bundle, this);
+            }
+        }
+
+        if(keys.contains(MeetingConstants.PRIOR_TIME_JOB_KEY)) {
+            if(results.getInt(MeetingConstants.NOTIFY_REQUIRED_KEY) == MeetingConstants.NOTIFY_REQUIRED) {
+
+                // strip out the "non race value" keys.
+                keys.remove(MeetingConstants.PRIOR_TIME_JOB_KEY);
+                keys.remove(MeetingConstants.NOTIFY_REQUIRED_KEY);
+
+                ArrayList<String[]> al = new ArrayList<>();
+
+                for(String key : keys) {
+                    al.add(results.getStringArray(key));
+                }
+
+//                ((INotifier) activity).onNotify(al);
+            }
+        }
     }
 
     public void onReceivedStartJobNotify(PersistableBundle bundle) {
@@ -192,7 +225,6 @@ public class MainFragment extends Fragment
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         Log.d(LOG_TAG, "onLoadFinished");
         meetingAdapter.swapCursor(data);
-//        updateEmptyView();
     }
 
     @Override

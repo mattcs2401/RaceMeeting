@@ -112,7 +112,7 @@ public class MeetingConstants {
     public static final int EDIT_ACTIVITY_REQUEST_CODE = 0x03;
     public static final int EDIT_ACTIVITY_RESULT_SAVE = 0x04;
     public static final int INIT_DEFAULT = -1;              // arbitrary initialiser value.
-    public static final int NOTIFY_REQUIRED = 0;
+    public static final int NOTIFY_REQUIRED = 1;
     public static final int MEETING_LOADER = 0;
     public static final String NOTIFY_REQUIRED_KEY = "notify_required_key";
     public static final int LISTING_CHANGE_REQUIRED = 1;   //
