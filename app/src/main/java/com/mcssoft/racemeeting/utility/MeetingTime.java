@@ -101,7 +101,7 @@ public class MeetingTime {
     }
 
     /**
-     * Get the current time in milli seconds. Internally sets the value for chaining toString().
+     * Get the current time in milli seconds.
      * @return The time in milli seconds.
      */
     public long getTimeInMillis() {
@@ -166,10 +166,33 @@ public class MeetingTime {
         return calendar.getTimeInMillis();
     }
 
+    /**
+     * Ensure instance values are made NULL.
+     */
     public void destroy() {
-        // Called in the ListingActivity.onDestroy().
         context = null;
         instance = null;
+    }
+
+    /**
+     * Check if the current time is after the time given.
+     * @param timeInMillis The given time.
+     * @return True if current time is after the given time, else false.
+     */
+    public boolean isTimeAfter(long timeInMillis) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date(timeInMillis));
+        return Calendar.getInstance().after(calendar);
+    }
+
+    /**
+     * Check if the given time is a time from today.
+     * @param timeInMillis The given time.
+     * @return True if the given time is a time from today, else false.
+     */
+    public boolean isToday(long timeInMillis) {
+
+        return false;
     }
 
     /**

@@ -33,6 +33,7 @@ import com.mcssoft.racemeeting.interfaces.INotifier;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingPreferences;
 import com.mcssoft.racemeeting.utility.MeetingScheduler;
+import com.mcssoft.racemeeting.utility.MeetingTime;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -117,6 +118,7 @@ public class MainFragment extends Fragment
         super.onStop();
         meetingScheduler.cancelStopAll();
         meetingPreferences.destroy();
+        MeetingTime.getInstance().destroy();
     }
 
     @Override
