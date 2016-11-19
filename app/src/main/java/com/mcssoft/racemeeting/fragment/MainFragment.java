@@ -143,10 +143,7 @@ public class MainFragment extends Fragment
 
         if(keys.contains(MeetingConstants.PAST_TIME_JOB_KEY)) {
             if(results.getInt(MeetingConstants.PAST_TIME_JOB_KEY) == MeetingConstants.LISTING_CHANGE_REQUIRED) {
-                Bundle bundle = new Bundle();
-                bundle.putInt(MeetingConstants.PAST_TIME_JOB_KEY, MeetingConstants.LISTING_CHANGE_REQUIRED);
-                // Do the actual work required.
-                getLoaderManager().restartLoader(0, bundle, this);
+                getLoaderManager().restartLoader(0, null, this);
             }
         }
 
