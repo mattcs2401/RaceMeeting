@@ -118,7 +118,6 @@ public class MainFragment extends Fragment
         super.onStop();
         meetingScheduler.cancelStopAll();
         meetingPreferences.destroy();
-        MeetingTime.getInstance().destroy();
     }
 
     @Override

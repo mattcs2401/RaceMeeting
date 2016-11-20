@@ -74,7 +74,7 @@ public class DeleteDialog extends DialogFragment implements View.OnClickListener
         tvRaceSel.setText(cursor.getString(cursor.getColumnIndexOrThrow(SchemaConstants.COLUMN_RACE_SEL)));
 
         long timeInMillis = cursor.getLong(cursor.getColumnIndexOrThrow(SchemaConstants.COLUMN_DATE_TIME));
-        String time = MeetingTime.getInstance().getFormattedTimeFromMillis(timeInMillis,false);
+        String time = MeetingTime.getInstance().getFormattedTimeFromMillis(timeInMillis);
         tvRaceTime.setText(time.replace("am","").replace("pm",""));
 
         btnDDDelete.setOnClickListener(this);

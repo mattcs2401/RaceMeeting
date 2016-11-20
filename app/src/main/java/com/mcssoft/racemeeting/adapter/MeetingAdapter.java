@@ -90,7 +90,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
         holder.getRaceNo().setText(cursor.getString(raceNumColNdx));
         holder.getRaceSel().setText(cursor.getString(raceSelColNdx));
 
-        String raceTime = MeetingTime.getInstance().getFormattedTimeFromMillis(cursor.getLong(dateTimeColNdx),true);
+        String raceTime = MeetingTime.getInstance().getFormattedTimeFromMillis(cursor.getLong(dateTimeColNdx));
         holder.getRaceTime().setText(raceTime);
 
         String dChangeReq = cursor.getString(chgReqColNdx);

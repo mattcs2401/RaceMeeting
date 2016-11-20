@@ -30,6 +30,7 @@ import mcssoft.com.racemeeting3.R;
 public class MainActivity extends AppCompatActivity
     implements IEditMeeting, IDeleteMeeting, INotifier {
 
+    //<editor-fold defaultstate="collapsed" desc="Region: Lifecycle">
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +69,19 @@ public class MainActivity extends AppCompatActivity
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        MeetingTime.getInstance(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        MeetingTime.getInstance().destroy();
+    }
+    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Interface - IEditMeeting">
     @Override
@@ -132,10 +146,6 @@ public class MainActivity extends AppCompatActivity
     private void initialise() {
         setContentView(R.layout.activity_main);
         mainFragment = new MainFragment();
-
-        if(!MeetingTime.instanceExists()) {
-            MeetingTime.getInstance(getApplicationContext());
-        }
     }
 
     private String notificationContentText(ArrayList<String[]> notifyValues) {
@@ -153,7 +163,7 @@ public class MainActivity extends AppCompatActivity
         contentText.append(" ");
         //int timeMillis = Integer.parseInt(contents[5]);
         long timeMillis = Long.parseLong(contents[5]);
-        contentText.append(MeetingTime.getInstance().getFormattedTimeFromMillis(timeMillis, true));
+        contentText.append(MeetingTime.getInstance().getFormattedTimeFromMillis(timeMillis));
         return contentText.toString();
     }
 
