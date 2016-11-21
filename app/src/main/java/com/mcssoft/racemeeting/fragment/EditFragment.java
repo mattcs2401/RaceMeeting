@@ -208,8 +208,6 @@ public class EditFragment extends Fragment
      * Show the time picker dialog.
      */
     private void showTimePicker() {
-//        if(meetKbd.isVisible()) meetKbd.hide();
-
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         DialogFragment df = new TimePickDialog();
 

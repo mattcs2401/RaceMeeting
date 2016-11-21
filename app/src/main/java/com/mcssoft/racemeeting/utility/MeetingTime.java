@@ -25,26 +25,20 @@ public class MeetingTime {
      * Get (initialise) an instance of MeetingTime.
      * @param context The current context.
      * @return An instance of MeetingTime.
-     * @throws IllegalStateException if instance already initialised.
      */
     public static synchronized MeetingTime getInstance(Context context) {
         if(!instanceExists()) {
             instance = new MeetingTime(context);
-            return instance;
         }
-        throw new IllegalStateException(R.string.meeting_time_already_init + "");
+        return instance;
     }
 
     /**
      * Get the current MeetingTime instance.
      * @return The current MeetingTime instance.
-     * @throws IllegalStateException if instance is null.
      */
     public static synchronized MeetingTime getInstance() {
-        if(instanceExists()) {
-            return instance;
-        }
-        throw new IllegalStateException(R.string.meeting_time_not_init + "");
+        return instance;
     }
 
     public static boolean instanceExists() {
