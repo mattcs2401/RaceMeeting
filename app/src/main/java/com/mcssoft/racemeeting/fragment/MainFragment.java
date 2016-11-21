@@ -72,44 +72,7 @@ public class MainFragment extends Fragment
     public void onStart() {
         Log.d(LOG_TAG, "onStart");
         super.onStart();
-
-        meetingPreferences = new MeetingPreferences(getActivity().getApplicationContext());
-        preferences = meetingPreferences.getAllPreferences();
-
-        // If the 'Meeting Time Actions' checkbox is ticked.
-        if(preferences.getString(MeetingConstants.TIME_ACTIONS_PREF_KEY).equals("true")) {
-            // If there are items listed.
-            int action;
-            if(recordsExist()) {
-
-                action = Integer.parseInt(preferences.getString(MeetingConstants.TIME_PRIOR_PREF_KEY));
-
-                // If anything other than the "No reminder" preference is selected.
-                if (action != MeetingConstants.TIME_PRIOR_PREF_DEFAULT) {
-                    meetingScheduler.startService(MeetingConstants.NOTIFY_SERVICE, action);
-                } else {
-                    // "No reminder." preference is selected.
-                    if (meetingScheduler.isSvcRunning(MeetingConstants.NOTIFY_SERVICE)) {
-                        meetingScheduler.cancelJobs(MeetingConstants.NOTIFY_SERVICE);
-                    }
-                }
-
-                action = Integer.parseInt(preferences.getString(MeetingConstants.TIME_PAST_PREF_KEY));
-
-                // If anything other than the "Take no action ..." preference is selected.
-                if (action != MeetingConstants.TIME_PAST_PREF_DEFAULT) {
-                    meetingScheduler.startService(MeetingConstants.LISTING_SERVICE, action);
-                } else {
-                    // "Take no action ..." preference is selected, cancel any jobs.
-                    if (meetingScheduler.isSvcRunning(MeetingConstants.LISTING_SERVICE)) {
-                        meetingScheduler.cancelJobs(MeetingConstants.LISTING_SERVICE);
-                    }
-                }
-            }
-        } else {
-            // 'Meeting Time Actions' checkbox is not ticked.
-            meetingScheduler.cancelStopAll();
-        }
+        checkServicesRequired();
     }
 
     @Override
@@ -267,6 +230,46 @@ public class MainFragment extends Fragment
                         null,
                         null,
                         SchemaConstants.SORT_ORDER);
+    }
+
+    private void checkServicesRequired() {
+        meetingPreferences = new MeetingPreferences(getActivity().getApplicationContext());
+        preferences = meetingPreferences.getAllPreferences();
+
+        // If the 'Meeting Time Actions' checkbox is ticked.
+        if(preferences.getString(MeetingConstants.TIME_ACTIONS_PREF_KEY).equals("true")) {
+            // If there are items listed.
+            int action;
+            if(recordsExist()) {
+
+                action = Integer.parseInt(preferences.getString(MeetingConstants.TIME_PRIOR_PREF_KEY));
+
+                // If anything other than the "No reminder" preference is selected.
+                if (action != MeetingConstants.TIME_PRIOR_PREF_DEFAULT) {
+                    meetingScheduler.startService(MeetingConstants.NOTIFY_SERVICE, action);
+                } else {
+                    // "No reminder." preference is selected.
+                    if (meetingScheduler.isSvcRunning(MeetingConstants.NOTIFY_SERVICE)) {
+                        meetingScheduler.cancelJobs(MeetingConstants.NOTIFY_SERVICE);
+                    }
+                }
+
+                action = Integer.parseInt(preferences.getString(MeetingConstants.TIME_PAST_PREF_KEY));
+
+                // If anything other than the "Take no action ..." preference is selected.
+                if (action != MeetingConstants.TIME_PAST_PREF_DEFAULT) {
+                    meetingScheduler.startService(MeetingConstants.LISTING_SERVICE, action);
+                } else {
+                    // "Take no action ..." preference is selected, cancel any jobs.
+                    if (meetingScheduler.isSvcRunning(MeetingConstants.LISTING_SERVICE)) {
+                        meetingScheduler.cancelJobs(MeetingConstants.LISTING_SERVICE);
+                    }
+                }
+            }
+        } else {
+            // 'Meeting Time Actions' checkbox is not ticked.
+            meetingScheduler.cancelStopAll();
+        }
     }
     //</editor-fold>
 
