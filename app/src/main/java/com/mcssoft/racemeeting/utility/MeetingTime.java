@@ -54,10 +54,9 @@ public class MeetingTime {
     /**
      * Get the time as a string formatted HH:MM.
      * @param timeInMillis The time value in mSec.
-     * @param meridiem Flag to indicate if 12HR time is appended with AM/PM.
      * @return The time based on the parameter timeInMillis value.
      */
-    public String getFormattedTimeFromMillis(long timeInMillis) { //}, boolean meridiem) {
+    public String getFormattedTimeFromMillis(long timeInMillis) {
 
         String time;
         SimpleDateFormat sdFormat;
@@ -69,12 +68,6 @@ public class MeetingTime {
 
         if(timeFormat.equals(MeetingConstants.TIME_FORMAT_PREF_12HR)) {
             sdFormat = new SimpleDateFormat(MeetingConstants.TIME_FORMAT_12HR, Locale.getDefault());
-
-//            if(meridiem) {
-//                time = time.replace("am","AM").replace("pm","PM");
-//            } else {
-//                time = time.replace("AM","").replace("PM","");
-//            }
         } else {
             sdFormat = new SimpleDateFormat(MeetingConstants.TIME_FORMAT_24HR, Locale.getDefault());
         }
@@ -180,7 +173,7 @@ public class MeetingTime {
      * @return True if current time is after the given time, else false.
      */
     public boolean isTimeAfter(long timeInMillis) {
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance(Locale.getDefault());
         calendar.setTime(new Date(timeInMillis));
         return Calendar.getInstance().after(calendar);
     }
@@ -189,8 +182,16 @@ public class MeetingTime {
      * Check if the given time is a time from today.
      * @param timeInMillis The given time.
      * @return True if the given time is a time from today, else false.
+     * Note: A return value of false means a time on a previous day.
      */
-    public boolean isToday(long timeInMillis) {
+    public boolean isTimeToday(long timeInMillis) {
+        Calendar today = Calendar.getInstance(Locale.getDefault());
+        Calendar toCheck = Calendar.getInstance(Locale.getDefault());
+        toCheck.setTime(new Date(timeInMillis));
+
+        if(toCheck.get(Calendar.DAY_OF_YEAR) == today.get(Calendar.DAY_OF_YEAR)) {
+            return true;
+        }
 
         return false;
     }
