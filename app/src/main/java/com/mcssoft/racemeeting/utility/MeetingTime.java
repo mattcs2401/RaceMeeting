@@ -57,7 +57,7 @@ public class MeetingTime {
      * @param meridiem Flag to indicate if 12HR time is appended with AM/PM.
      * @return The time based on the parameter timeInMillis value.
      */
-    public String getFormattedTimeFromMillis(long timeInMillis, boolean meridiem) {
+    public String getFormattedTimeFromMillis(long timeInMillis) { //}, boolean meridiem) {
 
         String time;
         SimpleDateFormat sdFormat;
