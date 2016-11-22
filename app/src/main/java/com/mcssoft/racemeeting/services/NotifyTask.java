@@ -2,21 +2,28 @@ package com.mcssoft.racemeeting.services;
 
 import android.app.job.JobParameters;
 import android.app.job.JobService;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.mcssoft.racemeeting.database.DatabaseHelper;
+import com.mcssoft.racemeeting.database.MeetingProvider;
+import com.mcssoft.racemeeting.database.SchemaConstants;
+import com.mcssoft.racemeeting.utility.MeetingConstants;
+import com.mcssoft.racemeeting.utility.MeetingTime;
 
 // https://androidresearch.wordpress.com/2013/05/10/dealing-with-asynctask-and-screen-orientation/
 
 public class NotifyTask extends AsyncTask<JobParameters, Void, JobParameters> {
 
-	public NotifyTask(NotifyService notifySvc, int reminderTime) {
+	public NotifyTask(NotifyService notifyService, int reminderTime) {
 		Log.d(LOG_TAG, "constructor");
-		this.notifySvc = notifySvc;
+		this.notifyService = notifyService;
         this.reminderTime = reminderTime;
 	}
 
-	@Override
-	public void onPreExecute() { }
+//	@Override
+//	public void onPreExecute() { }
 
 	@Override
     /* Method just runs a query and returns any result in the extras. */
@@ -29,36 +36,36 @@ public class NotifyTask extends AsyncTask<JobParameters, Void, JobParameters> {
 
             for (JobParameters jp : jParams) {
                 result = jp;
+                Cursor cursor = notifyService.getContentResolver()
+                        .query(MeetingProvider.contentUri,
+                                DatabaseHelper.getNotifyProjection(),
+                                SchemaConstants.WHERE_FOR_NOTIFY,
+                                new String[] {Long.toString(MeetingTime.getInstance().getTimeMinus(reminderTime)),
+                                              Long.toString(MeetingTime.getInstance().getTimeInMillis())},
+                                null);
 
-                // Work around as we need the selection arguments as int/long, not string.
-//                Cursor cursor = DatabaseHelper.rawQuery(SchemaConstants.SELECT_ALL_NOTIFY +
-//                        MeetingTime.getInstance().getTimeMinus(reminderTime) +
-//                        " AND " +
-//                        MeetingTime.getInstance().getTimeInMillis(), null);
-//
-//                if (cursor.getCount() > 0) {
-//                    int cols = cursor.getColumnCount();
-//                    String[] row = new String[cols];
-//
-//                    result.getExtras().putInt(MeetingConstants.NOTIFY_REQUIRED_KEY, MeetingConstants.NOTIFY_REQUIRED);
-//                    while (cursor.moveToNext()) {
-//
-//                        row[0] = (Integer.toString(cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_ROWID))));
-//                        row[1] = (cursor.getString(cursor.getColumnIndex(SchemaConstants.COLUMN_CITY_CODE)));
-//                        row[2] = (cursor.getString(cursor.getColumnIndex(SchemaConstants.COLUMN_RACE_CODE)));
-//                        row[3] = (Integer.toString(cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_RACE_NUM))));
-//                        row[4] = (Integer.toString(cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_RACE_SEL))));
-//                        row[5] = (Long.toString(cursor.getLong(cursor.getColumnIndex(SchemaConstants.COLUMN_DATE_TIME))));
-//
-//                        result.getExtras().putStringArray(row[0], row);     // key is column id as string.
-//                        row = new String[cols];
-//                    }
-//                } else {
-//                    // explicitly set some value other than NOTIFY_REQUIRED.
-//                    result.getExtras().putInt(MeetingConstants.NOTIFY_REQUIRED_KEY, MeetingConstants.INT_DEFAULT);
-//                }
-//
-//                cursor.close();
+                if (cursor.getCount() > 0) {
+                    int cols = cursor.getColumnCount();
+                    String[] row = new String[cols];
+
+                    result.getExtras().putInt(MeetingConstants.NOTIFY_REQUIRED_KEY, MeetingConstants.NOTIFY_REQUIRED);
+                    while (cursor.moveToNext()) {
+
+                        row[0] = Integer.toString(cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_ROWID)));
+                        row[1] = cursor.getString(cursor.getColumnIndex(SchemaConstants.COLUMN_CITY_CODE));
+                        row[2] = cursor.getString(cursor.getColumnIndex(SchemaConstants.COLUMN_RACE_CODE));
+                        row[3] = Integer.toString(cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_RACE_NUM)));
+                        row[4] = Integer.toString(cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_RACE_SEL)));
+                        row[5] = Long.toString(cursor.getLong(cursor.getColumnIndex(SchemaConstants.COLUMN_DATE_TIME)));
+
+                        result.getExtras().putStringArray(row[0], row);     // key is column id as string.
+                        row = new String[cols];
+                    }
+                } else {
+                    result.getExtras().putInt(MeetingConstants.NOTIFY_REQUIRED_KEY, 0); //MeetingConstants.INIT_DEFAULT);
+                }
+
+                cursor.close();
             }
         }
         return result;
@@ -69,12 +76,12 @@ public class NotifyTask extends AsyncTask<JobParameters, Void, JobParameters> {
     @Override
     protected void onPostExecute(JobParameters result) {
     	Log.d(LOG_TAG, "onPostExecute");
-        notifySvc.jobFinished(result, false);
-        notifySvc.onStopJob(result);
+        notifyService.jobFinished(result, false);
+        notifyService.onStopJob(result);
     }
 
     private int reminderTime;     // prior reminder time (from preferences) in mSec.
-	private JobService notifySvc;
+	private JobService notifyService;
 
     private String LOG_TAG = this.getClass().getCanonicalName();
 }

@@ -53,25 +53,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String[] getDatabaseSchemaProjection() {
         return new String[] {
-                SchemaConstants.COLUMN_ROWID,
-                SchemaConstants.COLUMN_CITY_CODE,
-                SchemaConstants.COLUMN_RACE_CODE,
-                SchemaConstants.COLUMN_RACE_NUM,
-                SchemaConstants.COLUMN_RACE_SEL,
-                SchemaConstants.COLUMN_DATE_TIME,
-                SchemaConstants.COLUMN_D_CHG_REQ,
-                SchemaConstants.COLUMN_NOTIFIED
+            SchemaConstants.COLUMN_ROWID,
+            SchemaConstants.COLUMN_CITY_CODE,
+            SchemaConstants.COLUMN_RACE_CODE,
+            SchemaConstants.COLUMN_RACE_NUM,
+            SchemaConstants.COLUMN_RACE_SEL,
+            SchemaConstants.COLUMN_DATE_TIME,
+            SchemaConstants.COLUMN_D_CHG_REQ,
+            SchemaConstants.COLUMN_NOTIFIED
         };
     }
 
     public static final String[] getMeetingListItemProjection() {
         return new String [] {
-                SchemaConstants.COLUMN_CITY_CODE,
-                SchemaConstants.COLUMN_RACE_CODE,
-                SchemaConstants.COLUMN_RACE_NUM,
-                SchemaConstants.COLUMN_RACE_SEL,
-                SchemaConstants.COLUMN_DATE_TIME,
-                SchemaConstants.COLUMN_D_CHG_REQ       // testing only.
+            SchemaConstants.COLUMN_CITY_CODE,
+            SchemaConstants.COLUMN_RACE_CODE,
+            SchemaConstants.COLUMN_RACE_NUM,
+            SchemaConstants.COLUMN_RACE_SEL,
+            SchemaConstants.COLUMN_DATE_TIME,
+            SchemaConstants.COLUMN_D_CHG_REQ       // testing only.
         };
     }
 
@@ -80,6 +80,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             SchemaConstants.COLUMN_ROWID,
             SchemaConstants.COLUMN_DATE_TIME,
             SchemaConstants.COLUMN_D_CHG_REQ
+        };
+    }
+
+    public static final String[] getNotifyProjection() {
+        return new String[] {
+            SchemaConstants.COLUMN_ROWID,
+            SchemaConstants.COLUMN_CITY_CODE,
+            SchemaConstants.COLUMN_RACE_CODE,
+            SchemaConstants.COLUMN_RACE_NUM,
+            SchemaConstants.COLUMN_RACE_SEL,
+            SchemaConstants.COLUMN_DATE_TIME
         };
     }
 

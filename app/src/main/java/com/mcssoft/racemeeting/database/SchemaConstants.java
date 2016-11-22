@@ -81,10 +81,15 @@ public class SchemaConstants {
              COLUMN_D_CHG_REQ + "," +
              " FROM " + DATABASE_TABLE;
 
-    // Select all records where a notificiation is required.
-    public final static String SELECT_ALL_NOTIFY =
-            SELECT_ALL +
-            " WHERE " + COLUMN_D_CHG_REQ + "='N'" +
-            " AND " + COLUMN_NOTIFIED + "='N'" +
-            " AND " + COLUMN_DATE_TIME + " BETWEEN ";
+//    // Select all records where a notificiation is required.
+//    public final static String SELECT_ALL_NOTIFY =
+//            SELECT_ALL +
+//            " WHERE " + COLUMN_D_CHG_REQ + "='N'" +
+//            " AND " + COLUMN_NOTIFIED + "='N'" +
+//            " AND " + COLUMN_DATE_TIME + " BETWEEN ";
+
+    public static final String WHERE_FOR_NOTIFY =
+            COLUMN_D_CHG_REQ + "='N' AND " +
+            COLUMN_NOTIFIED + "='N' AND " +
+            COLUMN_DATE_TIME + " BETWEEN ? AND ?";
 }

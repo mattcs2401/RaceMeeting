@@ -18,13 +18,13 @@ import com.mcssoft.racemeeting.utility.MeetingTime;
 
 public class ListingTask extends AsyncTask<JobParameters, Void, JobParameters> {
 
-	public ListingTask(ListingService jobSvc) {
+	public ListingTask(ListingService listingService) {
 		Log.d(LOG_TAG, "constructor");
-		this.jobSvc = jobSvc;
+		this.listingService = listingService;
 	}
 
-	@Override
-	public void onPreExecute() { }
+//	@Override
+//	public void onPreExecute() { }
 	
 	// Android dev:
 	// "The specified parameters are the parameters passed to execute(Params...) by the caller of this task." 
@@ -40,7 +40,7 @@ public class ListingTask extends AsyncTask<JobParameters, Void, JobParameters> {
 //            int size = jParams.length;  // what if this is > 1 ?
             for (JobParameters jp : jParams) {
                 result = jp;
-                Cursor cursor = jobSvc.getContentResolver()
+                Cursor cursor = listingService.getContentResolver()
                         .query(MeetingProvider.contentUri,
                                DatabaseHelper.getDChangeProjection(),
                                SchemaConstants.WHERE_FOR_DCHANGE,
@@ -53,7 +53,7 @@ public class ListingTask extends AsyncTask<JobParameters, Void, JobParameters> {
                         ContentValues cVals = new ContentValues();
                         cVals.put(SchemaConstants.COLUMN_D_CHG_REQ, "Y");
                         rowId = cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_ROWID));
-                        jobSvc.getContentResolver().update(ContentUris.withAppendedId(MeetingProvider.contentUri, rowId), cVals, null, null);
+                        listingService.getContentResolver().update(ContentUris.withAppendedId(MeetingProvider.contentUri, rowId), cVals, null, null);
 
                         if(updated == false) {
                             updated = true;
@@ -79,12 +79,12 @@ public class ListingTask extends AsyncTask<JobParameters, Void, JobParameters> {
     @Override
     protected void onPostExecute(JobParameters result) {
     	Log.d(LOG_TAG, "onPostExecute");
-        jobSvc.jobFinished(result, false);
-        jobSvc.onStopJob(result);
+        listingService.jobFinished(result, false);
+        listingService.onStopJob(result);
     }
 
     private boolean updated;
-	private JobService jobSvc;
+	private JobService listingService;
 
     private String LOG_TAG = this.getClass().getCanonicalName();
 }
