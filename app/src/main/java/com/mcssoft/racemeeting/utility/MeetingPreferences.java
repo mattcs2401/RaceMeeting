@@ -93,7 +93,7 @@ public class MeetingPreferences {
         prefVals = new String[2];
         prefVals[0] = PreferenceManager.getDefaultSharedPreferences(context)
                 .getString(MeetingConstants.TIME_PRIOR_PREF_KEY, null);
-        prefVals[1] = context.getResources().getStringArray(R.array.meetingPriorReminderTimeVals)[Integer.parseInt(prefVals[0])];
+        //prefVals[1] = context.getResources().getStringArray(R.array.meetingPriorReminderTimeVals)[Integer.parseInt(prefVals[0])];
         return prefVals;
     }
 

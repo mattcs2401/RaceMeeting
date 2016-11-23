@@ -55,7 +55,7 @@ public class NotifyService extends JobService {
             String sReminder = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
                     .getString(MeetingConstants.TIME_PRIOR_PREF_KEY, null);
 
-            String[] mprt = getResources().getStringArray(R.array.meetingPriorReminderTime);
+            String[] mprt = {}; //getResources().getStringArray(R.array.meetingPriorReminderTime);
 
             if(!sReminder.equals(mprt[0])) {
                 for(String s : mprt) {

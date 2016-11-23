@@ -49,13 +49,6 @@
             android:entries="@array/meetingPastRaceTimeVals"
             android:entryValues="@array/meetingPastRaceTime" />
 
-<!--        <ListPreference
-            android:title="@string/pref_time_prior_title"
-            android:summary="@string/pref_time_prior_summary"
-            android:key="@string/pref_time_prior_key"
-            android:defaultValue="@string/pref_time_prior_default"
-            android:entries="@array/meetingPriorReminderTimeVals"
-            android:entryValues="@array/meetingPriorReminderTime" /> -->
         <com.mcssoft.racemeeting.dialogs.PriorTimeDialog
             android:title="@string/pref_time_prior_title"
             android:summary="@string/pref_time_prior_summary"
