@@ -9,14 +9,18 @@ Issues:
 To Do:
 ------
 (in no particular order)
--> Fully implement the services and associated tasks.
+-> Review functionality of the notification service and associated task ()not working properly:
+   -> Multiple notifications.
+   -> Time when notifications are supposed to happen.
 -> Saved instance states, implement properly.
--> Rotation, have landscape view of main fragment left side and detail fragment right side.
+-> Rotation:
+   -> have landscape view of main fragment left side and detail fragment right side.
+   -> or simply lock to portrait.
 -> Determine if time is yesterday or today.
 -> What to do about a meeting entry from a previous day ?
 -> Image for left of listing item, e.g. if race code is R then image of horse.
 -> Format and style of DeleteDialog.
--> Swipe to delete ?
+-> Implement a swipe to delete ? Have an Undo ?
 -> Meeting Prior Reminder Time, maybe replace with spinner ?
 -> Start updating documentation, proper comments etc.
 
