@@ -37,8 +37,7 @@ public class PriorTimeDialog extends DialogPreference {
     @Override
     public void onClick(DialogInterface dialog, int which) {
         if(which == DialogInterface.BUTTON_POSITIVE) {
-            int value = numberPicker.getValue();
-            persistString(Integer.toString(value));
+            persistString(Integer.toString(numberPicker.getValue()));
         }
     }
 
