@@ -21,7 +21,6 @@ To Do:
 -> Image for left of listing item, e.g. if race code is R then image of horse.
 -> Format and style of DeleteDialog.
 -> Implement a swipe to delete ? Have an Undo ?
--> Meeting Prior Reminder Time, maybe replace with number picker ?
 -> Start updating documentation, proper comments etc.
 
 Usability:
