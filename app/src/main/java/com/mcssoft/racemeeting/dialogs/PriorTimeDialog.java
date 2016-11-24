@@ -17,9 +17,7 @@ public class PriorTimeDialog extends DialogPreference {
     public PriorTimeDialog(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
-
-        setPersistent(true);
-        setDialogLayoutResource(R.layout.dialog_prior_time);
+        initialise();
     }
 
     @Override
@@ -28,19 +26,31 @@ public class PriorTimeDialog extends DialogPreference {
         numberPicker = (NumberPicker) view.findViewById(R.id.id_prior_time_numberPicker);
         numberPicker.setMinValue(1);
         numberPicker.setMaxValue(10);
-
-        String prefVal = PreferenceManager.getDefaultSharedPreferences(context)
-                .getString(MeetingConstants.TIME_PRIOR_PREF_KEY, null);
-        numberPicker.setValue(Integer.parseInt(prefVal));
+        numberPicker.setValue(prefVal);
     }
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
         if(which == DialogInterface.BUTTON_POSITIVE) {
-            persistString(Integer.toString(numberPicker.getValue()));
+            persistInt(numberPicker.getValue());
         }
     }
 
+    private void initialise() {
+        setPersistent(true);
+        setDialogLayoutResource(R.layout.dialog_prior_time);
+
+        prefVal = PreferenceManager.getDefaultSharedPreferences(context)
+                .getInt(MeetingConstants.TIME_PRIOR_PREF_KEY, MeetingConstants.INIT_DEFAULT);
+
+        if(prefVal == MeetingConstants.INIT_DEFAULT) {
+            prefVal = MeetingConstants.TIME_PRIOR_PREF_DEFAULT;
+            PreferenceManager.getDefaultSharedPreferences(context)
+                    .edit().putInt(MeetingConstants.TIME_PRIOR_PREF_KEY, prefVal);
+        }
+    }
+
+    private int prefVal;
     private Context context;
     private NumberPicker numberPicker;
 }

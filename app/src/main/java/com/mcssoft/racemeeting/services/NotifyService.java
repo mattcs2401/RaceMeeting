@@ -51,10 +51,10 @@ public class NotifyService extends JobService {
         if(mainFragment != null) {
             Log.d(LOG_TAG, "onStartJob");
 
-            String sReminder = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
-                    .getString(MeetingConstants.TIME_PRIOR_PREF_KEY, null);
+            int iReminder = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                    .getInt(MeetingConstants.TIME_PRIOR_PREF_KEY, MeetingConstants.INIT_DEFAULT);
 
-            notifyTask = new NotifyTask(this, (Integer.parseInt(sReminder) * 1000)); //iReminder);
+            notifyTask = new NotifyTask(this, (iReminder * MeetingConstants.ONE_MINUTE));
             mainFragment.onReceivedStartJobNotify(jobParams.getExtras());
             notifyTask.execute(jobParams);
             retVal = true;

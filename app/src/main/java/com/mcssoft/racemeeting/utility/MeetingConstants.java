@@ -59,7 +59,7 @@ public class MeetingConstants {
 
     // Prior time preferences (settings) defaults.
     public static final String TIME_PRIOR_PREF_KEY = "time_prior_pref_key";
-    public static final int TIME_PRIOR_PREF_DEFAULT = 0; // == the "No reminder." preference.
+    public static final int TIME_PRIOR_PREF_DEFAULT = 3; // == the "No reminder." preference.
 
     // Past time preferences (settings) defaults.
     public static final String TIME_PAST_PREF_KEY = "time_past_pref_key";

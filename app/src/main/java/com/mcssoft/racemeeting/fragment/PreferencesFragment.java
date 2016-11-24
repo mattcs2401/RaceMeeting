@@ -111,8 +111,8 @@ public class PreferencesFragment extends PreferenceFragment
                 prefVal = meetingPreferences.meetingPastTimePref()[1];
                 Toast.makeText(getActivity(), "Past race time preference changed to '" + prefVal + "'.", Toast.LENGTH_SHORT).show();
             } else if (key.equals(MeetingConstants.TIME_PRIOR_PREF_KEY)) {
-                prefVal = meetingPreferences.meetingPriorTimePref();
-                Toast.makeText(getActivity(), "Prior reminder time preference changed to '" + prefVal + "'.", Toast.LENGTH_SHORT).show();
+                int val = meetingPreferences.meetingPriorTimePref();
+                Toast.makeText(getActivity(), "Prior reminder time preference changed to '" + val + "'.", Toast.LENGTH_SHORT).show();
             }
         }
     }

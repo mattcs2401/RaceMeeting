@@ -89,9 +89,9 @@ public class MeetingPreferences {
      * Get the details for the 'Meeting Prior Reminder Time' preference.
      * @return [0] preference (array) value, [1] preference text.
      */
-    public String meetingPriorTimePref() {
+    public int meetingPriorTimePref() {
         return PreferenceManager.getDefaultSharedPreferences(context)
-                .getString(MeetingConstants.TIME_PRIOR_PREF_KEY, null);
+                .getInt(R.string.pref_time_prior_key + "", MeetingConstants.INIT_DEFAULT);
     }
 
     /**
@@ -117,7 +117,6 @@ public class MeetingPreferences {
         if(prefsMap.isEmpty()) {
             // No SharedPreferences set yet. App has probably been uninstalled then re-installed
             // and/or cache and data cleared. Set the app preferences defaults.
-//            setDefaultValues();
             PreferenceManager.setDefaultValues(context, R.xml.meeting_preferences, false);
             prefsMap = PreferenceManager.getDefaultSharedPreferences(context).getAll();
         }
