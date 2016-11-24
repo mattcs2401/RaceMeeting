@@ -51,25 +51,13 @@ public class NotifyService extends JobService {
         if(mainFragment != null) {
             Log.d(LOG_TAG, "onStartJob");
 
-            int iReminder = MeetingConstants.INIT_DEFAULT;
             String sReminder = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
                     .getString(MeetingConstants.TIME_PRIOR_PREF_KEY, null);
 
-            String[] mprt = {}; //getResources().getStringArray(R.array.meetingPriorReminderTime);
-
-            if(!sReminder.equals(mprt[0])) {
-                for(String s : mprt) {
-                    if(s.equals(sReminder)) {
-                        iReminder = Integer.parseInt(sReminder) * 1000;   // milli seconds.
-                        break;
-                    }
-                }
-
-                notifyTask = new NotifyTask(this, iReminder);
-                mainFragment.onReceivedStartJobNotify(jobParams.getExtras());
-                notifyTask.execute(jobParams);
-                retVal = true;
-            }
+            notifyTask = new NotifyTask(this, (Integer.parseInt(sReminder) * 1000)); //iReminder);
+            mainFragment.onReceivedStartJobNotify(jobParams.getExtras());
+            notifyTask.execute(jobParams);
+            retVal = true;
         }
         return retVal;
     }

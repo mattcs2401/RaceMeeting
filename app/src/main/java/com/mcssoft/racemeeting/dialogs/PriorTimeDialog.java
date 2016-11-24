@@ -29,16 +29,16 @@ public class PriorTimeDialog extends DialogPreference {
         numberPicker.setMinValue(1);
         numberPicker.setMaxValue(10);
 
-        int value = PreferenceManager.getDefaultSharedPreferences(context)
-                .getInt(MeetingConstants.TIME_PRIOR_PREF_KEY , 0);
-        numberPicker.setValue(value);
+        String prefVal = PreferenceManager.getDefaultSharedPreferences(context)
+                .getString(MeetingConstants.TIME_PRIOR_PREF_KEY, null);
+        numberPicker.setValue(Integer.parseInt(prefVal));
     }
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
         if(which == DialogInterface.BUTTON_POSITIVE) {
             int value = numberPicker.getValue();
-            persistInt(value);
+            persistString(Integer.toString(value));
         }
     }
 

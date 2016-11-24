@@ -115,7 +115,6 @@ public class PreferencesFragment extends PreferenceFragment
                 Toast.makeText(getActivity(), "Prior reminder time preference changed to '" + prefVal + "'.", Toast.LENGTH_SHORT).show();
             }
         }
-        getActivity().setResult(MeetingConstants.PREFERENCES_CHANGED);
     }
 
     @Override

@@ -63,8 +63,7 @@ public class MainActivity extends AppCompatActivity
                 onEditMeeting(0, MeetingConstants.NEW_MEETING);
                 break;
             case R.id.toolbar_preference_settings:
-                Intent paIntent = new Intent(this, PreferencesActivity.class);
-                startActivityForResult(paIntent, MeetingConstants.PREFERENCES_ACTIVITY_REQUEST_CODE);
+                startActivity(new Intent(this, PreferencesActivity.class));
                 return true;
         }
         return super.onOptionsItemSelected(item);
