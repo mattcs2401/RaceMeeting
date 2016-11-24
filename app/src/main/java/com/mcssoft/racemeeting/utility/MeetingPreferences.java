@@ -89,12 +89,9 @@ public class MeetingPreferences {
      * Get the details for the 'Meeting Prior Reminder Time' preference.
      * @return [0] preference (array) value, [1] preference text.
      */
-    public String[] meetingPriorTimePref() {
-        prefVals = new String[2];
-        prefVals[0] = PreferenceManager.getDefaultSharedPreferences(context)
+    public String meetingPriorTimePref() {
+        return PreferenceManager.getDefaultSharedPreferences(context)
                 .getString(MeetingConstants.TIME_PRIOR_PREF_KEY, null);
-        //prefVals[1] = context.getResources().getStringArray(R.array.meetingPriorReminderTimeVals)[Integer.parseInt(prefVals[0])];
-        return prefVals;
     }
 
     /**
