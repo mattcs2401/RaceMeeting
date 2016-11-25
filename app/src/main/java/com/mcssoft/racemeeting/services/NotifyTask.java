@@ -36,12 +36,15 @@ public class NotifyTask extends AsyncTask<JobParameters, Void, JobParameters> {
 
             for (JobParameters jp : jParams) {
                 result = jp;
+
+                String sReminderTime = Long.toString(MeetingTime.getInstance().getTimeMinus(reminderTime));
+                String sCurrentTime = Long.toString(MeetingTime.getInstance().getTimeInMillis());
+
                 Cursor cursor = notifyService.getContentResolver()
                         .query(MeetingProvider.contentUri,
                                 DatabaseHelper.getNotifyProjection(),
                                 SchemaConstants.WHERE_FOR_NOTIFY,
-                                new String[] {Long.toString(MeetingTime.getInstance().getTimeMinus(reminderTime)),
-                                              Long.toString(MeetingTime.getInstance().getTimeInMillis())},
+                                new String[] {sReminderTime, sCurrentTime},
                                 null);
 
                 if (cursor.getCount() > 0) {

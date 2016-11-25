@@ -4,8 +4,7 @@ Issues:
 -------
 -> Recycler view last item not showing properly, bottom cut off.
 -> MeetingPreferences toolbar overlaying system icons, should be down a bit.
--> Logic flaw in how the difference between reminder time and race time is calculate:
-   -> If reminder time is say 4 minutes, and race time is 3 minutes past the hour.
+-> Logic flaw in how the difference between reminder time and race time is calculated.
 -> Crash. In a reminder, select review, in the Details screen select Edit.
 
 ------
