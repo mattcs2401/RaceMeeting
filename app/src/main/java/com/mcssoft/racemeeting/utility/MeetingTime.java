@@ -147,7 +147,9 @@ public class MeetingTime {
         calendar = Calendar.getInstance(Locale.getDefault());
         int minute = calendar.get(calendar.MINUTE);
 
-        minute = minute - (minusTime / 1000);
+        // TBA - possible logic flaw here if 'minute' ends up a minus value.
+        minute = (minute - minusTime);
+
         calendar.set(Calendar.MINUTE, minute);
 
         return calendar.getTimeInMillis();
