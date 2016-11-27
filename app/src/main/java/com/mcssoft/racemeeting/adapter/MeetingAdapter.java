@@ -17,7 +17,7 @@ import mcssoft.com.racemeeting3.R;
 
 public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
 
-    public MeetingAdapter() { }
+//    public MeetingAdapter() { }
 
     @Override
     public MeetingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -93,11 +93,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
         String raceTime = MeetingTime.getInstance().getFormattedTimeFromMillis(cursor.getLong(dateTimeColNdx));
         holder.getRaceTime().setText(raceTime);
 
-        String dChangeReq = cursor.getString(chgReqColNdx);
-        holder.getDChange().setText(dChangeReq);
-
-        if (dChangeReq.equals("Y")) {
-//            holder.itemView.setBackgroundResource(R.drawable.et_basic);
+        if(cursor.getString(chgReqColNdx).equals("Y")) {
             holder.getCityCode().setTextColor(Color.RED);
             holder.getRaceCode().setTextColor(Color.RED);
             holder.getRaceNo().setTextColor(Color.RED);
@@ -105,7 +101,6 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
             holder.getRaceTime().setTextColor(Color.RED);
 
         } else {
-//            holder.itemView.setBackgroundResource(0);
             holder.getCityCode().setTextColor(Color.BLACK);
             holder.getRaceCode().setTextColor(Color.BLACK);
             holder.getRaceNo().setTextColor(Color.BLACK);
@@ -117,9 +112,6 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
     private View view;
     private Cursor cursor;
 
-    private IItemClickListener itemClickListener;
-    private IItemLongClickListener itemLongClickListener;
-
     private int idColNdx;
     private int cityCodeColNdx;
     private int raceCodeColNdx;
@@ -127,6 +119,9 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
     private int raceSelColNdx;
     private int dateTimeColNdx;
     private int chgReqColNdx;
+
+    private IItemClickListener itemClickListener;
+    private IItemLongClickListener itemLongClickListener;
 
     private String LOG_TAG = this.getClass().getCanonicalName();
 }

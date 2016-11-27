@@ -52,23 +52,23 @@ public class SchemaConstants {
 
     public static final String SORT_ORDER = COLUMN_DATE_TIME + " ASC, " + COLUMN_RACE_SEL;
 
-    // Partial select, get all records where a display change is required.
+    // Where a display change is required.
     public final static String WHERE_FOR_DCHANGE =
             SchemaConstants.COLUMN_D_CHG_REQ + " = ? AND " +
             SchemaConstants.COLUMN_DATE_TIME + " < ?";
 
-    // Select all.
-    public static final String SELECT_ALL =
-            "SELECT " +
-            COLUMN_ROWID + "," +
-            COLUMN_CITY_CODE + "," +
-            COLUMN_RACE_CODE + "," +
-            COLUMN_RACE_NUM + "," +
-            COLUMN_RACE_SEL + "," +
-            COLUMN_DATE_TIME + "," +
-            COLUMN_D_CHG_REQ + "," +
-            COLUMN_NOTIFIED +
-            " FROM " + DATABASE_TABLE;
+//    // Select all.
+//    public static final String SELECT_ALL =
+//            "SELECT " +
+//            COLUMN_ROWID + "," +
+//            COLUMN_CITY_CODE + "," +
+//            COLUMN_RACE_CODE + "," +
+//            COLUMN_RACE_NUM + "," +
+//            COLUMN_RACE_SEL + "," +
+//            COLUMN_DATE_TIME + "," +
+//            COLUMN_D_CHG_REQ + "," +
+//            COLUMN_NOTIFIED +
+//            " FROM " + DATABASE_TABLE;
 
     // marries with DatabaseHelper.getMeetingListItemProjection.
     public static final String SELECT_ALL_MLI =
