@@ -21,21 +21,16 @@ import android.util.Log;
 
 public class ListingService extends JobService {
 
-//	public ListingService() { }
-
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(LOG_TAG, "onStartComand");
 
         // the messenger object is effectively a reference to the handler in the MainFragment.
         Messenger messenger = intent.getParcelableExtra(MeetingConstants.LISTING_SERVICE_HANDLER);
-
         // Dev doco: ... the best way to get one of these is to call Message.obtain()
         Message message = Message.obtain();
-
         //Dev doco: User-defined message code so that the recipient can identify what this message is about.
         message.what = MeetingConstants.MSG_LISTING_SERVICE;
-
         // Dev doco: An arbitrary object to send to the recipient.
         message.obj = this;
 
@@ -44,7 +39,6 @@ public class ListingService extends JobService {
         } catch (RemoteException e) {
             throw new IllegalStateException(R.string.listing_service_exception + "");
         }
-
         return START_NOT_STICKY;
     }
 
@@ -54,7 +48,7 @@ public class ListingService extends JobService {
             return false;
         } else {
             Log.d(LOG_TAG, "onStartJob");
-            listingTask = new ListingTask(this);
+            ListingTask listingTask = new ListingTask(this);
             mainFragment.onReceivedStartJobListing(jobParams.getExtras());
             listingTask.execute(jobParams);
             return true;
@@ -80,20 +74,14 @@ public class ListingService extends JobService {
     public boolean scheduleJob(JobInfo jobInfo) {
         Log.d(LOG_TAG, "scheduleJob");
         JobScheduler jobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
-        if(jobScheduler.schedule(jobInfo) == JobScheduler.RESULT_SUCCESS) {
-            return true;
-        } else {
-            return false;
-        }
+        return (jobScheduler.schedule(jobInfo) == JobScheduler.RESULT_SUCCESS);
     }
 
     public void setUiCallback(MainFragment mainFragment) {
         this.mainFragment = mainFragment;
     }
 
-    private ListingTask listingTask;
     private MainFragment mainFragment;
 
     private String LOG_TAG = this.getClass().getCanonicalName();
-
 }
