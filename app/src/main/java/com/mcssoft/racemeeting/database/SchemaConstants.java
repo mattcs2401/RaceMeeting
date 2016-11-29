@@ -66,6 +66,7 @@ public class SchemaConstants {
              COLUMN_RACE_SEL + "," +
              COLUMN_DATE_TIME + "," +
              COLUMN_D_CHG_REQ + "," +
+             COLUMN_NOTIFIED +
              " FROM " + DATABASE_TABLE;
 
     public static final String WHERE_FOR_NOTIFY =

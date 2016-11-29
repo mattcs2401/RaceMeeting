@@ -71,7 +71,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             SchemaConstants.COLUMN_RACE_NUM,
             SchemaConstants.COLUMN_RACE_SEL,
             SchemaConstants.COLUMN_DATE_TIME,
-            SchemaConstants.COLUMN_D_CHG_REQ       // testing only.
+            SchemaConstants.COLUMN_D_CHG_REQ,
+            SchemaConstants.COLUMN_NOTIFIED
         };
     }
 

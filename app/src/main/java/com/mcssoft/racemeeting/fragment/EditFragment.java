@@ -191,7 +191,8 @@ public class EditFragment extends Fragment
         String time = MeetingTime.getInstance().getFormattedTimeFromMillis(timeInMillis);
         etRaceTime.setText(time.replace("am","").replace("pm",""));
 
-        dChange = cursor.getString(cursor.getColumnIndexOrThrow(SchemaConstants.COLUMN_D_CHG_REQ));
+        dispChgReq = cursor.getString(cursor.getColumnIndexOrThrow(SchemaConstants.COLUMN_D_CHG_REQ));
+        notified = cursor.getString(cursor.getColumnIndexOrThrow(SchemaConstants.COLUMN_NOTIFIED));
 
         if(editAction.equals(MeetingConstants.EDIT_ACTION_COPY)) {
             setCache();
@@ -339,9 +340,16 @@ public class EditFragment extends Fragment
             }
         } else if(editAction.equals(MeetingConstants.EDIT_ACTION_EXISTING)) {
 
-            if ((timeInMillis > MeetingTime.getInstance().getTimeInMillis()) && (dChange.equals("Y"))) {
+            // reset display change required.
+            if ((timeInMillis > MeetingTime.getInstance().getTimeInMillis()) && (dispChgReq.equals("Y"))) {
                 contentValues.put(SchemaConstants.COLUMN_D_CHG_REQ, "N");
             }
+
+            // reset notify required.
+            if ((timeInMillis > MeetingTime.getInstance().getTimeInMillis()) && (notified.equals("Y"))) {
+                contentValues.put(SchemaConstants.COLUMN_NOTIFIED, "N");
+            }
+
             dbRowId = getArguments().getLong(MeetingConstants.EDIT_EXISTING);
             int count = getActivity().getContentResolver()
                     .update(ContentUris.withAppendedId(MeetingProvider.contentUri, dbRowId), contentValues, null, null);
@@ -489,7 +497,8 @@ public class EditFragment extends Fragment
     private ActionBar actionBar;
 
     private long timeInMillis;         // time in milli sec.
-    private String dChange;            // display change required flag.
+    private String dispChgReq;            // display change required flag.
+    private String notified;
     private String editAction;       // activity action tag.
 
     private String LOG_TAG = this.getClass().getCanonicalName();
