@@ -2,7 +2,10 @@ package com.mcssoft.racemeeting.services;
 
 import android.app.job.JobParameters;
 import android.app.job.JobService;
+import android.content.ContentUris;
+import android.content.ContentValues;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -22,9 +25,6 @@ public class NotifyTask extends AsyncTask<JobParameters, Void, JobParameters> {
         this.reminderTime = reminderTime;
 	}
 
-//	@Override
-//	public void onPreExecute() { }
-
 	@Override
     /* Method just runs a query and returns any result in the extras. */
     protected JobParameters doInBackground(JobParameters... jParams) {
@@ -37,44 +37,22 @@ public class NotifyTask extends AsyncTask<JobParameters, Void, JobParameters> {
             for (JobParameters jp : jParams) {
                 result = jp;
 
-                Cursor cursor = notifyService.getContentResolver()
-                        .query(MeetingProvider.contentUri,
-                                DatabaseHelper.getNotifyProjection(),
-                                SchemaConstants.WHERE_FOR_NOTIFY,
-                                null,
-                                null);
+                cursor = doGetCursor();
 
                 if (cursor.getCount() > 0) {
-
-                    int cols = cursor.getColumnCount();
-                    String[] row = null;
+                    String [] row = null;
 
                     while (cursor.moveToNext()) {
-                        long lRaceTime = cursor.getLong(cursor.getColumnIndex(SchemaConstants.COLUMN_DATE_TIME));
-                        String sRaceTime = MeetingTime.getInstance().getFormattedTimeFromMillis(lRaceTime);     // testing
-                        long lNotifyTime = MeetingTime.getInstance().getTimeMinus(reminderTime);
-                        String sNotifyTime = MeetingTime.getInstance().getFormattedTimeFromMillis(lNotifyTime); // testing
-                        long lCurrentTime = MeetingTime.getInstance().getTimeInMillis();
-                        String sCurrentTime = MeetingTime.getInstance().getFormattedTimeFromMillis(lCurrentTime);// testing
-
-                        if((lCurrentTime > lNotifyTime) && (lCurrentTime < lRaceTime)) {
-                            row = new String[cols];
-
-                            row[0] = Integer.toString(cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_ROWID)));
-                            row[1] = cursor.getString(cursor.getColumnIndex(SchemaConstants.COLUMN_CITY_CODE));
-                            row[2] = cursor.getString(cursor.getColumnIndex(SchemaConstants.COLUMN_RACE_CODE));
-                            row[3] = Integer.toString(cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_RACE_NUM)));
-                            row[4] = Integer.toString(cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_RACE_SEL)));
-                            row[5] = Long.toString(cursor.getLong(cursor.getColumnIndex(SchemaConstants.COLUMN_DATE_TIME)));
-
-                            result.getExtras().putStringArray(row[0], row);     // key is column id as string.
-                        } // end if
-                    } // end while
-                    if(row != null) {
-                        result.getExtras().putInt(MeetingConstants.NOTIFY_REQUIRED_KEY, MeetingConstants.NOTIFY_REQUIRED);
+                        if(doCriteriaCheck()) {
+                            row = doCollateValues();
+                            result.getExtras().putStringArray(row[0], row); // key is column id as string.
+                            doUpdateCursor(row[0]); // set Notified flag.
+                        }
                     }
-                } else {
-                    result.getExtras().putInt(MeetingConstants.NOTIFY_REQUIRED_KEY, 0); //MeetingConstants.INIT_DEFAULT);
+                    if(row != null) {
+                        result.getExtras().putInt(MeetingConstants.NOTIFY_REQUIRED_KEY,
+                                                  MeetingConstants.NOTIFY_REQUIRED);
+                    }
                 }
                 cursor.close();
             }
@@ -91,10 +69,56 @@ public class NotifyTask extends AsyncTask<JobParameters, Void, JobParameters> {
         notifyService.onStopJob(result);
     }
 
+    //<editor-fold defaultstate="collapsed" desc="Region: Utility">
+
+    // Note: These methods are just basically snippets of functionality to make the doInBackground
+    // method easier to read/debug.
+
+    private void doUpdateCursor(String rowId) {
+        Uri uri = ContentUris.withAppendedId(MeetingProvider.contentUri, Long.parseLong(rowId));
+        ContentValues cVals = new ContentValues();
+        cVals.put(SchemaConstants.COLUMN_NOTIFIED, "Y");
+        notifyService.getContentResolver().update(uri, cVals, null, null);
+    }
+
+    private String [] doCollateValues() {
+        return new String [] {
+                Integer.toString(cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_ROWID))),
+                cursor.getString(cursor.getColumnIndex(SchemaConstants.COLUMN_CITY_CODE)),
+                cursor.getString(cursor.getColumnIndex(SchemaConstants.COLUMN_RACE_CODE)),
+                Integer.toString(cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_RACE_NUM))),
+                Integer.toString(cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_RACE_SEL))),
+                Long.toString(cursor.getLong(cursor.getColumnIndex(SchemaConstants.COLUMN_DATE_TIME)))};
+    }
+
+    private boolean doCriteriaCheck() {
+        long lRaceTime = cursor.getLong(cursor.getColumnIndex(SchemaConstants.COLUMN_DATE_TIME));
+//        String sRaceTime = MeetingTime.getInstance().getFormattedTimeFromMillis(lRaceTime);      // testing
+        long lNotifyTime = MeetingTime.getInstance().getTimeMinus(reminderTime);
+//        String sNotifyTime = MeetingTime.getInstance().getFormattedTimeFromMillis(lNotifyTime);  // testing
+        long lCurrentTime = MeetingTime.getInstance().getTimeInMillis();
+//        String sCurrentTime = MeetingTime.getInstance().getFormattedTimeFromMillis(lCurrentTime);// testing
+
+        return ((lCurrentTime > lNotifyTime) && (lCurrentTime < lRaceTime));
+    }
+
+    private Cursor doGetCursor() {
+        return notifyService.getContentResolver()
+                .query(MeetingProvider.contentUri,
+                       DatabaseHelper.getNotifyProjection(),
+                       SchemaConstants.WHERE_FOR_NOTIFY,
+                       null,
+                       null);
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Region: Private vars">
     private int reminderTime;     // prior reminder time (from preferences) in mSec.
+    private Cursor cursor;
 	private JobService notifyService;
 
     private String LOG_TAG = this.getClass().getCanonicalName();
+    //</editor-fold>
 }
 /*
 Android dev: AsyncTask's generic types:
