@@ -63,7 +63,7 @@ public class DeleteDialog extends DialogFragment implements View.OnClickListener
     private void initialiseComponents() {
         Uri contentUri = ContentUris.withAppendedId(MeetingProvider.contentUri, rowId);
         Cursor cursor =  getActivity().getContentResolver()
-                .query(contentUri, DatabaseHelper.getMeetingListItemProjection(),
+                .query(contentUri, DatabaseHelper.getProjection(DatabaseHelper.Projection.MeetingListItem),
                        SchemaConstants.SELECT_ALL_MLI, new String[] {Long.toString(rowId)}, null);
 
         String cityCode = cursor.getString(cursor.getColumnIndexOrThrow(SchemaConstants.COLUMN_CITY_CODE));

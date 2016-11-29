@@ -42,7 +42,7 @@ public class ListingTask extends AsyncTask<JobParameters, Void, JobParameters> {
                 result = jp;
                 Cursor cursor = listingService.getContentResolver()
                         .query(MeetingProvider.contentUri,
-                               DatabaseHelper.getDChangeProjection(),
+                               DatabaseHelper.getProjection(DatabaseHelper.Projection.DChange),
                                SchemaConstants.WHERE_FOR_DCHANGE,
                                new String[] {"N", Long.toString(MeetingTime.getInstance().getTimeInMillis())},
                                null);

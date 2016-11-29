@@ -105,7 +105,7 @@ public class NotifyTask extends AsyncTask<JobParameters, Void, JobParameters> {
     private Cursor doGetCursor() {
         return notifyService.getContentResolver()
                 .query(MeetingProvider.contentUri,
-                       DatabaseHelper.getNotifyProjection(),
+                       DatabaseHelper.getProjection(DatabaseHelper.Projection.Notify),
                        SchemaConstants.WHERE_FOR_NOTIFY,
                        null,
                        null);

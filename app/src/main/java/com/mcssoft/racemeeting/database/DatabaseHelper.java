@@ -9,13 +9,12 @@ import android.util.Log;
 import android.widget.Toast;
 
 /**
- *
+ * Database utility class.
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public DatabaseHelper(Context context) {
         super(context, SchemaConstants.DATABASE_NAME, null, SchemaConstants.DATABASE_VERSION);
-        this.context = context;
     }
 
     @Override
@@ -28,17 +27,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.execSQL(SchemaConstants.DATABASE_CREATE);
             db.setTransactionSuccessful();
         } catch(SQLException sqle) {
-            Toast.makeText(context, sqle.getMessage(), Toast.LENGTH_LONG);
             Log.d(LOG_TAG, "Exception thrown on database create: " + sqle.getMessage());
         } finally {
             db.endTransaction();
         }
-    }
-
-    // This method really only so we can do a rawQuery().
-    @Override
-    public SQLiteDatabase getWritableDatabase() {
-        return super.getWritableDatabase();
     }
 
     @Override
@@ -47,11 +39,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + SchemaConstants.DATABASE_NAME + "." + SchemaConstants.DATABASE_TABLE + ";");
     }
 
-    public Cursor rawQuery(String query, String[] selectionArgs) {
-        return getWritableDatabase().rawQuery(query, selectionArgs);
+    public enum Projection {
+        DatabaseSchema, MeetingListItem, DChange, Notify
     }
 
-    public static final String[] getDatabaseSchemaProjection() {
+    public static String [] getProjection(Projection projection) {
+        switch (projection) {
+            case DatabaseSchema:
+                return getDatabaseSchemaProjection();
+            case MeetingListItem:
+                return getMeetingListItemProjection();
+            case DChange:
+                return getDChangeProjection();
+            case Notify:
+                return getNotifyProjection();
+        }
+        return  null;
+    }
+
+    private static final String[] getDatabaseSchemaProjection() {
         return new String[] {
             SchemaConstants.COLUMN_ROWID,
             SchemaConstants.COLUMN_CITY_CODE,
@@ -64,7 +70,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         };
     }
 
-    public static final String[] getMeetingListItemProjection() {
+    private static final String[] getMeetingListItemProjection() {
         return new String [] {
             SchemaConstants.COLUMN_CITY_CODE,
             SchemaConstants.COLUMN_RACE_CODE,
@@ -76,7 +82,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         };
     }
 
-    public static final String [] getDChangeProjection () {
+    private static final String [] getDChangeProjection () {
         return new String[] {
             SchemaConstants.COLUMN_ROWID,
             SchemaConstants.COLUMN_DATE_TIME,
@@ -84,7 +90,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         };
     }
 
-    public static final String[] getNotifyProjection() {
+    private static final String[] getNotifyProjection() {
         return new String[] {
             SchemaConstants.COLUMN_ROWID,
             SchemaConstants.COLUMN_CITY_CODE,
@@ -95,6 +101,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         };
     }
 
-    private Context context;
     private String LOG_TAG = this.getClass().getCanonicalName();
 }

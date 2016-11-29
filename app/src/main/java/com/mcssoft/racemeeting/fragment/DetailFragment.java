@@ -79,7 +79,7 @@ public class DetailFragment extends Fragment
         Uri contentUri = ContentUris.withAppendedId(MeetingProvider.contentUri, rowId);
         return new CursorLoader(getActivity(),
                 contentUri,
-                DatabaseHelper.getMeetingListItemProjection(),
+                DatabaseHelper.getProjection(DatabaseHelper.Projection.MeetingListItem),
                 SchemaConstants.SELECT_ALL_MLI,
                 new String[] {Long.toString(rowId)},
                 null);

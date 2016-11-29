@@ -171,7 +171,7 @@ public class EditFragment extends Fragment
 
         return new CursorLoader(getActivity(),
                 contentUri,
-                DatabaseHelper.getMeetingListItemProjection(),
+                DatabaseHelper.getProjection(DatabaseHelper.Projection.MeetingListItem),
                 SchemaConstants.SELECT_ALL_MLI,
                 new String[] {Long.toString(dbRowId)},
                 null);

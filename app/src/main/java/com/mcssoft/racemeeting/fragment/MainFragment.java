@@ -196,7 +196,7 @@ public class MainFragment extends Fragment
         Log.d(LOG_TAG, "onCreateLoader");
         return new CursorLoader(getActivity(),
                 MeetingProvider.contentUri,
-                DatabaseHelper.getDatabaseSchemaProjection(),
+                DatabaseHelper.getProjection(DatabaseHelper.Projection.DatabaseSchema),
                 null,
                 null,
                 null);
@@ -245,7 +245,7 @@ public class MainFragment extends Fragment
     private Cursor queryAll() {
         return getActivity().getContentResolver()
                 .query(Uri.parse(SchemaConstants.CONTENT_URI),
-                        DatabaseHelper.getDatabaseSchemaProjection(),
+                        DatabaseHelper.getProjection(DatabaseHelper.Projection.DatabaseSchema),
                         null,
                         null,
                         SchemaConstants.SORT_ORDER);
