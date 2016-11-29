@@ -37,37 +37,45 @@ public class NotifyTask extends AsyncTask<JobParameters, Void, JobParameters> {
             for (JobParameters jp : jParams) {
                 result = jp;
 
-                String sReminderTime = Long.toString(MeetingTime.getInstance().getTimeMinus(reminderTime));
-                String sCurrentTime = Long.toString(MeetingTime.getInstance().getTimeInMillis());
-
                 Cursor cursor = notifyService.getContentResolver()
                         .query(MeetingProvider.contentUri,
                                 DatabaseHelper.getNotifyProjection(),
                                 SchemaConstants.WHERE_FOR_NOTIFY,
-                                new String[] {sReminderTime, sCurrentTime},
+                                null,
                                 null);
 
                 if (cursor.getCount() > 0) {
+
                     int cols = cursor.getColumnCount();
-                    String[] row = new String[cols];
+                    String[] row = null;
 
-                    result.getExtras().putInt(MeetingConstants.NOTIFY_REQUIRED_KEY, MeetingConstants.NOTIFY_REQUIRED);
                     while (cursor.moveToNext()) {
+                        long lRaceTime = cursor.getLong(cursor.getColumnIndex(SchemaConstants.COLUMN_DATE_TIME));
+                        String sRaceTime = MeetingTime.getInstance().getFormattedTimeFromMillis(lRaceTime);     // testing
+                        long lNotifyTime = MeetingTime.getInstance().getTimeMinus(reminderTime);
+                        String sNotifyTime = MeetingTime.getInstance().getFormattedTimeFromMillis(lNotifyTime); // testing
+                        long lCurrentTime = MeetingTime.getInstance().getTimeInMillis();
+                        String sCurrentTime = MeetingTime.getInstance().getFormattedTimeFromMillis(lCurrentTime);// testing
 
-                        row[0] = Integer.toString(cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_ROWID)));
-                        row[1] = cursor.getString(cursor.getColumnIndex(SchemaConstants.COLUMN_CITY_CODE));
-                        row[2] = cursor.getString(cursor.getColumnIndex(SchemaConstants.COLUMN_RACE_CODE));
-                        row[3] = Integer.toString(cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_RACE_NUM)));
-                        row[4] = Integer.toString(cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_RACE_SEL)));
-                        row[5] = Long.toString(cursor.getLong(cursor.getColumnIndex(SchemaConstants.COLUMN_DATE_TIME)));
+                        if((lCurrentTime > lNotifyTime) && (lCurrentTime < lRaceTime)) {
+                            row = new String[cols];
 
-                        result.getExtras().putStringArray(row[0], row);     // key is column id as string.
-                        row = new String[cols];
+                            row[0] = Integer.toString(cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_ROWID)));
+                            row[1] = cursor.getString(cursor.getColumnIndex(SchemaConstants.COLUMN_CITY_CODE));
+                            row[2] = cursor.getString(cursor.getColumnIndex(SchemaConstants.COLUMN_RACE_CODE));
+                            row[3] = Integer.toString(cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_RACE_NUM)));
+                            row[4] = Integer.toString(cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_RACE_SEL)));
+                            row[5] = Long.toString(cursor.getLong(cursor.getColumnIndex(SchemaConstants.COLUMN_DATE_TIME)));
+
+                            result.getExtras().putStringArray(row[0], row);     // key is column id as string.
+                        } // end if
+                    } // end while
+                    if(row != null) {
+                        result.getExtras().putInt(MeetingConstants.NOTIFY_REQUIRED_KEY, MeetingConstants.NOTIFY_REQUIRED);
                     }
                 } else {
                     result.getExtras().putInt(MeetingConstants.NOTIFY_REQUIRED_KEY, 0); //MeetingConstants.INIT_DEFAULT);
                 }
-
                 cursor.close();
             }
         }

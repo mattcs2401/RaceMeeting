@@ -24,7 +24,7 @@ public class PriorTimeDialog extends DialogPreference {
     protected void onBindDialogView(View view) {
         super.onBindDialogView(view);
         numberPicker = (NumberPicker) view.findViewById(R.id.id_prior_time_numberPicker);
-        numberPicker.setMinValue(1);
+        numberPicker.setMinValue(0);
         numberPicker.setMaxValue(10);
         numberPicker.setValue(prefVal);
     }
@@ -39,6 +39,7 @@ public class PriorTimeDialog extends DialogPreference {
     private void initialise() {
         setPersistent(true);
         setDialogLayoutResource(R.layout.dialog_prior_time);
+        setDialogMessage("A value of 0 means no reminder,");
 
         prefVal = PreferenceManager.getDefaultSharedPreferences(context)
                 .getInt(MeetingConstants.TIME_PRIOR_PREF_KEY, MeetingConstants.INIT_DEFAULT);

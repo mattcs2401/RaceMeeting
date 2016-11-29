@@ -57,19 +57,6 @@ public class SchemaConstants {
             SchemaConstants.COLUMN_D_CHG_REQ + " = ? AND " +
             SchemaConstants.COLUMN_DATE_TIME + " < ?";
 
-//    // Select all.
-//    public static final String SELECT_ALL =
-//            "SELECT " +
-//            COLUMN_ROWID + "," +
-//            COLUMN_CITY_CODE + "," +
-//            COLUMN_RACE_CODE + "," +
-//            COLUMN_RACE_NUM + "," +
-//            COLUMN_RACE_SEL + "," +
-//            COLUMN_DATE_TIME + "," +
-//            COLUMN_D_CHG_REQ + "," +
-//            COLUMN_NOTIFIED +
-//            " FROM " + DATABASE_TABLE;
-
     // marries with DatabaseHelper.getMeetingListItemProjection.
     public static final String SELECT_ALL_MLI =
             "SELECT " +
@@ -82,7 +69,5 @@ public class SchemaConstants {
              " FROM " + DATABASE_TABLE;
 
     public static final String WHERE_FOR_NOTIFY =
-//            COLUMN_D_CHG_REQ + "='N' AND " +
-            COLUMN_NOTIFIED + "='N' AND " +
-            COLUMN_DATE_TIME + " BETWEEN ? AND ?";
+            COLUMN_NOTIFIED + "='N'";
 }

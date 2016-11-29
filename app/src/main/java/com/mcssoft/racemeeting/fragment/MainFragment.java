@@ -89,6 +89,7 @@ public class MainFragment extends Fragment
     }
     //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Region: Job Start/Stop">
     public void onReceivedStartJobListing(PersistableBundle bundle) {
         // TBA
         //Toast.makeText(getActivity(), "onReceivedStartJobListing", Toast.LENGTH_SHORT).show();
@@ -154,6 +155,7 @@ public class MainFragment extends Fragment
             }
         }
     }
+    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Click handlers">
     @Override
@@ -265,7 +267,7 @@ public class MainFragment extends Fragment
                 if (action != MeetingConstants.TIME_PRIOR_PREF_DEFAULT) {
                     meetingScheduler.startService(MeetingConstants.NOTIFY_SERVICE, action);
                 } else {
-                    // "No reminder." preference is selected.
+                    // No reminder is selected.
                     if (meetingScheduler.isSvcRunning(MeetingConstants.NOTIFY_SERVICE)) {
                         meetingScheduler.cancelJobs(MeetingConstants.NOTIFY_SERVICE);
                     }
