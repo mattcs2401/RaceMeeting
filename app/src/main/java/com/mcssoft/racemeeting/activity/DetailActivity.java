@@ -22,6 +22,8 @@ public class DetailActivity extends AppCompatActivity implements IEditMeeting {
         setContentView(R.layout.activity_detail); // <-- simple FrameLayout
 
         Bundle args = getIntent().getExtras();
+        if(args.isEmpty()) { } // trial and error ?? required if this is called from a Notification.
+
         detailFragment = new DetailFragment();
 
         if (savedInstanceState == null) {

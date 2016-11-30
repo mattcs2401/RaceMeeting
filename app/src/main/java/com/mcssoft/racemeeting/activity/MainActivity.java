@@ -181,15 +181,12 @@ public class MainActivity extends AppCompatActivity
     // https://developer.android.com/reference/android/app/Notification.Action.Builder.html
     private Notification.Action getNotificationAction(ArrayList<String[]> notifyValues) {
 
-        Bundle bundle = new Bundle();
-        bundle.putStringArray(MeetingConstants.REVIEW_VALUES_KEY, notifyValues.get(0));
-
         Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtras(bundle);
+        intent.putExtra(MeetingConstants.SHOW_SUMMARY, Long.parseLong((notifyValues.get(0)[0])));
 
         PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
 
-        Notification.Action.Builder builder = new Notification.Action.Builder(0, "Review", pIntent);
+        Notification.Action.Builder builder = new Notification.Action.Builder(0, "Detail", pIntent);
         return builder.build();
     }
     //</editor-fold>

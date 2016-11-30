@@ -90,10 +90,7 @@ public class MainFragment extends Fragment
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Job Start/Stop">
-    public void onReceivedStartJobListing(PersistableBundle bundle) {
-        // TBA
-        //Toast.makeText(getActivity(), "onReceivedStartJobListing", Toast.LENGTH_SHORT).show();
-    }
+    public void onReceivedStartJobListing(PersistableBundle bundle) { }
 
     public void onReceivedStopJobListing(PersistableBundle results) {
         Toast.makeText(getActivity(), "onReceivedStopJobListing", Toast.LENGTH_SHORT).show();
@@ -109,29 +106,9 @@ public class MainFragment extends Fragment
                 getLoaderManager().restartLoader(0, null, this);
             }
         }
-
-        if(keys.contains(MeetingConstants.PRIOR_TIME_JOB_KEY)) {
-            if(results.getInt(MeetingConstants.NOTIFY_REQUIRED_KEY) == MeetingConstants.NOTIFY_REQUIRED) {
-
-                // strip out the "non race value" keys.
-                keys.remove(MeetingConstants.PRIOR_TIME_JOB_KEY);
-                keys.remove(MeetingConstants.NOTIFY_REQUIRED_KEY);
-
-                ArrayList<String[]> al = new ArrayList<>();
-
-                for(String key : keys) {
-                    al.add(results.getStringArray(key));
-                }
-
-                ((INotifier) getActivity()).onNotify(al);
-            }
-        }
     }
 
-    public void onReceivedStartJobNotify(PersistableBundle bundle) {
-        // TBA
-        //Toast.makeText(getActivity(), "onReceivedStartJobListing", Toast.LENGTH_SHORT).show();
-    }
+    public void onReceivedStartJobNotify(PersistableBundle bundle) { }
 
     public void onReceivedStopJobNotify(PersistableBundle results) {
         // The notify service returns back to here when the notify task is done.
