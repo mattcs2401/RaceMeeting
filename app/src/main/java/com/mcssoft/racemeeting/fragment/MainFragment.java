@@ -203,7 +203,7 @@ public class MainFragment extends Fragment
         recyclerView.addItemDecoration(new ListingDivider(getActivity(), LinearLayoutManager.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        meetingAdapter = new MeetingAdapter();
+        meetingAdapter = new MeetingAdapter(getActivity().getApplicationContext());
         meetingAdapter.setOnItemClickListener(this);
         meetingAdapter.setOnItemLongClickListener(this);
         recyclerView.setAdapter(meetingAdapter);
