@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,7 +20,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.mcssoft.racemeeting.adapter.MeetingAdapter;
 import com.mcssoft.racemeeting.database.DatabaseHelper;
@@ -33,7 +33,6 @@ import com.mcssoft.racemeeting.interfaces.INotifier;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingPreferences;
 import com.mcssoft.racemeeting.utility.MeetingScheduler;
-import com.mcssoft.racemeeting.utility.MeetingTime;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -55,10 +54,12 @@ public class MainFragment extends Fragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        Log.d(LOG_TAG, "onCreateView");
+        rootView = inflater.inflate(R.layout.fragment_main, container, false);
         Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.id_toolbar_frag_main);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        setRecyclerView(rootView);
+
+        setMeetingAdapter();
         return rootView;
     }
 
@@ -72,6 +73,8 @@ public class MainFragment extends Fragment
     public void onStart() {
         Log.d(LOG_TAG, "onStart");
         super.onStart();
+        setRecyclerView(rootView);
+        meetingAdapter.setDChgReqFromPrefs(getDChangeReqFromPrefs());
         checkServicesRequired();
     }
 
@@ -90,15 +93,11 @@ public class MainFragment extends Fragment
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Job Start/Stop">
-    public void onReceivedStartJobListing(PersistableBundle bundle) { }
+//    public void onReceivedStartJobListing(PersistableBundle bundle) { }
 
     public void onReceivedStopJobListing(PersistableBundle results) {
-        Toast.makeText(getActivity(), "onReceivedStopJobListing", Toast.LENGTH_SHORT).show();
-
-        // The listing service returns back to here when the listing task is done.
-        // ListingTask will have set the D_CHG_REQ column to Y on applicable records.
-
-        Log.d(LOG_TAG, "onReceivedStopJobListing");
+        // The listing service returns back to here when the listing task is done. ListingTask will
+        // have set the D_CHG_REQ column to Y on applicable records.
         Set<String> keys = results.keySet();
 
         if(keys.contains(MeetingConstants.PAST_TIME_JOB_KEY)) {
@@ -108,11 +107,10 @@ public class MainFragment extends Fragment
         }
     }
 
-    public void onReceivedStartJobNotify(PersistableBundle bundle) { }
+//    public void onReceivedStartJobNotify(PersistableBundle bundle) { }
 
     public void onReceivedStopJobNotify(PersistableBundle results) {
         // The notify service returns back to here when the notify task is done.
-        Log.d(LOG_TAG, "onReceivedStopJobNotify");
         Set<String> keys = results.keySet();
 
         if(keys.contains(MeetingConstants.PRIOR_TIME_JOB_KEY)) {
@@ -202,11 +200,21 @@ public class MainFragment extends Fragment
         recyclerView.setHasFixedSize(true);
         recyclerView.addItemDecoration(new ListingDivider(getActivity(), LinearLayoutManager.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(meetingAdapter);
+    }
 
-        meetingAdapter = new MeetingAdapter(getActivity().getApplicationContext());
+    private void setMeetingAdapter() {
+        meetingAdapter = new MeetingAdapter(getDChangeReqFromPrefs());
         meetingAdapter.setOnItemClickListener(this);
         meetingAdapter.setOnItemLongClickListener(this);
-        recyclerView.setAdapter(meetingAdapter);
+    }
+
+    private boolean getDChangeReqFromPrefs() {
+        int currentPrefVal = Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext())
+                .getString(MeetingConstants.TIME_PAST_PREF_KEY, null));
+        int defaultPrefVal = Integer.parseInt(getActivity().getApplicationContext().getResources()
+                .getStringArray(R.array.meetingPastRaceTime)[0]);
+        return (currentPrefVal == defaultPrefVal);
     }
 
     private int getDbRowId(int position) {
@@ -271,7 +279,7 @@ public class MainFragment extends Fragment
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
     private int position;
-
+private View rootView;
     private Bundle preferences;
     private RecyclerView recyclerView;
     private MeetingAdapter meetingAdapter;

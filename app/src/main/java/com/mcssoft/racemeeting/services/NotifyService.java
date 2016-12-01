@@ -51,7 +51,7 @@ public class NotifyService extends JobService {
                     .getInt(MeetingConstants.TIME_PRIOR_PREF_KEY, MeetingConstants.INIT_DEFAULT);
 
             NotifyTask notifyTask = new NotifyTask(this, iReminder);
-            mainFragment.onReceivedStartJobNotify(jobParams.getExtras());
+//            mainFragment.onReceivedStartJobNotify(jobParams.getExtras());
             notifyTask.execute(jobParams);
             retVal = true;
         }

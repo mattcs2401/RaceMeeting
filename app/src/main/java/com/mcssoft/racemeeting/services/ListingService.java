@@ -49,7 +49,7 @@ public class ListingService extends JobService {
         } else {
             Log.d(LOG_TAG, "onStartJob");
             ListingTask listingTask = new ListingTask(this);
-            mainFragment.onReceivedStartJobListing(jobParams.getExtras());
+//            mainFragment.onReceivedStartJobListing(jobParams.getExtras());
             listingTask.execute(jobParams);
             return true;
         }

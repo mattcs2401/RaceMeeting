@@ -1,9 +1,7 @@
 package com.mcssoft.racemeeting.adapter;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
-import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,17 +11,14 @@ import android.view.ViewGroup;
 import com.mcssoft.racemeeting.database.SchemaConstants;
 import com.mcssoft.racemeeting.interfaces.IItemClickListener;
 import com.mcssoft.racemeeting.interfaces.IItemLongClickListener;
-import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingTime;
-
-import java.util.Map;
 
 import mcssoft.com.racemeeting3.R;
 
 public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
 
-    public MeetingAdapter(Context context) {
-        this.context = context;
+    public MeetingAdapter(boolean prefsNoDChgReq) {
+        this.dChgFromPrefs = prefsNoDChgReq;
     }
 
     @Override
@@ -89,6 +84,10 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
         return cursor;
     }
 
+    public void setDChgReqFromPrefs(boolean dChgFromPrefs) {
+        this.dChgFromPrefs = dChgFromPrefs;
+    }
+
     private void adapaterOnBindViewHolder(MeetingViewHolder holder, int position) {
         cursor.moveToPosition(position);
 
@@ -100,10 +99,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
         String raceTime = MeetingTime.getInstance().getFormattedTimeFromMillis(cursor.getLong(dateTimeColNdx));
         holder.getRaceTime().setText(raceTime);
 
-        String val = PreferenceManager.getDefaultSharedPreferences(context).getString(MeetingConstants.TIME_PAST_PREF_KEY, null);
-        String val1 = context.getResources().getStringArray(R.array.meetingPastRaceTime)[0];
-
-        if(cursor.getString(chgReqColNdx).equals("Y")) {
+        if(cursor.getString(chgReqColNdx).equals("Y") && (!dChgFromPrefs)) {
             holder.getCityCode().setTextColor(Color.RED);
             holder.getRaceCode().setTextColor(Color.RED);
             holder.getRaceNo().setTextColor(Color.RED);
@@ -121,7 +117,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
 
     private View view;
     private Cursor cursor;
-    private Context context;
+    private boolean dChgFromPrefs;
 
     private int idColNdx;
     private int cityCodeColNdx;
