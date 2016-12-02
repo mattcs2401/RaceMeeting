@@ -5,26 +5,28 @@ Issues:
 -> Recycler view last item not showing properly, bottom cut off.
 -> MeetingPreferences toolbar overlaying system icons, should be down a bit.
 
-------
-To Do:
-------
+----------
+Usability:
+----------
+-> When the app comes to the foreground, after some other app, and the highlight preference is
+   enabled, then check times and update display accordingly, as well as starting the service.
+-> When the highlight preferrence is turned off, then revert the display back 'normal'.
+
+-----------------
+To Do (possibly):
+-----------------
 (in no particular order)
--> Review functionality of the notification service and associated task formultiple notifications.
+-> Review functionality of the notification service and associated task for multiple notifications.
 -> Saved instance states, implement properly.
 -> Rotation:
    -> have landscape view of main fragment left side and detail fragment right side.
    -> or simply lock to portrait ?
 -> Determine if time is yesterday or today.
--> What to do about a meeting entry from a previous day ?
+-> Icons to indicate today/yesterday meeting entries ?
 -> Image for left of listing item, e.g. if race code is R then image of horse.
 -> Format and style of DeleteDialog.
 -> Implement a swipe to delete ? Have an Undo ?
--> Start updating documentation, proper comments etc.
-
-Usability:
--> When the app comes to the foreground, after some other app, and the highlight preference is
-   enabled, then check times and update display accordingly, as well as starting the service.
--> When the highlight preferrence is turned off, then revert the display back 'normal'.
+-> Update documentation, proper comments etc.
 
 ----------
 Resources:
@@ -34,6 +36,7 @@ Vogella:
 Material Icons:
 -> https://github.com/google/material-design-icons
 Fragments:
+-> http://staticfree.info/~steve/complete_android_fragment_lifecycle.png
 -> http://www.vogella.com/tutorials/AndroidFragments/article.html#usingfragments_fragmentmanager
 Recycler View:
 -> https://developer.android.com/training/material/lists-cards.html
