@@ -110,6 +110,12 @@ public class MeetingPreferences {
         context = null;
     }
 
+    public void setContext(Context context) {
+        if(this.context == null) {
+            this.context = context;
+        }
+    }
+
     private Bundle getPreferences() {
 
         Map<String,?> prefsMap = PreferenceManager.getDefaultSharedPreferences(context).getAll();

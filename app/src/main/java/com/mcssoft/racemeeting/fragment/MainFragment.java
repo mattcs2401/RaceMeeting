@@ -59,7 +59,10 @@ public class MainFragment extends Fragment
         Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.id_toolbar_frag_main);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
+        meetingPreferences = new MeetingPreferences(getActivity().getApplicationContext());
+
         setMeetingAdapter();
+
         return rootView;
     }
 
@@ -73,6 +76,11 @@ public class MainFragment extends Fragment
     public void onStart() {
         Log.d(LOG_TAG, "onStart");
         super.onStart();
+
+        // TBA ?? not sure ATT why I need this here ??  When app first starts, this is essentially
+        // set in onCreateView.
+        meetingPreferences.setContext(getActivity().getApplicationContext());
+
         setRecyclerView(rootView);
         meetingAdapter.setDChgReqFromPrefs(getDChangeReqFromPrefs());
         checkServicesRequired();
@@ -210,8 +218,7 @@ public class MainFragment extends Fragment
     }
 
     private boolean getDChangeReqFromPrefs() {
-        int currentPrefVal = Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext())
-                .getString(MeetingConstants.TIME_PAST_PREF_KEY, null));
+        int currentPrefVal = Integer.parseInt(meetingPreferences.meetingPastTimePref()[0]);
         int defaultPrefVal = Integer.parseInt(getActivity().getApplicationContext().getResources()
                 .getStringArray(R.array.meetingPastRaceTime)[0]);
         return (currentPrefVal == defaultPrefVal);
@@ -237,8 +244,7 @@ public class MainFragment extends Fragment
     }
 
     private void checkServicesRequired() {
-        meetingPreferences = new MeetingPreferences(getActivity().getApplicationContext());
-        preferences = meetingPreferences.getAllPreferences();
+        Bundle preferences = meetingPreferences.getAllPreferences();
 
         // If the 'Meeting Time Actions' checkbox is ticked.
         if(preferences.getString(MeetingConstants.TIME_ACTIONS_PREF_KEY).equals("true")) {
@@ -280,7 +286,7 @@ public class MainFragment extends Fragment
     //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
     private int position;
 private View rootView;
-    private Bundle preferences;
+   // private Bundle preferences;
     private RecyclerView recyclerView;
     private MeetingAdapter meetingAdapter;
     private MeetingScheduler meetingScheduler;
