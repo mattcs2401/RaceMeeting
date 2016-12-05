@@ -2,6 +2,7 @@ package com.mcssoft.racemeeting.utility;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 
@@ -39,7 +40,7 @@ public class MeetingPreferences {
      * @return True if checked.
      */
     public boolean meetingNotificationPref() {
-        return PreferenceManager.getDefaultSharedPreferences(context)
+        return getDefaultSharedPreferences()
                 .getBoolean(MeetingConstants.MEETING_NOTIFICATIONS_KEY, false);
     }
 
@@ -48,10 +49,11 @@ public class MeetingPreferences {
      * @return [0] preference (array) value, [1] preference text.
      */
     public String[] meetingShowPref() {
-        prefVals = new String[2];
-        prefVals[0] = PreferenceManager.getDefaultSharedPreferences(context)
+       String[] prefVals = new String[2];
+        prefVals[0] = getDefaultSharedPreferences()
                 .getString(MeetingConstants.MEETING_SHOW_KEY, null);
-        prefVals[1] = context.getResources().getStringArray(R.array.meetingShowWhichVals)[Integer.parseInt(prefVals[0])];
+        prefVals[1] = context.getResources()
+                .getStringArray(R.array.meetingShowWhichVals)[Integer.parseInt(prefVals[0])];
         return prefVals;
     }
 
@@ -60,10 +62,11 @@ public class MeetingPreferences {
      * @return [0] preference (array) value, [1] preference text.
      */
     public String[] meetingTimeFormatPref() {
-        prefVals = new String[2];
-        prefVals[0] = PreferenceManager.getDefaultSharedPreferences(context)
+        String[] prefVals = new String[2];
+        prefVals[0] = getDefaultSharedPreferences()
                 .getString(MeetingConstants.TIME_FORMAT_PREF_KEY, null);
-        prefVals[1] = context.getResources().getStringArray(R.array.meetingTimeFormatVals)[Integer.parseInt(prefVals[0])];
+        prefVals[1] = context.getResources()
+                .getStringArray(R.array.meetingTimeFormatVals)[Integer.parseInt(prefVals[0])];
         return prefVals;
     }
 
@@ -72,10 +75,11 @@ public class MeetingPreferences {
      * @return [0] preference (array) value, [1] preference text.
      */
     public String[] meetingDefaultRaceCodePref() {
-        prefVals = new String[2];
-        prefVals[0] = PreferenceManager.getDefaultSharedPreferences(context)
+        String[] prefVals = new String[2];
+        prefVals[0] = getDefaultSharedPreferences()
                 .getString(MeetingConstants.DEFAULT_RACE_CODE_PREF_KEY, null);
-        prefVals[1] = context.getResources().getStringArray(R.array.meetingDefaultRaceCodeVals)[Integer.parseInt(prefVals[0])];
+        prefVals[1] = context.getResources()
+                .getStringArray(R.array.meetingDefaultRaceCodeVals)[Integer.parseInt(prefVals[0])];
         return prefVals;
     }
 
@@ -84,7 +88,7 @@ public class MeetingPreferences {
      * @return True if checked.
      */
     public boolean meetingTimePastPrior() {
-        return PreferenceManager.getDefaultSharedPreferences(context)
+        return getDefaultSharedPreferences()
                 .getBoolean(MeetingConstants.TIME_ACTIONS_PREF_KEY, false);
     }
 
@@ -93,10 +97,11 @@ public class MeetingPreferences {
      * @return [0] preference (array) value, [1] preference text.
      */
     public String[] meetingPastTimePref() {
-        prefVals = new String[2];
-        prefVals[0] = PreferenceManager.getDefaultSharedPreferences(context)
+        String[] prefVals = new String[2];
+        prefVals[0] = getDefaultSharedPreferences()
                 .getString(MeetingConstants.TIME_PAST_PREF_KEY, null);
-        prefVals[1] = context.getResources().getStringArray(R.array.meetingPastRaceTimeVals)[Integer.parseInt(prefVals[0])];
+        prefVals[1] = context.getResources()
+                .getStringArray(R.array.meetingPastRaceTimeVals)[Integer.parseInt(prefVals[0])];
         return prefVals;
     }
 
@@ -105,7 +110,7 @@ public class MeetingPreferences {
      * @return [0] preference (array) value, [1] preference text.
      */
     public int meetingPriorTimePref() {
-        return PreferenceManager.getDefaultSharedPreferences(context)
+        return getDefaultSharedPreferences()
                 .getInt(R.string.pref_time_prior_key + "", MeetingConstants.INIT_DEFAULT);
     }
 
@@ -118,29 +123,26 @@ public class MeetingPreferences {
     }
 
     /**
-     * Utility to null out the context parameter. Called in the MainFragment.onDestroy(), basically
-     * so don't leak context.
+     * Utility to null out the context parameter. Called in the MainActivity.onDestroy().
      */
     public void destroy() {
         context = null;
         instance = null;
     }
 
-    public void setContext(Context context) {
-        if(this.context == null) {
-            this.context = context;
-        }
+    public SharedPreferences getDefaultSharedPreferences() {
+        return PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     private Bundle getPreferences() {
 
-        Map<String,?> prefsMap = PreferenceManager.getDefaultSharedPreferences(context).getAll();
+        Map<String,?> prefsMap = getDefaultSharedPreferences().getAll();
 
         if(prefsMap.isEmpty()) {
             // No SharedPreferences set yet. App has probably been uninstalled then re-installed
             // and/or cache and data cleared. Set the app preferences defaults.
             PreferenceManager.setDefaultValues(context, R.xml.meeting_preferences, false);
-            prefsMap = PreferenceManager.getDefaultSharedPreferences(context).getAll();
+            prefsMap = getDefaultSharedPreferences().getAll();
         }
 
         Bundle prefsState = new Bundle();
@@ -153,8 +155,6 @@ public class MeetingPreferences {
         return prefsState;
     }
 
-    String [] prefVals;      // general array value used where array is return type.
     private Context context;
-
     private static volatile MeetingPreferences instance = null;
 }

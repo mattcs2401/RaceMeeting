@@ -40,7 +40,7 @@ public class PreferencesFragment extends PreferenceFragment
 
         addPreferencesFromResource(R.xml.meeting_preferences);
 
-        sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        sharedPrefs = MeetingPreferences.getInstance().getDefaultSharedPreferences();
 
         cbpUseDefaults = (CheckBoxPreference) getPreferenceManager().findPreference(MeetingConstants.TIME_ACTIONS_PREF_KEY);
         cbpUseDefaults.setOnPreferenceChangeListener(this);

@@ -16,7 +16,6 @@ Usability:
 To Do (possibly):
 -----------------
 (in no particular order)
--> Re-assess how MeetingPreferences can be used within PreferencesFragment.
 -> Review functionality of the notification service and associated task for multiple notifications.
 -> Saved instance states, implement properly.
 -> Rotation:
