@@ -17,8 +17,7 @@ public class PriorTimeDialog extends DialogPreference {
 
     public PriorTimeDialog(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.context = context;
-        initialise();
+        initialise(context);
     }
 
     @Override
@@ -37,7 +36,7 @@ public class PriorTimeDialog extends DialogPreference {
         }
     }
 
-    private void initialise() {
+    private void initialise(Context context) {
         setPersistent(true);
         setDialogLayoutResource(R.layout.dialog_prior_time);
         setDialogMessage("A value of 0 means no reminder,");
@@ -54,6 +53,5 @@ public class PriorTimeDialog extends DialogPreference {
     }
 
     private int prefVal;
-    private Context context;
     private NumberPicker numberPicker;
 }
