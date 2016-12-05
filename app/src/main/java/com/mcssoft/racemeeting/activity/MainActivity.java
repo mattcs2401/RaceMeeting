@@ -21,6 +21,7 @@ import com.mcssoft.racemeeting.interfaces.IDeleteMeeting;
 import com.mcssoft.racemeeting.interfaces.IEditMeeting;
 import com.mcssoft.racemeeting.interfaces.INotifier;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
+import com.mcssoft.racemeeting.utility.MeetingPreferences;
 import com.mcssoft.racemeeting.utility.MeetingTime;
 
 import java.util.ArrayList;
@@ -70,15 +71,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        MeetingTime.getInstance(this);
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         MeetingTime.getInstance().destroy();
+        MeetingPreferences.getInstance().destroy();
     }
     //</editor-fold>
 
@@ -145,6 +141,8 @@ public class MainActivity extends AppCompatActivity
     private void initialise() {
         setContentView(R.layout.activity_main);
         mainFragment = new MainFragment();
+        MeetingPreferences.getInstance(this);
+        MeetingTime.getInstance(this);
     }
 
     private String notificationContentText(ArrayList<String[]> notifyValues) {

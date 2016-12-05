@@ -14,9 +14,24 @@ import mcssoft.com.racemeeting3.R;
  */
 public class MeetingPreferences {
 
-    public MeetingPreferences(Context context) {
+    private MeetingPreferences(Context context) {
         this.context = context;
         getPreferences();
+    }
+
+    public static synchronized MeetingPreferences getInstance(Context context) {
+        if(!instanceExists()) {
+            instance = new MeetingPreferences(context);
+        }
+        return instance;
+    }
+
+    public static synchronized MeetingPreferences getInstance() {
+        return instance;
+    }
+
+    public static boolean instanceExists() {
+        return instance != null ? true : false;
     }
 
     /**
@@ -108,6 +123,7 @@ public class MeetingPreferences {
      */
     public void destroy() {
         context = null;
+        instance = null;
     }
 
     public void setContext(Context context) {
@@ -139,4 +155,6 @@ public class MeetingPreferences {
 
     String [] prefVals;      // general array value used where array is return type.
     private Context context;
+
+    private static volatile MeetingPreferences instance = null;
 }

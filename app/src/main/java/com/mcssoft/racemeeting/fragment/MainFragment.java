@@ -59,8 +59,6 @@ public class MainFragment extends Fragment
         Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.id_toolbar_frag_main);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
-        meetingPreferences = new MeetingPreferences(getActivity().getApplicationContext());
-
         setMeetingAdapter();
 
         return rootView;
@@ -77,10 +75,6 @@ public class MainFragment extends Fragment
         Log.d(LOG_TAG, "onStart");
         super.onStart();
 
-        // TBA ?? not sure ATT why I need this here ??  When app first starts, this is essentially
-        // set in onCreateView.
-        meetingPreferences.setContext(getActivity().getApplicationContext());
-
         setRecyclerView(rootView);
         meetingAdapter.setDChgReqFromPrefs(getDChangeReqFromPrefs());
         checkServicesRequired();
@@ -91,7 +85,6 @@ public class MainFragment extends Fragment
         Log.d(LOG_TAG, "onStop");
         super.onStop();
         meetingScheduler.cancelStopAll();
-        meetingPreferences.destroy();
     }
 
     @Override
@@ -218,7 +211,7 @@ public class MainFragment extends Fragment
     }
 
     private boolean getDChangeReqFromPrefs() {
-        int currentPrefVal = Integer.parseInt(meetingPreferences.meetingPastTimePref()[0]);
+        int currentPrefVal = Integer.parseInt(MeetingPreferences.getInstance().meetingPastTimePref()[0]);
         int defaultPrefVal = Integer.parseInt(getActivity().getApplicationContext().getResources()
                 .getStringArray(R.array.meetingPastRaceTime)[0]);
         return (currentPrefVal == defaultPrefVal);
@@ -244,7 +237,7 @@ public class MainFragment extends Fragment
     }
 
     private void checkServicesRequired() {
-        Bundle preferences = meetingPreferences.getAllPreferences();
+        Bundle preferences = MeetingPreferences.getInstance().getAllPreferences();
 
         // If the 'Meeting Time Actions' checkbox is ticked.
         if(preferences.getString(MeetingConstants.TIME_ACTIONS_PREF_KEY).equals("true")) {
@@ -290,7 +283,6 @@ private View rootView;
     private RecyclerView recyclerView;
     private MeetingAdapter meetingAdapter;
     private MeetingScheduler meetingScheduler;
-    private MeetingPreferences meetingPreferences;
 
     private String LOG_TAG = this.getClass().getCanonicalName();
     //</editor-fold>

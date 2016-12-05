@@ -2,6 +2,7 @@ package com.mcssoft.racemeeting.dialogs;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.preference.DialogPreference;
 import android.preference.PreferenceManager;
 import android.util.AttributeSet;
@@ -46,8 +47,9 @@ public class PriorTimeDialog extends DialogPreference {
 
         if(prefVal == MeetingConstants.INIT_DEFAULT) {
             prefVal = MeetingConstants.TIME_PRIOR_PREF_DEFAULT;
-            PreferenceManager.getDefaultSharedPreferences(context)
-                    .edit().putInt(MeetingConstants.TIME_PRIOR_PREF_KEY, prefVal);
+            SharedPreferences.Editor spe =
+                    PreferenceManager.getDefaultSharedPreferences(context).edit();
+            spe.putInt(MeetingConstants.TIME_PRIOR_PREF_KEY, prefVal).apply();
         }
     }
 
