@@ -76,7 +76,8 @@ public class MainFragment extends Fragment
         super.onStart();
 
         setRecyclerView(rootView);
-        meetingAdapter.setDChgReqFromPrefs(getDChangeReqFromPrefs());
+        boolean dChange = getDChangeReqFromPrefs();
+        meetingAdapter.setDChgReqFromPrefs(dChange);
         checkServicesRequired();
     }
 
@@ -247,11 +248,11 @@ public class MainFragment extends Fragment
 
                 action = Integer.parseInt(preferences.getString(MeetingConstants.TIME_PRIOR_PREF_KEY));
 
-                // If anything other than the "No reminder" preference is selected.
+                // If any other value than the 0 minutes default is selected.
                 if (action != MeetingConstants.TIME_PRIOR_PREF_DEFAULT) {
                     meetingScheduler.startService(MeetingConstants.NOTIFY_SERVICE, action);
                 } else {
-                    // No reminder is selected.
+                    // 0 minutes default is selected.
                     if (meetingScheduler.isSvcRunning(MeetingConstants.NOTIFY_SERVICE)) {
                         meetingScheduler.cancelJobs(MeetingConstants.NOTIFY_SERVICE);
                     }
