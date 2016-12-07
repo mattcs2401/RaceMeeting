@@ -24,7 +24,6 @@ To Do (possibly):
 -> Determine if time is yesterday or today.
 -> Icons to indicate today/yesterday meeting entries ?
 -> Image for left of listing item, e.g. if race code is R then image of horse.
--> Format and style of DeleteDialog.
 -> Implement a swipe to delete ? Have an Undo ?
 -> Update documentation, proper comments etc.
 

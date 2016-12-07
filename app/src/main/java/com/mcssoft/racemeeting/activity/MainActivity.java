@@ -1,6 +1,5 @@
 package com.mcssoft.racemeeting.activity;
 
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.DialogFragment;
 import android.app.Notification;
