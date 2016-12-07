@@ -21,8 +21,9 @@ To Do (possibly):
 -> Rotation:
    -> have landscape view of main fragment left side and detail fragment right side.
    -> or simply lock to portrait ?
--> Determine if time is yesterday or today.
--> Icons to indicate today/yesterday meeting entries ?
+-> Determine if time is today, or previous i.e. yesterday or older.
+   -> Link in with the 'Meetings To Show' preference.
+   -> Icons to indicate today/previous meeting entries ?
 -> Image for left of listing item, e.g. if race code is R then image of horse.
 -> Implement a swipe to delete ? Have an Undo ?
 -> Update documentation, proper comments etc.
