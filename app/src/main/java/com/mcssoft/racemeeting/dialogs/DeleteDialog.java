@@ -30,11 +30,11 @@ public class DeleteDialog extends DialogFragment implements  DialogInterface.OnC
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder ab = new AlertDialog.Builder(getActivity(), AlertDialog.THEME_HOLO_LIGHT);
-        ab.setIcon(R.drawable.ic_warning_black_24dp)
-          .setTitle("Delete Meeting")
+        ab.setIcon(R.drawable.ic_action_warning) // holo_light, xhdpi size.
+          .setTitle(R.string.lbl_delete_dialog_title)
           .setMessage(raceDetails)
-          .setPositiveButton("Delete", this)
-          .setNegativeButton("Cancel", this);
+          .setPositiveButton(R.string.lbl_delete, this)
+          .setNegativeButton(R.string.lbl_cancel, this);
         return ab.create();
     }
     //</editor-fold>
