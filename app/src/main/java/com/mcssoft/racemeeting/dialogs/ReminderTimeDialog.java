@@ -13,9 +13,9 @@ import com.mcssoft.racemeeting.utility.MeetingConstants;
 
 import mcssoft.com.racemeeting3.R;
 
-public class PriorTimeDialog extends DialogPreference {
+public class ReminderTimeDialog extends DialogPreference {
 
-    public PriorTimeDialog(Context context, AttributeSet attrs) {
+    public ReminderTimeDialog(Context context, AttributeSet attrs) {
         super(context, attrs);
         initialise(context);
     }

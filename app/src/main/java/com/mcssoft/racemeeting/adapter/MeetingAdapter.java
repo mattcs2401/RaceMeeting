@@ -17,8 +17,8 @@ import mcssoft.com.racemeeting3.R;
 
 public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
 
-    public MeetingAdapter(boolean prefsNoDChgReq) {
-        this.dChgFromPrefs = prefsNoDChgReq;
+    public MeetingAdapter(boolean highliteChgReq) {
+        this.highliteChgReq = highliteChgReq;
     }
 
     @Override
@@ -84,8 +84,8 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
         return cursor;
     }
 
-    public void setDChgReqFromPrefs(boolean dChgFromPrefs) {
-        this.dChgFromPrefs = dChgFromPrefs;
+    public void setDChgReqFromPrefs(boolean highliteChgReq) {
+        this.highliteChgReq = highliteChgReq;
     }
 
     private void adapaterOnBindViewHolder(MeetingViewHolder holder, int position) {
@@ -99,7 +99,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
         String raceTime = MeetingTime.getInstance().getFormattedTimeFromMillis(cursor.getLong(dateTimeColNdx));
         holder.getRaceTime().setText(raceTime);
 
-        if(cursor.getString(chgReqColNdx).equals("Y") && (!dChgFromPrefs)) {
+        if(cursor.getString(chgReqColNdx).equals("Y") && (!highliteChgReq)) {
             holder.getCityCode().setTextColor(Color.RED);
             holder.getRaceCode().setTextColor(Color.RED);
             holder.getRaceNo().setTextColor(Color.RED);
@@ -117,7 +117,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
 
     private View view;
     private Cursor cursor;
-    private boolean dChgFromPrefs;
+    private boolean highliteChgReq;
 
     private int idColNdx;
     private int cityCodeColNdx;

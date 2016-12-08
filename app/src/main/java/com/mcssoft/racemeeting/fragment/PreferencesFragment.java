@@ -38,12 +38,13 @@ public class PreferencesFragment extends PreferenceFragment
 //        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_18dp);
 //        toolbar.setNavigationOnClickListener(this);
 
-        addPreferencesFromResource(R.xml.meeting_preferences);
+//        addPreferencesFromResource(R.xml.meeting_preferences);
+        addPreferencesFromResource(R.xml.meeting_preferences2);
 
         sharedPrefs = MeetingPreferences.getInstance().getDefaultSharedPreferences();
 
         cbpUseDefaults = (CheckBoxPreference) getPreferenceManager().findPreference(MeetingConstants.TIME_ACTIONS_PREF_KEY);
-        cbpUseDefaults.setOnPreferenceChangeListener(this);
+//        cbpUseDefaults.setOnPreferenceChangeListener(this);
         meetingPrefCat = (PreferenceCategory) getPreferenceManager().findPreference(MeetingConstants.TIME_ACTIONS_PREFCAT_KEY);
 
         return rootView;
@@ -56,7 +57,7 @@ public class PreferencesFragment extends PreferenceFragment
 
         sharedPrefs.registerOnSharedPreferenceChangeListener(this);
         boolean tdpk = sharedPrefs.getBoolean(MeetingConstants.TIME_ACTIONS_PREF_KEY, false);
-        cbpUseDefaults.setChecked(tdpk);
+//        cbpUseDefaults.setChecked(tdpk);
         enableMeetingTimeDefaults(tdpk);
     }
 
@@ -74,10 +75,10 @@ public class PreferencesFragment extends PreferenceFragment
         // 1. This is called when the 'Meeting Time Actions' CheckBoxPreference is pressed.
         // 2. This will fire 1st, then the onSharedPreferenceChanged().
         Log.d(LOG_TAG, "onPreferenceChange");
-        if(preference.getKey().equals(MeetingConstants.TIME_ACTIONS_PREF_KEY)) {
-            cbpUseDefaults.setChecked((boolean) newValue);
-        }
-        enableMeetingTimeDefaults(cbpUseDefaults.isChecked());
+//        if(preference.getKey().equals(MeetingConstants.TIME_ACTIONS_PREF_KEY)) {
+//            cbpUseDefaults.setChecked((boolean) newValue);
+//        }
+//        enableMeetingTimeDefaults(cbpUseDefaults.isChecked());
         return true;
     }
 

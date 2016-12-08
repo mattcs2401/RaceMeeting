@@ -8,7 +8,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -76,7 +75,7 @@ public class MainFragment extends Fragment
         super.onStart();
 
         setRecyclerView(rootView);
-        boolean dChange = getDChangeReqFromPrefs();
+        boolean dChange = getHighliteReqFromPrefs();
         meetingAdapter.setDChgReqFromPrefs(dChange);
         checkServicesRequired();
     }
@@ -206,12 +205,12 @@ public class MainFragment extends Fragment
     }
 
     private void setMeetingAdapter() {
-        meetingAdapter = new MeetingAdapter(getDChangeReqFromPrefs());
+        meetingAdapter = new MeetingAdapter(getHighliteReqFromPrefs());
         meetingAdapter.setOnItemClickListener(this);
         meetingAdapter.setOnItemLongClickListener(this);
     }
 
-    private boolean getDChangeReqFromPrefs() {
+    private boolean getHighliteReqFromPrefs() {
         int currentPrefVal = Integer.parseInt(MeetingPreferences.getInstance().meetingPastTimePref()[0]);
         int defaultPrefVal = Integer.parseInt(getActivity().getApplicationContext().getResources()
                 .getStringArray(R.array.meetingPastRaceTime)[0]);
@@ -279,8 +278,7 @@ public class MainFragment extends Fragment
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
     private int position;
-private View rootView;
-   // private Bundle preferences;
+    private View rootView;
     private RecyclerView recyclerView;
     private MeetingAdapter meetingAdapter;
     private MeetingScheduler meetingScheduler;

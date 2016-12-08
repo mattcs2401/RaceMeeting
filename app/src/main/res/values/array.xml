@@ -3,13 +3,11 @@
     <!-- Meeting Past Race Time. -->
     <string-array name="meetingPastRaceTimeVals">
         <item>Take no action at this time</item>
-        <item>Auto delete the meeting entry</item>
         <item>Highlight the meeting entry</item>
     </string-array>
     <string-array name="meetingPastRaceTime">
         <item>0</item>
         <item>1</item>
-        <item>2</item>
     </string-array>
 
     <!-- Meeting Time Format. -->

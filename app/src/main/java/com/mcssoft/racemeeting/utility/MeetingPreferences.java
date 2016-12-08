@@ -111,7 +111,7 @@ public class MeetingPreferences {
      */
     public int meetingPriorTimePref() {
         return getDefaultSharedPreferences()
-                .getInt(R.string.pref_time_prior_key + "", MeetingConstants.INIT_DEFAULT);
+                .getInt(R.string.pref_reminder_prior_key + "", MeetingConstants.INIT_DEFAULT);
     }
 
     /**

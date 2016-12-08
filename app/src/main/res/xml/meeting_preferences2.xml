@@ -31,12 +31,12 @@
         android:entries="@array/meetingDefaultRaceCodeVals"
         android:entryValues="@array/meetingDefaultRaceCode" />
 
-    <CheckBoxPreference
+<!--    <CheckBoxPreference
         android:key="time_actions_pref_key"
-        android:title="Meeting Time Past &amp; Prior Actions."
-        android:summary="Check this setting to use the Meeting Time past and prior actions."
+        android:title="Meeting Time Actions."
+        android:summary="Check this setting to use the Meeting Time actions."
         android:defaultValue="false" />
-
+-->
     <PreferenceCategory
         android:key="@string/time_actions_prefcat_key"
         android:title="@string/pref_category_time_title">
