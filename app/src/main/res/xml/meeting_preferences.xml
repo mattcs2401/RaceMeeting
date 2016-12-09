@@ -8,14 +8,6 @@
         android:defaultValue="@string/pref_meeting_notifications_default" />
 
     <ListPreference
-        android:title="@string/pref_today_meeting_title"
-        android:summary="@string/pref_today_meeting_summary"
-        android:key="@string/pref_today_meeting_key"
-        android:defaultValue="@string/pref_today_meeting_default"
-        android:entries="@array/meetingShowWhichVals"
-        android:entryValues="@array/meetingShowWhich"/>
-
-    <ListPreference
         android:title="@string/pref_default_race_code_title"
         android:summary="@string/pref_default_race_code_summary"
         android:key="@string/pref_default_race_code_key"
@@ -24,19 +16,33 @@
         android:entryValues="@array/meetingDefaultRaceCode" />
 
     <PreferenceCategory
-        android:key="@string/time_actions_prefcat_key"
-        android:title="@string/pref_category_time_title">
-
-        <CheckBoxPreference
-            android:key="@string/pref_time_format_key"
-            android:title="@string/pref_time_format_title"
-            android:summary="@string/pref_time_format_summary"
-            android:defaultValue="true"/>
+        android:key="@string/pref_cat_display_actions_key"
+        android:title="@string/pref_cat_display_actions_title">
 
         <CheckBoxPreference
             android:key="@string/pref_time_past_key"
             android:title="@string/pref_time_past_title"
             android:summary="@string/pref_time_past_summary"
+            android:defaultValue="true"/>
+
+        <ListPreference
+            android:title="@string/pref_today_meeting_title"
+            android:summary="@string/pref_today_meeting_summary"
+            android:key="@string/pref_today_meeting_key"
+            android:defaultValue="@string/pref_today_meeting_default"
+            android:entries="@array/meetingShowWhichVals"
+            android:entryValues="@array/meetingShowWhich"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="@string/pref_cat_time_actions_key"
+        android:title="@string/pref_cat_time_actions_title">
+
+        <CheckBoxPreference
+            android:key="@string/pref_time_format_key"
+            android:title="@string/pref_time_format_title"
+            android:summary="@string/pref_time_format_summary"
             android:defaultValue="true"/>
 
         <com.mcssoft.racemeeting.dialogs.ReminderTimeDialog
