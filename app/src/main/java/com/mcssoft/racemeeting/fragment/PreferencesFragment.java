@@ -2,12 +2,8 @@ package com.mcssoft.racemeeting.fragment;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,14 +16,9 @@ import com.mcssoft.racemeeting.utility.MeetingPreferences;
 import mcssoft.com.racemeeting3.R;
 
 public class PreferencesFragment extends PreferenceFragment
-        implements View.OnClickListener,
-        Preference.OnPreferenceChangeListener,
-        SharedPreferences.OnSharedPreferenceChangeListener {
+        implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-    public PreferencesFragment() {
-        super();
-    }
-
+    //<editor-fold defaultstate="collapsed" desc="Region: Lifecycle">
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -38,14 +29,8 @@ public class PreferencesFragment extends PreferenceFragment
 //        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_18dp);
 //        toolbar.setNavigationOnClickListener(this);
 
-//        addPreferencesFromResource(R.xml.meeting_preferences);
-        addPreferencesFromResource(R.xml.meeting_preferences2);
-
+        addPreferencesFromResource(R.xml.meeting_preferences);
         sharedPrefs = MeetingPreferences.getInstance().getDefaultSharedPreferences();
-
-        cbpUseDefaults = (CheckBoxPreference) getPreferenceManager().findPreference(MeetingConstants.TIME_ACTIONS_PREF_KEY);
-//        cbpUseDefaults.setOnPreferenceChangeListener(this);
-        meetingPrefCat = (PreferenceCategory) getPreferenceManager().findPreference(MeetingConstants.TIME_ACTIONS_PREFCAT_KEY);
 
         return rootView;
     }
@@ -56,32 +41,17 @@ public class PreferencesFragment extends PreferenceFragment
         super.onStart();
 
         sharedPrefs.registerOnSharedPreferenceChangeListener(this);
-        boolean tdpk = sharedPrefs.getBoolean(MeetingConstants.TIME_ACTIONS_PREF_KEY, false);
-//        cbpUseDefaults.setChecked(tdpk);
-        enableMeetingTimeDefaults(tdpk);
     }
 
     @Override
     public void onStop() {
-        // Note: Can't put result Intent here as MainFragment.onStart() is called before this.
         Log.d(LOG_TAG, "onStop");
         super.onStop();
         sharedPrefs.unregisterOnSharedPreferenceChangeListener(this);
     }
+    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Listeners">
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        // 1. This is called when the 'Meeting Time Actions' CheckBoxPreference is pressed.
-        // 2. This will fire 1st, then the onSharedPreferenceChanged().
-        Log.d(LOG_TAG, "onPreferenceChange");
-//        if(preference.getKey().equals(MeetingConstants.TIME_ACTIONS_PREF_KEY)) {
-//            cbpUseDefaults.setChecked((boolean) newValue);
-//        }
-//        enableMeetingTimeDefaults(cbpUseDefaults.isChecked());
-        return true;
-    }
-
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sp, String key) {
         Log.d(LOG_TAG, "onSharedpreferenceChanged");
@@ -93,49 +63,30 @@ public class PreferencesFragment extends PreferenceFragment
             if(key.equals(MeetingConstants.MEETING_SHOW_KEY)) {
                 prefVal = MeetingPreferences.getInstance().meetingShowPref()[1];
                 Toast.makeText(getActivity(), "Meeting show preference changed to " + prefVal + ".", Toast.LENGTH_SHORT).show();
-            }
-            else if (key.equals(MeetingConstants.TIME_FORMAT_PREF_KEY)) {
-                prefVal = MeetingPreferences.getInstance().meetingTimeFormatPref()[1];
+            } else if (key.equals(MeetingConstants.TIME_FORMAT_PREF_KEY)) {
+                prefVal = String.valueOf(MeetingPreferences.getInstance().meetingTimeFormatPref());
+                if(prefVal.equals("false")) {prefVal = "12HR";} else {prefVal = "24HR";};
                 Toast.makeText(getActivity(), "Time format preference changed to " + prefVal + ".", Toast.LENGTH_SHORT).show();
             } else if (key.equals(MeetingConstants.DEFAULT_RACE_CODE_PREF_KEY)) {
                 prefVal = MeetingPreferences.getInstance().meetingDefaultRaceCodePref()[1];
                 Toast.makeText(getActivity(), "Default race code preference changed to " + prefVal + ".", Toast.LENGTH_SHORT).show();
-            } else if (key.equals(MeetingConstants.TIME_ACTIONS_PREF_KEY)) {
-                if (MeetingPreferences.getInstance().meetingTimePastPrior()) {
-                    Toast.makeText(getActivity(), "Meeting past and prior time defaults enabled.", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getActivity(), "Meeting past and prior time defaults disabled.", Toast.LENGTH_SHORT).show();
-                }
             } else if (key.equals(MeetingConstants.TIME_PAST_PREF_KEY)) {
-                prefVal = MeetingPreferences.getInstance().meetingPastTimePref()[1];
+                prefVal = String.valueOf(MeetingPreferences.getInstance().meetingPastTimePref());
+                if(prefVal.equals("false")) {prefVal = "no highlight.";} else {prefVal = "highlight.";};
                 Toast.makeText(getActivity(), "Past race time preference changed to '" + prefVal + "'.", Toast.LENGTH_SHORT).show();
             } else if (key.equals(MeetingConstants.TIME_PRIOR_PREF_KEY)) {
-                int val = MeetingPreferences.getInstance().meetingPriorTimePref();
+                int val = MeetingPreferences.getInstance().meetingReminderTimePref();
                 Toast.makeText(getActivity(), "Prior reminder time preference changed to '" + val + "'.", Toast.LENGTH_SHORT).show();
             }
         }
     }
-
-    @Override
-    public void onClick(View v) {
-        getActivity().finish();
-    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Utility">
-    private void enableMeetingTimeDefaults(boolean enabled) {
-        if(enabled) {
-            meetingPrefCat.setEnabled(true);
-        } else {
-            meetingPrefCat.setEnabled(false);
-        }
-    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private vars">
     private SharedPreferences sharedPrefs;
-    private CheckBoxPreference cbpUseDefaults;
-    private PreferenceCategory meetingPrefCat;
 
     private String LOG_TAG = this.getClass().getCanonicalName();
     //</editor-fold>

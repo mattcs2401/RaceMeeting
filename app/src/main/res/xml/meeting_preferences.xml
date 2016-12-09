@@ -2,9 +2,9 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <SwitchPreference
+        android:key="@string/pref_meeting_notifications_key"
         android:title="@string/pref_meeting_notifications_title"
         android:summary="@string/pref_meeting_notifications_summary"
-        android:key="@string/pref_meeting_notifications_key"
         android:defaultValue="@string/pref_meeting_notifications_default" />
 
     <ListPreference
@@ -16,14 +16,6 @@
         android:entryValues="@array/meetingShowWhich"/>
 
     <ListPreference
-        android:title="@string/pref_time_format_title"
-        android:summary="@string/pref_time_format_summary"
-        android:key="@string/pref_time_format_key"
-        android:defaultValue="@string/pref_time_format_default"
-        android:entries="@array/meetingTimeFormatVals"
-        android:entryValues="@array/meetingTimeFormat" />
-
-    <ListPreference
         android:title="@string/pref_default_race_code_title"
         android:summary="@string/pref_default_race_code_summary"
         android:key="@string/pref_default_race_code_key"
@@ -31,28 +23,26 @@
         android:entries="@array/meetingDefaultRaceCodeVals"
         android:entryValues="@array/meetingDefaultRaceCode" />
 
-    <CheckBoxPreference
-        android:key="time_actions_pref_key"
-        android:title="Meeting Time Past &amp; Prior Actions."
-        android:summary="Check this setting to use the Meeting Time past and prior actions."
-        android:defaultValue="false" />
-
     <PreferenceCategory
         android:key="@string/time_actions_prefcat_key"
         android:title="@string/pref_category_time_title">
 
-        <ListPreference
+        <CheckBoxPreference
+            android:key="@string/pref_time_format_key"
+            android:title="@string/pref_time_format_title"
+            android:summary="@string/pref_time_format_summary"
+            android:defaultValue="true"/>
+
+        <CheckBoxPreference
+            android:key="@string/pref_time_past_key"
             android:title="@string/pref_time_past_title"
             android:summary="@string/pref_time_past_summary"
-            android:key="@string/pref_time_past_key"
-            android:defaultValue="@string/pref_time_past_default"
-            android:entries="@array/meetingPastRaceTimeVals"
-            android:entryValues="@array/meetingPastRaceTime" />
+            android:defaultValue="true"/>
 
         <com.mcssoft.racemeeting.dialogs.ReminderTimeDialog
-            android:title="@string/pref_time_prior_title"
-            android:summary="@string/pref_time_prior_summary"
-            android:key="@string/pref_reminder_prior_key" />
+            android:title="@string/pref_reminder_title"
+            android:summary="@string/pref_reminder_summary"
+            android:key="@string/pref_reminder_key" />
 
     </PreferenceCategory>
 

@@ -75,8 +75,8 @@ public class MainFragment extends Fragment
         super.onStart();
 
         setRecyclerView(rootView);
-        boolean dChange = getHighliteReqFromPrefs();
-        meetingAdapter.setDChgReqFromPrefs(dChange);
+        boolean hightliteReq = MeetingPreferences.getInstance().meetingPastTimePref();
+        meetingAdapter.setHighliteReqFromPrefs(hightliteReq);
         checkServicesRequired();
     }
 
@@ -205,16 +205,10 @@ public class MainFragment extends Fragment
     }
 
     private void setMeetingAdapter() {
-        meetingAdapter = new MeetingAdapter(getHighliteReqFromPrefs());
+        boolean highliteReq = MeetingPreferences.getInstance().meetingPastTimePref();
+        meetingAdapter = new MeetingAdapter(highliteReq);
         meetingAdapter.setOnItemClickListener(this);
         meetingAdapter.setOnItemLongClickListener(this);
-    }
-
-    private boolean getHighliteReqFromPrefs() {
-        int currentPrefVal = Integer.parseInt(MeetingPreferences.getInstance().meetingPastTimePref()[0]);
-        int defaultPrefVal = Integer.parseInt(getActivity().getApplicationContext().getResources()
-                .getStringArray(R.array.meetingPastRaceTime)[0]);
-        return (currentPrefVal == defaultPrefVal);
     }
 
     private int getDbRowId(int position) {
@@ -240,7 +234,7 @@ public class MainFragment extends Fragment
         Bundle preferences = MeetingPreferences.getInstance().getAllPreferences();
 
         // If the 'Meeting Time Actions' checkbox is ticked.
-        if(preferences.getString(MeetingConstants.TIME_ACTIONS_PREF_KEY).equals("true")) {
+//        if(preferences.getString(MeetingConstants.TIME_ACTIONS_PREF_KEY).equals("true")) {
             // If there are items listed.
             int action;
             if(recordsExist()) {
@@ -254,6 +248,7 @@ public class MainFragment extends Fragment
                     // 0 minutes default is selected.
                     if (meetingScheduler.isSvcRunning(MeetingConstants.NOTIFY_SERVICE)) {
                         meetingScheduler.cancelJobs(MeetingConstants.NOTIFY_SERVICE);
+                        meetingScheduler.stopService(MeetingConstants.NOTIFY_SERVICE);
                     }
                 }
 
@@ -266,12 +261,13 @@ public class MainFragment extends Fragment
                     // "Take no action ..." preference is selected, cancel any jobs.
                     if (meetingScheduler.isSvcRunning(MeetingConstants.LISTING_SERVICE)) {
                         meetingScheduler.cancelJobs(MeetingConstants.LISTING_SERVICE);
+                        meetingScheduler.stopService(MeetingConstants.LISTING_SERVICE);
                     }
                 }
-            }
-        } else {
-            // 'Meeting Time Actions' checkbox is not ticked.
-            meetingScheduler.cancelStopAll();
+//            }
+//        } else {
+//            // 'Meeting Time Actions' checkbox is not ticked.
+//            meetingScheduler.cancelStopAll();
         }
     }
     //</editor-fold>

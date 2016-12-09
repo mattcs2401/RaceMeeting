@@ -196,17 +196,14 @@ public class MeetingTime {
      * Set the time format 12HR/24HR from the app's shared preferences.
      */
     private void setTimeFormatFromPreferences() {
-        String formatKey = PreferenceManager.getDefaultSharedPreferences(context)
-                .getString(MeetingConstants.TIME_FORMAT_PREF_KEY, null);
+        boolean format = PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean(MeetingConstants.TIME_FORMAT_PREF_KEY, false);
 
-        if(formatKey == null) {
+        if(format) {
             timeFormat = MeetingConstants.TIME_FORMAT_PREF_24HR;
-        } else if(formatKey.equals(MeetingConstants.TIME_FORMAT_PREF_12HR_KEY)) {
+        } else {
             timeFormat = MeetingConstants.TIME_FORMAT_PREF_12HR;
-        } else if(formatKey.equals(MeetingConstants.TIME_FORMAT_PREF_24HR_KEY)) {
-            timeFormat = MeetingConstants.TIME_FORMAT_PREF_24HR;
         }
-
     }
 
     private String timeFormat;    // the current time format.

@@ -61,13 +61,8 @@ public class MeetingPreferences {
      * Get the details for the 'Meeting Time Format' preference.
      * @return [0] preference (array) value, [1] preference text.
      */
-    public String[] meetingTimeFormatPref() {
-        String[] prefVals = new String[2];
-        prefVals[0] = getDefaultSharedPreferences()
-                .getString(MeetingConstants.TIME_FORMAT_PREF_KEY, null);
-        prefVals[1] = context.getResources()
-                .getStringArray(R.array.meetingTimeFormatVals)[Integer.parseInt(prefVals[0])];
-        return prefVals;
+    public boolean meetingTimeFormatPref() {
+        return getDefaultSharedPreferences().getBoolean(MeetingConstants.TIME_FORMAT_PREF_KEY, false);
     }
 
     /**
@@ -84,34 +79,21 @@ public class MeetingPreferences {
     }
 
     /**
-     * Get the value of the 'Meeting Time Past & Prior Actions' checkbox.
+     * Get the details for the 'Meeting Past Race Time' preference.
      * @return True if checked.
      */
-    public boolean meetingTimePastPrior() {
+    public boolean meetingPastTimePref() {
         return getDefaultSharedPreferences()
-                .getBoolean(MeetingConstants.TIME_ACTIONS_PREF_KEY, false);
+                .getBoolean(MeetingConstants.TIME_PAST_PREF_KEY, false);
     }
 
     /**
-     * Get the details for the 'Meeting Past Race Time' preference.
+     * Get the details for the 'Meeting Reminder Time' preference.
      * @return [0] preference (array) value, [1] preference text.
      */
-    public String[] meetingPastTimePref() {
-        String[] prefVals = new String[2];
-        prefVals[0] = getDefaultSharedPreferences()
-                .getString(MeetingConstants.TIME_PAST_PREF_KEY, null);
-        prefVals[1] = context.getResources()
-                .getStringArray(R.array.meetingPastRaceTimeVals)[Integer.parseInt(prefVals[0])];
-        return prefVals;
-    }
-
-    /**
-     * Get the details for the 'Meeting Prior Reminder Time' preference.
-     * @return [0] preference (array) value, [1] preference text.
-     */
-    public int meetingPriorTimePref() {
+    public int meetingReminderTimePref() {
         return getDefaultSharedPreferences()
-                .getInt(R.string.pref_reminder_prior_key + "", MeetingConstants.INIT_DEFAULT);
+                .getInt(R.string.pref_reminder_key + "", MeetingConstants.INIT_DEFAULT);
     }
 
     /**

@@ -27,8 +27,8 @@
 
     <string name="pref_time_format_key">time_format_pref_key</string>
     <string name="pref_time_format_title">Meeting Time Format</string>
-    <string name="pref_time_format_summary">Sets the default race time format (12/24 HR).</string>
-    <string name="pref_time_format_default">0</string>
+    <string name="pref_time_format_summary">Check to set meeting time format as 24HR.</string>
+    <string name="pref_time_format_default">1</string>
 
     <string name="pref_default_race_code_key">default_race_code_pref_key</string>
     <string name="pref_default_race_code_title">Default Race Code</string>
@@ -38,14 +38,14 @@
     <string name="time_actions_prefcat_key">time_actions_prefcat_key</string>
     <string name="pref_category_time_title">Meeting Time Actions</string>
 
-    <string name="pref_reminder_prior_key">time_prior_pref_key</string>
-    <string name="pref_time_prior_title">Meeting Reminder Time</string>
-    <string name="pref_time_prior_summary">Set a reminder (in minutes) before the meeting.</string>
-    <string name="pref_time_prior_default">0</string>
+    <string name="pref_reminder_key">time_prior_pref_key</string>
+    <string name="pref_reminder_title">Meeting Reminder Time</string>
+    <string name="pref_reminder_summary">Set a reminder (in minutes) before the meeting.</string>
+    <string name="pref_reminder_default">0</string>
 
     <string name="pref_time_past_key">time_past_pref_key</string>
     <string name="pref_time_past_title">Meeting Past Race Time</string>
-    <string name="pref_time_past_summary">Sets the default past race time action.</string>
+    <string name="pref_time_past_summary">Check to highlight meetings that are past race time.</string>
     <string name="pref_time_past_default">0</string>
 
     <!-- Generic (button text) -->
