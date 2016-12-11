@@ -21,7 +21,7 @@ public class MeetingViewHolder extends RecyclerView.ViewHolder
         tvRaceNo = (TextView) view.findViewById(R.id.tv_race_no);
         tvRaceSel = (TextView) view.findViewById(R.id.tv_race_sel);
         tvRaceTime = (TextView) view.findViewById(R.id.tv_race_time);
-        tvDChange = (TextView) view.findViewById(R.id.tv_dchange_testing);
+        tvDChange = (TextView) view.findViewById(R.id.tv_race_day);
 
         // Set the listeners.
         itemClickListener = listener;

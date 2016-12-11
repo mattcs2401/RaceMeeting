@@ -63,7 +63,7 @@ public class MeetingConstants {
 
     // Past time preferences (settings) defaults.
     public static final String TIME_PAST_PREF_KEY = "time_past_pref_key";
-    public static final int TIME_PAST_PREF_DEFAULT = 0; // == the "Take no action ..." preference.
+    public static final boolean TIME_PAST_PREF_DEFAULT = true;
 
     // Time format preferences.
     public static final String TIME_FORMAT_PREF_KEY = "time_format_pref_key";

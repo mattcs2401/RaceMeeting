@@ -74,7 +74,8 @@
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_dchange_testing"
+        android:id="@+id/tv_race_day"
+        android:background="@drawable/tv_day_outline"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="8dp"
         app:layout_constraintLeft_toRightOf="@+id/tv_race_time"

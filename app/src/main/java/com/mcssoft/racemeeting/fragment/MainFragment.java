@@ -236,14 +236,12 @@ public class MainFragment extends Fragment
         // If the 'Meeting Time Actions' checkbox is ticked.
 //        if(preferences.getString(MeetingConstants.TIME_ACTIONS_PREF_KEY).equals("true")) {
             // If there are items listed.
-            int action;
             if(recordsExist()) {
 
-                action = Integer.parseInt(preferences.getString(MeetingConstants.TIME_PRIOR_PREF_KEY));
-
                 // If any other value than the 0 minutes default is selected.
-                if (action != MeetingConstants.TIME_PRIOR_PREF_DEFAULT) {
-                    meetingScheduler.startService(MeetingConstants.NOTIFY_SERVICE, action);
+                if (MeetingPreferences.getInstance().meetingReminderTimePref()
+                        != MeetingConstants.TIME_PRIOR_PREF_DEFAULT) {
+                    meetingScheduler.startService(MeetingConstants.NOTIFY_SERVICE); //, action);
                 } else {
                     // 0 minutes default is selected.
                     if (meetingScheduler.isSvcRunning(MeetingConstants.NOTIFY_SERVICE)) {
@@ -252,11 +250,9 @@ public class MainFragment extends Fragment
                     }
                 }
 
-                action = Integer.parseInt(preferences.getString(MeetingConstants.TIME_PAST_PREF_KEY));
-
                 // If anything other than the "Take no action ..." preference is selected.
-                if (action != MeetingConstants.TIME_PAST_PREF_DEFAULT) {
-                    meetingScheduler.startService(MeetingConstants.LISTING_SERVICE, action);
+                if (MeetingPreferences.getInstance().meetingPastTimePref()) {
+                    meetingScheduler.startService(MeetingConstants.LISTING_SERVICE); //, action);
                 } else {
                     // "Take no action ..." preference is selected, cancel any jobs.
                     if (meetingScheduler.isSvcRunning(MeetingConstants.LISTING_SERVICE)) {

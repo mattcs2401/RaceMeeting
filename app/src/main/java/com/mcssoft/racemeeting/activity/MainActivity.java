@@ -44,7 +44,9 @@ public class MainActivity extends AppCompatActivity
                                 .addToBackStack(null)
                                 .commit();
         } else {
-            // TBA
+            // TBA ...
+            mainFragment = (MainFragment) getFragmentManager()
+                    .getFragment(savedInstanceState, MeetingConstants.DEFAULT_LISTING_FRAGMENT_TAG);
         }
     }
 
@@ -117,10 +119,6 @@ public class MainActivity extends AppCompatActivity
 
     //<editor-fold defaultstate="collapsed" desc="Region: Interface - INotifier">
     public void onNotify(ArrayList<String[]> notifyValues) {
-        // TODO - rework this for potential multiple notifications.
-        // TODO - content title and text values.
-        // TODO - option to go to a "review" screen ? or edit ?
-
         Notification notification = new Notification.Builder(this)
                 .setContentTitle(MeetingConstants.CONTENT_TITLE)
                 .setContentText(notificationContentText(notifyValues))
@@ -145,20 +143,17 @@ public class MainActivity extends AppCompatActivity
     }
 
     private String notificationContentText(ArrayList<String[]> notifyValues) {
-        //0-id, 1-city, 2-code, 3-num, 4-sel, 5-time
-        // TODO - this needs work, testing only.
         String [] contents = notifyValues.get(0);
         StringBuilder contentText = new StringBuilder();
 
-        contentText.append(contents[1]);
-        contentText.append(contents[2]);
+        contentText.append(contents[1]);  // city code
+        contentText.append(contents[2]);  // race code
         contentText.append(" ");
-        contentText.append(contents[3]);
+        contentText.append(contents[3]);  // race number
         contentText.append(" ");
-        contentText.append(contents[4]);
+        contentText.append(contents[4]);  // race selection
         contentText.append(" ");
-        //int timeMillis = Integer.parseInt(contents[5]);
-        long timeMillis = Long.parseLong(contents[5]);
+        long timeMillis = Long.parseLong(contents[5]);  // race time
         contentText.append(MeetingTime.getInstance().getFormattedTimeFromMillis(timeMillis));
         return contentText.toString();
     }
@@ -166,12 +161,6 @@ public class MainActivity extends AppCompatActivity
     // https://developer.android.com/reference/android/graphics/BitmapFactory.html
     // https://developer.android.com/reference/android/graphics/BitmapFactory.Options.html
     private Bitmap getBitmap(int image) {
-        //BitmapFactory.Options options = new BitmapFactory.Options();
-        //options.inJustDecodeBounds = true;
-        //BitmapFactory.decodeResource(getResources(), image, options);
-        //int imageHeight = options.outHeight;
-        //int imageWidth = options.outWidth;
-        //String imageType = options.outMimeType;
         return BitmapFactory.decodeResource(getResources(), image); //, options);
     }
 

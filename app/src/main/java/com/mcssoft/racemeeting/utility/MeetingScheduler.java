@@ -59,20 +59,20 @@ public class MeetingScheduler {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Service">
-    public void startService(int svcId, int action) {
+    public void startService(int svcId) { //}, int action) {
         switch(svcId) {
             case MeetingConstants.LISTING_SERVICE:
                 Log.d(LOG_TAG, "startListingService");
                 listingSvcIntent = new Intent(activity, ListingService.class);
                 listingSvcIntent.putExtra(MeetingConstants.LISTING_SERVICE_HANDLER, new Messenger(lHandler));
-                listingSvcIntent.putExtra(MeetingConstants.LISTING_SERVICE_ACTION, action);
+//                listingSvcIntent.putExtra(MeetingConstants.LISTING_SERVICE_ACTION, action);
                 activity.startService(listingSvcIntent);
                 break;
             case MeetingConstants.NOTIFY_SERVICE:
                 Log.d(LOG_TAG, "startNotifyService");
                 notifySvcIntent = new Intent(activity, NotifyService.class);
                 notifySvcIntent.putExtra(MeetingConstants.NOTIFY_SERVICE_HANDLER, new Messenger(lHandler));
-                notifySvcIntent.putExtra(MeetingConstants.NOTIFY_SERVICE_ACTION, action);
+//                notifySvcIntent.putExtra(MeetingConstants.NOTIFY_SERVICE_ACTION, action);
                 activity.startService(notifySvcIntent);
                 break;
         }
