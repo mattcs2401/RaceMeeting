@@ -99,7 +99,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
         String raceTime = MeetingTime.getInstance().getFormattedTimeFromMillis(cursor.getLong(dateTimeColNdx));
         holder.getRaceTime().setText(raceTime);
 
-        if(cursor.getString(chgReqColNdx).equals("Y") && (!highliteReq)) {
+        if(cursor.getString(chgReqColNdx).equals("Y") && (highliteReq)) {
             holder.getCityCode().setTextColor(Color.RED);
             holder.getRaceCode().setTextColor(Color.RED);
             holder.getRaceNo().setTextColor(Color.RED);
