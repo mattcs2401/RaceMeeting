@@ -15,23 +15,15 @@ public class SchemaConstants {
 
     // Database columns
     public static final String COLUMN_ROWID = "_id"; // Note: Has to be like this (upper case _ID ?).
-    public static final int COLUMN_ROWID_NDX = 0;
     public static final String COLUMN_CITY_CODE = "CITY_CODE";
-    public static final int COLUMN_CITY_CODE_NDX = 1;
     public static final String COLUMN_RACE_CODE = "RACE_CODE";
-    public static final int COLUMN_RACE_CODE_NDX = 2;
     public static final String COLUMN_RACE_NUM = "RACE_NUM";
-    public static final int COLUMN_RACE_NUM_NDX = 3;
     public static final String COLUMN_RACE_SEL = "RACE_SEL";
-    public static final int COLUMN_RACE_SEL_NDX = 4;
     public static final String COLUMN_DATE_TIME = "DATE_TIME";
-    public static final int COLUMN_DATE_TIME_NDX = 5;
     // Generic field to indicate a display change is required.
     public static final String COLUMN_D_CHG_REQ = "D_CHG_REQ";
-    public static final int COLUMN_D_CHG_REQ_NDX = 6;
     // Generic field that indicates if a notification set for the record.
     public static final String COLUMN_NOTIFIED = "NOTIFIED";
-    public static final int COLUMN_NOTIFIED_NDX = 7;
 
     // Database version and names.
     public static final int DATABASE_VERSION = 1;
