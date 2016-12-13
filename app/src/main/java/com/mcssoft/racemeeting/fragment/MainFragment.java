@@ -76,7 +76,7 @@ public class MainFragment extends Fragment
 
         setRecyclerView(rootView);
         boolean hightliteReq = MeetingPreferences.getInstance().meetingPastTimePref();
-        meetingAdapter.setHighliteReqFromPrefs(hightliteReq);
+        meetingAdapter.setHighliteReq(hightliteReq);
         checkServicesRequired();
     }
 

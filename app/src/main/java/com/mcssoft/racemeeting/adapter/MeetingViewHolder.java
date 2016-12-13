@@ -21,7 +21,7 @@ public class MeetingViewHolder extends RecyclerView.ViewHolder
         tvRaceNo = (TextView) view.findViewById(R.id.tv_race_no);
         tvRaceSel = (TextView) view.findViewById(R.id.tv_race_sel);
         tvRaceTime = (TextView) view.findViewById(R.id.tv_race_time);
-        tvDChange = (TextView) view.findViewById(R.id.tv_race_day);
+        tvRaceDay = (TextView) view.findViewById(R.id.tv_race_day);
 
         // Set the listeners.
         itemClickListener = listener;
@@ -69,8 +69,8 @@ public class MeetingViewHolder extends RecyclerView.ViewHolder
         return tvRaceTime;
     }
 
-    public TextView getDChange() {
-        return tvDChange;
+    public TextView getRaceDay() {
+        return tvRaceDay;
     }
     //</editor-fold>
 
@@ -80,7 +80,7 @@ public class MeetingViewHolder extends RecyclerView.ViewHolder
     private TextView tvRaceNo;
     private TextView tvRaceSel;
     private TextView tvRaceTime;
-    private TextView tvDChange;
+    private TextView tvRaceDay;
 
     private IItemClickListener itemClickListener;
     private IItemLongClickListener itemLongClickListener;

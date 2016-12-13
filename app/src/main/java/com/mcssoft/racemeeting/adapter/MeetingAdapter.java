@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import com.mcssoft.racemeeting.database.SchemaConstants;
 import com.mcssoft.racemeeting.interfaces.IItemClickListener;
 import com.mcssoft.racemeeting.interfaces.IItemLongClickListener;
+import com.mcssoft.racemeeting.utility.MeetingConstants;
+import com.mcssoft.racemeeting.utility.MeetingPreferences;
 import com.mcssoft.racemeeting.utility.MeetingTime;
 
 import mcssoft.com.racemeeting3.R;
@@ -84,7 +86,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
         return cursor;
     }
 
-    public void setHighliteReqFromPrefs(boolean highliteReq) {
+    public void setHighliteReq(boolean highliteReq) {
         this.highliteReq = highliteReq;
     }
 
@@ -96,8 +98,10 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
         holder.getRaceNo().setText(cursor.getString(raceNumColNdx));
         holder.getRaceSel().setText(cursor.getString(raceSelColNdx));
 
-        String raceTime = MeetingTime.getInstance().getFormattedTimeFromMillis(cursor.getLong(dateTimeColNdx));
-        holder.getRaceTime().setText(raceTime);
+        long lRaceTime = cursor.getLong(dateTimeColNdx);
+        String sRaceTime = MeetingTime.getInstance().getFormattedTimeFromMillis(lRaceTime);
+
+        holder.getRaceTime().setText(sRaceTime);
 
         if(cursor.getString(chgReqColNdx).equals("Y") && (highliteReq)) {
             holder.getCityCode().setTextColor(Color.RED);
@@ -113,6 +117,15 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
             holder.getRaceSel().setTextColor(Color.BLACK);
             holder.getRaceTime().setTextColor(Color.BLACK);
         }
+
+        holder.getRaceDay().setBackgroundResource(R.drawable.tv_day_outline);
+//        if(Integer.parseInt(MeetingPreferences.getInstance().meetingShowPref()[1]) == MeetingConstants.MEETING_SHOW_TODAY) {
+        if (MeetingTime.getInstance().isTimeToday(lRaceTime)) {
+            holder.getRaceDay().setText("T");
+        } else {
+            holder.getRaceDay().setText("P");
+        }
+//        }
     }
 
     private View view;
