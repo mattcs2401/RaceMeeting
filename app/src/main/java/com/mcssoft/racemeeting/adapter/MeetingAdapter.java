@@ -19,8 +19,9 @@ import mcssoft.com.racemeeting3.R;
 
 public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
 
-    public MeetingAdapter(boolean highliteChgReq) {
+    public MeetingAdapter(boolean highliteChgReq, boolean showToday) {
         this.highliteReq = highliteChgReq;
+        this.showToday = showToday;
     }
 
     @Override
@@ -90,6 +91,8 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
         this.highliteReq = highliteReq;
     }
 
+    public void setShowToday(boolean showToday) { this.showToday = showToday; }
+
     private void adapaterOnBindViewHolder(MeetingViewHolder holder, int position) {
         cursor.moveToPosition(position);
 
@@ -118,18 +121,22 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
             holder.getRaceTime().setTextColor(Color.BLACK);
         }
 
-        holder.getRaceDay().setBackgroundResource(R.drawable.tv_day_outline);
-//        if(Integer.parseInt(MeetingPreferences.getInstance().meetingShowPref()[1]) == MeetingConstants.MEETING_SHOW_TODAY) {
-        if (MeetingTime.getInstance().isTimeToday(lRaceTime)) {
-            holder.getRaceDay().setText("T");
+        if(showToday == false) {
+            holder.getRaceDay().setBackgroundResource(R.drawable.tv_day_outline);
+            if (MeetingTime.getInstance().isTimeToday(lRaceTime)) {
+                holder.getRaceDay().setText(MeetingConstants.MEETING_SHOW_T);
+            } else {
+                holder.getRaceDay().setText(MeetingConstants.MEETING_SHOW_P);
+            }
         } else {
-            holder.getRaceDay().setText("P");
+            holder.getRaceDay().setBackgroundResource(0);
+            holder.getRaceDay().setText(null);
         }
-//        }
     }
 
     private View view;
     private Cursor cursor;
+    private boolean showToday;
     private boolean highliteReq;
 
     private int idColNdx;

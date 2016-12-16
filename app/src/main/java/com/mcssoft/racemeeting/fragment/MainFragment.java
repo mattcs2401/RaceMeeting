@@ -75,8 +75,8 @@ public class MainFragment extends Fragment
         super.onStart();
 
         setRecyclerView(rootView);
-        boolean hightliteReq = MeetingPreferences.getInstance().meetingPastTimePref();
-        meetingAdapter.setHighliteReq(hightliteReq);
+        meetingAdapter.setHighliteReq(getHighlightReq());
+        meetingAdapter.setShowToday(getShowToday());
         checkServicesRequired();
     }
 
@@ -205,10 +205,21 @@ public class MainFragment extends Fragment
     }
 
     private void setMeetingAdapter() {
-        boolean highliteReq = MeetingPreferences.getInstance().meetingPastTimePref();
-        meetingAdapter = new MeetingAdapter(highliteReq);
+        meetingAdapter = new MeetingAdapter(getHighlightReq(), getShowToday());
         meetingAdapter.setOnItemClickListener(this);
         meetingAdapter.setOnItemLongClickListener(this);
+    }
+
+    private boolean getHighlightReq() {
+        return MeetingPreferences.getInstance().meetingPastTimePref();
+    }
+
+    private boolean getShowToday() {
+        if(Integer.parseInt(MeetingPreferences.getInstance().meetingShowPref()[0])
+                == MeetingConstants.MEETING_SHOW_TODAY) {
+            return true;
+        }
+        return false;
     }
 
     private int getDbRowId(int position) {
