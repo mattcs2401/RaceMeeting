@@ -3,5 +3,7 @@
     android:shape="ring"
     android:thickness="2dp"
     android:useLevel="false">
-    <solid android:color="#CCCCCC"/> <!-- gray -->
+    <solid android:color="#2196F3"/>
+    <size android:height="32dp"
+        android:width="32dp" />
 </shape>
