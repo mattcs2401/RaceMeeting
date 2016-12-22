@@ -19,6 +19,8 @@ import mcssoft.com.racemeeting3.R;
 
 public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
 
+    public MeetingAdapter() {}
+
     public MeetingAdapter(boolean highliteChgReq, boolean showToday) {
         this.highliteReq = highliteChgReq;
         this.showToday = showToday;
@@ -42,8 +44,9 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
         Log.d(LOG_TAG, "onBindViewHolder");
         if (!cursor.moveToPosition(position)) {
             throw new IllegalStateException("Couldn't move cursor to position: " + position);
+        } else {
+            adapaterOnBindViewHolder(holder, position);
         }
-        adapaterOnBindViewHolder(holder, position);
     }
 
     @Override
@@ -68,8 +71,10 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
 
     public void swapCursor(Cursor newCursor) {
         Log.d(LOG_TAG, "swapCursor");
+        // set current listing data.
         cursor = newCursor;
 
+        // set column indexes for use by the (adapter)OnBindViewHolder.
         if(cursor != null) {
             cursor.moveToFirst();
             idColNdx = cursor.getColumnIndex(SchemaConstants.COLUMN_ROWID);
@@ -79,6 +84,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
             raceSelColNdx = cursor.getColumnIndex(SchemaConstants.COLUMN_RACE_SEL);
             dateTimeColNdx = cursor.getColumnIndex(SchemaConstants.COLUMN_DATE_TIME);
             chgReqColNdx = cursor.getColumnIndex(SchemaConstants.COLUMN_D_CHG_REQ);
+
             notifyDataSetChanged();
         }
     }

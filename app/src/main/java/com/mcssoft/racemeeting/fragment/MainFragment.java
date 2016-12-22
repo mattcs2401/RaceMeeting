@@ -170,18 +170,13 @@ public class MainFragment extends Fragment
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         Log.d(LOG_TAG, "onCreateLoader");
-        return new CursorLoader(getActivity(),
-                MeetingProvider.contentUri,
-                DatabaseHelper.getProjection(DatabaseHelper.Projection.DatabaseSchema),
-                null,
-                null,
-                null);
+        return onCreateWichLoader();
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         Log.d(LOG_TAG, "onLoadFinished");
-        meetingAdapter.swapCursor(data);
+        meetingAdapter.swapCursor(cursor);
     }
 
     @Override
@@ -205,7 +200,8 @@ public class MainFragment extends Fragment
     }
 
     private void setMeetingAdapter() {
-        meetingAdapter = new MeetingAdapter(getHighlightReq(), getShowToday());
+        meetingAdapter = new MeetingAdapter();
+//        meetingAdapter = new MeetingAdapter(getHighlightReq(), getShowToday());
         meetingAdapter.setOnItemClickListener(this);
         meetingAdapter.setOnItemLongClickListener(this);
     }
@@ -215,11 +211,8 @@ public class MainFragment extends Fragment
     }
 
     private boolean getShowToday() {
-        if(Integer.parseInt(MeetingPreferences.getInstance().meetingShowPref()[0])
-                == MeetingConstants.MEETING_SHOW_TODAY) {
-            return true;
-        }
-        return false;
+        return (Integer.parseInt(MeetingPreferences.getInstance().meetingShowPref()[0])
+                == MeetingConstants.MEETING_SHOW_TODAY);
     }
 
     private int getDbRowId(int position) {
@@ -242,40 +235,41 @@ public class MainFragment extends Fragment
     }
 
     private void checkServicesRequired() {
-        Bundle preferences = MeetingPreferences.getInstance().getAllPreferences();
 
-        // If the 'Meeting Time Actions' checkbox is ticked.
-//        if(preferences.getString(MeetingConstants.TIME_ACTIONS_PREF_KEY).equals("true")) {
-            // If there are items listed.
-            if(recordsExist()) {
+        if(recordsExist()) {
 
-                // If any other value than the 0 minutes default is selected.
-                if (MeetingPreferences.getInstance().meetingReminderTimePref()
-                        != MeetingConstants.TIME_PRIOR_PREF_DEFAULT) {
-                    meetingScheduler.startService(MeetingConstants.NOTIFY_SERVICE); //, action);
-                } else {
-                    // 0 minutes default is selected.
-                    if (meetingScheduler.isSvcRunning(MeetingConstants.NOTIFY_SERVICE)) {
-                        meetingScheduler.cancelJobs(MeetingConstants.NOTIFY_SERVICE);
-                        meetingScheduler.stopService(MeetingConstants.NOTIFY_SERVICE);
-                    }
+            // If any other value than the 0 minutes default is selected.
+            if (MeetingPreferences.getInstance().meetingReminderTimePref()
+                    != MeetingConstants.TIME_PRIOR_PREF_DEFAULT) {
+                meetingScheduler.startService(MeetingConstants.NOTIFY_SERVICE);
+            } else {
+                // 0 minutes default is selected.
+                if (meetingScheduler.isSvcRunning(MeetingConstants.NOTIFY_SERVICE)) {
+                    meetingScheduler.cancelJobs(MeetingConstants.NOTIFY_SERVICE);
+                    meetingScheduler.stopService(MeetingConstants.NOTIFY_SERVICE);
                 }
+            }
 
-                // If anything other than the "Take no action ..." preference is selected.
-                if (MeetingPreferences.getInstance().meetingPastTimePref()) {
-                    meetingScheduler.startService(MeetingConstants.LISTING_SERVICE); //, action);
-                } else {
-                    // "Take no action ..." preference is selected, cancel any jobs.
-                    if (meetingScheduler.isSvcRunning(MeetingConstants.LISTING_SERVICE)) {
-                        meetingScheduler.cancelJobs(MeetingConstants.LISTING_SERVICE);
-                        meetingScheduler.stopService(MeetingConstants.LISTING_SERVICE);
-                    }
+            // Meeting Past Race Time checkbox is selected.
+            if (MeetingPreferences.getInstance().meetingPastTimePref()) {
+                meetingScheduler.startService(MeetingConstants.LISTING_SERVICE);
+            } else {
+                if (meetingScheduler.isSvcRunning(MeetingConstants.LISTING_SERVICE)) {
+                    meetingScheduler.cancelJobs(MeetingConstants.LISTING_SERVICE);
+                    meetingScheduler.stopService(MeetingConstants.LISTING_SERVICE);
                 }
-//            }
-//        } else {
-//            // 'Meeting Time Actions' checkbox is not ticked.
-//            meetingScheduler.cancelStopAll();
+            }
         }
+    }
+
+    private CursorLoader onCreateWichLoader() {
+        return new CursorLoader(getActivity(),
+                MeetingProvider.contentUri,
+                DatabaseHelper.getProjection(DatabaseHelper.Projection.DatabaseSchema),
+                null,
+                null,
+                null);
+
     }
     //</editor-fold>
 

@@ -44,23 +44,26 @@ public class SchemaConstants {
 
     public static final String SORT_ORDER = COLUMN_DATE_TIME + " ASC, " + COLUMN_RACE_SEL;
 
-    // Where a display change is required.
-    public final static String WHERE_FOR_DCHANGE =
-            SchemaConstants.COLUMN_D_CHG_REQ + " = ? AND " +
-            SchemaConstants.COLUMN_DATE_TIME + " < ?";
-
     // marries with DatabaseHelper.getMeetingListItemProjection.
     public static final String SELECT_ALL_MLI =
             "SELECT " +
-             COLUMN_CITY_CODE + "," +
-             COLUMN_RACE_CODE + "," +
-             COLUMN_RACE_NUM + "," +
-             COLUMN_RACE_SEL + "," +
-             COLUMN_DATE_TIME + "," +
-             COLUMN_D_CHG_REQ + "," +
-             COLUMN_NOTIFIED +
-             " FROM " + DATABASE_TABLE;
+                    COLUMN_CITY_CODE + "," +
+                    COLUMN_RACE_CODE + "," +
+                    COLUMN_RACE_NUM + "," +
+                    COLUMN_RACE_SEL + "," +
+                    COLUMN_DATE_TIME + "," +
+                    COLUMN_D_CHG_REQ + "," +
+                    COLUMN_NOTIFIED +
+                    " FROM " + DATABASE_TABLE;
 
-    public static final String WHERE_FOR_NOTIFY =
-            COLUMN_NOTIFIED + "='N'";
+    // Where a display change is required.
+    public final static String WHERE_FOR_DCHANGE = COLUMN_D_CHG_REQ + " = ? AND " +
+                                                   COLUMN_DATE_TIME + " < ?";
+
+    // where for meetings to notify.
+    public static final String WHERE_FOR_NOTIFY = COLUMN_NOTIFIED + "='N'";
+
+    // where for which meetings to show.
+    public static final String WHERE_FOR_SHOW = COLUMN_DATE_TIME + " > ?";
+
 }
