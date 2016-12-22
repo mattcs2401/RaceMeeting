@@ -16,6 +16,9 @@ Usability:
 To Do (possibly):
 -----------------
 (in no particular order)
+-> 'Show' Preference:
+   -> 'Show only today's meetings' does exactly that. Maybe need to relook at the main listing query ?
+   -> 'Show all meetings' displays P for previous (and T for today ?)
 -> Review functionality of the notification service and associated task for multiple notifications.
 -> Vibrate and/or ping on notifications.
 -> Show full date/time in DetailFragment.
@@ -32,6 +35,10 @@ Vogella:
 -> http://www.vogella.com/tutorials/android.html
 Material Icons:
 -> https://github.com/google/material-design-icons
+Colour:
+-> https://material.google.com/style/color.html#color-color-schemes
+Shape:
+-> https://developer.android.com/guide/topics/resources/drawable-resource.html#Shape
 Fragments:
 -> http://staticfree.info/~steve/complete_android_fragment_lifecycle.png
 -> http://www.vogella.com/tutorials/AndroidFragments/article.html#usingfragments_fragmentmanager
