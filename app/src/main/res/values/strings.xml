@@ -35,15 +35,13 @@
     <string name="pref_default_race_code_summary">Sets the default race code.</string>
     <string name="pref_default_race_code_default">1</string>
 
-    <string name="pref_cat_time_actions_key">time_actions_prefcat_key</string>
+    <string name="pref_cat_meeting_general_title">Meeting General</string>
     <string name="pref_cat_time_actions_title">Meeting Time Actions</string>
-
-    <string name="pref_cat_display_actions_key">display_actions_prefcat_key</string>
     <string name="pref_cat_display_actions_title">Meeting Display Actions</string>
 
     <string name="pref_reminder_key">time_prior_pref_key</string>
     <string name="pref_reminder_title">Meeting Reminder Time</string>
-    <string name="pref_reminder_summary">Set a reminder before the meeting.</string>
+    <string name="pref_reminder_summary">Set a reminder in minutes before the meeting.</string>
     <string name="pref_reminder_default">0</string>
 
     <string name="pref_time_past_key">time_past_pref_key</string>

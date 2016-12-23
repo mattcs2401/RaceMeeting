@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <SwitchPreference
-        android:key="@string/pref_meeting_notifications_key"
-        android:title="@string/pref_meeting_notifications_title"
-        android:summary="@string/pref_meeting_notifications_summary"
-        android:defaultValue="@string/pref_meeting_notifications_default" />
+    <PreferenceCategory
+        android:title="@string/pref_cat_meeting_general_title">
 
-    <ListPreference
-        android:title="@string/pref_default_race_code_title"
-        android:summary="@string/pref_default_race_code_summary"
-        android:key="@string/pref_default_race_code_key"
-        android:defaultValue="@string/pref_default_race_code_default"
-        android:entries="@array/meetingDefaultRaceCodeVals"
-        android:entryValues="@array/meetingDefaultRaceCode" />
+        <SwitchPreference
+            android:key="@string/pref_meeting_notifications_key"
+            android:title="@string/pref_meeting_notifications_title"
+            android:summary="@string/pref_meeting_notifications_summary"
+            android:defaultValue="@string/pref_meeting_notifications_default" />
+
+        <ListPreference
+            android:title="@string/pref_default_race_code_title"
+            android:summary="@string/pref_default_race_code_summary"
+            android:key="@string/pref_default_race_code_key"
+            android:defaultValue="@string/pref_default_race_code_default"
+            android:entries="@array/meetingDefaultRaceCodeVals"
+            android:entryValues="@array/meetingDefaultRaceCode" />
+    </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="@string/pref_cat_display_actions_key"
         android:title="@string/pref_cat_display_actions_title">
 
         <CheckBoxPreference
@@ -32,11 +35,9 @@
             android:defaultValue="@string/pref_today_meeting_default"
             android:entries="@array/meetingShowWhichVals"
             android:entryValues="@array/meetingShowWhich"/>
-
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="@string/pref_cat_time_actions_key"
         android:title="@string/pref_cat_time_actions_title">
 
         <CheckBoxPreference
@@ -49,9 +50,7 @@
             android:title="@string/pref_reminder_title"
             android:summary="@string/pref_reminder_summary"
             android:key="@string/pref_reminder_key" />
-
     </PreferenceCategory>
-
 </PreferenceScreen>
 
 
