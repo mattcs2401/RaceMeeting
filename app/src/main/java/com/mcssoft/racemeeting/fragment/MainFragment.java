@@ -32,9 +32,11 @@ import com.mcssoft.racemeeting.interfaces.INotifier;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingPreferences;
 import com.mcssoft.racemeeting.utility.MeetingScheduler;
+import com.mcssoft.racemeeting.utility.MeetingTime;
 
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 import mcssoft.com.racemeeting3.R;
 
@@ -263,13 +265,24 @@ public class MainFragment extends Fragment
     }
 
     private CursorLoader onCreateWichLoader() {
-        return new CursorLoader(getActivity(),
-                MeetingProvider.contentUri,
-                DatabaseHelper.getProjection(DatabaseHelper.Projection.DatabaseSchema),
-                null,
-                null,
-                null);
-
+        if(Integer.parseInt(MeetingPreferences.getInstance().meetingShowPref()[0])
+                == MeetingConstants.MEETING_SHOW_ALL) {
+            // For the 'Show all meetings' preference.
+            return new CursorLoader(getActivity(),
+                    MeetingProvider.contentUri,
+                    DatabaseHelper.getProjection(DatabaseHelper.Projection.DatabaseSchema),
+                    null,
+                    null,
+                    null);
+        } else {
+            // For the "Show only today's meetings' preference.
+            return new CursorLoader(getActivity(),
+                    MeetingProvider.contentUri,
+                    DatabaseHelper.getProjection(DatabaseHelper.Projection.DatabaseSchema),
+                    SchemaConstants.WHERE_FOR_SHOW, // where column datetime > midnight
+                    new String[] {String.valueOf(MeetingTime.getInstance().getMidnight())},
+                    null);
+        }
     }
     //</editor-fold>
 

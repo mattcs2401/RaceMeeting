@@ -175,6 +175,17 @@ public class MeetingTime {
     }
 
     /**
+     * Get a value that represents midnight (00:00 hours of the current day).
+     * @return Time in mSec representing mignight.
+     */
+    public long getMidnight() {
+        Calendar calendar = Calendar.getInstance(Locale.getDefault());
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        return calendar.getTimeInMillis();
+    }
+
+    /**
      * Check if the given time is a time from today.
      * @param timeInMillis The given time.
      * @return True if the given time is a time from today, else false.
