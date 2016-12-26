@@ -336,7 +336,7 @@ public class EditFragment extends Fragment
 
             dbRowId = ContentUris.parseId(itemUri);
             if(dbRowId < 1) {
-                throw new IllegalStateException("Unable to update; path=" + itemUri.toString());
+                throw new IllegalStateException(R.string.error_path + itemUri.toString());
             }
         } else if(editAction.equals(MeetingConstants.EDIT_ACTION_EXISTING)) {
 
@@ -354,7 +354,7 @@ public class EditFragment extends Fragment
             int count = getActivity().getContentResolver()
                     .update(ContentUris.withAppendedId(MeetingProvider.contentUri, dbRowId), contentValues, null, null);
             if (count != 1) {
-                throw new IllegalStateException("Unable to update RaceMeeting: more than one rows match rowId: " + dbRowId);
+                throw new IllegalStateException(R.string.error_multi_rows + String.valueOf(dbRowId));
             }
         }
     }
@@ -423,11 +423,7 @@ public class EditFragment extends Fragment
      * @return True if a default race code set, else false.
      */
     private boolean checkUseRaceCodePreference() {
-        if(getRaceCodePreference().equals(MeetingConstants.RACE_CODE_ID_NONE)) {
-            return false;
-        } else {
-            return true;
-        }
+        return (getRaceCodePreference().equals(MeetingConstants.RACE_CODE_ID_NONE));
     }
 
     /**

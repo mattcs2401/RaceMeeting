@@ -62,6 +62,8 @@
     <string name="lbl_race_no">Race No:</string>
     <string name="lbl_race_sel">Race Sel:</string>
     <string name="lbl_race_time">Race Time:</string>
+    <string name="error_path">Unable to update RaceMeeting; path=</string>
+    <string name="error_multi_rows">Unable to update RaceMeeting: more than one rows match rowId: </string>
 
     <!-- ** Fragments ** -->
     <!-- City Codes -->
