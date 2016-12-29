@@ -16,11 +16,11 @@ Usability:
 To Do (possibly):
 -----------------
 (in no particular order)
--> 'Show' Preference:
-   -> 'Show only today's meetings' does exactly that. Maybe need to relook at the main listing query ?
-   -> 'Show all meetings' displays P for previous (and T for today ?)
--> Review functionality of the notification service and associated task for multiple notifications.
 -> Vibrate and/or ping on notifications.
+-> 'Show' Preference:
+   -> Show (time and) date for previous meetings ? Current meetings just show time ?
+      -> Remove the P and T for 'Show all meetings' ?
+-> Review functionality of the notification service and associated task for multiple notifications.
 -> Show full date/time in DetailFragment.
 -> Saved instance states, implement properly.
 -> Image for left of listing item, e.g. if race code is R then image of horse.

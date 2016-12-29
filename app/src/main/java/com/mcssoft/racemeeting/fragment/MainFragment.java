@@ -36,7 +36,6 @@ import com.mcssoft.racemeeting.utility.MeetingTime;
 
 import java.util.ArrayList;
 import java.util.Set;
-import java.util.StringTokenizer;
 
 import mcssoft.com.racemeeting3.R;
 
@@ -69,12 +68,19 @@ public class MainFragment extends Fragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         getLoaderManager().initLoader(MeetingConstants.MEETING_LOADER, null, this);
+        onActivityCreated = true;
     }
 
     @Override
     public void onStart() {
         Log.d(LOG_TAG, "onStart");
         super.onStart();
+
+        if(onActivityCreated) {
+            onActivityCreated = false;
+        } else {
+            getLoaderManager().restartLoader(MeetingConstants.MEETING_LOADER, null, this);
+        }
 
         setRecyclerView(rootView);
         meetingAdapter.setHighliteReq(getHighlightReq());
@@ -172,7 +178,7 @@ public class MainFragment extends Fragment
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         Log.d(LOG_TAG, "onCreateLoader");
-        return onCreateWichLoader();
+        return onCreateWhichLoader();
     }
 
     @Override
@@ -264,7 +270,7 @@ public class MainFragment extends Fragment
         }
     }
 
-    private CursorLoader onCreateWichLoader() {
+    private CursorLoader onCreateWhichLoader() {
         if(Integer.parseInt(MeetingPreferences.getInstance().meetingShowPref()[0])
                 == MeetingConstants.MEETING_SHOW_ALL) {
             // For the 'Show all meetings' preference.
@@ -287,6 +293,7 @@ public class MainFragment extends Fragment
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
+    private boolean onActivityCreated;
     private int position;
     private View rootView;
     private RecyclerView recyclerView;
