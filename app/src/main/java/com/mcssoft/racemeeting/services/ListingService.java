@@ -1,7 +1,7 @@
 package com.mcssoft.racemeeting.services;
 
 
-import mcssoft.com.racemeeting3.R;
+import mcssoft.com.racemeeting.R;
 
 import com.mcssoft.racemeeting.fragment.MainFragment;
 import com.mcssoft.racemeeting.utility.MeetingConstants;

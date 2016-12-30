@@ -43,7 +43,7 @@ import com.mcssoft.racemeeting.utility.MeetingEditText;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingTime;
 
-import mcssoft.com.racemeeting3.R;
+import mcssoft.com.racemeeting.R;
 
 public class EditFragment extends Fragment
     implements View.OnClickListener,

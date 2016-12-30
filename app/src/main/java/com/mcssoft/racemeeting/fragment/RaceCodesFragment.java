@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.mcssoft.racemeeting.interfaces.IShowCodes;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 
-import mcssoft.com.racemeeting3.R;
+import mcssoft.com.racemeeting.R;
 
 public class RaceCodesFragment extends Fragment
         implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {

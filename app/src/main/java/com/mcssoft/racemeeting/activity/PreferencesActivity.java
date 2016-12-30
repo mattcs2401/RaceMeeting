@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import com.mcssoft.racemeeting.fragment.PreferencesFragment;
 
-import mcssoft.com.racemeeting3.R;
+import mcssoft.com.racemeeting.R;
 
 public class PreferencesActivity extends PreferenceActivity {
 

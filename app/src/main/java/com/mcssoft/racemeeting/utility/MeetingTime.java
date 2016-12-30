@@ -4,7 +4,7 @@ package com.mcssoft.racemeeting.utility;
 import android.content.Context;
 import android.preference.PreferenceManager;
 
-import mcssoft.com.racemeeting3.R;
+import mcssoft.com.racemeeting.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

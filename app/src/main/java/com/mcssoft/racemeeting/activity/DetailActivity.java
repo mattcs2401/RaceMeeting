@@ -10,7 +10,7 @@ import com.mcssoft.racemeeting.fragment.DetailFragment;
 import com.mcssoft.racemeeting.interfaces.IEditMeeting;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 
-import mcssoft.com.racemeeting3.R;
+import mcssoft.com.racemeeting.R;
 
 public class DetailActivity extends AppCompatActivity implements IEditMeeting {
 

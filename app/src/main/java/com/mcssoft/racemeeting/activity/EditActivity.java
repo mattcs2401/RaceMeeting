@@ -16,7 +16,7 @@ import com.mcssoft.racemeeting.fragment.RaceCodesFragment;
 import com.mcssoft.racemeeting.interfaces.IShowCodes;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 
-import mcssoft.com.racemeeting3.R;
+import mcssoft.com.racemeeting.R;
 
 public class EditActivity extends AppCompatActivity
         implements IShowCodes {

@@ -13,7 +13,7 @@ import android.os.RemoteException;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import mcssoft.com.racemeeting3.R;
+import mcssoft.com.racemeeting.R;
 
 import com.mcssoft.racemeeting.fragment.MainFragment;
 import com.mcssoft.racemeeting.utility.MeetingConstants;

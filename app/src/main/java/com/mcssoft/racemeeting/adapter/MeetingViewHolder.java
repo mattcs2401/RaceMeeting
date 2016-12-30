@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.mcssoft.racemeeting.interfaces.IItemClickListener;
 import com.mcssoft.racemeeting.interfaces.IItemLongClickListener;
 
-import mcssoft.com.racemeeting3.R;
+import mcssoft.com.racemeeting.R;
 
 public class MeetingViewHolder extends RecyclerView.ViewHolder
         implements View.OnClickListener,

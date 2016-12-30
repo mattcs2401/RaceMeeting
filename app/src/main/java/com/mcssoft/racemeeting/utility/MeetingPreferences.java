@@ -8,7 +8,7 @@ import android.preference.PreferenceManager;
 
 import java.util.Map;
 
-import mcssoft.com.racemeeting3.R;
+import mcssoft.com.racemeeting.R;
 
 /**
  * Utility class to get/set app SharedPreferences.

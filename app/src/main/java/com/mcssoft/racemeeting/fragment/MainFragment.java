@@ -37,7 +37,7 @@ import com.mcssoft.racemeeting.utility.MeetingTime;
 import java.util.ArrayList;
 import java.util.Set;
 
-import mcssoft.com.racemeeting3.R;
+import mcssoft.com.racemeeting.R;
 
 public class MainFragment extends Fragment
     implements LoaderManager.LoaderCallbacks<Cursor>,

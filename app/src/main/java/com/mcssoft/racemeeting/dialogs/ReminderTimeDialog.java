@@ -11,7 +11,7 @@ import android.widget.NumberPicker;
 
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 
-import mcssoft.com.racemeeting3.R;
+import mcssoft.com.racemeeting.R;
 
 public class ReminderTimeDialog extends DialogPreference {
 

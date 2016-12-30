@@ -15,7 +15,7 @@ import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingPreferences;
 import com.mcssoft.racemeeting.utility.MeetingTime;
 
-import mcssoft.com.racemeeting3.R;
+import mcssoft.com.racemeeting.R;
 
 public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
 

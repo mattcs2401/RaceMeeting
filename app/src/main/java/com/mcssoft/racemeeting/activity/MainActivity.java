@@ -25,7 +25,7 @@ import com.mcssoft.racemeeting.utility.MeetingTime;
 
 import java.util.ArrayList;
 
-import mcssoft.com.racemeeting3.R;
+import mcssoft.com.racemeeting.R;
 
 public class MainActivity extends AppCompatActivity
     implements IEditMeeting, IDeleteMeeting, INotifier {
@@ -125,11 +125,12 @@ public class MainActivity extends AppCompatActivity
                 .setSmallIcon(R.drawable.r_icon_24dp)
                 .setLargeIcon(getBitmap(R.drawable.r_icon_32dp))  // testing API 22 doesn't do icon
                 .addAction(getNotificationAction(notifyValues))
+                .setVibrate(new long [] {1000})
+                .setOnlyAlertOnce(true)
+                .setAutoCancel(true)
                 .build();
-        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        // Hide the notification after its selected
-        notification.flags |= Notification.FLAG_AUTO_CANCEL;
 
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(0, notification);
     }
     //</editor-fold>
@@ -171,8 +172,8 @@ public class MainActivity extends AppCompatActivity
         intent.putExtra(MeetingConstants.SHOW_SUMMARY, Long.parseLong((notifyValues.get(0)[0])));
 
         PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
-
         Notification.Action.Builder builder = new Notification.Action.Builder(0, "Detail", pIntent);
+
         return builder.build();
     }
     //</editor-fold>
