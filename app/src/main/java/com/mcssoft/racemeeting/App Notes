@@ -16,7 +16,7 @@ Usability:
 To Do (possibly):
 -----------------
 (in no particular order)
--> Vibrate and/or ping on notifications.
+-> Preferences for notifications (vibrate and/or ping) ?
 -> 'Show' Preference:
    -> Show (time and) date for previous meetings ? Current meetings just show time ?
       -> Remove the P and T for 'Show all meetings' ?
@@ -51,6 +51,8 @@ Divider:
 http://java-lang-programming.com/en/articles/19?ref=ara
 -> Preferences:
 https://developer.android.com/reference/android/preference/PreferenceActivity.html
+-> Notifications:
+http://www.concretepage.com/android/android-notification-example-with-vibration-sound-action-and-big-view-styles
 -> KVM (to try):
 https://software.intel.com/en-us/blogs/2012/03/12/how-to-start-intel-hardware-assisted-virtualization-hypervisor-on-linux-to-speed-up-intel-android-x86-emulator
 
