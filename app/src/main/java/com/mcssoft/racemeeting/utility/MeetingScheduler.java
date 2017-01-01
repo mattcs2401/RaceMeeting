@@ -166,7 +166,7 @@ public class MeetingScheduler {
                     Log.d(LOG_TAG, "scheduleListingJob");
 
                     builder = new JobInfo.Builder(lsJobId++, new ComponentName(activity, ListingService.class));
-                    builder.setPeriodic(MeetingConstants.ONE_MINUTE);
+                    builder.setPeriodic(MeetingConstants.THIRTY_SECONDS);
 
                     bundle = new PersistableBundle();
                     bundle.putInt(MeetingConstants.PAST_TIME_JOB_KEY, MeetingConstants.INIT_DEFAULT); // key/value

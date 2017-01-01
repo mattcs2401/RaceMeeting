@@ -43,7 +43,7 @@ public class NotifyTask extends AsyncTask<JobParameters, Void, JobParameters> {
                     String [] row = null;
 
                     while (cursor.moveToNext()) {
-                        if(doCriteriaCheck()) {
+                        if(doNotifyCheck()) {
                             row = doCollateValues();
                             result.getExtras().putStringArray(row[0], row); // key is column id as string.
                             doUpdateCursor(row[0]); // set Notified flag.
@@ -91,10 +91,10 @@ public class NotifyTask extends AsyncTask<JobParameters, Void, JobParameters> {
                 Long.toString(cursor.getLong(cursor.getColumnIndex(SchemaConstants.COLUMN_DATE_TIME)))};
     }
 
-    private boolean doCriteriaCheck() {
+    private boolean doNotifyCheck() {
         long lRaceTime = cursor.getLong(cursor.getColumnIndex(SchemaConstants.COLUMN_DATE_TIME));
 //        String sRaceTime = MeetingTime.getInstance().getFormattedTimeFromMillis(lRaceTime);      // testing
-        long lNotifyTime = MeetingTime.getInstance().getTimeMinus(reminderTime);
+        long lNotifyTime = MeetingTime.getInstance().getTimeMinus(reminderTime, lRaceTime);
 //        String sNotifyTime = MeetingTime.getInstance().getFormattedTimeFromMillis(lNotifyTime);  // testing
         long lCurrentTime = MeetingTime.getInstance().getTimeInMillis();
 //        String sCurrentTime = MeetingTime.getInstance().getFormattedTimeFromMillis(lCurrentTime);// testing

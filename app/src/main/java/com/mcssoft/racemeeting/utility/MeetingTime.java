@@ -140,18 +140,14 @@ public class MeetingTime {
 
     /**
      * Get a time value in millis that is the current time minus (parameter).
-     * @param minusTime A time value in milliseconds.
-     * @return A time value that is the current time minus (parameter).
+     * @param reminderTime A time value in minutes.
+     * @param raceTime A time value in milli seconds.
+     * @return A time value that is the race time minus the reminder time.
      */
-    public long getTimeMinus(int minusTime) {
+    public long getTimeMinus(int reminderTime, long raceTime) {
         calendar = Calendar.getInstance(Locale.getDefault());
-        int minute = calendar.get(calendar.MINUTE);
-
-        // TBA - possible logic flaw here if 'minute' ends up a minus value.
-        minute = (minute - minusTime);
-
-        calendar.set(Calendar.MINUTE, minute);
-
+        calendar.setTime(new Date(raceTime));
+        calendar.add(Calendar.MINUTE, -reminderTime);
         return calendar.getTimeInMillis();
     }
 

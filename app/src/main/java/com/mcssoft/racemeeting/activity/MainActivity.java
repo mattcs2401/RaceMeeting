@@ -125,8 +125,8 @@ public class MainActivity extends AppCompatActivity
                 .setSmallIcon(R.drawable.r_icon_24dp)
                 .setLargeIcon(getBitmap(R.drawable.r_icon_32dp))  // testing API 22 doesn't do icon
                 .addAction(getNotificationAction(notifyValues))
-                .setVibrate(new long [] {1000})
-                .setOnlyAlertOnce(true)
+                .setVibrate(new long [] {1000,1000,1000,1000}) // wait 1 sec, vibrate 1 sec (twice).
+                //.setOnlyAlertOnce(true)
                 .setAutoCancel(true)
                 .build();
 
