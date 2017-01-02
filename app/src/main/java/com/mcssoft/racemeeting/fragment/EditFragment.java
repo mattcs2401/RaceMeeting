@@ -423,7 +423,10 @@ public class EditFragment extends Fragment
      * @return True if a default race code set, else false.
      */
     private boolean checkUseRaceCodePreference() {
-        return (getRaceCodePreference().equals(MeetingConstants.RACE_CODE_ID_NONE));
+        if (getRaceCodePreference().equals(MeetingConstants.RACE_CODE_ID_NONE)) {
+            return false;
+        }
+        return true;
     }
 
     /**
