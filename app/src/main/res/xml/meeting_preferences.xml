@@ -22,7 +22,7 @@
     <PreferenceCategory
         android:title="@string/pref_cat_display_actions_title">
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="@string/pref_time_past_key"
             android:title="@string/pref_time_past_title"
             android:summary="@string/pref_time_past_summary"

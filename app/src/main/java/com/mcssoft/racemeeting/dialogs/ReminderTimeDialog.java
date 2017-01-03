@@ -8,12 +8,14 @@ import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.NumberPicker;
+import android.widget.TextView;
 
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 
 import mcssoft.com.racemeeting.R;
 
-public class ReminderTimeDialog extends DialogPreference {
+public class ReminderTimeDialog extends DialogPreference
+    implements NumberPicker.OnValueChangeListener {
 
     public ReminderTimeDialog(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -24,8 +26,11 @@ public class ReminderTimeDialog extends DialogPreference {
     protected void onBindDialogView(View view) {
         super.onBindDialogView(view);
         numberPicker = (NumberPicker) view.findViewById(R.id.id_prior_time_numberPicker);
+        tvMinutes = (TextView) view.findViewById(R.id.tvMinutes);
+        numberPicker.setOnValueChangedListener(this);
         numberPicker.setMinValue(0);
         numberPicker.setMaxValue(10);
+        numberPicker.setWrapSelectorWheel(true);
         numberPicker.setValue(prefVal);
     }
 
@@ -36,10 +41,21 @@ public class ReminderTimeDialog extends DialogPreference {
         }
     }
 
+    @Override
+    public void onValueChange(NumberPicker np, int oldVal, int newVal) {
+
+        if(newVal == 0) {
+            tvMinutes.setText("No reminder");
+        } else if(newVal == 1) {
+            tvMinutes.setText("minute");
+        } else {
+            tvMinutes.setText("minutes");
+        }
+    }
+
     private void initialise(Context context) {
         setPersistent(true);
         setDialogLayoutResource(R.layout.dialog_prior_time);
-        setDialogMessage("A value of 0 means no reminder,");
 
         prefVal = PreferenceManager.getDefaultSharedPreferences(context)
                 .getInt(MeetingConstants.TIME_PRIOR_PREF_KEY, MeetingConstants.INIT_DEFAULT);
@@ -52,6 +68,7 @@ public class ReminderTimeDialog extends DialogPreference {
         }
     }
 
-    private int prefVal;
-    private NumberPicker numberPicker;
+    private int prefVal;               // current value of the preference.
+    private TextView tvMinutes;        // a textview to display 'No reminder','minute' or 'minutes'.
+    private NumberPicker numberPicker; // this.
 }

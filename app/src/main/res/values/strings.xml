@@ -46,7 +46,7 @@
 
     <string name="pref_time_past_key">time_past_pref_key</string>
     <string name="pref_time_past_title">Meeting Past Race Time</string>
-    <string name="pref_time_past_summary">Check to highlight meetings that are past race time.</string>
+    <string name="pref_time_past_summary">Highlight meetings that are past race time.</string>
     <string name="pref_time_past_default">0</string>
 
     <!-- Generic (button text) -->
