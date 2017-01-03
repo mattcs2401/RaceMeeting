@@ -27,7 +27,7 @@
 
     <string name="pref_time_format_key">time_format_pref_key</string>
     <string name="pref_time_format_title">Meeting Time Format</string>
-    <string name="pref_time_format_summary">Check to set meeting time format as 24HR.</string>
+    <string name="pref_time_format_summary">Set the meeting time format as 24HR.</string>
     <string name="pref_time_format_default">1</string>
 
     <string name="pref_default_race_code_key">default_race_code_pref_key</string>
