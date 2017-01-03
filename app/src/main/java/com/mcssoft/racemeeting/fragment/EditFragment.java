@@ -109,17 +109,16 @@ public class EditFragment extends Fragment
         Log.d(LOG_TAG, "onTouch");
         if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
 
-            IShowCodes isc = (IShowCodes) getActivity(); // callback to EditActivity.
-
             switch (view.getId()) {
                 case R.id.etCityCode:
-                    isc.onShowCodes(MeetingConstants.CITY_CODES_FRAGMENT_ID, view);
+                    ((IShowCodes) getActivity())
+                            .onShowCodes(MeetingConstants.CITY_CODES_FRAGMENT_ID, view);
                     break;
                 case R.id.etRaceCode:
-                    isc.onShowCodes(MeetingConstants.RACE_CODES_FRAGMENT_ID, view);
+                    ((IShowCodes) getActivity())
+                            .onShowCodes(MeetingConstants.RACE_CODES_FRAGMENT_ID, view);
                     break;
                 case R.id.etRaceTime:
-                    isc = null;
                     showTimePicker();
                     break;
             }
@@ -434,12 +433,8 @@ public class EditFragment extends Fragment
      * @return The race code preference value.
      */
     private String getRaceCodePreference() {
-        String dspk = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext())
+        return PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext())
                 .getString(MeetingConstants.DEFAULT_RACE_CODE_PREF_KEY, null);
-        if(dspk == null) {
-            dspk = MeetingConstants.RACE_CODE_ID_NONE;
-        }
-        return dspk;
     }
 
     /**
@@ -464,8 +459,9 @@ public class EditFragment extends Fragment
         }
     }
 
-    public void hideSoftKeyboard(View view){
-        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+    private void hideSoftKeyboard(View view){
+        InputMethodManager imm = (InputMethodManager) getActivity()
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 

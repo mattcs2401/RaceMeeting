@@ -17,16 +17,20 @@ To Do (possibly):
 -----------------
 (in no particular order)
 -> Preferences for notifications (vibrate and/or ping) ?
+-> Reduce preferences into 2 (maybe 3) screens, i.e. 'combine into 1 or 2' ? Headers ?
 -> 'Show' Preference:
    -> Show (time and) date for previous meetings ? Current meetings just show time ?
       -> Remove the P and T for 'Show all meetings' ?
 -> Review functionality of the notification service and associated task for multiple notifications.
+   -> Need to loop on multiples with the same start (race) time.
 -> Show full date/time in DetailFragment.
 -> Saved instance states, implement properly.
 -> Image for left of listing item, e.g. if race code is R then image of horse.
--> Implement a swipe to delete ? Have an Undo ? (then long press has some other use ?)
+-> Implement a swipe to delete ?
+   -> Have an Undo ?
+   -> Then long press has some other use ?
 -> Rotation: have landscape view of main fragment left side and detail fragment right side.
--> Update documentation, proper comments etc.
+-> Update documentation, proper method and other comments etc.
 
 ----------
 Resources:
