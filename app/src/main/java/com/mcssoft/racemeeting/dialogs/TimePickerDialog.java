@@ -8,7 +8,7 @@ import android.app.DialogFragment;
 
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 
-public class TimePickDialog extends DialogFragment {
+public class TimePickerDialog extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -20,7 +20,7 @@ public class TimePickDialog extends DialogFragment {
             is24Hour = true;
         }
 
-        return new TimePickerDialog(
+        return new android.app.TimePickerDialog(
                 getActivity(),
                 (OnTimeSetListener) getFragmentManager().findFragmentByTag(MeetingConstants.DEFAULT_EDIT_FRAGMENT_TAG),
                 args.getInt(MeetingConstants.HOUR),
