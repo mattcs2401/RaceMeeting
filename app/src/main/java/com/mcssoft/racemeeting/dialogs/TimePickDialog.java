@@ -8,7 +8,7 @@ import android.app.DialogFragment;
 
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 
-public class TimePickerDialog extends DialogFragment {
+public class TimePickDialog extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

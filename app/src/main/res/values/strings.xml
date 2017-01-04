@@ -26,7 +26,7 @@
     <string name="pref_today_meeting_default">1</string>
 
     <string name="pref_time_format_key">time_format_pref_key</string>
-    <string name="pref_time_format_title">Meeting Time Format</string>
+    <string name="pref_time_format_title">Default Time Format</string>
     <string name="pref_time_format_summary">Set the meeting time format as 24HR.</string>
     <string name="pref_time_format_default">1</string>
 
@@ -36,15 +36,23 @@
     <string name="pref_default_race_code_default">1</string>
 
     <string name="pref_cat_meeting_general_title">Meeting General</string>
-    <string name="pref_cat_time_actions_title">Meeting Time Actions</string>
+    <string name="pref_cat_notify_actions_title">Meeting Notification Actions</string>
     <string name="pref_cat_display_actions_title">Meeting Display Actions</string>
 
-    <string name="pref_reminder_key">time_prior_pref_key</string>
-    <string name="pref_reminder_title">Meeting Reminder Time</string>
-    <string name="pref_reminder_summary">Set a reminder in minutes before the meeting.</string>
-    <string name="pref_reminder_default">0</string>
+    <string name="pref_notification_enable_key">notification_enable_key</string>
+    <string name="pref_notification_enable_title">Meeting Notifications</string>
+    <string name="pref_notification_enable_summary">Enable meeting notifications.</string>
 
-    <string name="pref_time_past_key">time_past_pref_key</string>
+    <string name="pref_reminder_key">reminder_key</string>
+    <string name="pref_reminder_title">Meeting Reminder Time</string>
+    <string name="pref_reminder_summary">Set a reminder notification in minutes before the meeting.</string>
+    <string name="pref_reminder_default">3</string>
+
+    <string name="pref_notification_key">notification_key</string>
+    <string name="pref_notification_title">Meeting Notifications</string>
+    <string name="pref_notification_summary">Set meeting reminder notification options.</string>
+
+    <string name="pref_time_past_key">time_past_key</string>
     <string name="pref_time_past_title">Meeting Past Race Time</string>
     <string name="pref_time_past_summary">Highlight meetings that are past race time.</string>
     <string name="pref_time_past_default">0</string>

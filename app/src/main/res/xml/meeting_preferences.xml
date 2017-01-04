@@ -17,6 +17,13 @@
             android:defaultValue="@string/pref_default_race_code_default"
             android:entries="@array/meetingDefaultRaceCodeVals"
             android:entryValues="@array/meetingDefaultRaceCode" />
+
+        <CheckBoxPreference
+            android:key="@string/pref_time_format_key"
+            android:title="@string/pref_time_format_title"
+            android:summary="@string/pref_time_format_summary"
+            android:defaultValue="true"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -38,18 +45,26 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/pref_cat_time_actions_title">
+        android:title="@string/pref_cat_notify_actions_title">
 
-        <CheckBoxPreference
-            android:key="@string/pref_time_format_key"
-            android:title="@string/pref_time_format_title"
-            android:summary="@string/pref_time_format_summary"
-            android:defaultValue="true"/>
+        <SwitchPreference
+            android:title="@string/pref_notification_enable_title"
+            android:summary="@string/pref_notification_enable_summary"
+            android:key="@string/pref_notification_enable_key"
+            android:defaultValue="false" />
 
         <com.mcssoft.racemeeting.dialogs.ReminderTimeDialog
             android:title="@string/pref_reminder_title"
             android:summary="@string/pref_reminder_summary"
-            android:key="@string/pref_reminder_key" />
+            android:key="@string/pref_reminder_key"
+            android:dependency="@string/pref_notification_enable_key" />
+
+        <com.mcssoft.racemeeting.dialogs.NotificationsDialog
+            android:title="@string/pref_notification_title"
+            android:summary="@string/pref_notification_summary"
+            android:key="@string/pref_notification_key"
+            android:dependency="@string/pref_notification_enable_key" />
+
     </PreferenceCategory>
 </PreferenceScreen>
 

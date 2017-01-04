@@ -36,7 +36,7 @@ import android.widget.Toast;
 import com.mcssoft.racemeeting.database.DatabaseHelper;
 import com.mcssoft.racemeeting.database.MeetingProvider;
 import com.mcssoft.racemeeting.database.SchemaConstants;
-import com.mcssoft.racemeeting.dialogs.TimePickerDialog;
+import com.mcssoft.racemeeting.dialogs.TimePickDialog;
 import com.mcssoft.racemeeting.interfaces.IShowCodes;
 import com.mcssoft.racemeeting.utility.MeetingEditText;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
@@ -208,7 +208,7 @@ public class EditFragment extends Fragment
      */
     private void showTimePicker() {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
-        DialogFragment df = new TimePickerDialog();
+        DialogFragment df = new TimePickDialog();
 
         Bundle args = new Bundle();
         int[] hourMin;

@@ -47,12 +47,15 @@ public class MeetingConstants {
     public static final String MEETING_SHOW_P = "P";
     public static final String MEETING_SHOW_T = "T";
 
-    // Prior time preferences (settings) defaults.
-    public static final String TIME_PRIOR_PREF_KEY = "time_prior_pref_key";
-    public static final int TIME_PRIOR_PREF_DEFAULT = 0; // == No reminder.
+    // Reminder preferences (settings) defaults.
+    public static final String REMINDER_PREF_KEY = "reminder_key";
+    public static final int REMINDER_PREF_DEFAULT = 0; // == No reminder.
 
     // Past time preferences (settings) defaults.
     public static final String TIME_PAST_PREF_KEY = "time_past_pref_key";
+
+    // Meeting notification preference.
+    public static final String NOTIFY_ENABLE_KEY = "notification_enable_key";
 
     // Time format preferences.
     public static final String TIME_FORMAT_PREF_KEY = "time_format_pref_key";

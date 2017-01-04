@@ -2,7 +2,6 @@ package com.mcssoft.racemeeting.fragment;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -74,7 +73,7 @@ public class PreferencesFragment extends PreferenceFragment
                 prefVal = String.valueOf(MeetingPreferences.getInstance().meetingPastTimePref());
                 if(prefVal.equals("false")) {prefVal = "no highlight.";} else {prefVal = "highlight.";};
                 Toast.makeText(getActivity(), "Past race time preference changed to '" + prefVal + "'.", Toast.LENGTH_SHORT).show();
-            } else if (key.equals(MeetingConstants.TIME_PRIOR_PREF_KEY)) {
+            } else if (key.equals(MeetingConstants.REMINDER_PREF_KEY)) {
                 int val = MeetingPreferences.getInstance().meetingReminderTimePref();
                 Toast.makeText(getActivity(), "Prior reminder time preference changed to '" + val + "'.", Toast.LENGTH_SHORT).show();
             }

@@ -32,6 +32,7 @@ public class ReminderTimeDialog extends DialogPreference
         numberPicker.setMaxValue(10);
         numberPicker.setWrapSelectorWheel(true);
         numberPicker.setValue(prefVal);
+        setLabel(prefVal);
     }
 
     @Override
@@ -43,14 +44,7 @@ public class ReminderTimeDialog extends DialogPreference
 
     @Override
     public void onValueChange(NumberPicker np, int oldVal, int newVal) {
-
-        if(newVal == 0) {
-            tvMinutes.setText("No reminder");
-        } else if(newVal == 1) {
-            tvMinutes.setText("minute");
-        } else {
-            tvMinutes.setText("minutes");
-        }
+        setLabel(newVal);
     }
 
     private void initialise(Context context) {
@@ -58,13 +52,24 @@ public class ReminderTimeDialog extends DialogPreference
         setDialogLayoutResource(R.layout.dialog_prior_time);
 
         prefVal = PreferenceManager.getDefaultSharedPreferences(context)
-                .getInt(MeetingConstants.TIME_PRIOR_PREF_KEY, MeetingConstants.INIT_DEFAULT);
+//                .getInt(MeetingConstants.REMINDER_PREF_KEY, MeetingConstants.INIT_DEFAULT);
+                .getInt(MeetingConstants.REMINDER_PREF_KEY, MeetingConstants.INIT_DEFAULT);
 
         if(prefVal == MeetingConstants.INIT_DEFAULT) {
-            prefVal = MeetingConstants.TIME_PRIOR_PREF_DEFAULT;
+            prefVal = MeetingConstants.REMINDER_PREF_DEFAULT;
             SharedPreferences.Editor spe =
                     PreferenceManager.getDefaultSharedPreferences(context).edit();
-            spe.putInt(MeetingConstants.TIME_PRIOR_PREF_KEY, prefVal).apply();
+            spe.putInt(MeetingConstants.REMINDER_PREF_KEY, prefVal).apply();
+        }
+    }
+
+    private void setLabel(int value) {
+        if(value == 0) {
+            tvMinutes.setText("No reminder");
+        } else if(value == 1) {
+            tvMinutes.setText("minute");
+        } else {
+            tvMinutes.setText("minutes");
         }
     }
 

@@ -11,7 +11,7 @@ import java.util.Map;
 import mcssoft.com.racemeeting.R;
 
 /**
- * Utility class to get/set app SharedPreferences.
+ * Utility class to get app SharedPreferences.
  */
 public class MeetingPreferences {
 
@@ -94,6 +94,10 @@ public class MeetingPreferences {
     public int meetingReminderTimePref() {
         return getDefaultSharedPreferences()
                 .getInt(R.string.pref_reminder_key + "", MeetingConstants.INIT_DEFAULT);
+    }
+
+    public boolean meetingNotificationEnablePref() {
+        return getDefaultSharedPreferences().getBoolean(MeetingConstants.NOTIFY_ENABLE_KEY, false);
     }
 
     /**
