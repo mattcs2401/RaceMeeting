@@ -54,8 +54,17 @@ public class MeetingConstants {
     // Past time preferences (settings) defaults.
     public static final String TIME_PAST_PREF_KEY = "time_past_pref_key";
 
-    // Meeting notification preference.
+    // Meeting notification enable preference.
     public static final String NOTIFY_ENABLE_KEY = "notification_enable_key";
+
+    // Meeting notification preference.
+    // (number picker prefs).
+    public static final String NOTIFY_PREF_KEY = "notify_key";
+    public static final int NOTIFY_PREF_DEFAULT = 1; // == No reminder.
+    // (sound prefs)
+    public static final String NOTIFY_SOUND_PREF_KEY = "notify_sound_key";
+    // (vibrate prefs)
+    public static final String NOTIFY_VIBRATE_PREF_KEY = "notify_vibrate_key";
 
     // Time format preferences.
     public static final String TIME_FORMAT_PREF_KEY = "time_format_pref_key";

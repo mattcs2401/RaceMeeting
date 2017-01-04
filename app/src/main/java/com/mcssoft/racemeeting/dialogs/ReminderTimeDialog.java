@@ -31,8 +31,8 @@ public class ReminderTimeDialog extends DialogPreference
         numberPicker.setMinValue(0);
         numberPicker.setMaxValue(10);
         numberPicker.setWrapSelectorWheel(true);
-        numberPicker.setValue(prefVal);
-        setLabel(prefVal);
+        numberPicker.setValue(npPrefVal);
+        setLabel(npPrefVal);
     }
 
     @Override
@@ -51,15 +51,14 @@ public class ReminderTimeDialog extends DialogPreference
         setPersistent(true);
         setDialogLayoutResource(R.layout.dialog_prior_time);
 
-        prefVal = PreferenceManager.getDefaultSharedPreferences(context)
-//                .getInt(MeetingConstants.REMINDER_PREF_KEY, MeetingConstants.INIT_DEFAULT);
+        npPrefVal = PreferenceManager.getDefaultSharedPreferences(context)
                 .getInt(MeetingConstants.REMINDER_PREF_KEY, MeetingConstants.INIT_DEFAULT);
 
-        if(prefVal == MeetingConstants.INIT_DEFAULT) {
-            prefVal = MeetingConstants.REMINDER_PREF_DEFAULT;
+        if(npPrefVal == MeetingConstants.INIT_DEFAULT) {
+            npPrefVal = MeetingConstants.REMINDER_PREF_DEFAULT;
             SharedPreferences.Editor spe =
                     PreferenceManager.getDefaultSharedPreferences(context).edit();
-            spe.putInt(MeetingConstants.REMINDER_PREF_KEY, prefVal).apply();
+            spe.putInt(MeetingConstants.REMINDER_PREF_KEY, npPrefVal).apply();
         }
     }
 
@@ -73,7 +72,7 @@ public class ReminderTimeDialog extends DialogPreference
         }
     }
 
-    private int prefVal;               // current value of the preference.
+    private int npPrefVal;             // current value of the preference.
     private TextView tvMinutes;        // a textview to display 'No reminder','minute' or 'minutes'.
     private NumberPicker numberPicker; // this.
 }
