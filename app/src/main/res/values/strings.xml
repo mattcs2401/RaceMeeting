@@ -38,7 +38,7 @@
     <string name="pref_notification_enable_title">Meeting Notifications</string>
     <string name="pref_notification_enable_summary">Enable meeting notifications.</string>
 
-    <string name="pref_reminder_key">reminder_key</string>
+    <string name="pref_reminder_key">reminder_pref_key</string>
     <string name="pref_reminder_title">Meeting Reminder Time</string>
     <string name="pref_reminder_summary">Set a reminder notification before the meeting.</string>
     <string name="pref_reminder_default">3</string>

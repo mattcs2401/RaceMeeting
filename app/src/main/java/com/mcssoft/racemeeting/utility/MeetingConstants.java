@@ -48,8 +48,9 @@ public class MeetingConstants {
 
     // Reminder preferences (settings) defaults.
     public static final String REMINDER_PREF_KEY = "reminder_pref_key";
-    public static final int REMINDER_DEFAULT_PREF_VAL = 0; // == No reminder.
     public static final String[] REMINDER_LABELS = {"No reminder", "minute", "minutes"};
+    public static final int REMINDER_MIN_VALUE = 0; // also default value (== no reminder).
+    public static final int REMINDER_MAX_VALUE = 10;
 
     // Past time preferences (settings) defaults.
     public static final String TIME_PAST_PREF_KEY = "time_past_pref_key";

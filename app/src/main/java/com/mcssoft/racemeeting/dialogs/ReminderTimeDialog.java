@@ -28,8 +28,8 @@ public class ReminderTimeDialog extends DialogPreference
         numberPicker = (NumberPicker) view.findViewById(R.id.id_prior_time_numberPicker);
         tvMinutes = (TextView) view.findViewById(R.id.tvMinutes);
         numberPicker.setOnValueChangedListener(this);
-        numberPicker.setMinValue(0);
-        numberPicker.setMaxValue(10);
+        numberPicker.setMinValue(MeetingConstants.REMINDER_MIN_VALUE);
+        numberPicker.setMaxValue(MeetingConstants.REMINDER_MAX_VALUE);
         numberPicker.setWrapSelectorWheel(true);
         numberPicker.setValue(npPrefVal);
         setLabel(npPrefVal);
@@ -51,15 +51,19 @@ public class ReminderTimeDialog extends DialogPreference
         setPersistent(true);
         setDialogLayoutResource(R.layout.dialog_prior_time);
 
-        checkCustomPreference();
+        checkReminderPreference();
     }
 
-    private void checkCustomPreference() {
+    /*
+      Basically just a check that this custom preference exists. App may have been un-installed
+      and then re-installed.
+     */
+    private void checkReminderPreference() {
         npPrefVal = PreferenceManager.getDefaultSharedPreferences(getContext())
                 .getInt(MeetingConstants.REMINDER_PREF_KEY, MeetingConstants.INIT_DEFAULT);
 
         if(npPrefVal == MeetingConstants.INIT_DEFAULT) {
-            npPrefVal = MeetingConstants.REMINDER_DEFAULT_PREF_VAL;
+            npPrefVal = MeetingConstants.REMINDER_MIN_VALUE;  // 0 or no reminder.
             SharedPreferences.Editor spe =
                     PreferenceManager.getDefaultSharedPreferences(getContext()).edit();
             spe.putInt(MeetingConstants.REMINDER_PREF_KEY, npPrefVal).apply();

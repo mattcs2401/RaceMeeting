@@ -32,20 +32,20 @@ public class PreferencesFragment extends PreferenceFragment {
         return rootView;
     }
 
-    @Override
-    public void onStart() {
-        Log.d(LOG_TAG, "onStart");
-        super.onStart();
-    }
+//    @Override
+//    public void onStart() {
+//        Log.d(LOG_TAG, "onStart");
+//        super.onStart();
+//    }
 
-    @Override
-    public void onStop() {
-        Log.d(LOG_TAG, "onStop");
-        super.onStop();
-    }
+//    @Override
+//    public void onStop() {
+//        Log.d(LOG_TAG, "onStop");
+//        super.onStop();
+//    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private vars">
-    private String LOG_TAG = this.getClass().getCanonicalName();
+//    private String LOG_TAG = this.getClass().getCanonicalName();
     //</editor-fold>
 }
