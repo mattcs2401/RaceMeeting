@@ -19,7 +19,7 @@ public class ReminderTimeDialog extends DialogPreference
 
     public ReminderTimeDialog(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initialise(context);
+        initialise();
     }
 
     @Override
@@ -47,28 +47,32 @@ public class ReminderTimeDialog extends DialogPreference
         setLabel(newVal);
     }
 
-    private void initialise(Context context) {
+    private void initialise() {
         setPersistent(true);
         setDialogLayoutResource(R.layout.dialog_prior_time);
 
-        npPrefVal = PreferenceManager.getDefaultSharedPreferences(context)
+        checkCustomPreference();
+    }
+
+    private void checkCustomPreference() {
+        npPrefVal = PreferenceManager.getDefaultSharedPreferences(getContext())
                 .getInt(MeetingConstants.REMINDER_PREF_KEY, MeetingConstants.INIT_DEFAULT);
 
         if(npPrefVal == MeetingConstants.INIT_DEFAULT) {
-            npPrefVal = MeetingConstants.REMINDER_PREF_DEFAULT;
+            npPrefVal = MeetingConstants.REMINDER_DEFAULT_PREF_VAL;
             SharedPreferences.Editor spe =
-                    PreferenceManager.getDefaultSharedPreferences(context).edit();
+                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit();
             spe.putInt(MeetingConstants.REMINDER_PREF_KEY, npPrefVal).apply();
         }
     }
 
     private void setLabel(int value) {
         if(value == 0) {
-            tvMinutes.setText("No reminder");
+            tvMinutes.setText(MeetingConstants.REMINDER_LABELS[0]);
         } else if(value == 1) {
-            tvMinutes.setText("minute");
+            tvMinutes.setText(MeetingConstants.REMINDER_LABELS[1]);
         } else {
-            tvMinutes.setText("minutes");
+            tvMinutes.setText(MeetingConstants.REMINDER_LABELS[2]);
         }
     }
 

@@ -51,6 +51,9 @@
     <string name="pref_notification_key">notification_key</string>
     <string name="pref_notification_title">Meeting Notifications</string>
     <string name="pref_notification_summary">Set meeting reminder notification options.</string>
+    <string name="pref_play_default_sound">Play default sound</string>
+    <string name="pref_vibrate">Vibrate</string>
+    <string name="pref_vibrations">Vibrations</string>
 
     <string name="pref_time_past_key">time_past_key</string>
     <string name="pref_time_past_title">Meeting Past Race Time</string>

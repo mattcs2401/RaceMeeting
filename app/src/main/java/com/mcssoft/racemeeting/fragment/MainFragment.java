@@ -248,7 +248,7 @@ public class MainFragment extends Fragment
 
             // If any other value than the 0 minutes default is selected.
             if (MeetingPreferences.getInstance().meetingReminderTimePref()
-                    != MeetingConstants.REMINDER_PREF_DEFAULT) {
+                    != MeetingConstants.REMINDER_DEFAULT_PREF_VAL) {
                 meetingScheduler.startService(MeetingConstants.NOTIFY_SERVICE);
             } else {
                 // 0 minutes default is selected.

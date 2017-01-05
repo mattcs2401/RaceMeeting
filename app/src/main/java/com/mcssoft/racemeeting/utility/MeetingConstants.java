@@ -49,7 +49,8 @@ public class MeetingConstants {
 
     // Reminder preferences (settings) defaults.
     public static final String REMINDER_PREF_KEY = "reminder_key";
-    public static final int REMINDER_PREF_DEFAULT = 0; // == No reminder.
+    public static final int REMINDER_DEFAULT_PREF_VAL = 0; // == No reminder.
+    public static final String[] REMINDER_LABELS = {"No reminder", "minute", "minutes"};
 
     // Past time preferences (settings) defaults.
     public static final String TIME_PAST_PREF_KEY = "time_past_pref_key";
@@ -60,11 +61,13 @@ public class MeetingConstants {
     // Meeting notification preference.
     // (number picker prefs).
     public static final String NOTIFY_PREF_KEY = "notify_key";
-    public static final int NOTIFY_PREF_DEFAULT = 1; // == No reminder.
+    public static final int NOTIFY_DEFAULT_PREF_VAL = 1;
     // (sound prefs)
     public static final String NOTIFY_SOUND_PREF_KEY = "notify_sound_key";
+    public static final boolean NOTIFY_SOUND_DEFAULT_PREF_VAL = false;
     // (vibrate prefs)
     public static final String NOTIFY_VIBRATE_PREF_KEY = "notify_vibrate_key";
+    public static final boolean NOTIFY_VIBRATE_DEFAULT_PREF_VAL = false;
 
     // Time format preferences.
     public static final String TIME_FORMAT_PREF_KEY = "time_format_pref_key";
