@@ -100,6 +100,19 @@ public class MeetingPreferences {
         return getDefaultSharedPreferences().getBoolean(MeetingConstants.NOTIFY_ENABLE_KEY, false);
     }
 
+    public boolean meetingNotifySoundPref() {
+        return getDefaultSharedPreferences().getBoolean(MeetingConstants.NOTIFY_SOUND_PREF_KEY, false);
+    }
+
+    public boolean meetingNotifyVibratePref() {
+        return getDefaultSharedPreferences().getBoolean(MeetingConstants.NOTIFY_VIBRATE_PREF_KEY, false);
+    }
+
+    public int meetingNotifyVibrationsPref() {
+        return getDefaultSharedPreferences().getInt(MeetingConstants.NOTIFY_PREF_KEY,
+                MeetingConstants.NOTIFY_DEFAULT_PREF_VAL);
+    }
+
     /**
      * Get a listing of all the preferences (as currently set).
      * @return The preference listing in a bundle.
