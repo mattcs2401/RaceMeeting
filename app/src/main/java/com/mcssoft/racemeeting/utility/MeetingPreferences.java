@@ -36,15 +36,6 @@ public class MeetingPreferences {
     }
 
     /**
-     * Get the value of the 'Preference Notifications' slider.
-     * @return True if checked.
-     */
-    public boolean meetingNotificationPref() {
-        return getDefaultSharedPreferences()
-                .getBoolean(MeetingConstants.MEETING_NOTIFICATIONS_PREF_KEY, false);
-    }
-
-    /**
      * Get the details for the 'Meetings To Show' preference.
      * @return [0] preference (array) value, [1] preference text.
      */

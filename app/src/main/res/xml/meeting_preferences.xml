@@ -4,12 +4,6 @@
     <PreferenceCategory
         android:title="@string/pref_cat_meeting_general_title">
 
-        <SwitchPreference
-            android:key="@string/pref_meeting_notifications_key"
-            android:title="@string/pref_meeting_notifications_title"
-            android:summary="@string/pref_meeting_notifications_summary"
-            android:defaultValue="@string/pref_meeting_notifications_default" />
-
         <ListPreference
             android:title="@string/pref_default_race_code_title"
             android:summary="@string/pref_default_race_code_summary"

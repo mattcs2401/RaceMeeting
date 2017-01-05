@@ -15,11 +15,6 @@
     <string name="notify_upcoming_meeting_reminder">Meeting reminder!</string>-->
 
     <!-- Preferences. -->
-    <string name="pref_meeting_notifications_key">"pref_meeting_notifications_key</string>
-    <string name="pref_meeting_notifications_title">Preference Notifications</string>
-    <string name="pref_meeting_notifications_summary">Enable notifications when preferences change.</string>
-    <string name="pref_meeting_notifications_default">0</string>
-
     <string name="pref_show_meeting_key">show_meeting_pref_key</string>
     <string name="pref_show_meeting_title">Meetings To Show</string>
     <string name="pref_show_meeting_summary">Determine which meetings to show.</string>
@@ -45,7 +40,7 @@
 
     <string name="pref_reminder_key">reminder_key</string>
     <string name="pref_reminder_title">Meeting Reminder Time</string>
-    <string name="pref_reminder_summary">Set a reminder notification in minutes before the meeting.</string>
+    <string name="pref_reminder_summary">Set a reminder notification before the meeting.</string>
     <string name="pref_reminder_default">3</string>
 
     <string name="pref_notification_key">notification_key</string>

@@ -40,7 +40,6 @@ public class MeetingConstants {
     public static final String DEFAULT_DELETE_DIALOG_FRAGMENT_TAG = "delete_dialog_fragment_tag";
 
     // Preferences (general)
-    public static final String MEETING_NOTIFICATIONS_PREF_KEY = "meeting_notifications_pref_key";
     public static final String SHOW_MEETING_PREF_KEY = "show_meeting_pref_key";
     public static final int MEETING_SHOW_ALL = 0x01;
     public static final int MEETING_SHOW_TODAY = 0x02;
