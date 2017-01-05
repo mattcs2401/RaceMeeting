@@ -13,13 +13,13 @@ public class MeetingConstants {
     public static final int TIME_COMPONENT_HOUR_MINUTE = 2;
 
     // Dialogs constants.
-    public static final String FRAGMENT_ID = "dialog_id";              // generic key.
+    public static final String FRAGMENT_ID = "dialog_id";             // generic keys.
     public static final String FRAGMENT_RB_VAL = "dialog_btn_val";    // "       "
-    public static final int CITY_CODES_FRAGMENT_ID = 0;                // city codes dialog id.
+    public static final int CITY_CODES_FRAGMENT_ID = 0;               // city codes dialog id.
     public static final String CITY_CODES_FRAGMENT_TAG = "CITY_CODES_FRAGMENT_TAG";    // frag trans tag, city codes.
-    public static final int RACE_CODES_FRAGMENT_ID = 1;                // race codes dialog id.
+    public static final int RACE_CODES_FRAGMENT_ID = 1;               // race codes dialog id.
     public static final String RACE_CODES_FRAGMENT_TAG = "RACE_CODES_FRAGMENT_TAG";    // frag trans tag, race codes.
-    public static final String TIME_PICKER_TAG = "TIME_PICKER_TAG";  // frag trans tag, time picker.
+    public static final String TIME_PICKER_TAG = "TIME_PICKER_TAG";   // frag trans tag, time picker.
 
     // Delete dialog constants.
     public static final String DELETE_DIALOG_ROWID = "delete_dialog_summary_key";
@@ -40,15 +40,15 @@ public class MeetingConstants {
     public static final String DEFAULT_DELETE_DIALOG_FRAGMENT_TAG = "delete_dialog_fragment_tag";
 
     // Preferences (general)
-    public static final String MEETING_NOTIFICATIONS_KEY = "pref_meeting_notifications_key";
-    public static final String MEETING_SHOW_KEY = "pref_today_meeting_key";
-    public static final int MEETING_SHOW_ALL = 0;
-    public static final int MEETING_SHOW_TODAY = 1;
+    public static final String MEETING_NOTIFICATIONS_PREF_KEY = "meeting_notifications_pref_key";
+    public static final String SHOW_MEETING_PREF_KEY = "show_meeting_pref_key";
+    public static final int MEETING_SHOW_ALL = 0x01;
+    public static final int MEETING_SHOW_TODAY = 0x02;
     public static final String MEETING_SHOW_P = "P";
     public static final String MEETING_SHOW_T = "T";
 
     // Reminder preferences (settings) defaults.
-    public static final String REMINDER_PREF_KEY = "reminder_key";
+    public static final String REMINDER_PREF_KEY = "reminder_pref_key";
     public static final int REMINDER_DEFAULT_PREF_VAL = 0; // == No reminder.
     public static final String[] REMINDER_LABELS = {"No reminder", "minute", "minutes"};
 
@@ -56,18 +56,20 @@ public class MeetingConstants {
     public static final String TIME_PAST_PREF_KEY = "time_past_pref_key";
 
     // Meeting notification enable preference.
-    public static final String NOTIFY_ENABLE_KEY = "notification_enable_key";
+    public static final String NOTIFY_ENABLE_PREF_KEY = "notify_enable_pref_key";
 
-    // Meeting notification preference.
+    /* Meeting notification preference. */
     // (number picker prefs).
-    public static final String NOTIFY_PREF_KEY = "notify_key";
+    public static final String NOTIFY_PREF_KEY = "notify_pref_key";
     public static final int NOTIFY_DEFAULT_PREF_VAL = 1;
     // (sound prefs)
-    public static final String NOTIFY_SOUND_PREF_KEY = "notify_sound_key";
+    public static final String NOTIFY_SOUND_PREF_KEY = "notify_sound_pref_key";
     public static final boolean NOTIFY_SOUND_DEFAULT_PREF_VAL = false;
     // (vibrate prefs)
-    public static final String NOTIFY_VIBRATE_PREF_KEY = "notify_vibrate_key";
+    public static final String NOTIFY_VIBRATE_PREF_KEY = "notify_vibrate_pref_key";
     public static final boolean NOTIFY_VIBRATE_DEFAULT_PREF_VAL = false;
+    public static final int NOTIFY_VIBRATE_MIN_VAL = 1; // min number vibrations.
+    public static final int NOTIFY_VIBRATE_MAX_VAL = 3; // max number vibrations.
 
     // Time format preferences.
     public static final String TIME_FORMAT_PREF_KEY = "time_format_pref_key";
@@ -80,10 +82,10 @@ public class MeetingConstants {
     public static final String DEFAULT_RACE_CODE_PREF_KEY = "default_race_code_pref_key";
 
     // Services / receivers.
-    public static final int MSG_LISTING_SERVICE = 0x10;    // arbitrary value.
-    public static final int LISTING_SERVICE = 0;
-    public static final int MSG_NOTIFY_SERVICE = 0x11;   // arbitrary value.
-    public static final int NOTIFY_SERVICE = 1;
+    public static final int MSG_LISTING_SERVICE = 0x10; // arbitrary values.
+    public static final int LISTING_SERVICE = 0x11;     //
+    public static final int MSG_NOTIFY_SERVICE = 0x12;  //
+    public static final int NOTIFY_SERVICE = 0x13;      //
     public static final String LISTING_SERVICE_HANDLER = "listing_service_handler";
     public static final String NOTIFY_SERVICE_HANDLER = "notify_service_handler";
 
@@ -102,14 +104,14 @@ public class MeetingConstants {
     public static final String RACE_CODE_S = "S";
 
     // Misc.
-    public static final int NEW_MEETING = 0x0;
-    public static final int EDIT_MEETING = 0x01;
-    public static final int COPY_MEETING = 0x02;
-    public static final int SHOW_MEETING = 0x03;
+    public static final int NEW_MEETING = 0x20;
+    public static final int EDIT_MEETING = 0x21;
+    public static final int COPY_MEETING = 0x22;
+    public static final int SHOW_MEETING = 0x23;
 
-    public static final int INIT_DEFAULT = -1;              // arbitrary initialiser value.
-    public static final int NOTIFY_REQUIRED = 1;
-    public static final int MEETING_LOADER = 0;
+    public static final int INIT_DEFAULT = -1;             // arbitrary initialiser value.
+    public static final int NOTIFY_REQUIRED = 0x30;
+    public static final int MEETING_LOADER = 0x40;
     public static final String NOTIFY_REQUIRED_KEY = "notify_required_key";
     public static final int LISTING_CHANGE_REQUIRED = 1;   //
     public static final String CONTENT_TITLE = "Racemeeting nearing start time.";

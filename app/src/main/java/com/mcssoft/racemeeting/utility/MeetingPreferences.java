@@ -41,7 +41,7 @@ public class MeetingPreferences {
      */
     public boolean meetingNotificationPref() {
         return getDefaultSharedPreferences()
-                .getBoolean(MeetingConstants.MEETING_NOTIFICATIONS_KEY, false);
+                .getBoolean(MeetingConstants.MEETING_NOTIFICATIONS_PREF_KEY, false);
     }
 
     /**
@@ -51,7 +51,7 @@ public class MeetingPreferences {
     public String[] meetingShowPref() {
        String[] prefVals = new String[2];
         prefVals[0] = getDefaultSharedPreferences()
-                .getString(MeetingConstants.MEETING_SHOW_KEY, null);
+                .getString(MeetingConstants.SHOW_MEETING_PREF_KEY, null);
         prefVals[1] = context.getResources()
                 .getStringArray(R.array.meetingShowWhichVals)[Integer.parseInt(prefVals[0])];
         return prefVals;
@@ -97,7 +97,7 @@ public class MeetingPreferences {
     }
 
     public boolean meetingNotificationEnablePref() {
-        return getDefaultSharedPreferences().getBoolean(MeetingConstants.NOTIFY_ENABLE_KEY, false);
+        return getDefaultSharedPreferences().getBoolean(MeetingConstants.NOTIFY_ENABLE_PREF_KEY, false);
     }
 
     public boolean meetingNotifySoundPref() {

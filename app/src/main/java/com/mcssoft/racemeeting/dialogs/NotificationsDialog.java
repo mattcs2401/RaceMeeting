@@ -28,10 +28,10 @@ public class NotificationsDialog extends DialogPreference
     protected void onBindDialogView(View view) {
         super.onBindDialogView(view);
 
-        numberPicker = (NumberPicker) view.findViewById(R.id.id_vibrate_numberPicker);
+        numberPicker = (NumberPicker) view.findViewById(R.id.id_numberPicker_vibrate);
         numberPicker.setOnValueChangedListener(this);
-        numberPicker.setMinValue(1);
-        numberPicker.setMaxValue(3);
+        numberPicker.setMinValue(MeetingConstants.NOTIFY_VIBRATE_MIN_VAL);
+        numberPicker.setMaxValue(MeetingConstants.NOTIFY_VIBRATE_MAX_VAL);
         numberPicker.setWrapSelectorWheel(true);
         numberPicker.setValue(npPrefVal);
 
@@ -41,14 +41,14 @@ public class NotificationsDialog extends DialogPreference
             numberPicker.setEnabled(false);
         }
 
-        soundPref = (Switch) view.findViewById(R.id.id_swDefaultSound);
+        soundPref = (Switch) view.findViewById(R.id.id_switch_defaultSound);
         if(soundPrefVal) {
             soundPref.setChecked(true);
         } else {
             soundPref.setChecked(false);
         }
 
-        vibratePref = (Switch) view.findViewById(R.id.id_swVibrate);
+        vibratePref = (Switch) view.findViewById(R.id.id_switch_vibrate);
         if(vibratePrefVal) {
             vibratePref.setChecked(true);
         } else {

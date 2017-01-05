@@ -36,10 +36,10 @@
             android:defaultValue="true"/>
 
         <ListPreference
-            android:title="@string/pref_today_meeting_title"
-            android:summary="@string/pref_today_meeting_summary"
-            android:key="@string/pref_today_meeting_key"
-            android:defaultValue="@string/pref_today_meeting_default"
+            android:title="@string/pref_show_meeting_title"
+            android:summary="@string/pref_show_meeting_summary"
+            android:key="@string/pref_show_meeting_key"
+            android:defaultValue="@string/pref_show_meeting_default"
             android:entries="@array/meetingShowWhichVals"
             android:entryValues="@array/meetingShowWhich"/>
     </PreferenceCategory>

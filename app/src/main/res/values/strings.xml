@@ -20,10 +20,10 @@
     <string name="pref_meeting_notifications_summary">Enable notifications when preferences change.</string>
     <string name="pref_meeting_notifications_default">0</string>
 
-    <string name="pref_today_meeting_key">pref_today_meeting_key</string>
-    <string name="pref_today_meeting_title">Meetings To Show</string>
-    <string name="pref_today_meeting_summary">Determine which meetings to show.</string>
-    <string name="pref_today_meeting_default">1</string>
+    <string name="pref_show_meeting_key">show_meeting_pref_key</string>
+    <string name="pref_show_meeting_title">Meetings To Show</string>
+    <string name="pref_show_meeting_summary">Determine which meetings to show.</string>
+    <string name="pref_show_meeting_default">1</string>
 
     <string name="pref_time_format_key">time_format_pref_key</string>
     <string name="pref_time_format_title">Default Time Format</string>
