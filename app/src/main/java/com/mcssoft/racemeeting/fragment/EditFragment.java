@@ -157,7 +157,7 @@ public class EditFragment extends Fragment
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         Log.d(LOG_TAG, "onCreateLoader");
-        long dbRowId = MeetingConstants.INIT_DEFAULT;  // simply an initialiser.
+        long dbRowId = MeetingConstants.INIT_DEFAULT;  // simply an initialiser else complains.
 
         if(editAction.equals(MeetingConstants.EDIT_ACTION_EXISTING)) {
             dbRowId = args.getLong(MeetingConstants.EDIT_EXISTING);
@@ -253,9 +253,7 @@ public class EditFragment extends Fragment
         updateBackground(MeetingConstants.EDIT_MEETING);
 
         Bundle args = new Bundle();
-        long rowId = intent.getLongExtra(MeetingConstants.EDIT_EXISTING, 0);
-
-        args.putLong(MeetingConstants.EDIT_EXISTING, rowId);
+        args.putLong(MeetingConstants.EDIT_EXISTING, getRowIdFromArgs(MeetingConstants.EDIT_EXISTING));
         getLoaderManager().initLoader(0, args, this);
     }
 
@@ -264,9 +262,7 @@ public class EditFragment extends Fragment
         updateBackground(MeetingConstants.EDIT_MEETING);
 
         Bundle args = new Bundle();
-        long rowId = intent.getLongExtra(MeetingConstants.EDIT_COPY, 0);
-
-        args.putLong(MeetingConstants.EDIT_COPY, rowId);
+        args.putLong(MeetingConstants.EDIT_COPY, getRowIdFromArgs(MeetingConstants.EDIT_COPY));
         getLoaderManager().initLoader(0, args, this);
 
         //setCache();
@@ -471,6 +467,21 @@ public class EditFragment extends Fragment
         etRaceSelCache = etRaceSel.getText().toString();
         etRaceTimeCache = etRaceTime.getText().toString();
     }
+
+    private long getRowIdFromArgs(String action) {
+        Object object = null;
+        Bundle b = intent.getExtras();
+        switch(action) {
+            case MeetingConstants.EDIT_EXISTING:
+                object = b.get(MeetingConstants.EDIT_EXISTING);
+                break;
+            case MeetingConstants.EDIT_COPY:
+                object = b.get(MeetingConstants.EDIT_COPY);
+                break;
+        }
+        return  ((long[])object)[0];
+    }
+
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private vars">

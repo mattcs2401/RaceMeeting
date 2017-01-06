@@ -44,9 +44,8 @@ public class DetailFragment extends Fragment
 
         onCreateInitialise(rootView);
 
-        Intent intent = getActivity().getIntent();
-        Bundle args = new Bundle();
-        rowId = intent.getLongExtra(MeetingConstants.SHOW_SUMMARY, MeetingConstants.INIT_DEFAULT);
+        Bundle args = getActivity().getIntent().getExtras();
+        rowId = ((long[])args.get(MeetingConstants.SHOW_SUMMARY))[0];
 
         if(rowId != MeetingConstants.INIT_DEFAULT) {
             args.putLong(MeetingConstants.SHOW_SUMMARY, rowId);

@@ -41,7 +41,7 @@ public class DetailActivity extends AppCompatActivity implements IEditMeeting {
 
     //<editor-fold defaultstate="collapsed" desc="Region: Interface - IEditMeeting">
     @Override
-    public void onEditMeeting(int editType, long dbRowId) {
+    public void onEditMeeting(int editType, long... dbRowId) {
         Intent intent = new Intent(this, EditActivity.class);
         intent.putExtra(MeetingConstants.EDIT_EXISTING, dbRowId);
         intent.setAction(MeetingConstants.EDIT_ACTION_EXISTING);

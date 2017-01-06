@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity
 
         switch (item.getItemId()) {
             case R.id.toolbar_menu_insert:
-                onEditMeeting(0, MeetingConstants.NEW_MEETING);
+                onEditMeeting(MeetingConstants.NEW_MEETING);
                 break;
             case R.id.toolbar_preference_settings:
                 startActivity(new Intent(this, PreferencesActivity.class));
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity
 
     //<editor-fold defaultstate="collapsed" desc="Region: Interface - IEditMeeting">
     @Override
-    public void onEditMeeting(int editType, long dbRowId) {
+    public void onEditMeeting(int editType, long... dbRowId) {
         Intent intent = new Intent(this, EditActivity.class);
         switch (editType) {
             case MeetingConstants.NEW_MEETING:

@@ -2,6 +2,7 @@ package com.mcssoft.racemeeting.fragment;
 
 import android.app.Fragment;
 import android.app.LoaderManager;
+import android.content.ContentResolver;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
@@ -234,18 +235,24 @@ public class MainFragment extends Fragment
     }
 
     private Cursor queryAll() {
-        return getActivity().getContentResolver()
-                .query(Uri.parse(SchemaConstants.CONTENT_URI),
-                        DatabaseHelper.getProjection(DatabaseHelper.Projection.DatabaseSchema),
-                        null,
-                        null,
-                        SchemaConstants.SORT_ORDER);
+        ContentResolver cr = getActivity().getContentResolver();
+        if(getShowToday()) {
+            return cr.query(Uri.parse(SchemaConstants.CONTENT_URI),
+                    DatabaseHelper.getProjection(DatabaseHelper.Projection.DatabaseSchema),
+                    SchemaConstants.WHERE_FOR_SHOW, // where column datetime > midnight
+                    new String[] {String.valueOf(MeetingTime.getInstance().getMidnight())},
+                    SchemaConstants.SORT_ORDER);
+        } else {
+            return cr.query(Uri.parse(SchemaConstants.CONTENT_URI),
+                    DatabaseHelper.getProjection(DatabaseHelper.Projection.DatabaseSchema),
+                    null,
+                    null,
+                    SchemaConstants.SORT_ORDER);
+        }
     }
 
     private void checkServicesRequired() {
-
         if(recordsExist()) {
-
             // If any other value than the 0 minutes default is selected.
             if (MeetingPreferences.getInstance().meetingReminderTimePref()
                     != MeetingConstants.REMINDER_MIN_VALUE) {
