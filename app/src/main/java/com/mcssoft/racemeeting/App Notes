@@ -16,6 +16,8 @@ Usability:
 To Do (possibly):
 -----------------
 (in no particular order)
+-> Edit actions: Existing and Copy are essentially the same thing WRT selecting a rowId value.
+   -> Combine (only need to differentiate WRT Copy validation).
 -> Make the ListPreference/s as DialogPreference (so user has to explicity click Ok or Cancel).
 -> 'Show' Preference:
    -> Show (time and) date for previous meetings ? Current meetings just show time ?

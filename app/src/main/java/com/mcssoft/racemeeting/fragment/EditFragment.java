@@ -264,8 +264,6 @@ public class EditFragment extends Fragment
         Bundle args = new Bundle();
         args.putLong(MeetingConstants.EDIT_COPY, getRowIdFromArgs(MeetingConstants.EDIT_COPY));
         getLoaderManager().initLoader(0, args, this);
-
-        //setCache();
     }
     //</editor-fold>
 
@@ -437,20 +435,19 @@ public class EditFragment extends Fragment
      */
     private void setRaceCodeFromPreference() {
 
-        String rcPref = getRaceCodePreference();
-
-        if (rcPref.equals(MeetingConstants.RACE_CODE_ID_R)) {
-            // race code 'R'
-            etRaceCode.setText(MeetingConstants.RACE_CODE_R);
-        } else if (rcPref.equals(MeetingConstants.RACE_CODE_ID_G)) {
-            // race code 'G'
-            etRaceCode.setText(MeetingConstants.RACE_CODE_G);
-        } else if (rcPref.equals(MeetingConstants.RACE_CODE_ID_T)) {
-            // race code 'T'
-            etRaceCode.setText(MeetingConstants.RACE_CODE_T);
-        } else if (rcPref.equals(MeetingConstants.RACE_CODE_ID_S)) {
-            // race code 'S'
-            etRaceCode.setText(MeetingConstants.RACE_CODE_S);
+        switch (getRaceCodePreference()) {
+            case MeetingConstants.RACE_CODE_ID_R:
+                etRaceCode.setText(MeetingConstants.RACE_CODE_R);
+                break;
+            case MeetingConstants.RACE_CODE_ID_G:
+                etRaceCode.setText(MeetingConstants.RACE_CODE_G);
+                break;
+            case MeetingConstants.RACE_CODE_ID_T:
+                etRaceCode.setText(MeetingConstants.RACE_CODE_T);
+                break;
+            case MeetingConstants.RACE_CODE_ID_S:
+                etRaceCode.setText(MeetingConstants.RACE_CODE_S);
+                break;
         }
     }
 
@@ -470,16 +467,15 @@ public class EditFragment extends Fragment
 
     private long getRowIdFromArgs(String action) {
         Object object = null;
-        Bundle b = intent.getExtras();
         switch(action) {
             case MeetingConstants.EDIT_EXISTING:
-                object = b.get(MeetingConstants.EDIT_EXISTING);
+                object = intent.getExtras().get(MeetingConstants.EDIT_EXISTING);
                 break;
             case MeetingConstants.EDIT_COPY:
-                object = b.get(MeetingConstants.EDIT_COPY);
+                object = intent.getExtras().get(MeetingConstants.EDIT_COPY);
                 break;
         }
-        return  ((long[])object)[0];
+        return  ((long[])object)[0]; // Note: array is only size 1.
     }
 
     //</editor-fold>
