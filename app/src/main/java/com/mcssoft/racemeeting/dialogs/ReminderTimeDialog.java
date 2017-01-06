@@ -50,7 +50,6 @@ public class ReminderTimeDialog extends DialogPreference
     private void initialise() {
         setPersistent(true);
         setDialogLayoutResource(R.layout.dialog_prior_time);
-
         checkReminderPreference();
     }
 

@@ -40,6 +40,7 @@ import com.mcssoft.racemeeting.dialogs.TimePickDialog;
 import com.mcssoft.racemeeting.interfaces.IShowCodes;
 import com.mcssoft.racemeeting.utility.MeetingEditText;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
+import com.mcssoft.racemeeting.utility.MeetingPreferences;
 import com.mcssoft.racemeeting.utility.MeetingTime;
 
 import mcssoft.com.racemeeting.R;
@@ -426,6 +427,8 @@ public class EditFragment extends Fragment
      * @return The race code preference value.
      */
     private String getRaceCodePreference() {
+//        need to use this . . . however
+//        return MeetingPreferences.getInstance().meetingDefaultRaceCodePref()[1];
         return PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext())
                 .getString(MeetingConstants.DEFAULT_RACE_CODE_PREF_KEY, null);
     }
