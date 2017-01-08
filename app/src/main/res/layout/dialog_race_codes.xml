@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:checkedButton="@+id/id_rb_race_code_r"
+        android:id="@+id/id_rg_race_codes">
+
+        <RadioButton
+            android:text="None"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/id_rb_race_code_none"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:text="R"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/id_rb_race_code_r"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:text="T"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/id_rb_race_code_t"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:text="G"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/id_rb_race_code_g"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:text="S"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/id_rb_race_code_s"
+            android:layout_weight="1" />
+    </RadioGroup>
+
+</android.support.constraint.ConstraintLayout>

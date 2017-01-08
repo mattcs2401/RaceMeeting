@@ -46,6 +46,10 @@ public class MeetingConstants {
     public static final String MEETING_SHOW_P = "P";
     public static final String MEETING_SHOW_T = "T";
 
+    // Race code preference.
+    public static final String RACE_CODE_PREF_VAL_KEY = "race_code__pref_val_key"; // e.g. 'R'
+    public static final String RACE_CODE_PREF_ID_KEY = "race_code__pref_id_key";   // button id.
+
     // Reminder preferences (settings) defaults.
     public static final String REMINDER_PREF_KEY = "reminder_pref_key";
     public static final String[] REMINDER_LABELS = {"No reminder", "minute", "minutes"};
