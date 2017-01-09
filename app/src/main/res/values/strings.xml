@@ -28,7 +28,6 @@
     <string name="pref_default_race_code_key">default_race_code_pref_key</string>
     <string name="pref_default_race_code_title">Default Race Code</string>
     <string name="pref_default_race_code_summary">Sets the default race code.</string>
-    <string name="pref_default_race_code_default">1</string>
 
     <string name="pref_cat_meeting_general_title">Meeting General</string>
     <string name="pref_cat_notify_actions_title">Meeting Notification Actions</string>

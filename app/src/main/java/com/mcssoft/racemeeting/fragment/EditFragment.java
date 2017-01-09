@@ -416,7 +416,7 @@ public class EditFragment extends Fragment
      * @return True if a default race code set, else false.
      */
     private boolean checkUseRaceCodePreference() {
-        if (getRaceCodePreference().equals(MeetingConstants.RACE_CODE_ID_NONE)) {
+        if (getRaceCodePreference().equals(MeetingConstants.RACE_CODE_NONE)) {
             return false;
         }
         return true;
@@ -427,31 +427,14 @@ public class EditFragment extends Fragment
      * @return The race code preference value.
      */
     private String getRaceCodePreference() {
-//        need to use this . . . however
-//        return MeetingPreferences.getInstance().meetingDefaultRaceCodePref()[1];
-        return PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext())
-                .getString(MeetingConstants.DEFAULT_RACE_CODE_PREF_KEY, null);
+        return MeetingPreferences.getInstance().meetingDefaultRaceCodePref();
     }
 
     /**
      * Set the default race code preference value into the component.
      */
     private void setRaceCodeFromPreference() {
-
-        switch (getRaceCodePreference()) {
-            case MeetingConstants.RACE_CODE_ID_R:
-                etRaceCode.setText(MeetingConstants.RACE_CODE_R);
-                break;
-            case MeetingConstants.RACE_CODE_ID_G:
-                etRaceCode.setText(MeetingConstants.RACE_CODE_G);
-                break;
-            case MeetingConstants.RACE_CODE_ID_T:
-                etRaceCode.setText(MeetingConstants.RACE_CODE_T);
-                break;
-            case MeetingConstants.RACE_CODE_ID_S:
-                etRaceCode.setText(MeetingConstants.RACE_CODE_S);
-                break;
-        }
+        etRaceCode.setText(getRaceCodePreference());
     }
 
     private void hideSoftKeyboard(View view){

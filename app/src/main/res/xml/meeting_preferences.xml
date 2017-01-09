@@ -4,13 +4,10 @@
     <PreferenceCategory
         android:title="@string/pref_cat_meeting_general_title">
 
-        <ListPreference
+        <com.mcssoft.racemeeting.dialogs.RaceCodesDialog
             android:title="@string/pref_default_race_code_title"
             android:summary="@string/pref_default_race_code_summary"
-            android:key="@string/pref_default_race_code_key"
-            android:defaultValue="@string/pref_default_race_code_default"
-            android:entries="@array/meetingDefaultRaceCodeVals"
-            android:entryValues="@array/meetingDefaultRaceCode" />
+            android:key="race_codes_dialog_key" />
 
         <CheckBoxPreference
             android:key="@string/pref_time_format_key"

@@ -60,13 +60,14 @@ public class MeetingPreferences {
      * Get the details for the 'Meeting Time Format' preference.
      * @return [0] preference (array) value, [1] preference text.
      */
-    public String[] meetingDefaultRaceCodePref() {
-        String[] prefVals = new String[2];
-        prefVals[0] = getDefaultSharedPreferences()
-                .getString(MeetingConstants.DEFAULT_RACE_CODE_PREF_KEY, null);
-        prefVals[1] = context.getResources()
-                .getStringArray(R.array.meetingDefaultRaceCodeVals)[Integer.parseInt(prefVals[0])];
-        return prefVals;
+    public String meetingDefaultRaceCodePref() {
+        return getDefaultSharedPreferences()
+                .getString(MeetingConstants.RACE_CODE_PREF_VAL_KEY, null);
+    }
+
+    public int meetingDefaultRaceCodeId() {
+        return getDefaultSharedPreferences()
+                .getInt(MeetingConstants.RACE_CODE_PREF_ID_KEY, MeetingConstants.INIT_DEFAULT);
     }
 
     /**

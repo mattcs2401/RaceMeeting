@@ -47,8 +47,10 @@ public class MeetingConstants {
     public static final String MEETING_SHOW_T = "T";
 
     // Race code preference.
-    public static final String RACE_CODE_PREF_VAL_KEY = "race_code__pref_val_key"; // e.g. 'R'
-    public static final String RACE_CODE_PREF_ID_KEY = "race_code__pref_id_key";   // button id.
+    public static final String RACE_CODE_PREF_VAL_KEY = "race_code_pref_val_key"; // e.g. 'R'
+    public static final String RACE_CODE_PREF_ID_KEY = "race_code_pref_id_key";   // button id.
+    public static final String RACE_CODE_DEFAULT_VAL = "R";
+    public static final String RACE_CODE_NONE = "None";
 
     // Reminder preferences (settings) defaults.
     public static final String REMINDER_PREF_KEY = "reminder_pref_key";
@@ -82,9 +84,6 @@ public class MeetingConstants {
     public static final String TIME_FORMAT_PREF_12HR = "12HR";
     public static final String TIME_FORMAT_PREF_12HR_KEY = "1";
 
-    // Default race code preferences.
-    public static final String DEFAULT_RACE_CODE_PREF_KEY = "default_race_code_pref_key";
-
     // Services / receivers.
     public static final int MSG_LISTING_SERVICE = 0x10; // arbitrary values.
     public static final int LISTING_SERVICE = 0x11;     //
@@ -95,17 +94,6 @@ public class MeetingConstants {
 
     public static final String PAST_TIME_JOB_KEY = "past_time_job_key";
     public static final String PRIOR_TIME_JOB_KEY = "prior_time_job_key";
-
-    // Meeting race codes.
-    public static final String RACE_CODE_ID_NONE = "0";  // maps to default race code array.
-    public static final String RACE_CODE_ID_R = "1";     //
-    public static final String RACE_CODE_ID_G = "2";     //
-    public static final String RACE_CODE_ID_T = "3";     //
-    public static final String RACE_CODE_ID_S = "4";     //
-    public static final String RACE_CODE_R = "R";
-    public static final String RACE_CODE_G = "G";
-    public static final String RACE_CODE_T = "T";
-    public static final String RACE_CODE_S = "S";
 
     // Misc.
     public static final int NEW_MEETING = 0x20;
