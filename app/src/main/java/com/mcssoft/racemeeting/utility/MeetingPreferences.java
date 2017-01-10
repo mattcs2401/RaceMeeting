@@ -56,10 +56,6 @@ public class MeetingPreferences {
         return getDefaultSharedPreferences().getBoolean(MeetingConstants.TIME_FORMAT_PREF_KEY, false);
     }
 
-    /**
-     * Get the details for the 'Meeting Time Format' preference.
-     * @return [0] preference (array) value, [1] preference text.
-     */
     public String meetingDefaultRaceCodePref() {
         return getDefaultSharedPreferences()
                 .getString(MeetingConstants.RACE_CODE_PREF_VAL_KEY, null);
