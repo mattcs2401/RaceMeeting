@@ -35,9 +35,9 @@ public class RaceCodesDialog extends DialogPreference {
     protected void onBindDialogView(View view) {
         super.onBindDialogView(view);
         radioGroup = (RadioGroup) view.findViewById(R.id.id_rg_race_codes);
-        rbId = MeetingPreferences.getInstance().getDefaultSharedPreferences()
+        int radioButtonId = MeetingPreferences.getInstance().getDefaultSharedPreferences()
                 .getInt(MeetingConstants.RACE_CODE_PREF_ID_KEY, MeetingConstants.INIT_DEFAULT);
-        radioButton = (RadioButton) radioGroup.findViewById(rbId);
+        RadioButton radioButton = (RadioButton) radioGroup.findViewById(radioButtonId);
         radioButton.setChecked(true);
     }
 
@@ -46,7 +46,7 @@ public class RaceCodesDialog extends DialogPreference {
       and then re-installed.
      */
     public void checkRaceCodePreference() {
-        // Has to be PreferenceManager if 1st time app run.
+        // Has to be PreferenceManager if it's the 1st time the app is run.
         if(!(PreferenceManager.getDefaultSharedPreferences(getContext())
                 .contains(MeetingConstants.RACE_CODE_PREF_VAL_KEY))) {
 
@@ -60,13 +60,14 @@ public class RaceCodesDialog extends DialogPreference {
                 RadioButton radioButton = (RadioButton) radioGroup.getChildAt(ndx);
                 String text = radioButton.getText().toString();
                 if(text.equals(MeetingConstants.RACE_CODE_DEFAULT_VAL)) {
-                    int id = radioButton.getId();
+                    int radioButtonId = radioButton.getId();
                     text = MeetingConstants.RACE_CODE_DEFAULT_VAL;
 
                     SharedPreferences.Editor spe =
                             PreferenceManager.getDefaultSharedPreferences(getContext()).edit();
-                    spe.putInt(MeetingConstants.RACE_CODE_PREF_ID_KEY, id).apply();
+                    spe.putInt(MeetingConstants.RACE_CODE_PREF_ID_KEY, radioButtonId).apply();
                     spe.putString(MeetingConstants.RACE_CODE_PREF_VAL_KEY, text).apply();
+                    // no need to keep going.
                     break;
                 }
             }
@@ -77,9 +78,9 @@ public class RaceCodesDialog extends DialogPreference {
       Set the race code preference (basically a manual persist).
     */
     private void setRaceCodePreference() {
-        rbId = radioGroup.getCheckedRadioButtonId();
-        radioButton = (RadioButton) radioGroup.findViewById(rbId);
-        newRbText = radioButton.getText().toString();
+        int radioButtonId = radioGroup.getCheckedRadioButtonId();
+        RadioButton radioButton = (RadioButton) radioGroup.findViewById(radioButtonId);
+        String newRbText = radioButton.getText().toString();
 
         String oldRbText = MeetingPreferences.getInstance().getDefaultSharedPreferences()
                 .getString(MeetingConstants.RACE_CODE_PREF_VAL_KEY, null);
@@ -88,14 +89,11 @@ public class RaceCodesDialog extends DialogPreference {
             // Only update if preference actually changed (i.e. a different one selected).
             SharedPreferences.Editor spe
                     = MeetingPreferences.getInstance().getDefaultSharedPreferences().edit();
-            spe.putInt(MeetingConstants.RACE_CODE_PREF_ID_KEY, rbId).apply();
+            spe.putInt(MeetingConstants.RACE_CODE_PREF_ID_KEY, radioButtonId).apply();
             spe.putString(MeetingConstants.RACE_CODE_PREF_VAL_KEY, newRbText).apply();
             notifyChanged();
         }
     }
 
-    private int rbId;
-    private String newRbText;
     private RadioGroup radioGroup;
-    private RadioButton radioButton;
 }
