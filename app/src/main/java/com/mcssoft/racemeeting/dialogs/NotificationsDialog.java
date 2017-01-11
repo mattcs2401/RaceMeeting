@@ -35,11 +35,11 @@ public class NotificationsDialog extends DialogPreference
         numberPicker.setWrapSelectorWheel(true);
         numberPicker.setValue(npPrefVal);
 
-        if(vibratePrefVal) {
-            numberPicker.setEnabled(true);
-        } else {
-            numberPicker.setEnabled(false);
-        }
+//        if(vibratePrefVal) {
+//            numberPicker.setEnabled(true);
+//        } else {
+//            numberPicker.setEnabled(false);
+//        }
 
         soundPref = (Switch) view.findViewById(R.id.id_switch_defaultSound);
         if(soundPrefVal) {
@@ -51,8 +51,10 @@ public class NotificationsDialog extends DialogPreference
         vibratePref = (Switch) view.findViewById(R.id.id_switch_vibrate);
         if(vibratePrefVal) {
             vibratePref.setChecked(true);
+            numberPicker.setEnabled(true);
         } else {
             vibratePref.setChecked(false);
+            numberPicker.setEnabled(false);
         }
     }
 
