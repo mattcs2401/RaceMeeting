@@ -7,6 +7,7 @@ import android.preference.DialogPreference;
 import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.NumberPicker;
 import android.widget.Switch;
 
@@ -17,7 +18,8 @@ import java.util.Map;
 import mcssoft.com.racemeeting.R;
 
 public class NotificationsDialog extends DialogPreference
-    implements NumberPicker.OnValueChangeListener {
+    implements NumberPicker.OnValueChangeListener,
+        CompoundButton.OnCheckedChangeListener {
 
     public NotificationsDialog(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -35,12 +37,6 @@ public class NotificationsDialog extends DialogPreference
         numberPicker.setWrapSelectorWheel(true);
         numberPicker.setValue(npPrefVal);
 
-//        if(vibratePrefVal) {
-//            numberPicker.setEnabled(true);
-//        } else {
-//            numberPicker.setEnabled(false);
-//        }
-
         soundPref = (Switch) view.findViewById(R.id.id_switch_defaultSound);
         if(soundPrefVal) {
             soundPref.setChecked(true);
@@ -49,6 +45,7 @@ public class NotificationsDialog extends DialogPreference
         }
 
         vibratePref = (Switch) view.findViewById(R.id.id_switch_vibrate);
+        vibratePref.setOnCheckedChangeListener(this);
         if(vibratePrefVal) {
             vibratePref.setChecked(true);
             numberPicker.setEnabled(true);
@@ -70,9 +67,18 @@ public class NotificationsDialog extends DialogPreference
         npPrefVal = newVal;
     }
 
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if((buttonView.getId() == R.id.id_switch_vibrate) && isChecked) {
+            numberPicker.setEnabled(true);
+        } else {
+            numberPicker.setEnabled(false);
+        }
+    }
+
     /*
-      Set initial values.
-     */
+          Set initial values.
+         */
     private void initialise() {
         setDialogLayoutResource(R.layout.dialog_notifications);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
