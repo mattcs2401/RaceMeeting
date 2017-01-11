@@ -220,8 +220,8 @@ public class MainFragment extends Fragment
     }
 
     private boolean getShowToday() {
-        return (Integer.parseInt(MeetingPreferences.getInstance().meetingShowPref()[0])
-                == MeetingConstants.MEETING_SHOW_TODAY);
+        return  MeetingPreferences.getInstance().meetingShowPref()
+                .equals((R.string.pref_show_meeting_today + ""));
     }
 
     private int getDbRowId(int position) {
@@ -278,9 +278,8 @@ public class MainFragment extends Fragment
     }
 
     private CursorLoader onCreateWhichLoader() {
-        if(Integer.parseInt(MeetingPreferences.getInstance().meetingShowPref()[0])
-                == MeetingConstants.MEETING_SHOW_ALL) {
-            // For the 'Show all meetings' preference.
+        if(!getShowToday()) {
+            // For the 'Show all' preference.
             return new CursorLoader(getActivity(),
                     MeetingProvider.contentUri,
                     DatabaseHelper.getProjection(DatabaseHelper.Projection.DatabaseSchema),
@@ -288,7 +287,7 @@ public class MainFragment extends Fragment
                     null,
                     null);
         } else {
-            // For the "Show only today's meetings' preference.
+            // For the "Show only today' preference.
             return new CursorLoader(getActivity(),
                     MeetingProvider.contentUri,
                     DatabaseHelper.getProjection(DatabaseHelper.Projection.DatabaseSchema),

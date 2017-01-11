@@ -14,7 +14,6 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -424,7 +423,7 @@ public class EditFragment extends Fragment
      * @return The race code preference value.
      */
     private String getRaceCodePreference() {
-        return MeetingPreferences.getInstance().meetingDefaultRaceCodePref();
+        return MeetingPreferences.getInstance().meetingRaceCodePref();
     }
 
     /**

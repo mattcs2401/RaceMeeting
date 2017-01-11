@@ -15,7 +15,6 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="16dp"
         app:layout_constraintTop_toTopOf="parent"
-        android:checkedButton="@+id/id_rb_race_code_r"
         android:id="@+id/id_rg_race_codes">
 
         <RadioButton

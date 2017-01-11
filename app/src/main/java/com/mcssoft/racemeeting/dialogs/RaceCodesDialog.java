@@ -37,8 +37,7 @@ public class RaceCodesDialog extends DialogPreference {
         radioGroup = (RadioGroup) view.findViewById(R.id.id_rg_race_codes);
         int radioButtonId = MeetingPreferences.getInstance().getDefaultSharedPreferences()
                 .getInt(MeetingConstants.RACE_CODE_PREF_ID_KEY, MeetingConstants.INIT_DEFAULT);
-        RadioButton radioButton = (RadioButton) radioGroup.findViewById(radioButtonId);
-        radioButton.setChecked(true);
+        ((RadioButton) radioGroup.findViewById(radioButtonId)).setChecked(true);
     }
 
     /*
@@ -61,8 +60,6 @@ public class RaceCodesDialog extends DialogPreference {
                 String text = radioButton.getText().toString();
                 if(text.equals(MeetingConstants.RACE_CODE_DEFAULT_VAL)) {
                     int radioButtonId = radioButton.getId();
-                    text = MeetingConstants.RACE_CODE_DEFAULT_VAL;
-
                     SharedPreferences.Editor spe =
                             PreferenceManager.getDefaultSharedPreferences(getContext()).edit();
                     spe.putInt(MeetingConstants.RACE_CODE_PREF_ID_KEY, radioButtonId).apply();

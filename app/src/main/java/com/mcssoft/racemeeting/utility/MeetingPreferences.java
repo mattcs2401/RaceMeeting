@@ -39,13 +39,9 @@ public class MeetingPreferences {
      * Get the details for the 'Meetings To Show' preference.
      * @return [0] preference (array) value, [1] preference text.
      */
-    public String[] meetingShowPref() {
-       String[] prefVals = new String[2];
-        prefVals[0] = getDefaultSharedPreferences()
-                .getString(MeetingConstants.SHOW_MEETING_PREF_KEY, null);
-        prefVals[1] = context.getResources()
-                .getStringArray(R.array.meetingShowWhichVals)[Integer.parseInt(prefVals[0])];
-        return prefVals;
+    public String meetingShowPref() {
+        return getDefaultSharedPreferences()
+                .getString(MeetingConstants.RACE_SHOW_MEETINGS_PREF_VAL_KEY, null);
     }
 
     /**
@@ -56,12 +52,12 @@ public class MeetingPreferences {
         return getDefaultSharedPreferences().getBoolean(MeetingConstants.TIME_FORMAT_PREF_KEY, false);
     }
 
-    public String meetingDefaultRaceCodePref() {
+    public String meetingRaceCodePref() {
         return getDefaultSharedPreferences()
                 .getString(MeetingConstants.RACE_CODE_PREF_VAL_KEY, null);
     }
 
-    public int meetingDefaultRaceCodeId() {
+    public int meetingRaceCodeId() {
         return getDefaultSharedPreferences()
                 .getInt(MeetingConstants.RACE_CODE_PREF_ID_KEY, MeetingConstants.INIT_DEFAULT);
     }

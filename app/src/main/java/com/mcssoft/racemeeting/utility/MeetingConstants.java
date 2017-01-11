@@ -40,9 +40,6 @@ public class MeetingConstants {
     public static final String DEFAULT_DELETE_DIALOG_FRAGMENT_TAG = "delete_dialog_fragment_tag";
 
     // Preferences (general)
-    public static final String SHOW_MEETING_PREF_KEY = "show_meeting_pref_key";
-    public static final int MEETING_SHOW_ALL = 0x01;
-    public static final int MEETING_SHOW_TODAY = 0x02;
     public static final String MEETING_SHOW_P = "P";
     public static final String MEETING_SHOW_T = "T";
 
@@ -51,6 +48,11 @@ public class MeetingConstants {
     public static final String RACE_CODE_PREF_ID_KEY = "race_code_pref_id_key";   // button id.
     public static final String RACE_CODE_DEFAULT_VAL = "R";
     public static final String RACE_CODE_NONE = "None";
+
+    // Meetings to show prference
+    public static final String RACE_SHOW_MEETINGS_PREF_ID_KEY = "race_show_meetings_pref_id_key";
+    public static final String RACE_SHOW_MEETINGS_PREF_VAL_KEY = "race_show_meetings_pref_val_key";
+    public static final String RACE_SHOW_MEETINGS_DEFAULT_VAL = "Show only today";
 
     // Reminder preferences (settings) defaults.
     public static final String REMINDER_PREF_KEY = "reminder_pref_key";
