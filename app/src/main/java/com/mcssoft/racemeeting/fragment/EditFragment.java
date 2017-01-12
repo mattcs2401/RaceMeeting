@@ -228,42 +228,35 @@ public class EditFragment extends Fragment
     //<editor-fold defaultstate="collapsed" desc="Region: Utility">
     //<editor-fold defaultstate="collapsed" desc="Region: Utility - Edit actions">
     private void doEditAction() {
-        if(editAction.equals(MeetingConstants.EDIT_ACTION_NEW)) {
-            doEditActionNew();
-        } else if(editAction.equals(MeetingConstants.EDIT_ACTION_EXISTING)) {
-            doEditActionExisting();
-        } else if(editAction.equals(MeetingConstants.EDIT_ACTION_COPY)) {
-            doEditActionCopy();
-        }
-    }
-
-    private void doEditActionNew() {
-        actionBar.setTitle(R.string.app_name_new);
-        updateBackground(MeetingConstants.NEW_MEETING);
-        timeInMillis = MeetingTime.getInstance().getTimeInMillis();
-        updateRaceTime(timeInMillis);
-
-        if(checkUseRaceCodePreference()) {
-            setRaceCodeFromPreference();
-        }
-    }
-
-    private void doEditActionExisting() {
-        actionBar.setTitle(R.string.app_name_edit);
-        updateBackground(MeetingConstants.EDIT_MEETING);
-
         Bundle args = new Bundle();
-        args.putLong(MeetingConstants.EDIT_EXISTING, getRowIdFromArgs(MeetingConstants.EDIT_EXISTING));
-        getLoaderManager().initLoader(0, args, this);
-    }
+        boolean getLoader = false;
+        switch(editAction) {
+            case MeetingConstants.EDIT_ACTION_NEW:
+                actionBar.setTitle(R.string.app_name_new);
+                updateBackground(MeetingConstants.NEW_MEETING);
+                timeInMillis = MeetingTime.getInstance().getTimeInMillis();
+                updateRaceTime(timeInMillis);
 
-    private void doEditActionCopy() {
-        actionBar.setTitle(R.string.app_name_copy);
-        updateBackground(MeetingConstants.EDIT_MEETING);
-
-        Bundle args = new Bundle();
-        args.putLong(MeetingConstants.EDIT_COPY, getRowIdFromArgs(MeetingConstants.EDIT_COPY));
-        getLoaderManager().initLoader(0, args, this);
+                if(checkUseRaceCodePreference()) {
+                    setRaceCodeFromPreference();
+                }
+                break;
+            case MeetingConstants.EDIT_ACTION_EXISTING:
+                actionBar.setTitle(R.string.app_name_edit);
+                updateBackground(MeetingConstants.EDIT_MEETING);
+                args.putLong(MeetingConstants.EDIT_EXISTING, getRowIdFromArgs(MeetingConstants.EDIT_EXISTING));
+                getLoader = true;
+                break;
+            case MeetingConstants.EDIT_ACTION_COPY:
+                actionBar.setTitle(R.string.app_name_copy);
+                updateBackground(MeetingConstants.EDIT_MEETING);
+                args.putLong(MeetingConstants.EDIT_COPY, getRowIdFromArgs(MeetingConstants.EDIT_COPY));
+                getLoader = true;
+                break;
+        }
+        if(getLoader) {
+            getLoaderManager().initLoader(0, args, this);
+        }
     }
     //</editor-fold>
 

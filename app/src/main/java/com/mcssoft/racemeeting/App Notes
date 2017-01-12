@@ -12,12 +12,10 @@ Usability:
    enabled, then check times and update display accordingly, as well as starting the service.
 -> When the highlight preferrence is turned off, then revert the display back 'normal'.
 
------------------
-To Do (possibly):
------------------
+------
+TO DO:
+------
 (in no particular order)
--> Edit actions: Existing and Copy are essentially the same thing WRT selecting a rowId value.
-   -> Combine (only need to differentiate WRT Copy validation).
 -> 'Show' Preference:
    -> Show (time and) date for previous meetings ? Current meetings just show time ?
       -> Remove the P and T for 'Show all meetings' ?
