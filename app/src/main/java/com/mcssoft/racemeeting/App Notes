@@ -17,7 +17,7 @@ TO DO:
 ------
 (in no particular order)
 -> 'Show' Preference:
-   -> Show (time and) date for previous meetings ? Current meetings just show time ?
+   -> Show (time and) date for previous meetings ? Current (today's) meetings just show time ?
       -> Remove the P and T for 'Show all meetings' ?
 -> Review functionality of the notification service and associated task for multiple notifications.
    -> Need to loop on multiples with the same start (race) time.

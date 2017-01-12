@@ -5,6 +5,7 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.LoaderManager;
+import android.app.TimePickerDialog;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -47,7 +48,7 @@ import mcssoft.com.racemeeting.R;
 public class EditFragment extends Fragment
     implements View.OnClickListener,
                View.OnTouchListener,
-               android.app.TimePickerDialog.OnTimeSetListener,
+               TimePickerDialog.OnTimeSetListener,
                TextView.OnEditorActionListener,
                LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -225,7 +226,6 @@ public class EditFragment extends Fragment
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Utility">
-    //<editor-fold defaultstate="collapsed" desc="Region: Utility - Edit actions">
     private void doEditAction() {
         Bundle args = new Bundle();
         boolean getLoader = false;
@@ -237,28 +237,24 @@ public class EditFragment extends Fragment
                 updateRaceTime(timeInMillis);
 
                 if(checkUseRaceCodePreference()) {
-                    setRaceCodeFromPreference();
+                    etRaceCode.setText(getRaceCodePreference());
                 }
                 break;
             case MeetingConstants.EDIT_ACTION_EXISTING:
                 actionBar.setTitle(R.string.app_name_edit);
-                updateBackground(MeetingConstants.EDIT_MEETING);
-//                args.putLong(MeetingConstants.EDIT_EXISTING, getRowIdFromArgs(MeetingConstants.EDIT_EXISTING));
-                args.putLong(MeetingConstants.EDIT_EXISTING_OR_COPY, getRowIdFromArgs()); //MeetingConstants.EDIT_EXISTING));
                 getLoader = true;
                 break;
             case MeetingConstants.EDIT_ACTION_COPY:
                 actionBar.setTitle(R.string.app_name_copy);
-                updateBackground(MeetingConstants.EDIT_MEETING);
-                args.putLong(MeetingConstants.EDIT_EXISTING_OR_COPY, getRowIdFromArgs()); //MeetingConstants.EDIT_COPY));
                 getLoader = true;
                 break;
         }
         if(getLoader) {
+            updateBackground(MeetingConstants.EDIT_MEETING);
+            args.putLong(MeetingConstants.EDIT_EXISTING_OR_COPY, getRowIdFromArgs());
             getLoaderManager().initLoader(0, args, this);
         }
     }
-    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Utility - Validation">
     /**
@@ -302,7 +298,7 @@ public class EditFragment extends Fragment
      */
     private void saveValues() {
         //Log.d(LOG_TAG, "saveValues");
-        long dbRowId = MeetingConstants.INIT_DEFAULT;
+        long dbRowId;
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(SchemaConstants.COLUMN_CITY_CODE, etCityCode.getText().toString());
@@ -325,17 +321,17 @@ public class EditFragment extends Fragment
             }
         } else if(editAction.equals(MeetingConstants.EDIT_ACTION_EXISTING)) {
 
-            // reset display change required.
+            // Reset display change required.
             if ((timeInMillis > MeetingTime.getInstance().getTimeInMillis()) && (dispChgReq.equals("Y"))) {
                 contentValues.put(SchemaConstants.COLUMN_D_CHG_REQ, "N");
             }
 
-            // reset notify required.
+            // Reset notify required.
             if ((timeInMillis > MeetingTime.getInstance().getTimeInMillis()) && (notified.equals("Y"))) {
                 contentValues.put(SchemaConstants.COLUMN_NOTIFIED, "N");
             }
 
-            dbRowId = getRowIdFromArgs(); //MeetingConstants.EDIT_EXISTING);
+            dbRowId = getRowIdFromArgs();
             int count = getActivity().getContentResolver()
                     .update(ContentUris.withAppendedId(MeetingProvider.contentUri, dbRowId), contentValues, null, null);
             if (count != 1) {
@@ -382,24 +378,26 @@ public class EditFragment extends Fragment
      * Set the backround of the components.
      * @param state
      */
-    private void updateBackground(long state) {
-        if(state == MeetingConstants.NEW_MEETING) {
-            etCityCode.setBackgroundResource(R.drawable.et_basic_red_outline);
+    private void updateBackground(int state) {
+        switch (state) {
+            case MeetingConstants.NEW_MEETING:
+                etCityCode.setBackgroundResource(R.drawable.et_basic_red_outline);
 
-            if (checkUseRaceCodePreference()) {
+                if (checkUseRaceCodePreference()) {
+                    etRaceCode.setBackgroundResource(R.drawable.et_basic_green_outline);
+                } else {
+                    etRaceCode.setBackgroundResource(R.drawable.et_basic_red_outline);
+                }
+
+                etRaceNum.setBackgroundResource(R.drawable.et_basic_red_outline);
+                etRaceSel.setBackgroundResource(R.drawable.et_basic_red_outline);
+                break;
+            case MeetingConstants.EDIT_MEETING:
+                etCityCode.setBackgroundResource(R.drawable.et_basic_green_outline);
                 etRaceCode.setBackgroundResource(R.drawable.et_basic_green_outline);
-            } else {
-                etRaceCode.setBackgroundResource(R.drawable.et_basic_red_outline);
-            }
-
-            etRaceNum.setBackgroundResource(R.drawable.et_basic_red_outline);
-            etRaceSel.setBackgroundResource(R.drawable.et_basic_red_outline);
-
-        } else if(state == MeetingConstants.EDIT_MEETING) {
-            etCityCode.setBackgroundResource(R.drawable.et_basic_green_outline);
-            etRaceCode.setBackgroundResource(R.drawable.et_basic_green_outline);
-            etRaceNum.setBackgroundResource(R.drawable.et_basic_green_outline);
-            etRaceSel.setBackgroundResource(R.drawable.et_basic_green_outline);
+                etRaceNum.setBackgroundResource(R.drawable.et_basic_green_outline);
+                etRaceSel.setBackgroundResource(R.drawable.et_basic_green_outline);
+                break;
         }
     }
 
@@ -419,13 +417,6 @@ public class EditFragment extends Fragment
         return MeetingPreferences.getInstance().meetingRaceCodePref();
     }
 
-    /**
-     * Set the default race code preference value into the component.
-     */
-    private void setRaceCodeFromPreference() {
-        etRaceCode.setText(getRaceCodePreference());
-    }
-
     private void hideSoftKeyboard(View view){
         InputMethodManager imm = (InputMethodManager) getActivity()
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -440,23 +431,10 @@ public class EditFragment extends Fragment
         etRaceTimeCache = etRaceTime.getText().toString();
     }
 
-//    private long getRowIdFromArgs(String action) {
-//        Object object = null;
-//        switch(action) {
-//            case MeetingConstants.EDIT_EXISTING:
-//                object = intent.getExtras().get(MeetingConstants.EDIT_EXISTING);
-//                break;
-//            case MeetingConstants.EDIT_COPY:
-//                object = intent.getExtras().get(MeetingConstants.EDIT_COPY);
-//                break;
-//        }
-//        return  ((long[])object)[0]; // Note: array is only size 1.
-//    }
     private long getRowIdFromArgs() {
-        Object object = intent.getExtras().get(MeetingConstants.EDIT_EXISTING_OR_COPY);;
-        return  ((long[])object)[0]; // Note: array is only size 1.
+        // Note: array is only one element.
+        return  ((long[])intent.getExtras().get(MeetingConstants.EDIT_EXISTING_OR_COPY))[0];
     }
-
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private vars">
