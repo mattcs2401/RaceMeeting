@@ -87,10 +87,10 @@ public class MeetingConstants {
     public static final String TIME_FORMAT_PREF_12HR_KEY = "1";
 
     // Services / receivers.
-    public static final int MSG_LISTING_SERVICE = 0x10; // arbitrary values.
-    public static final int LISTING_SERVICE = 0x11;     //
-    public static final int MSG_NOTIFY_SERVICE = 0x12;  //
-    public static final int NOTIFY_SERVICE = 0x13;      //
+    public static final int MSG_LISTING_SERVICE = 0x10;
+    public static final int LISTING_SERVICE = 0x11;
+    public static final int MSG_NOTIFY_SERVICE = 0x12;
+    public static final int NOTIFY_SERVICE = 0x13;
     public static final String LISTING_SERVICE_HANDLER = "listing_service_handler";
     public static final String NOTIFY_SERVICE_HANDLER = "notify_service_handler";
 
@@ -103,14 +103,12 @@ public class MeetingConstants {
     public static final int COPY_MEETING = 0x22;
     public static final int SHOW_MEETING = 0x23;
 
-    public static final int INIT_DEFAULT = -1;             // arbitrary initialiser value.
+    public static final int INIT_DEFAULT = -1; // arbitrary initialiser value.
     public static final int NOTIFY_REQUIRED = 0x30;
     public static final int MEETING_LOADER = 0x40;
     public static final String NOTIFY_REQUIRED_KEY = "notify_required_key";
-    public static final int LISTING_CHANGE_REQUIRED = 1;   //
+    public static final int LISTING_CHANGE_REQUIRED = 0x31;   //
     public static final String CONTENT_TITLE = "Racemeeting nearing start time.";
-    //public static final String EDIT_EXISTING = "edit_existing";
-    //public static final String EDIT_COPY = "edit_copy";
     public static final String EDIT_EXISTING_OR_COPY = "edit_existing_or_copy";
     public static final String EDIT_ACTION_EXISTING = "edit_action_existing";
     public static final String EDIT_ACTION_NEW = "edit_action_new";
