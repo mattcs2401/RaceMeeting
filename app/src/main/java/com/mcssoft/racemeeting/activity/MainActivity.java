@@ -89,11 +89,11 @@ public class MainActivity extends AppCompatActivity
                 intent.setAction(MeetingConstants.EDIT_ACTION_NEW);
                 break;
             case MeetingConstants.EDIT_MEETING:
-                intent.putExtra(MeetingConstants.EDIT_EXISTING, dbRowId);
+                intent.putExtra(MeetingConstants.EDIT_EXISTING_OR_COPY, dbRowId);
                 intent.setAction(MeetingConstants.EDIT_ACTION_EXISTING);
                 break;
             case MeetingConstants.COPY_MEETING:
-                intent.putExtra(MeetingConstants.EDIT_COPY, dbRowId);
+                intent.putExtra(MeetingConstants.EDIT_EXISTING_OR_COPY, dbRowId);
                 intent.setAction(MeetingConstants.EDIT_ACTION_COPY);
                 break;
             case MeetingConstants.SHOW_MEETING:

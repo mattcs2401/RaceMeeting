@@ -43,7 +43,7 @@ public class DetailActivity extends AppCompatActivity implements IEditMeeting {
     @Override
     public void onEditMeeting(int editType, long... dbRowId) {
         Intent intent = new Intent(this, EditActivity.class);
-        intent.putExtra(MeetingConstants.EDIT_EXISTING, dbRowId);
+        intent.putExtra(MeetingConstants.EDIT_EXISTING_OR_COPY, dbRowId);
         intent.setAction(MeetingConstants.EDIT_ACTION_EXISTING);
         startActivity(intent);
     }

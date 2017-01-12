@@ -159,10 +159,9 @@ public class EditFragment extends Fragment
         Log.d(LOG_TAG, "onCreateLoader");
         long dbRowId = MeetingConstants.INIT_DEFAULT;  // simply an initialiser else complains.
 
-        if(editAction.equals(MeetingConstants.EDIT_ACTION_EXISTING)) {
-            dbRowId = args.getLong(MeetingConstants.EDIT_EXISTING);
-        } else if(editAction.equals(MeetingConstants.EDIT_ACTION_COPY)) {
-            dbRowId = args.getLong(MeetingConstants.EDIT_COPY);
+        if((editAction.equals(MeetingConstants.EDIT_ACTION_EXISTING)) ||
+                (editAction.equals(MeetingConstants.EDIT_ACTION_COPY))) {
+            dbRowId = args.getLong(MeetingConstants.EDIT_EXISTING_OR_COPY);
         }
 
         Uri contentUri = ContentUris.withAppendedId(MeetingProvider.contentUri, dbRowId);
@@ -244,13 +243,14 @@ public class EditFragment extends Fragment
             case MeetingConstants.EDIT_ACTION_EXISTING:
                 actionBar.setTitle(R.string.app_name_edit);
                 updateBackground(MeetingConstants.EDIT_MEETING);
-                args.putLong(MeetingConstants.EDIT_EXISTING, getRowIdFromArgs(MeetingConstants.EDIT_EXISTING));
+//                args.putLong(MeetingConstants.EDIT_EXISTING, getRowIdFromArgs(MeetingConstants.EDIT_EXISTING));
+                args.putLong(MeetingConstants.EDIT_EXISTING_OR_COPY, getRowIdFromArgs()); //MeetingConstants.EDIT_EXISTING));
                 getLoader = true;
                 break;
             case MeetingConstants.EDIT_ACTION_COPY:
                 actionBar.setTitle(R.string.app_name_copy);
                 updateBackground(MeetingConstants.EDIT_MEETING);
-                args.putLong(MeetingConstants.EDIT_COPY, getRowIdFromArgs(MeetingConstants.EDIT_COPY));
+                args.putLong(MeetingConstants.EDIT_EXISTING_OR_COPY, getRowIdFromArgs()); //MeetingConstants.EDIT_COPY));
                 getLoader = true;
                 break;
         }
@@ -335,7 +335,7 @@ public class EditFragment extends Fragment
                 contentValues.put(SchemaConstants.COLUMN_NOTIFIED, "N");
             }
 
-            dbRowId = getArguments().getLong(MeetingConstants.EDIT_EXISTING);
+            dbRowId = getRowIdFromArgs(); //MeetingConstants.EDIT_EXISTING);
             int count = getActivity().getContentResolver()
                     .update(ContentUris.withAppendedId(MeetingProvider.contentUri, dbRowId), contentValues, null, null);
             if (count != 1) {
@@ -440,16 +440,20 @@ public class EditFragment extends Fragment
         etRaceTimeCache = etRaceTime.getText().toString();
     }
 
-    private long getRowIdFromArgs(String action) {
-        Object object = null;
-        switch(action) {
-            case MeetingConstants.EDIT_EXISTING:
-                object = intent.getExtras().get(MeetingConstants.EDIT_EXISTING);
-                break;
-            case MeetingConstants.EDIT_COPY:
-                object = intent.getExtras().get(MeetingConstants.EDIT_COPY);
-                break;
-        }
+//    private long getRowIdFromArgs(String action) {
+//        Object object = null;
+//        switch(action) {
+//            case MeetingConstants.EDIT_EXISTING:
+//                object = intent.getExtras().get(MeetingConstants.EDIT_EXISTING);
+//                break;
+//            case MeetingConstants.EDIT_COPY:
+//                object = intent.getExtras().get(MeetingConstants.EDIT_COPY);
+//                break;
+//        }
+//        return  ((long[])object)[0]; // Note: array is only size 1.
+//    }
+    private long getRowIdFromArgs() {
+        Object object = intent.getExtras().get(MeetingConstants.EDIT_EXISTING_OR_COPY);;
         return  ((long[])object)[0]; // Note: array is only size 1.
     }
 

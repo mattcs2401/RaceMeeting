@@ -109,8 +109,9 @@ public class MeetingConstants {
     public static final String NOTIFY_REQUIRED_KEY = "notify_required_key";
     public static final int LISTING_CHANGE_REQUIRED = 1;   //
     public static final String CONTENT_TITLE = "Racemeeting nearing start time.";
-    public static final String EDIT_EXISTING = "edit_existing";
-    public static final String EDIT_COPY = "edit_copy";
+    //public static final String EDIT_EXISTING = "edit_existing";
+    //public static final String EDIT_COPY = "edit_copy";
+    public static final String EDIT_EXISTING_OR_COPY = "edit_existing_or_copy";
     public static final String EDIT_ACTION_EXISTING = "edit_action_existing";
     public static final String EDIT_ACTION_NEW = "edit_action_new";
     public static final String EDIT_ACTION_COPY = "edit_action_copy";
