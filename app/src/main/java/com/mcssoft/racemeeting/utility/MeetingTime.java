@@ -62,11 +62,13 @@ public class MeetingTime {
 
         if(timeFormat.equals(MeetingConstants.TIME_FORMAT_PREF_12HR)) {
             sdFormat = new SimpleDateFormat(MeetingConstants.TIME_FORMAT_12HR, Locale.getDefault());
+            time = sdFormat.format(calendar.getTime());
+            time = time.replace("am","AM").replace("pm","PM");
         } else {
             sdFormat = new SimpleDateFormat(MeetingConstants.TIME_FORMAT_24HR, Locale.getDefault());
+            time = sdFormat.format(calendar.getTime());
         }
 
-        time = sdFormat.format(calendar.getTime());
         return time;
     }
 
