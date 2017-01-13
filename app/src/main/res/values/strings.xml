@@ -44,7 +44,7 @@
     <string name="pref_reminder_default">3</string>
 
     <string name="pref_notification_key">notification_key</string>
-    <string name="pref_notification_title">Meeting Notifications</string>
+    <string name="pref_notification_title">Meeting Notification Options</string>
     <string name="pref_notification_summary">Set meeting reminder notification options.</string>
     <string name="pref_play_default_sound">Play default sound</string>
     <string name="pref_vibrate">Vibrate</string>
