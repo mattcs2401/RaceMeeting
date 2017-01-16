@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -16,7 +17,7 @@ import com.mcssoft.racemeeting.utility.MeetingPreferences;
 
 import mcssoft.com.racemeeting.R;
 
-public class MeetingsToShowDialog extends DialogPreference {
+public class MeetingsToShowDialog extends DialogPreference implements RadioGroup.OnCheckedChangeListener {
 
     public MeetingsToShowDialog(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -35,21 +36,40 @@ public class MeetingsToShowDialog extends DialogPreference {
     protected void onBindDialogView(View view) {
         super.onBindDialogView(view);
         radioGroup = (RadioGroup) view.findViewById(R.id.id_rg_show_meetings);
+        radioGroup.setOnCheckedChangeListener(this);
         int radioButtonId = MeetingPreferences.getInstance().getDefaultSharedPreferences()
                 .getInt(MeetingConstants.RACE_SHOW_MEETINGS_PREF_ID_KEY, MeetingConstants.INIT_DEFAULT);
-        ((RadioButton) radioGroup.findViewById(radioButtonId)).setChecked(true);
+
+        RadioButton radioButton = (RadioButton) radioGroup.findViewById(radioButtonId);
+        radioButton.setChecked(true);
+
+        CheckBox checkBox = (CheckBox) view.findViewById(R.id.id_cb_meeting_include_date);
+        if(!(radioButton.getText().toString().equals(MeetingConstants.RACE_SHOW_MEETINGS_DEFAULT_VAL))) {
+            // not equal to Show only today and is checked.
+            checkBox.setEnabled(true);
+        } else {
+            checkBox.setEnabled(false);
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        
     }
 
     /*
-      Basically just a check that this custom preference exists. App may have been un-installed
-      and then re-installed.
-     */
+          Basically just a check that this custom preference exists. App may have been un-installed
+          and then re-installed.
+         */
     private void checkMeetingPreference() {
         // Has to be PreferenceManager if it's the 1st time the app is run.
         if(!(PreferenceManager.getDefaultSharedPreferences(getContext())
                 .contains(MeetingConstants.RACE_SHOW_MEETINGS_PREF_VAL_KEY))) {
-
             // If the preference doesn't exist, set the default for this preference.
+
+            SharedPreferences.Editor spe =
+                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit();
+
             LayoutInflater inflater = LayoutInflater.from(getContext());
             View view = inflater.inflate(R.layout.dialog_meeting_show, null);
             RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.id_rg_show_meetings);
@@ -60,14 +80,15 @@ public class MeetingsToShowDialog extends DialogPreference {
                 String text = radioButton.getText().toString();
                 if(text.equals(MeetingConstants.RACE_SHOW_MEETINGS_DEFAULT_VAL)) {
                     int radioButtonId = radioButton.getId();
-                    SharedPreferences.Editor spe =
-                            PreferenceManager.getDefaultSharedPreferences(getContext()).edit();
                     spe.putInt(MeetingConstants.RACE_SHOW_MEETINGS_PREF_ID_KEY, radioButtonId).apply();
                     spe.putString(MeetingConstants.RACE_SHOW_MEETINGS_PREF_VAL_KEY, text).apply();
                     // no need to keep going.
                     break;
                 }
             }
+
+            spe.putBoolean(MeetingConstants.RACE_SHOW_MEETINGS_INCL_DATE_KEY,
+                    MeetingConstants.RACE_SHOW_MEETINGS_INCL_DATE_DEFAULT_VAL);
         }
     }
 
