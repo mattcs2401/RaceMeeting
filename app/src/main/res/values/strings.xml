@@ -20,6 +20,7 @@
     <string name="pref_show_meeting_summary">Determine which meetings to show.</string>
     <string name="pref_show_meeting_all">Show all</string>
     <string name="pref_show_meeting_today">Show only today</string>
+    <string name="pref_show_meeting_include_date">Include date</string>
 
     <string name="pref_time_format_key">time_format_pref_key</string>
     <string name="pref_time_format_title">Default Time Format</string>

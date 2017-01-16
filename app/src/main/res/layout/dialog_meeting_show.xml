@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -17,17 +18,27 @@
         android:id="@+id/id_rg_show_meetings">
 
         <RadioButton
-            android:text="@string/pref_show_meeting_all"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/id_rb_meeting_show_all"
-            android:layout_weight="1" />
-
-        <RadioButton
             android:text="@string/pref_show_meeting_today"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/id_rb_meeting_show_today"
             android:layout_weight="1" />
+        <RadioButton
+            android:text="@string/pref_show_meeting_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/id_rb_meeting_show_all"
+            android:layout_weight="1" />
     </RadioGroup>
+
+    <CheckBox
+        android:text="@string/pref_show_meeting_include_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/id_cb_meeting_include_date"
+        app:layout_constraintTop_toBottomOf="@+id/id_rg_show_meetings"
+        app:layout_constraintRight_toRightOf="@+id/id_rg_show_meetings"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1" />
+
 </android.support.constraint.ConstraintLayout>
