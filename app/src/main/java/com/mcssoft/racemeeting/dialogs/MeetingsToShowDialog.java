@@ -54,7 +54,7 @@ public class MeetingsToShowDialog extends DialogPreference implements RadioGroup
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        
+
     }
 
     /*
