@@ -37,7 +37,6 @@ public class MeetingPreferences {
 
     /**
      * Get the details for the 'Meetings To Show' preference.
-     * @return [0] preference (array) value, [1] preference text.
      */
     public String meetingShowPref() {
         return getDefaultSharedPreferences()

@@ -209,8 +209,8 @@ public class MainFragment extends Fragment
     }
 
     private void setMeetingAdapter() {
-        meetingAdapter = new MeetingAdapter();
-//        meetingAdapter = new MeetingAdapter(getHighlightReq(), getShowToday());
+//        meetingAdapter = new MeetingAdapter();
+        meetingAdapter = new MeetingAdapter(getHighlightReq(), getShowToday());
         meetingAdapter.setOnItemClickListener(this);
         meetingAdapter.setOnItemLongClickListener(this);
     }
@@ -220,8 +220,15 @@ public class MainFragment extends Fragment
     }
 
     private boolean getShowToday() {
-        return  MeetingPreferences.getInstance().meetingShowPref()
-                .equals((R.string.pref_show_meeting_today + ""));
+        boolean showAll = false;
+        if(MeetingPreferences.getInstance().meetingShowPref()
+                .equals(MeetingConstants.RACE_SHOW_MEETINGS_DEFAULT_VAL)) {
+            // 'Show only today' - do nothing?
+        } else {
+            
+        }
+
+        return showAll;
     }
 
     private int getDbRowId(int position) {
