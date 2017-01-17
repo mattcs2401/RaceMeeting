@@ -98,6 +98,24 @@ public class MeetingPreferences {
     }
 
     /**
+     * Gets the id of the currently selected radio button of the race show preference.
+     * @return The id of the currently selected radio button on preference save.
+     */
+    public int meetingRaceShowPref() {
+        return getDefaultSharedPreferences().getInt(MeetingConstants.RACE_SHOW_MEETINGS_PREF_ID_KEY,
+                MeetingConstants.INIT_DEFAULT);
+    }
+
+    /**
+     * Gets the state of the 'Include date' checkbox on the race show preference 'Show all'.
+     * @return True if was checked on preference save.
+     */
+    public boolean meetingRaceShowDatePref() {
+        return getDefaultSharedPreferences()
+                .getBoolean(MeetingConstants.RACE_SHOW_MEETINGS_INCL_DATE_KEY, false);
+    }
+
+    /**
      * Get a listing of all the preferences (as currently set).
      * @return The preference listing in a bundle.
      */

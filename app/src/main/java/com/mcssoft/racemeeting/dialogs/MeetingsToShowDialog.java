@@ -17,7 +17,8 @@ import com.mcssoft.racemeeting.utility.MeetingPreferences;
 
 import mcssoft.com.racemeeting.R;
 
-public class MeetingsToShowDialog extends DialogPreference implements RadioGroup.OnCheckedChangeListener {
+public class MeetingsToShowDialog extends DialogPreference
+        implements View.OnClickListener {
 
     public MeetingsToShowDialog(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -28,39 +29,91 @@ public class MeetingsToShowDialog extends DialogPreference implements RadioGroup
     @Override
     public void onClick(DialogInterface dialog, int which) {
         if(which == DialogInterface.BUTTON_POSITIVE) {
-            setMeetingPreference();
+            saveMeetingPreference();
         }
     }
 
     @Override
     protected void onBindDialogView(View view) {
         super.onBindDialogView(view);
+
         radioGroup = (RadioGroup) view.findViewById(R.id.id_rg_show_meetings);
-        radioGroup.setOnCheckedChangeListener(this);
-        int radioButtonId = MeetingPreferences.getInstance().getDefaultSharedPreferences()
-                .getInt(MeetingConstants.RACE_SHOW_MEETINGS_PREF_ID_KEY, MeetingConstants.INIT_DEFAULT);
+        rbShowAll = (RadioButton) view.findViewById(R.id.id_rb_meeting_show_all);
+        rbShowToday = (RadioButton) view.findViewById(R.id.id_rb_meeting_show_today);
+        checkBox = (CheckBox) view.findViewById(R.id.id_cb_meeting_include_date);
 
-        RadioButton radioButton = (RadioButton) radioGroup.findViewById(radioButtonId);
-        radioButton.setChecked(true);
+        rbShowAll.setOnClickListener(this);
+        rbShowToday.setOnClickListener(this);
+        checkBox.setOnClickListener(this);
 
-        CheckBox checkBox = (CheckBox) view.findViewById(R.id.id_cb_meeting_include_date);
-        if(!(radioButton.getText().toString().equals(MeetingConstants.RACE_SHOW_MEETINGS_DEFAULT_VAL))) {
-            // not equal to Show only today and is checked.
+        radioButtonId = MeetingPreferences.getInstance().meetingRaceShowPref();
+
+        if(rbShowAll.getId() == radioButtonId) {
+            rbShowAll.setChecked(true);
             checkBox.setEnabled(true);
         } else {
+            rbShowToday.setChecked(true);
             checkBox.setEnabled(false);
+        }
+        // Checkbox may currently be disabled, but previously was (enabled and) checked.
+        if(MeetingPreferences.getInstance().meetingRaceShowDatePref()) {
+            checkBox.setChecked(true);
+        } else {
+            checkBox.setChecked(false);
         }
     }
 
     @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-
+    public void onClick(View view) {
+        int viewId = view.getId();
+        switch (viewId) {
+            case R.id.id_rb_meeting_show_all:
+                checkBox.setEnabled(true);
+                break;
+            case R.id.id_rb_meeting_show_today:
+                checkBox.setEnabled(false);
+                break;
+        }
     }
 
     /*
-          Basically just a check that this custom preference exists. App may have been un-installed
-          and then re-installed.
-         */
+      Set the meeting(s) to show preference (basically a manual persist).
+    */
+    private void saveMeetingPreference() {
+        boolean notifyChange = false;
+        radioButtonId = radioGroup.getCheckedRadioButtonId();
+        RadioButton radioButton = (RadioButton) radioGroup.findViewById(radioButtonId);
+
+        String newRbText = radioButton.getText().toString();
+        String oldRbText = MeetingPreferences.getInstance().getDefaultSharedPreferences()
+                .getString(MeetingConstants.RACE_SHOW_MEETINGS_PREF_VAL_KEY, null);
+
+        SharedPreferences.Editor spe
+                = MeetingPreferences.getInstance().getDefaultSharedPreferences().edit();
+
+        if(!(oldRbText.equals(newRbText))) {
+            // Only update if preference actually changed (i.e. a different one selected).
+            spe.putInt(MeetingConstants.RACE_SHOW_MEETINGS_PREF_ID_KEY, radioButtonId).apply();
+            spe.putString(MeetingConstants.RACE_SHOW_MEETINGS_PREF_VAL_KEY, newRbText).apply();
+            notifyChange = true;
+        }
+
+        boolean cbOldVal = MeetingPreferences.getInstance().getDefaultSharedPreferences()
+                .getBoolean(MeetingConstants.RACE_SHOW_MEETINGS_INCL_DATE_KEY, false);
+        boolean cbNewVal = checkBox.isChecked();
+
+        if(cbOldVal != cbNewVal) {
+            spe.putBoolean(MeetingConstants.RACE_SHOW_MEETINGS_INCL_DATE_KEY, cbNewVal).apply();
+            notifyChange = true;
+        }
+
+        if(notifyChange) { notifyChanged(); }
+    }
+
+    /*
+      Basically just a check that this custom preference exists. App may have been un-installed
+      and then re-installed.
+    */
     private void checkMeetingPreference() {
         // Has to be PreferenceManager if it's the 1st time the app is run.
         if(!(PreferenceManager.getDefaultSharedPreferences(getContext())
@@ -86,33 +139,15 @@ public class MeetingsToShowDialog extends DialogPreference implements RadioGroup
                     break;
                 }
             }
-
+            // include the checkbox.
             spe.putBoolean(MeetingConstants.RACE_SHOW_MEETINGS_INCL_DATE_KEY,
                     MeetingConstants.RACE_SHOW_MEETINGS_INCL_DATE_DEFAULT_VAL);
         }
     }
 
-    /*
-      Set the meeting(s) to show preference (basically a manual persist).
-    */
-    private void setMeetingPreference() {
-        int radioButtonId = radioGroup.getCheckedRadioButtonId();
-        RadioButton radioButton = (RadioButton) radioGroup.findViewById(radioButtonId);
-        String newRbText = radioButton.getText().toString();
-
-        String oldRbText = MeetingPreferences.getInstance().getDefaultSharedPreferences()
-                .getString(MeetingConstants.RACE_SHOW_MEETINGS_PREF_VAL_KEY, null);
-
-        if(oldRbText != newRbText) {
-            // Only update if preference actually changed (i.e. a different one selected).
-            SharedPreferences.Editor spe
-                    = MeetingPreferences.getInstance().getDefaultSharedPreferences().edit();
-            spe.putInt(MeetingConstants.RACE_SHOW_MEETINGS_PREF_ID_KEY, radioButtonId).apply();
-            spe.putString(MeetingConstants.RACE_SHOW_MEETINGS_PREF_VAL_KEY, newRbText).apply();
-            notifyChanged();
-        }
-    }
-
-    private RadioGroup radioGroup;
-
+    private CheckBox checkBox;         // the 'Include date' checkbox.
+    private RadioGroup radioGroup;     //
+    private RadioButton rbShowAll;     // the 'Show all' radio button.
+    private RadioButton rbShowToday;   // the 'Show only today' radio button.
+    private int radioButtonId;         // id of currently selected radio button.
 }
