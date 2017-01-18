@@ -139,7 +139,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
                     holder.getRaceDay().setText(null);
                 } else {
                     holder.getRaceDay().setBackgroundResource(R.drawable.tv_day_outline);
-                    holder.getRaceDay().setText(MeetingConstants.MEETING_SHOW_P);
+                    holder.getRaceDay().setText(MeetingConstants.MEETING_SHOW_PREVIOUS);
                 }
             }
         }

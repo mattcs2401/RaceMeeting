@@ -41,7 +41,7 @@ public class MeetingConstants {
     public static final String DEFAULT_DELETE_DIALOG_FRAGMENT_TAG = "delete_dialog_fragment_tag";
 
     // Preferences (general)
-    public static final String MEETING_SHOW_P = "P";
+    public static final String MEETING_SHOW_PREVIOUS = "P";
 
     // Race code preference.
     public static final String RACE_CODE_PREF_VAL_KEY = "race_code_pref_val_key"; // e.g. 'R'
