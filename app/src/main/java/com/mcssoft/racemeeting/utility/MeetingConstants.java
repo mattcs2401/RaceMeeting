@@ -28,6 +28,7 @@ public class MeetingConstants {
     public static final String TIME_FORMAT = "time_format";     // generic 'key' value.
     public static final String TIME_FORMAT_12HR = "hh:mm aa";   // HH:MM am/pm
     public static final String TIME_FORMAT_24HR = "kk:mm";      // HH24:MI
+    public static final String DATE_FORMAT = "dd/MM/yyyy";
 
     // Calendar misc.
     public static final int ONE_MINUTE = 60000;       // i.e. 60000ms

@@ -55,7 +55,7 @@ public class MeetingTime {
         String time;
         SimpleDateFormat sdFormat;
 
-        calendar = Calendar.getInstance(Locale.getDefault());
+        Calendar calendar = Calendar.getInstance(Locale.getDefault());
         calendar.setTime(new Date(timeInMillis));
 
         setTimeFormatFromPreferences();
@@ -72,6 +72,17 @@ public class MeetingTime {
         return time;
     }
 
+    public String getFormattedDateFromMillis(long timeInMillis) {
+        String ddMMyyyy;
+        SimpleDateFormat sdFormat;
+
+        Calendar calendar = Calendar.getInstance(Locale.getDefault());
+        calendar.setTime(new Date(timeInMillis));
+        sdFormat = new SimpleDateFormat(MeetingConstants.DATE_FORMAT, Locale.getDefault());
+        ddMMyyyy = sdFormat.format(calendar.getTime());
+        return ddMMyyyy;
+    }
+
     /**
      * Get the time in milli seconds based on the given hour and minute values.
      * @param time int[2] where; [0] == hour, [1] ==  minute (can be null).
@@ -82,7 +93,7 @@ public class MeetingTime {
             return MeetingConstants.INIT_DEFAULT;
         }
 
-        calendar = Calendar.getInstance(Locale.getDefault());
+        Calendar calendar = Calendar.getInstance(Locale.getDefault());
         calendar.set(Calendar.HOUR_OF_DAY, time[0]);
         calendar.set(Calendar.MINUTE, time[1]);
 
@@ -108,7 +119,7 @@ public class MeetingTime {
 
         int [] time = new int[2];
 
-        calendar = Calendar.getInstance(Locale.getDefault());
+        Calendar calendar = Calendar.getInstance(Locale.getDefault());
         calendar.setTime(new Date(timeInMillis));
 
         switch(component) {
@@ -147,7 +158,7 @@ public class MeetingTime {
      * @return A time value that is the race time minus the reminder time.
      */
     public long getTimeMinus(int reminderTime, long raceTime) {
-        calendar = Calendar.getInstance(Locale.getDefault());
+        Calendar calendar = Calendar.getInstance(Locale.getDefault());
         calendar.setTime(new Date(raceTime));
         calendar.add(Calendar.MINUTE, -reminderTime);
         return calendar.getTimeInMillis();
@@ -205,18 +216,16 @@ public class MeetingTime {
      * Set the time format 12HR/24HR from the app's shared preferences.
      */
     private void setTimeFormatFromPreferences() {
-        boolean format = PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean(MeetingConstants.TIME_FORMAT_PREF_KEY, false);
+        if(PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean(MeetingConstants.TIME_FORMAT_PREF_KEY, false)) {
 
-        if(format) {
             timeFormat = MeetingConstants.TIME_FORMAT_PREF_24HR;
         } else {
             timeFormat = MeetingConstants.TIME_FORMAT_PREF_12HR;
         }
     }
 
-    private String timeFormat;    // the current time format.
-    private Calendar calendar;    // multi method general usage variable.
+    private String timeFormat;    // the current time format (12HR/24HR).
     private Context context;      // app context for shared preferences.
 
     private static volatile MeetingTime instance = null;
