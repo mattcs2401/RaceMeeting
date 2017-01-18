@@ -16,9 +16,8 @@ Usability:
 TO DO:
 ------
 (in no particular order)
--> 'Show' Preference:
-   -> Show (time and) date for previous meetings ? Current (today's) meetings just show time ?
-      -> Remove the P and T for 'Show all meetings' ?
+-> On entering race no and race sel values:
+   -> when enter for race no and keyboard ok is selected, move cursor to race sel.
 -> Review functionality of the notification service and associated task for multiple notifications.
    -> Need to loop on multiples with the same start (race) time.
 -> Show full date/time in DetailFragment.

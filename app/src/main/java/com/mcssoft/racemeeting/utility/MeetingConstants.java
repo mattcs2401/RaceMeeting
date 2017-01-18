@@ -42,7 +42,6 @@ public class MeetingConstants {
 
     // Preferences (general)
     public static final String MEETING_SHOW_P = "P";
-    public static final String MEETING_SHOW_T = "T";
 
     // Race code preference.
     public static final String RACE_CODE_PREF_VAL_KEY = "race_code_pref_val_key"; // e.g. 'R'
