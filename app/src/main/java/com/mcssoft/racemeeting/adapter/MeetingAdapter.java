@@ -128,15 +128,20 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
         }
 
         if(showToday == false) {
-            holder.getRaceDay().setBackgroundResource(R.drawable.tv_day_outline);
-            if (MeetingTime.getInstance().isTimeToday(lRaceTime)) {
-                holder.getRaceDay().setText(MeetingConstants.MEETING_SHOW_T);
+            // 'Show all' preference selected.
+            if(MeetingPreferences.getInstance().meetingRaceShowDatePref()) {
+                // the 'Include date' preference is selected
+                String date = MeetingTime.getInstance().getFormattedDateFromMillis(lRaceTime);
+                holder.getRaceDay().setText(date);
             } else {
-                holder.getRaceDay().setText(MeetingConstants.MEETING_SHOW_P);
+                if (MeetingTime.getInstance().isTimeToday(lRaceTime)) {
+                    holder.getRaceDay().setBackgroundResource(0);
+                    holder.getRaceDay().setText(null);
+                } else {
+                    holder.getRaceDay().setBackgroundResource(R.drawable.tv_day_outline);
+                    holder.getRaceDay().setText(MeetingConstants.MEETING_SHOW_P);
+                }
             }
-        } else {
-            holder.getRaceDay().setBackgroundResource(0);
-            holder.getRaceDay().setText(null);
         }
     }
 

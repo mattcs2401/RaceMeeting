@@ -220,15 +220,9 @@ public class MainFragment extends Fragment
     }
 
     private boolean getShowToday() {
-        boolean showAll = false;
-        if(MeetingPreferences.getInstance().meetingShowPref()
-                .equals(MeetingConstants.RACE_SHOW_MEETINGS_DEFAULT_VAL)) {
-            // 'Show only today' - do nothing?
-        } else {
-            
-        }
-
-        return showAll;
+        // If the 'Show only today' preference set, this will return false.
+        return (MeetingPreferences.getInstance().meetingShowPref()
+                .equals(MeetingConstants.RACE_SHOW_MEETINGS_DEFAULT_VAL));
     }
 
     private int getDbRowId(int position) {
