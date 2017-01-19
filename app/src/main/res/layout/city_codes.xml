@@ -11,7 +11,7 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/id_fab_city_codes"
-        style="@style/FloatingActionButtonMedium"
+        style="@style/FloatingActionButtonLarge"
         android:layout_margin="@dimen/fab_margin"
         android:src="@android:drawable/ic_input_add"
         app:layout_anchor="@id/id_city_codes"
