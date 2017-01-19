@@ -209,7 +209,6 @@ public class MainFragment extends Fragment
     }
 
     private void setMeetingAdapter() {
-//        meetingAdapter = new MeetingAdapter();
         meetingAdapter = new MeetingAdapter(getHighlightReq(), getShowToday());
         meetingAdapter.setOnItemClickListener(this);
         meetingAdapter.setOnItemLongClickListener(this);

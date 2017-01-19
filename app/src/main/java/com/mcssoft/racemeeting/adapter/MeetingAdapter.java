@@ -19,8 +19,6 @@ import mcssoft.com.racemeeting.R;
 
 public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
 
-    public MeetingAdapter() {}
-
     public MeetingAdapter(boolean highliteChgReq, boolean showToday) {
         this.highliteReq = highliteChgReq;
         this.showToday = showToday;
