@@ -219,7 +219,7 @@ public class MainFragment extends Fragment
     }
 
     private boolean getShowToday() {
-        // If the 'Show only today' preference set, this will return false.
+        // If the 'Show only today' preference is set, this will return true.
         return (MeetingPreferences.getInstance().meetingShowPref()
                 .equals(MeetingConstants.RACE_SHOW_MEETINGS_DEFAULT_VAL));
     }
@@ -230,25 +230,28 @@ public class MainFragment extends Fragment
         return  cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_ROWID));
     }
 
+    // TODO
+    // if preference is "Sow only today", i.e. getShowToday returns true, but, no records in result,
+    // then get all records (if any exist) and set notification in main view
+
     private boolean recordsExist() {
         return (queryAll().getCount() > 0) ? true : false;
     }
 
     private Cursor queryAll() {
-        ContentResolver cr = getActivity().getContentResolver();
-        if(getShowToday()) {
-            return cr.query(Uri.parse(SchemaConstants.CONTENT_URI),
-                    DatabaseHelper.getProjection(DatabaseHelper.Projection.DatabaseSchema),
-                    SchemaConstants.WHERE_FOR_SHOW, // where column datetime > midnight
-                    new String[] {String.valueOf(MeetingTime.getInstance().getMidnight())},
-                    SchemaConstants.SORT_ORDER);
-        } else {
-            return cr.query(Uri.parse(SchemaConstants.CONTENT_URI),
+            return getActivity().getContentResolver().query(Uri.parse(SchemaConstants.CONTENT_URI),
                     DatabaseHelper.getProjection(DatabaseHelper.Projection.DatabaseSchema),
                     null,
                     null,
                     SchemaConstants.SORT_ORDER);
-        }
+    }
+
+    private Cursor queryAllToday() {
+        return getActivity().getContentResolver().query(Uri.parse(SchemaConstants.CONTENT_URI),
+                DatabaseHelper.getProjection(DatabaseHelper.Projection.DatabaseSchema),
+                SchemaConstants.WHERE_FOR_SHOW, // where column datetime > midnight
+                new String[] {String.valueOf(MeetingTime.getInstance().getMidnight())},
+                SchemaConstants.SORT_ORDER);
     }
 
     private void checkServicesRequired() {

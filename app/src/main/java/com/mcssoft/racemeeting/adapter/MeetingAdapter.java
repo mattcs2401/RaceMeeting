@@ -73,7 +73,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
         cursor = newCursor;
 
         // set column indexes for use by the (adapter)OnBindViewHolder.
-        if(cursor != null) {
+        if((cursor != null) && (cursor.getCount() > 0)){
             cursor.moveToFirst();
             idColNdx = cursor.getColumnIndex(SchemaConstants.COLUMN_ROWID);
             cityCodeColNdx = cursor.getColumnIndex(SchemaConstants.COLUMN_CITY_CODE);
