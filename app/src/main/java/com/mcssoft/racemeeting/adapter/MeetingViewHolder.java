@@ -13,6 +13,11 @@ public class MeetingViewHolder extends RecyclerView.ViewHolder
         implements View.OnClickListener,
                    View.OnLongClickListener {
 
+    public MeetingViewHolder(View view) {
+        super(view);
+        tvEmptyView = (TextView) view.findViewById(R.id.id_tvEmptyView);
+    }
+
     public MeetingViewHolder(View view, IItemClickListener listener, IItemLongClickListener longListener) {
         super(view);
         // Set the ViewHolder components.
@@ -72,6 +77,8 @@ public class MeetingViewHolder extends RecyclerView.ViewHolder
     public TextView getRaceDay() {
         return tvRaceDay;
     }
+
+    public TextView getEmptyText() { return tvEmptyView; }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private vars">
@@ -81,6 +88,7 @@ public class MeetingViewHolder extends RecyclerView.ViewHolder
     private TextView tvRaceSel;
     private TextView tvRaceTime;
     private TextView tvRaceDay;
+    private TextView tvEmptyView;
 
     private IItemClickListener itemClickListener;
     private IItemLongClickListener itemLongClickListener;

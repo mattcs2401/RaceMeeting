@@ -2,7 +2,6 @@ package com.mcssoft.racemeeting.fragment;
 
 import android.app.Fragment;
 import android.app.LoaderManager;
-import android.content.ContentResolver;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
@@ -59,16 +58,14 @@ public class MainFragment extends Fragment
         rootView = inflater.inflate(R.layout.fragment_main, container, false);
         Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.id_toolbar_frag_main);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-
-        setMeetingAdapter();
-
         return rootView;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        getLoaderManager().initLoader(MeetingConstants.MEETING_LOADER, null, this);
+        setMeetingAdapter();
+//        getLoaderManager().initLoader(MeetingConstants.MEETING_LOADER, null, this);
         onActivityCreated = true;
     }
 
@@ -77,16 +74,24 @@ public class MainFragment extends Fragment
         Log.d(LOG_TAG, "onStart");
         super.onStart();
 
+        setRecyclerView(rootView);
+
+        String records = checkRecordsExist();
+        if(records.equals(MeetingConstants.RACE_PRIOR_MEETINGS_EXIST)) {
+            meetingAdapter.setEmptyView(true);
+        } else if(Integer.parseInt(records) > 0) {
+            meetingAdapter.setEmptyView(false);
+            meetingAdapter.setHighliteReq(getHighlightReq());
+            meetingAdapter.setShowToday(getShowToday());
+            checkServicesRequired();
+        }
+
         if(onActivityCreated) {
             onActivityCreated = false;
+            getLoaderManager().initLoader(MeetingConstants.MEETING_LOADER, null, this);
         } else {
             getLoaderManager().restartLoader(MeetingConstants.MEETING_LOADER, null, this);
         }
-
-        setRecyclerView(rootView);
-        meetingAdapter.setHighliteReq(getHighlightReq());
-        meetingAdapter.setShowToday(getShowToday());
-        checkServicesRequired();
     }
 
     @Override
@@ -230,12 +235,27 @@ public class MainFragment extends Fragment
         return  cursor.getInt(cursor.getColumnIndex(SchemaConstants.COLUMN_ROWID));
     }
 
-    // TODO
-    // if preference is "Sow only today", i.e. getShowToday returns true, but, no records in result,
-    // then get all records (if any exist) and set notification in main view
+    private String checkRecordsExist() {
+        String records = "";
+        int count;
 
-    private boolean recordsExist() {
-        return (queryAll().getCount() > 0) ? true : false;
+        if(getShowToday()) {
+            count = queryAllToday().getCount();
+            if(count > 0) {
+                // records from today exist.
+                records = String.valueOf(count);
+            } else {
+                count = queryAll().getCount();
+                if(count > 0) {
+                    // previous records exist.
+                    records = MeetingConstants.RACE_PRIOR_MEETINGS_EXIST;
+                }
+            }
+        } else {
+            count = queryAll().getCount();
+            records = String.valueOf(count);
+        }
+        return  records;
     }
 
     private Cursor queryAll() {
@@ -255,27 +275,25 @@ public class MainFragment extends Fragment
     }
 
     private void checkServicesRequired() {
-        if(recordsExist()) {
-            // If any other value than the 0 minutes default is selected.
-            if (MeetingPreferences.getInstance().meetingReminderTimePref()
-                    != MeetingConstants.REMINDER_MIN_VALUE) {
-                meetingScheduler.startService(MeetingConstants.NOTIFY_SERVICE);
-            } else {
-                // 0 minutes default is selected.
-                if (meetingScheduler.isSvcRunning(MeetingConstants.NOTIFY_SERVICE)) {
-                    meetingScheduler.cancelJobs(MeetingConstants.NOTIFY_SERVICE);
-                    meetingScheduler.stopService(MeetingConstants.NOTIFY_SERVICE);
-                }
+        // If any other value than the 0 minutes default is selected.
+        if (MeetingPreferences.getInstance().meetingReminderTimePref()
+                != MeetingConstants.REMINDER_MIN_VALUE) {
+            meetingScheduler.startService(MeetingConstants.NOTIFY_SERVICE);
+        } else {
+            // 0 minutes default is selected.
+            if (meetingScheduler.isSvcRunning(MeetingConstants.NOTIFY_SERVICE)) {
+                meetingScheduler.cancelJobs(MeetingConstants.NOTIFY_SERVICE);
+                meetingScheduler.stopService(MeetingConstants.NOTIFY_SERVICE);
             }
+        }
 
-            // Meeting Past Race Time checkbox is selected.
-            if (MeetingPreferences.getInstance().meetingPastTimePref()) {
-                meetingScheduler.startService(MeetingConstants.LISTING_SERVICE);
-            } else {
-                if (meetingScheduler.isSvcRunning(MeetingConstants.LISTING_SERVICE)) {
-                    meetingScheduler.cancelJobs(MeetingConstants.LISTING_SERVICE);
-                    meetingScheduler.stopService(MeetingConstants.LISTING_SERVICE);
-                }
+        // Meeting Past Race Time checkbox is selected.
+        if (MeetingPreferences.getInstance().meetingPastTimePref()) {
+            meetingScheduler.startService(MeetingConstants.LISTING_SERVICE);
+        } else {
+            if (meetingScheduler.isSvcRunning(MeetingConstants.LISTING_SERVICE)) {
+                meetingScheduler.cancelJobs(MeetingConstants.LISTING_SERVICE);
+                meetingScheduler.stopService(MeetingConstants.LISTING_SERVICE);
             }
         }
     }

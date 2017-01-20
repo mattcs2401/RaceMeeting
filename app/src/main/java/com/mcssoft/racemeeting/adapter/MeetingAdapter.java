@@ -27,11 +27,17 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
     @Override
     public MeetingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Log.d(LOG_TAG, "onCreateViewHolder");
+        // Note: don't need to keep a local copy of MeetingViewHolder, framework now supplies.
         if ( parent instanceof RecyclerView ) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.racemeet_row, parent, false);
-            view.setFocusable(true);
-            // don't need to keep a local copy, framework now supplies.
-            return new MeetingViewHolder(view, itemClickListener, itemLongClickListener);
+            if(!emptyView) {
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.racemeet_row, parent, false);
+                view.setFocusable(true);
+                // don't need to keep a local copy, framework now supplies.
+                return new MeetingViewHolder(view, itemClickListener, itemLongClickListener);
+            } else {
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.racemeet_empty, parent, false);
+                return new MeetingViewHolder(view);
+            }
         } else {
             throw new RuntimeException("Not bound to RecyclerView");
         }
@@ -43,7 +49,11 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
         if (!cursor.moveToPosition(position)) {
             throw new IllegalStateException("Couldn't move cursor to position: " + position);
         } else {
-            adapaterOnBindViewHolder(holder, position);
+            if(!emptyView) {
+                adapaterOnBindViewHolder(holder, position);
+            } else {
+                holder.getEmptyText().getText().toString();
+            }
         }
     }
 
@@ -97,6 +107,8 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
 
     public void setShowToday(boolean showToday) { this.showToday = showToday; }
 
+    public void setEmptyView(boolean emptyView) { this.emptyView = emptyView; }
+
     private void adapaterOnBindViewHolder(MeetingViewHolder holder, int position) {
         cursor.moveToPosition(position);
 
@@ -147,6 +159,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
     private Cursor cursor;
     private boolean showToday;
     private boolean highliteReq;
+    private boolean emptyView;
 
     private int idColNdx;
     private int cityCodeColNdx;
