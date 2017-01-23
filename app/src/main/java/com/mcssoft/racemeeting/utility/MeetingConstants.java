@@ -56,6 +56,7 @@ public class MeetingConstants {
     public static final String RACE_SHOW_MEETINGS_INCL_DATE_KEY = "race_show_meetings_incl_date_key";
     public static final boolean RACE_SHOW_MEETINGS_INCL_DATE_DEFAULT_VAL = false;
     public static final String RACE_PRIOR_MEETINGS_EXIST = "previous meetings exist";
+    public static final String RACE_NO_MEETINGS = "0";
 
     // Reminder preferences (settings) defaults.
     public static final String REMINDER_PREF_KEY = "reminder_pref_key";

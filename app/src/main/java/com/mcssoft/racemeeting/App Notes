@@ -16,8 +16,6 @@ Usability:
 TO DO:
 ------
 (in no particular order)
--> If meetings exist, but are previous meetings, and meeting show preference is 'Show only today'
-   then set a message in the main view.
 -> On entering race no and race sel values:
    -> when enter for race no and keyboard ok is selected, move cursor to race sel.
 -> Review functionality of the notification service and associated task for multiple notifications.

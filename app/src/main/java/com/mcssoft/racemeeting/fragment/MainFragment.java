@@ -77,7 +77,8 @@ public class MainFragment extends Fragment
         setRecyclerView(rootView);
 
         String records = checkRecordsExist();
-        if(records.equals(MeetingConstants.RACE_PRIOR_MEETINGS_EXIST)) {
+        if(records.equals(MeetingConstants.RACE_PRIOR_MEETINGS_EXIST) ||
+           records.equals(MeetingConstants.RACE_NO_MEETINGS)) {
             meetingAdapter.setEmptyView(true);
         } else if(Integer.parseInt(records) > 0) {
             meetingAdapter.setEmptyView(false);
@@ -236,7 +237,7 @@ public class MainFragment extends Fragment
     }
 
     private String checkRecordsExist() {
-        String records = "";
+        String records = MeetingConstants.RACE_NO_MEETINGS;     // simply a default value.
         int count;
 
         if(getShowToday()) {

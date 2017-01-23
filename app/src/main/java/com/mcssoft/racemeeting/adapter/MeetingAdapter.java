@@ -46,20 +46,20 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
     @Override
     public void onBindViewHolder(MeetingViewHolder holder, int position) {
         Log.d(LOG_TAG, "onBindViewHolder");
-        if (!cursor.moveToPosition(position)) {
-            throw new IllegalStateException("Couldn't move cursor to position: " + position);
+        if(!emptyView) {
+            adapaterOnBindViewHolder(holder, position);
         } else {
-            if(!emptyView) {
-                adapaterOnBindViewHolder(holder, position);
-            } else {
-                holder.getEmptyText().getText().toString();
-            }
+            holder.getEmptyText().getText().toString();
         }
     }
 
     @Override
     public int getItemCount() {
-        return cursor != null ? cursor.getCount() : 0;
+        if(emptyView) {
+            return  1; // need to do this so the onCreateViewHolder fires.
+        } else {
+            return cursor.getCount();
+        }
     }
 
     @Override
@@ -83,7 +83,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
         cursor = newCursor;
 
         // set column indexes for use by the (adapter)OnBindViewHolder.
-        if((cursor != null) && !(emptyView)) {// && (cursor.getCount() > 0)){
+        if((cursor != null) && !(emptyView)) {
             cursor.moveToFirst();
             idColNdx = cursor.getColumnIndex(SchemaConstants.COLUMN_ROWID);
             cityCodeColNdx = cursor.getColumnIndex(SchemaConstants.COLUMN_CITY_CODE);
