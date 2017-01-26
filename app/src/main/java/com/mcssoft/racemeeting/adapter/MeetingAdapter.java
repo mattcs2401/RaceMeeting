@@ -58,7 +58,11 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
         if(emptyView) {
             return  1; // need to do this so the onCreateViewHolder fires.
         } else {
-            return cursor.getCount();
+            if(cursor != null) {
+                return cursor.getCount();
+            } else {
+                return 0;
+            }
         }
     }
 
