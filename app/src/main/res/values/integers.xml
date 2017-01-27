@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="new_meeting">0x20</integer>
+    <integer name="edit_meeting">0x21</integer>
+    <integer name="copy_meeting">0x22</integer>
+    <integer name="show_meeting">0x23</integer>
+    <integer name="init_default">-1</integer>
+    <integer name="notify_required">0x30</integer>
+    <integer name="listing_change_required">0x31</integer>
+    <integer name="meeting_loader">0x40</integer>
+    <integer name="msg_listing_service">0x10</integer>
+    <integer name="listing_service">0x11</integer>
+    <integer name="msg_notify_service">0x12</integer>
+    <integer name="notify_service">0x13</integer>
+    <integer name="notify_vibrate_min_val">1</integer>
+    <integer name="notify_vibrate_max_val">3</integer>
+    <integer name="notify_default_pref_val">1</integer>
+    <integer name="reminder_min_value">0</integer>
+    <integer name="reminder_max_value">10</integer>
+    <integer name="one_minute">60000</integer>
+    <integer name="thirty_seconds">30000</integer>
+    <integer name="city_codes_fragment_id">0</integer>
+    <integer name="race_codes_fragment_id">1</integer>
+    <integer name="time_component_hour">0</integer>
+    <integer name="time_component_minute">1</integer>
+    <integer name="time_component_hour_minute">2</integer>
+</resources>

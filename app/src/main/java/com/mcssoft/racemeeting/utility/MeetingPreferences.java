@@ -58,7 +58,7 @@ public class MeetingPreferences {
 
     public int meetingRaceCodeId() {
         return getDefaultSharedPreferences()
-                .getInt(MeetingConstants.RACE_CODE_PREF_ID_KEY, MeetingConstants.INIT_DEFAULT);
+                .getInt(MeetingConstants.RACE_CODE_PREF_ID_KEY, R.integer.init_default);
     }
 
     /**
@@ -76,7 +76,7 @@ public class MeetingPreferences {
      */
     public int meetingReminderTimePref() {
         return getDefaultSharedPreferences()
-                .getInt(R.string.pref_reminder_key + "", MeetingConstants.INIT_DEFAULT);
+                .getInt(R.string.pref_reminder_key + "", R.integer.init_default);
     }
 
     public boolean meetingNotificationEnablePref() {
@@ -93,7 +93,7 @@ public class MeetingPreferences {
 
     public int meetingNotifyVibrationsPref() {
         return getDefaultSharedPreferences().getInt(MeetingConstants.NOTIFY_PREF_KEY,
-                MeetingConstants.NOTIFY_DEFAULT_PREF_VAL);
+                R.integer.notify_default_pref_val);
     }
 
     /**
@@ -102,7 +102,7 @@ public class MeetingPreferences {
      */
     public int meetingRaceShowPref() {
         return getDefaultSharedPreferences().getInt(MeetingConstants.RACE_SHOW_MEETINGS_PREF_ID_KEY,
-                MeetingConstants.INIT_DEFAULT);
+                R.integer.init_default);
     }
 
     /**

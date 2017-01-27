@@ -36,7 +36,7 @@ public class RaceCodesDialog extends DialogPreference {
         super.onBindDialogView(view);
         radioGroup = (RadioGroup) view.findViewById(R.id.id_rg_race_codes);
         int radioButtonId = MeetingPreferences.getInstance().getDefaultSharedPreferences()
-                .getInt(MeetingConstants.RACE_CODE_PREF_ID_KEY, MeetingConstants.INIT_DEFAULT);
+                .getInt(MeetingConstants.RACE_CODE_PREF_ID_KEY, R.integer.init_default);
         ((RadioButton) radioGroup.findViewById(radioButtonId)).setChecked(true);
     }
 

@@ -47,7 +47,7 @@ public class DetailFragment extends Fragment
         Bundle args = getActivity().getIntent().getExtras();
         rowId = ((long[])args.get(MeetingConstants.SHOW_SUMMARY))[0];
 
-        if(rowId != MeetingConstants.INIT_DEFAULT) {
+        if(rowId != R.integer.init_default) {
             args.putLong(MeetingConstants.SHOW_SUMMARY, rowId);
             getLoaderManager().initLoader(0, args, this);
         } else {
@@ -64,7 +64,7 @@ public class DetailFragment extends Fragment
         Log.d(LOG_TAG, "onClick");
         switch(view.getId()) {
             case R.id.btnEdit:
-                ((IEditMeeting) getActivity()).onEditMeeting(MeetingConstants.SHOW_MEETING, rowId);
+                ((IEditMeeting) getActivity()).onEditMeeting(R.integer.show_meeting, rowId);
                 break;
             }
     }

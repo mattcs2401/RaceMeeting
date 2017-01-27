@@ -75,7 +75,7 @@ public class CityCodesFragment extends Fragment
         fab = (FloatingActionButton) view.findViewById(R.id.id_fab_city_codes);
         fab.setOnClickListener(this);
 
-        if(rbId == MeetingConstants.INIT_DEFAULT) {
+        if(rbId == R.integer.init_default) {
             // editing for new entry.
             rgCC.clearCheck();
         } else {
@@ -86,7 +86,7 @@ public class CityCodesFragment extends Fragment
 
     private int getRbId() {
         RadioButton rb = null;
-        int id = MeetingConstants.INIT_DEFAULT;
+        int id = R.integer.init_default;
         int count = rgCC.getChildCount();
 
         for (int ndx = 0; ndx < count; ndx++) {

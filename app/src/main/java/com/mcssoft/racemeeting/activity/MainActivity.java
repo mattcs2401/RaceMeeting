@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity
 
         switch (item.getItemId()) {
             case R.id.toolbar_menu_insert:
-                onEditMeeting(MeetingConstants.NEW_MEETING);
+                onEditMeeting(R.integer.new_meeting);
                 break;
             case R.id.toolbar_preference_settings:
                 startActivity(new Intent(this, PreferencesActivity.class));
@@ -85,18 +85,18 @@ public class MainActivity extends AppCompatActivity
     public void onEditMeeting(int editType, long... dbRowId) {
         Intent intent = new Intent(this, EditActivity.class);
         switch (editType) {
-            case MeetingConstants.NEW_MEETING:
+            case R.integer.new_meeting:
                 intent.setAction(MeetingConstants.EDIT_ACTION_NEW);
                 break;
-            case MeetingConstants.EDIT_MEETING:
+            case R.integer.edit_meeting:
                 intent.putExtra(MeetingConstants.EDIT_EXISTING_OR_COPY, dbRowId);
                 intent.setAction(MeetingConstants.EDIT_ACTION_EXISTING);
                 break;
-            case MeetingConstants.COPY_MEETING:
+            case R.integer.copy_meeting:
                 intent.putExtra(MeetingConstants.EDIT_EXISTING_OR_COPY, dbRowId);
                 intent.setAction(MeetingConstants.EDIT_ACTION_COPY);
                 break;
-            case MeetingConstants.SHOW_MEETING:
+            case R.integer.show_meeting:
                 intent = new Intent(this, DetailActivity.class);
                 intent.putExtra(MeetingConstants.SHOW_SUMMARY, dbRowId);
                 break;

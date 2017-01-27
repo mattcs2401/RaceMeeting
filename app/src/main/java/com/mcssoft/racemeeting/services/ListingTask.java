@@ -14,6 +14,7 @@ import com.mcssoft.racemeeting.database.SchemaConstants;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingTime;
 
+import mcssoft.com.racemeeting.R;
 // https://androidresearch.wordpress.com/2013/05/10/dealing-with-asynctask-and-screen-orientation/
 
 public class ListingTask extends AsyncTask<JobParameters, Void, JobParameters> {
@@ -63,7 +64,7 @@ public class ListingTask extends AsyncTask<JobParameters, Void, JobParameters> {
 
                     if(updated) {
                         result.getExtras().putInt(MeetingConstants.PAST_TIME_JOB_KEY,
-                                MeetingConstants.LISTING_CHANGE_REQUIRED);
+                                R.integer.listing_change_required);
                     } else {
                         result.getExtras().putInt(MeetingConstants.PAST_TIME_JOB_KEY, 0);
                     }

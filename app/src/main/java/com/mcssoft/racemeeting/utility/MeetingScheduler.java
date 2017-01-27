@@ -13,15 +13,13 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.PersistableBundle;
 import android.util.Log;
+import java.util.List;
 
-import com.mcssoft.racemeeting.adapter.MeetingAdapter;
 import com.mcssoft.racemeeting.fragment.MainFragment;
 import com.mcssoft.racemeeting.services.ListingService;
 import com.mcssoft.racemeeting.services.NotifyService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import mcssoft.com.racemeeting.R;
 
 public class MeetingScheduler {
 
@@ -35,22 +33,22 @@ public class MeetingScheduler {
         @Override
         public void handleMessage(Message message) {
             switch (message.what) {
-                case MeetingConstants.MSG_LISTING_SERVICE:
+                case R.integer.msg_listing_service:
                     Log.d(LOG_TAG, "handleMessage - listing service");
                     listingSvc = (ListingService) message.obj;
                     listingSvc.setUiCallback(getListingFragment());
 
                     if(!lsJobSchld) {
-                        scheduleJob(MeetingConstants.LISTING_SERVICE);
+                        scheduleJob(R.integer.listing_service);
                     }
                     break;
-                case MeetingConstants.MSG_NOTIFY_SERVICE:
+                case R.integer.msg_notify_service:
                     Log.d(LOG_TAG, "handleMessage - notify service");
                     notifySvc = (NotifyService) message.obj;
                     notifySvc.setUiCallback(getListingFragment());
 
                     if(!nsJobSchld) {
-                        scheduleJob(MeetingConstants.NOTIFY_SERVICE);
+                        scheduleJob(R.integer.notify_service);
                     }
                     break;
             }
@@ -61,18 +59,18 @@ public class MeetingScheduler {
     //<editor-fold defaultstate="collapsed" desc="Region: Service">
     public void startService(int svcId) { //}, int action) {
         switch(svcId) {
-            case MeetingConstants.LISTING_SERVICE:
+            case R.integer.listing_service:
                 Log.d(LOG_TAG, "startListingService");
                 listingSvcIntent = new Intent(activity, ListingService.class);
                 listingSvcIntent.putExtra(MeetingConstants.LISTING_SERVICE_HANDLER, new Messenger(lHandler));
-//                listingSvcIntent.putExtra(MeetingConstants.LISTING_SERVICE_ACTION, action);
+//                listingSvcIntent.putExtra(R.integer.listing_service_ACTION, action);
                 activity.startService(listingSvcIntent);
                 break;
-            case MeetingConstants.NOTIFY_SERVICE:
+            case R.integer.notify_service:
                 Log.d(LOG_TAG, "startNotifyService");
                 notifySvcIntent = new Intent(activity, NotifyService.class);
                 notifySvcIntent.putExtra(MeetingConstants.NOTIFY_SERVICE_HANDLER, new Messenger(lHandler));
-//                notifySvcIntent.putExtra(MeetingConstants.NOTIFY_SERVICE_ACTION, action);
+//                notifySvcIntent.putExtra(R.integer.notify_service_ACTION, action);
                 activity.startService(notifySvcIntent);
                 break;
         }
@@ -80,7 +78,7 @@ public class MeetingScheduler {
 
     public void stopService(int svcId) {
         switch (svcId) {
-            case MeetingConstants.LISTING_SERVICE:
+            case R.integer.listing_service:
                 if(listingSvcIntent != null) {
                     Log.d(LOG_TAG, "stopListingService");
                     activity.stopService(listingSvcIntent);
@@ -88,7 +86,7 @@ public class MeetingScheduler {
                     listingSvc = null;
                 }
                 break;
-            case MeetingConstants.NOTIFY_SERVICE:
+            case R.integer.notify_service:
                 if(notifySvcIntent != null) {
                     Log.d(LOG_TAG, "stopNotifyService");
                     activity.stopService(notifySvcIntent);
@@ -102,10 +100,10 @@ public class MeetingScheduler {
     public boolean isSvcRunning(int svcId) {
         boolean retVal = false;
         switch(svcId) {
-            case MeetingConstants.LISTING_SERVICE:
+            case R.integer.listing_service:
                 retVal = (listingSvc != null) ? true : false;
                 break;
-            case MeetingConstants.NOTIFY_SERVICE:
+            case R.integer.notify_service:
                 retVal = (notifySvc != null) ? true : false;
                 break;
         }
@@ -116,15 +114,15 @@ public class MeetingScheduler {
     //<editor-fold defaultstate="collapsed" desc="Region: Task/Job">
     public void cancelStopAll() {
         Log.d(LOG_TAG, "cancelStopAll");
-        if(isSvcRunning(MeetingConstants.LISTING_SERVICE)) {
-            cancelJobs(MeetingConstants.LISTING_SERVICE);
+        if(isSvcRunning(R.integer.listing_service)) {
+            cancelJobs(R.integer.listing_service);
             lsJobSchld = false;
-            stopService(MeetingConstants.LISTING_SERVICE);
+            stopService(R.integer.listing_service);
         }
-        if(isSvcRunning(MeetingConstants.NOTIFY_SERVICE)) {
-            cancelJobs(MeetingConstants.NOTIFY_SERVICE);
+        if(isSvcRunning(R.integer.notify_service)) {
+            cancelJobs(R.integer.notify_service);
             nsJobSchld = false;
-            stopService(MeetingConstants.NOTIFY_SERVICE);
+            stopService(R.integer.notify_service);
         }
     }
 
@@ -141,12 +139,12 @@ public class MeetingScheduler {
                 name = ji.getService().getClassName().toString();
 
                 switch (svcId) {
-                    case MeetingConstants.LISTING_SERVICE:
+                    case R.integer.listing_service:
                         if (name.contains("ListingService")) {
                             js.cancel(id);
                         }
                         break;
-                    case MeetingConstants.NOTIFY_SERVICE:
+                    case R.integer.notify_service:
                         if (name.contains("NotifyService")) {
                             js.cancel(id);
                         }
@@ -161,15 +159,15 @@ public class MeetingScheduler {
         PersistableBundle bundle = null;
 
         switch (svcId) {
-            case MeetingConstants.LISTING_SERVICE:
-                if(isSvcRunning(MeetingConstants.LISTING_SERVICE)) {
+            case R.integer.listing_service:
+                if(isSvcRunning(R.integer.listing_service)) {
                     Log.d(LOG_TAG, "scheduleListingJob");
 
                     builder = new JobInfo.Builder(lsJobId++, new ComponentName(activity, ListingService.class));
-                    builder.setPeriodic(MeetingConstants.THIRTY_SECONDS);
+                    builder.setPeriodic(R.integer.thirty_seconds);
 
                     bundle = new PersistableBundle();
-                    bundle.putInt(MeetingConstants.PAST_TIME_JOB_KEY, MeetingConstants.INIT_DEFAULT); // key/value
+                    bundle.putInt(MeetingConstants.PAST_TIME_JOB_KEY, R.integer.init_default); // key/value
 
                     builder.setExtras(bundle);
 
@@ -180,15 +178,15 @@ public class MeetingScheduler {
                     }
                 }
                 break;
-            case MeetingConstants.NOTIFY_SERVICE:
-                if(isSvcRunning(MeetingConstants.NOTIFY_SERVICE)) {
+            case R.integer.notify_service:
+                if(isSvcRunning(R.integer.notify_service)) {
                     Log.d(LOG_TAG, "scheduleNotifyJob");
 
                     builder = new JobInfo.Builder(lsJobId++, new ComponentName(activity, NotifyService.class));
-                    builder.setPeriodic(MeetingConstants.THIRTY_SECONDS);
+                    builder.setPeriodic(R.integer.thirty_seconds);
 
                     bundle = new PersistableBundle();
-                    bundle.putInt(MeetingConstants.PRIOR_TIME_JOB_KEY, MeetingConstants.INIT_DEFAULT); // key/value
+                    bundle.putInt(MeetingConstants.PRIOR_TIME_JOB_KEY, R.integer.init_default); // key/value
                     builder.setExtras(bundle);
                     JobInfo ji = builder.build();
 

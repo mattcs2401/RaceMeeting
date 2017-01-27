@@ -30,7 +30,7 @@ public class ListingService extends JobService {
         // Dev doco: ... the best way to get one of these is to call Message.obtain()
         Message message = Message.obtain();
         //Dev doco: User-defined message code so that the recipient can identify what this message is about.
-        message.what = MeetingConstants.MSG_LISTING_SERVICE;
+        message.what = R.integer.msg_listing_service;
         // Dev doco: An arbitrary object to send to the recipient.
         message.obj = this;
 

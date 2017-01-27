@@ -112,11 +112,11 @@ public class EditFragment extends Fragment
             switch (view.getId()) {
                 case R.id.etCityCode:
                     ((IShowCodes) getActivity())
-                            .onShowCodes(MeetingConstants.CITY_CODES_FRAGMENT_ID, view);
+                            .onShowCodes(R.integer.city_codes_fragment_id, view);
                     break;
                 case R.id.etRaceCode:
                     ((IShowCodes) getActivity())
-                            .onShowCodes(MeetingConstants.RACE_CODES_FRAGMENT_ID, view);
+                            .onShowCodes(R.integer.race_codes_fragment_id, view);
                     break;
                 case R.id.etRaceTime:
                     showTimePicker();
@@ -158,7 +158,7 @@ public class EditFragment extends Fragment
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         Log.d(LOG_TAG, "onCreateLoader");
-        long dbRowId = MeetingConstants.INIT_DEFAULT;  // simply an initialiser else complains.
+        long dbRowId = R.integer.init_default;  // simply an initialiser else complains.
 
         if((editAction.equals(MeetingConstants.EDIT_ACTION_EXISTING)) ||
                 (editAction.equals(MeetingConstants.EDIT_ACTION_COPY))) {
@@ -213,7 +213,7 @@ public class EditFragment extends Fragment
         Bundle args = new Bundle();
         int[] hourMin;
 
-        hourMin = MeetingTime.getInstance().getTimeComponent(timeInMillis,MeetingConstants.TIME_COMPONENT_HOUR_MINUTE);
+        hourMin = MeetingTime.getInstance().getTimeComponent(timeInMillis,R.integer.time_component_hour_minute);
 
         args.putInt(MeetingConstants.HOUR, hourMin[0]);
         args.putInt(MeetingConstants.MINS, hourMin[1]);
@@ -232,7 +232,7 @@ public class EditFragment extends Fragment
         switch(editAction) {
             case MeetingConstants.EDIT_ACTION_NEW:
                 actionBar.setTitle(R.string.app_name_new);
-                updateBackground(MeetingConstants.NEW_MEETING);
+                updateBackground(R.integer.new_meeting);
                 timeInMillis = MeetingTime.getInstance().getTimeInMillis();
                 updateRaceTime(timeInMillis);
 
@@ -250,7 +250,7 @@ public class EditFragment extends Fragment
                 break;
         }
         if(getLoader) {
-            updateBackground(MeetingConstants.EDIT_MEETING);
+            updateBackground(R.integer.edit_meeting);
             args.putLong(MeetingConstants.EDIT_EXISTING_OR_COPY, getRowIdFromArgs());
             getLoaderManager().initLoader(0, args, this);
         }
@@ -380,7 +380,7 @@ public class EditFragment extends Fragment
      */
     private void updateBackground(int state) {
         switch (state) {
-            case MeetingConstants.NEW_MEETING:
+            case R.integer.new_meeting:
                 etCityCode.setBackgroundResource(R.drawable.et_basic_red_outline);
 
                 if (checkUseRaceCodePreference()) {
@@ -392,7 +392,7 @@ public class EditFragment extends Fragment
                 etRaceNum.setBackgroundResource(R.drawable.et_basic_red_outline);
                 etRaceSel.setBackgroundResource(R.drawable.et_basic_red_outline);
                 break;
-            case MeetingConstants.EDIT_MEETING:
+            case R.integer.edit_meeting:
                 etCityCode.setBackgroundResource(R.drawable.et_basic_green_outline);
                 etRaceCode.setBackgroundResource(R.drawable.et_basic_green_outline);
                 etRaceNum.setBackgroundResource(R.drawable.et_basic_green_outline);

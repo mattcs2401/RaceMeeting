@@ -15,6 +15,7 @@ import com.mcssoft.racemeeting.database.SchemaConstants;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingTime;
 
+import mcssoft.com.racemeeting.R;
 // https://androidresearch.wordpress.com/2013/05/10/dealing-with-asynctask-and-screen-orientation/
 
 public class NotifyTask extends AsyncTask<JobParameters, Void, JobParameters> {
@@ -51,7 +52,7 @@ public class NotifyTask extends AsyncTask<JobParameters, Void, JobParameters> {
                     }
                     if(row != null) {
                         result.getExtras().putInt(MeetingConstants.NOTIFY_REQUIRED_KEY,
-                                                  MeetingConstants.NOTIFY_REQUIRED);
+                                                  R.integer.notify_required);
                     }
                 }
                 cursor.close();

@@ -75,14 +75,14 @@ public class EditActivity extends AppCompatActivity
         FrameLayout frameLayout = (FrameLayout) findViewById(R.id.edit_detail_container);
 
         switch (fragId) {
-            case MeetingConstants.CITY_CODES_FRAGMENT_ID:
+            case R.integer.city_codes_fragment_id:
                 frameLayout.removeView(findViewById(R.id.id_city_codes_detail));
                 EditText cc = (EditText) findViewById(R.id.etCityCode);
                 cc.setText(rbText);
                 cc.setBackgroundResource(R.drawable.et_basic_green_outline);
                 cityCodesFragment = null;
                 break;
-            case MeetingConstants.RACE_CODES_FRAGMENT_ID:
+            case R.integer.race_codes_fragment_id:
                 frameLayout.removeView(findViewById(R.id.id_race_codes));
                 EditText rc = (EditText) findViewById(R.id.etRaceCode);
                 rc.setText(rbText);
@@ -111,14 +111,14 @@ public class EditActivity extends AppCompatActivity
         String etValue;
 
         switch (fragId) {
-            case MeetingConstants.CITY_CODES_FRAGMENT_ID:
+            case R.integer.city_codes_fragment_id:
                 etValue = ((EditText) view.findViewById(R.id.etCityCode)).getText().toString();
                 args.putString(MeetingConstants.FRAGMENT_RB_VAL, etValue);
                 cityCodesFragment = new CityCodesFragment();
                 cityCodesFragment.setArguments(args);
                 ft.add(R.id.edit_detail_container, cityCodesFragment, MeetingConstants.CITY_CODES_FRAGMENT_TAG);
                 break;
-            case MeetingConstants.RACE_CODES_FRAGMENT_ID:
+            case R.integer.race_codes_fragment_id:
                 etValue = ((EditText) view.findViewById(R.id.etRaceCode)).getText().toString();
                 args.putString(MeetingConstants.FRAGMENT_RB_VAL, etValue);
                 raceCodesFragment = new RaceCodesFragment();

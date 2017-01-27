@@ -32,8 +32,8 @@ public class NotificationsDialog extends DialogPreference
 
         numberPicker = (NumberPicker) view.findViewById(R.id.id_numberPicker_vibrate);
         numberPicker.setOnValueChangedListener(this);
-        numberPicker.setMinValue(MeetingConstants.NOTIFY_VIBRATE_MIN_VAL);
-        numberPicker.setMaxValue(MeetingConstants.NOTIFY_VIBRATE_MAX_VAL);
+        numberPicker.setMinValue(R.integer.notify_vibrate_min_val);
+        numberPicker.setMaxValue(R.integer.notify_vibrate_max_val);
         numberPicker.setWrapSelectorWheel(true);
         numberPicker.setValue(npPrefVal);
 
@@ -103,7 +103,7 @@ public class NotificationsDialog extends DialogPreference
             spe.putBoolean(MeetingConstants.NOTIFY_VIBRATE_PREF_KEY, vibratePrefVal).apply();
         }
         if(!prefsMap.containsKey(MeetingConstants.NOTIFY_PREF_KEY)) {
-            npPrefVal = MeetingConstants.NOTIFY_DEFAULT_PREF_VAL;
+            npPrefVal = R.integer.notify_default_pref_val;
             spe.putInt(MeetingConstants.NOTIFY_PREF_KEY, npPrefVal).apply();
         }
     }
@@ -125,7 +125,7 @@ public class NotificationsDialog extends DialogPreference
         soundPrefVal = sharedPreferences.getBoolean(MeetingConstants.NOTIFY_SOUND_PREF_KEY, false);
         vibratePrefVal = sharedPreferences.getBoolean(MeetingConstants.NOTIFY_VIBRATE_PREF_KEY, false);
         npPrefVal = sharedPreferences.getInt(MeetingConstants.NOTIFY_PREF_KEY,
-                MeetingConstants.NOTIFY_DEFAULT_PREF_VAL);
+                R.integer.notify_default_pref_val);
     }
 
     private int npPrefVal;

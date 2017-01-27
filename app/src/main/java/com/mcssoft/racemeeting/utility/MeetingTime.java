@@ -90,7 +90,7 @@ public class MeetingTime {
      */
     public long getMillisFromTimeComponent(int [] time) {
         if (time == null || time.length != 2) {
-            return MeetingConstants.INIT_DEFAULT;
+            return R.integer.init_default;
         }
 
         Calendar calendar = Calendar.getInstance(Locale.getDefault());
@@ -123,17 +123,17 @@ public class MeetingTime {
         calendar.setTime(new Date(timeInMillis));
 
         switch(component) {
-            case MeetingConstants.TIME_COMPONENT_HOUR_MINUTE:
+            case R.integer.time_component_hour_minute:
                 time[0] = calendar.get(Calendar.HOUR_OF_DAY);
                 time[1] = calendar.get(Calendar.MINUTE);
                 break;
-            case MeetingConstants.TIME_COMPONENT_HOUR:
+            case R.integer.time_component_hour:
                 time[0] = calendar.get(Calendar.HOUR_OF_DAY);
-                time[1] = MeetingConstants.INIT_DEFAULT;
+                time[1] = R.integer.init_default;
                 break;
-            case MeetingConstants.TIME_COMPONENT_MINUTE:
+            case R.integer.time_component_minute:
                 time[0] = calendar.get(Calendar.MINUTE);
-                time[1] = MeetingConstants.INIT_DEFAULT;
+                time[1] = R.integer.init_default;
                 break;
             default:
                 time = null;

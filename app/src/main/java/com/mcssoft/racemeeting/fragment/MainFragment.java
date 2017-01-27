@@ -88,9 +88,9 @@ public class MainFragment extends Fragment
 
         if(activityCreated) {
             activityCreated = false;
-            getLoaderManager().initLoader(MeetingConstants.MEETING_LOADER, null, this);
+            getLoaderManager().initLoader(R.integer.meeting_loader, null, this);
         } else {
-            getLoaderManager().restartLoader(MeetingConstants.MEETING_LOADER, null, this);
+            getLoaderManager().restartLoader(R.integer.meeting_loader, null, this);
         }
     }
 
@@ -116,7 +116,7 @@ public class MainFragment extends Fragment
         Set<String> keys = results.keySet();
 
         if(keys.contains(MeetingConstants.PAST_TIME_JOB_KEY)) {
-            if(results.getInt(MeetingConstants.PAST_TIME_JOB_KEY) == MeetingConstants.LISTING_CHANGE_REQUIRED) {
+            if(results.getInt(MeetingConstants.PAST_TIME_JOB_KEY) == R.integer.listing_change_required) {
                 getLoaderManager().restartLoader(0, null, this);
             }
         }
@@ -129,7 +129,7 @@ public class MainFragment extends Fragment
         Set<String> keys = results.keySet();
 
         if(keys.contains(MeetingConstants.PRIOR_TIME_JOB_KEY)) {
-            if(results.getInt(MeetingConstants.NOTIFY_REQUIRED_KEY) == MeetingConstants.NOTIFY_REQUIRED) {
+            if(results.getInt(MeetingConstants.NOTIFY_REQUIRED_KEY) == R.integer.notify_required) {
 
                 // strip out the "non race value" keys.
                 keys.remove(MeetingConstants.PRIOR_TIME_JOB_KEY);
@@ -166,14 +166,14 @@ public class MainFragment extends Fragment
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.context_menu_edit:
-                ((IEditMeeting) getActivity()).onEditMeeting(MeetingConstants.EDIT_MEETING, getDbRowId(position));
+                ((IEditMeeting) getActivity()).onEditMeeting(R.integer.edit_meeting, getDbRowId(position));
                 break;
             case R.id.context_menu_copy:
-                ((IEditMeeting) getActivity()).onEditMeeting(MeetingConstants.COPY_MEETING, getDbRowId(position));
+                ((IEditMeeting) getActivity()).onEditMeeting(R.integer.copy_meeting, getDbRowId(position));
                 //Toast.makeText(getActivity(), "copy menu item clicked", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.context_menu_details:
-                ((IEditMeeting) getActivity()).onEditMeeting(MeetingConstants.SHOW_MEETING, getDbRowId(position));
+                ((IEditMeeting) getActivity()).onEditMeeting(R.integer.show_meeting, getDbRowId(position));
                 break;
         }
         return false;
@@ -280,23 +280,23 @@ public class MainFragment extends Fragment
     private void checkServicesRequired() {
         // If any other value than the 0 minutes default is selected.
         if (MeetingPreferences.getInstance().meetingReminderTimePref()
-                != MeetingConstants.REMINDER_MIN_VALUE) {
-            meetingScheduler.startService(MeetingConstants.NOTIFY_SERVICE);
+                != R.integer.reminder_min_value) {
+            meetingScheduler.startService(R.integer.notify_service);
         } else {
             // 0 minutes default is selected.
-            if (meetingScheduler.isSvcRunning(MeetingConstants.NOTIFY_SERVICE)) {
-                meetingScheduler.cancelJobs(MeetingConstants.NOTIFY_SERVICE);
-                meetingScheduler.stopService(MeetingConstants.NOTIFY_SERVICE);
+            if (meetingScheduler.isSvcRunning(R.integer.notify_service)) {
+                meetingScheduler.cancelJobs(R.integer.notify_service);
+                meetingScheduler.stopService(R.integer.notify_service);
             }
         }
 
         // Meeting Past Race Time checkbox is selected.
         if (MeetingPreferences.getInstance().meetingPastTimePref()) {
-            meetingScheduler.startService(MeetingConstants.LISTING_SERVICE);
+            meetingScheduler.startService(R.integer.listing_service);
         } else {
-            if (meetingScheduler.isSvcRunning(MeetingConstants.LISTING_SERVICE)) {
-                meetingScheduler.cancelJobs(MeetingConstants.LISTING_SERVICE);
-                meetingScheduler.stopService(MeetingConstants.LISTING_SERVICE);
+            if (meetingScheduler.isSvcRunning(R.integer.listing_service)) {
+                meetingScheduler.cancelJobs(R.integer.listing_service);
+                meetingScheduler.stopService(R.integer.listing_service);
             }
         }
     }

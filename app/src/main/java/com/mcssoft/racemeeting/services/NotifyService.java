@@ -29,7 +29,7 @@ public class NotifyService extends JobService {
         // Dev doco: ... the best way to get one of these is to call Message.obtain()
         Message message = Message.obtain();
         //Dev doco: User-defined message code so that the recipient can identify what this message is about.
-        message.what = MeetingConstants.MSG_NOTIFY_SERVICE;
+        message.what = R.integer.msg_notify_service;
         // Dev doco: An arbitrary object to send to the recipient.
         message.obj = this;
 
@@ -48,7 +48,7 @@ public class NotifyService extends JobService {
             Log.d(LOG_TAG, "onStartJob");
 
             int iReminder = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
-                    .getInt(MeetingConstants.REMINDER_PREF_KEY, MeetingConstants.INIT_DEFAULT);
+                    .getInt(MeetingConstants.REMINDER_PREF_KEY, R.integer.init_default);
 
             NotifyTask notifyTask = new NotifyTask(this, iReminder);
 //            mainFragment.onReceivedStartJobNotify(jobParams.getExtras());
@@ -70,7 +70,7 @@ public class NotifyService extends JobService {
             return false;
         } else {
             Log.d(LOG_TAG, "onStopJob");
-            if(jobParams.getExtras().getInt(MeetingConstants.NOTIFY_REQUIRED_KEY) == MeetingConstants.NOTIFY_REQUIRED) {
+            if(jobParams.getExtras().getInt(MeetingConstants.NOTIFY_REQUIRED_KEY) == R.integer.notify_required) {
                 mainFragment.onReceivedStopJobNotify(jobParams.getExtras());
             }
             return true; // indicates to job manager to reschedule.
