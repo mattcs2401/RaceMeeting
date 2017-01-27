@@ -141,7 +141,7 @@ public class MeetingsToShowDialog extends DialogPreference
             }
             // include the checkbox.
             spe.putBoolean(MeetingConstants.RACE_SHOW_MEETINGS_INCL_DATE_KEY,
-                    MeetingConstants.RACE_SHOW_MEETINGS_INCL_DATE_DEFAULT_VAL);
+                    getContext().getResources().getBoolean(R.bool.race_show_meetings_incl_date_default_val));
         }
     }
 

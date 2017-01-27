@@ -59,10 +59,11 @@ public class ReminderTimeDialog extends DialogPreference
      */
     private void checkReminderPreference() {
         npPrefVal = PreferenceManager.getDefaultSharedPreferences(getContext())
-                .getInt(MeetingConstants.REMINDER_PREF_KEY, R.integer.init_default);
+                .getInt(MeetingConstants.REMINDER_PREF_KEY,
+                        getContext().getResources().getInteger(R.integer.init_default));
 
-        if(npPrefVal == R.integer.init_default) {
-            npPrefVal = R.integer.reminder_min_value;  // 0 or no reminder.
+        if(npPrefVal == getContext().getResources().getInteger(R.integer.init_default)) {
+            npPrefVal = getContext().getResources().getInteger(R.integer.reminder_min_value);  // 0 or no reminder.
             SharedPreferences.Editor spe =
                     PreferenceManager.getDefaultSharedPreferences(getContext()).edit();
             spe.putInt(MeetingConstants.REMINDER_PREF_KEY, npPrefVal).apply();

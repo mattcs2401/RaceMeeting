@@ -95,15 +95,15 @@ public class NotificationsDialog extends DialogPreference
         SharedPreferences.Editor spe = sharedPreferences.edit();
 
         if(!prefsMap.containsKey(MeetingConstants.NOTIFY_SOUND_PREF_KEY)) {
-            soundPrefVal = MeetingConstants.NOTIFY_SOUND_DEFAULT_PREF_VAL;
+            soundPrefVal = getContext().getResources().getBoolean(R.bool.notify_sound_default_pref_val);
             spe.putBoolean(MeetingConstants.NOTIFY_SOUND_PREF_KEY, soundPrefVal).apply();
         }
         if(!prefsMap.containsKey(MeetingConstants.NOTIFY_VIBRATE_PREF_KEY)) {
-            vibratePrefVal = MeetingConstants.NOTIFY_VIBRATE_DEFAULT_PREF_VAL;
+            vibratePrefVal = getContext().getResources().getBoolean(R.bool.notify_vibrate_default_pref_val);
             spe.putBoolean(MeetingConstants.NOTIFY_VIBRATE_PREF_KEY, vibratePrefVal).apply();
         }
         if(!prefsMap.containsKey(MeetingConstants.NOTIFY_PREF_KEY)) {
-            npPrefVal = R.integer.notify_default_pref_val;
+            npPrefVal = getContext().getResources().getInteger(R.integer.notify_default_pref_val);
             spe.putInt(MeetingConstants.NOTIFY_PREF_KEY, npPrefVal).apply();
         }
     }
@@ -125,7 +125,7 @@ public class NotificationsDialog extends DialogPreference
         soundPrefVal = sharedPreferences.getBoolean(MeetingConstants.NOTIFY_SOUND_PREF_KEY, false);
         vibratePrefVal = sharedPreferences.getBoolean(MeetingConstants.NOTIFY_VIBRATE_PREF_KEY, false);
         npPrefVal = sharedPreferences.getInt(MeetingConstants.NOTIFY_PREF_KEY,
-                R.integer.notify_default_pref_val);
+                getContext().getResources().getInteger(R.integer.notify_default_pref_val));
     }
 
     private int npPrefVal;

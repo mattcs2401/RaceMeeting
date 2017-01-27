@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="race_show_meetings_incl_date_default_val">false</bool>
+    <bool name="notify_sound_default_pref_val">false</bool>
+    <bool name="notify_vibrate_default_pref_val">false</bool>
+</resources>

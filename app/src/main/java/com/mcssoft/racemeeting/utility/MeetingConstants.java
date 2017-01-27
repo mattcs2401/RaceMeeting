@@ -45,7 +45,6 @@ public class MeetingConstants {
     public static final String RACE_SHOW_MEETINGS_PREF_VAL_KEY = "race_show_meetings_pref_val_key";
     public static final String RACE_SHOW_MEETINGS_DEFAULT_VAL = "Show only today";
     public static final String RACE_SHOW_MEETINGS_INCL_DATE_KEY = "race_show_meetings_incl_date_key";
-    public static final boolean RACE_SHOW_MEETINGS_INCL_DATE_DEFAULT_VAL = false;
     public static final String RACE_PRIOR_MEETINGS_EXIST = "previous meetings exist";
     public static final String RACE_NO_MEETINGS = "0";
 
@@ -64,10 +63,8 @@ public class MeetingConstants {
     public static final String NOTIFY_PREF_KEY = "notify_pref_key";
     // (sound prefs)
     public static final String NOTIFY_SOUND_PREF_KEY = "notify_sound_pref_key";
-    public static final boolean NOTIFY_SOUND_DEFAULT_PREF_VAL = false;
     // (vibrate prefs)
     public static final String NOTIFY_VIBRATE_PREF_KEY = "notify_vibrate_pref_key";
-    public static final boolean NOTIFY_VIBRATE_DEFAULT_PREF_VAL = false;
 
     // Time format preferences.
     public static final String TIME_FORMAT_PREF_KEY = "time_format_pref_key";
