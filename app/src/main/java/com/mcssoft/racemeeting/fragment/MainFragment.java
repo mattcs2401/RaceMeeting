@@ -65,8 +65,7 @@ public class MainFragment extends Fragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setMeetingAdapter();
-//        getLoaderManager().initLoader(MeetingConstants.MEETING_LOADER, null, this);
-        onActivityCreated = true;
+        activityCreated = true;
     }
 
     @Override
@@ -87,8 +86,8 @@ public class MainFragment extends Fragment
             checkServicesRequired();
         }
 
-        if(onActivityCreated) {
-            onActivityCreated = false;
+        if(activityCreated) {
+            activityCreated = false;
             getLoaderManager().initLoader(MeetingConstants.MEETING_LOADER, null, this);
         } else {
             getLoaderManager().restartLoader(MeetingConstants.MEETING_LOADER, null, this);
@@ -203,7 +202,10 @@ public class MainFragment extends Fragment
 
     //<editor-fold defaultstate="collapsed" desc="Region: Utility">
     private void setRecyclerView(View view) {
-        recyclerView = (RecyclerView) view.findViewById(R.id.id_recyclerview_listing);
+        if(recyclerView == null) {
+            // Will be null when app 1st starts.
+            recyclerView = (RecyclerView) view.findViewById(R.id.id_recyclerview_listing);
+        }
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         llm.scrollToPosition(0);
@@ -321,7 +323,7 @@ public class MainFragment extends Fragment
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
-    private boolean onActivityCreated;
+    private boolean activityCreated;
     private int position;
     private View rootView;
     private RecyclerView recyclerView;
