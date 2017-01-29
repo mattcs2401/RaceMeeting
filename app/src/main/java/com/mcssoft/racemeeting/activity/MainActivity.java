@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity
         super.onDestroy();
         MeetingTime.getInstance().destroy();
         MeetingPreferences.getInstance().destroy();
+        MeetingResources.getInstance().destroy();
     }
     //</editor-fold>
 

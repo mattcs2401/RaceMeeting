@@ -31,16 +31,38 @@ public class MeetingResources {
         return instance;
     }
 
+    /**
+     * Check if this instance exists.
+     * @return True if instance exists, else false.
+     */
     public static boolean instanceExists() {
         return instance != null ? true : false;
     }
 
+    /**
+     * Get an integer resource.
+     * @param resId The resource id.
+     * @return The integer resource.
+     */
     public int getInteger(int resId) {
         return context.getResources().getInteger(resId);
     }
 
+    /**
+     * Get an boolean resource.
+     * @param resId The resource id.
+     * @return The boolean resource.
+     */
     public boolean getBoolean(int resId) {
         return context.getResources().getBoolean(resId);
+    }
+
+    /**
+     * Ensure instance values are made NULL.
+     */
+    public void destroy() {
+        context = null;
+        instance = null;
     }
 
     private Context context;
