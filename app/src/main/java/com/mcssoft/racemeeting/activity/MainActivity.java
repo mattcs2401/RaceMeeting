@@ -22,6 +22,7 @@ import com.mcssoft.racemeeting.interfaces.IEditMeeting;
 import com.mcssoft.racemeeting.interfaces.INotifier;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingPreferences;
+import com.mcssoft.racemeeting.utility.MeetingResources;
 import com.mcssoft.racemeeting.utility.MeetingTime;
 
 import java.util.ArrayList;
@@ -139,6 +140,7 @@ public class MainActivity extends AppCompatActivity
     private void initialise() {
         setContentView(R.layout.activity_main);
         mainFragment = new MainFragment();
+        MeetingResources.getInstance(this);
         MeetingPreferences.getInstance(this);
         MeetingTime.getInstance(this);
     }

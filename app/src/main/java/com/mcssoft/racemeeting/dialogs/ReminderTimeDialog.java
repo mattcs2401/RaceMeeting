@@ -11,6 +11,7 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.mcssoft.racemeeting.utility.MeetingConstants;
+import com.mcssoft.racemeeting.utility.MeetingResources;
 
 import mcssoft.com.racemeeting.R;
 
@@ -28,8 +29,10 @@ public class ReminderTimeDialog extends DialogPreference
         numberPicker = (NumberPicker) view.findViewById(R.id.id_prior_time_numberPicker);
         tvMinutes = (TextView) view.findViewById(R.id.tvMinutes);
         numberPicker.setOnValueChangedListener(this);
-        numberPicker.setMinValue(R.integer.reminder_min_value);
-        numberPicker.setMaxValue(R.integer.reminder_max_value);
+        numberPicker.setMinValue(MeetingResources.getInstance()
+                .getInteger(R.integer.reminder_min_value));
+        numberPicker.setMaxValue(MeetingResources.getInstance()
+                .getInteger(R.integer.reminder_max_value));
         numberPicker.setWrapSelectorWheel(true);
         numberPicker.setValue(npPrefVal);
         setLabel(npPrefVal);
@@ -58,12 +61,12 @@ public class ReminderTimeDialog extends DialogPreference
       and then re-installed.
      */
     private void checkReminderPreference() {
+        int init_default = MeetingResources.getInstance().getInteger(R.integer.init_default);
         npPrefVal = PreferenceManager.getDefaultSharedPreferences(getContext())
-                .getInt(MeetingConstants.REMINDER_PREF_KEY,
-                        getContext().getResources().getInteger(R.integer.init_default));
+                .getInt(MeetingConstants.REMINDER_PREF_KEY, init_default);
 
-        if(npPrefVal == getContext().getResources().getInteger(R.integer.init_default)) {
-            npPrefVal = getContext().getResources().getInteger(R.integer.reminder_min_value);  // 0 or no reminder.
+        if(npPrefVal == init_default) {
+            npPrefVal = MeetingResources.getInstance().getInteger(R.integer.reminder_min_value);  // 0 or no reminder.
             SharedPreferences.Editor spe =
                     PreferenceManager.getDefaultSharedPreferences(getContext()).edit();
             spe.putInt(MeetingConstants.REMINDER_PREF_KEY, npPrefVal).apply();
