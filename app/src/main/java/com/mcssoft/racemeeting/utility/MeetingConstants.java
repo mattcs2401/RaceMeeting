@@ -5,20 +5,6 @@ package com.mcssoft.racemeeting.utility;
  **/
 public class MeetingConstants {
 
-    // Past time preferences (settings) defaults.
-    public static final String TIME_PAST_PREF_KEY = "time_past_pref_key";
-
-    // Meeting notification enable preference.
-    public static final String NOTIFY_ENABLE_PREF_KEY = "notify_enable_pref_key";
-
-    /* Meeting notification preference. */
-    // (number picker prefs).
-    public static final String NOTIFY_PREF_KEY = "notify_pref_key";
-    // (sound prefs)
-    public static final String NOTIFY_SOUND_PREF_KEY = "notify_sound_pref_key";
-    // (vibrate prefs)
-    public static final String NOTIFY_VIBRATE_PREF_KEY = "notify_vibrate_pref_key";
-
     // Time format preferences.
     public static final String TIME_FORMAT_PREF_KEY = "time_format_pref_key";
     public static final String TIME_FORMAT_PREF_24HR = "24HR";

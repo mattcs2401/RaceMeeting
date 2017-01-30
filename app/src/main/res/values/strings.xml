@@ -150,5 +150,10 @@
     <string-array name="reminder_pref_labels">
         <item>No reminder</item><item>minute</item><item>minutes</item>
     </string-array>
+    <string name="time_past_pref_key">time_past_pref_key</string>
+    <string name="notify_enable_pref_key">notify_enable_pref_key</string>
+    <string name="notify_pref_key">notify_pref_key</string>
+    <string name="notify_sound_pref_key">notify_sound_pref_key</string>
+    <string name="notify_vibrate_pref_key">notify_vibrate_pref_key</string>
 
 </resources>

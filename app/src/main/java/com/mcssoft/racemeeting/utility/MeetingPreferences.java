@@ -70,7 +70,8 @@ public class MeetingPreferences {
      */
     public boolean meetingPastTimePref() {
         return getDefaultSharedPreferences()
-                .getBoolean(MeetingConstants.TIME_PAST_PREF_KEY, false);
+                .getBoolean(MeetingResources.getInstance()
+                        .getString(R.string.time_past_pref_key), false);
     }
 
     /**
@@ -83,19 +84,23 @@ public class MeetingPreferences {
     }
 
     public boolean meetingNotificationEnablePref() {
-        return getDefaultSharedPreferences().getBoolean(MeetingConstants.NOTIFY_ENABLE_PREF_KEY, false);
+        return getDefaultSharedPreferences().getBoolean(MeetingResources.getInstance()
+                .getString(R.string.notify_enable_pref_key), false);
     }
 
     public boolean meetingNotifySoundPref() {
-        return getDefaultSharedPreferences().getBoolean(MeetingConstants.NOTIFY_SOUND_PREF_KEY, false);
+        return getDefaultSharedPreferences().getBoolean(MeetingResources.getInstance()
+                .getString(R.string.notify_sound_pref_key), false);
     }
 
     public boolean meetingNotifyVibratePref() {
-        return getDefaultSharedPreferences().getBoolean(MeetingConstants.NOTIFY_VIBRATE_PREF_KEY, false);
+        return getDefaultSharedPreferences().getBoolean(MeetingResources.getInstance()
+                .getString(R.string.notify_vibrate_pref_key), false);
     }
 
     public int meetingNotifyVibrationsPref() {
-        return getDefaultSharedPreferences().getInt(MeetingConstants.NOTIFY_PREF_KEY,
+        return getDefaultSharedPreferences().getInt(MeetingResources.getInstance()
+                .getString(R.string.notify_pref_key),
                 R.integer.notify_default_pref_val);
     }
 

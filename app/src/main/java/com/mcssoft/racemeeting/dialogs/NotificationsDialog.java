@@ -98,19 +98,23 @@ public class NotificationsDialog extends DialogPreference
         Map<String,?> prefsMap = sharedPreferences.getAll();
         SharedPreferences.Editor spe = sharedPreferences.edit();
 
-        if(!prefsMap.containsKey(MeetingConstants.NOTIFY_SOUND_PREF_KEY)) {
+        if(!prefsMap.containsKey(MeetingResources.getInstance()
+                .getString(R.string.notify_sound_pref_key))) {
             soundPrefVal = MeetingResources.getInstance()
                     .getBoolean(R.bool.notify_sound_default_pref_val);
-            spe.putBoolean(MeetingConstants.NOTIFY_SOUND_PREF_KEY, soundPrefVal).apply();
+            spe.putBoolean(MeetingResources.getInstance()
+                    .getString(R.string.notify_sound_pref_key), soundPrefVal).apply();
         }
-        if(!prefsMap.containsKey(MeetingConstants.NOTIFY_VIBRATE_PREF_KEY)) {
+        if(!prefsMap.containsKey(MeetingResources.getInstance().getString(R.string.notify_vibrate_pref_key))) {
             vibratePrefVal = MeetingResources.getInstance()
                     .getBoolean(R.bool.notify_vibrate_default_pref_val);
-            spe.putBoolean(MeetingConstants.NOTIFY_VIBRATE_PREF_KEY, vibratePrefVal).apply();
+            spe.putBoolean(MeetingResources.getInstance()
+                    .getString(R.string.notify_vibrate_pref_key), vibratePrefVal).apply();
         }
-        if(!prefsMap.containsKey(MeetingConstants.NOTIFY_PREF_KEY)) {
+        if(!prefsMap.containsKey(MeetingResources.getInstance().getString(R.string.notify_pref_key))) {
             npPrefVal = MeetingResources.getInstance().getInteger(R.integer.notify_default_pref_val);
-            spe.putInt(MeetingConstants.NOTIFY_PREF_KEY, npPrefVal).apply();
+            spe.putInt(MeetingResources.getInstance()
+                    .getString(R.string.notify_pref_key), npPrefVal).apply();
         }
     }
 
@@ -119,18 +123,24 @@ public class NotificationsDialog extends DialogPreference
      */
     private void setNotifyPreferences() {
         SharedPreferences.Editor spe = sharedPreferences.edit();
-        spe.putBoolean(MeetingConstants.NOTIFY_SOUND_PREF_KEY, soundPref.isChecked()).apply();
-        spe.putBoolean(MeetingConstants.NOTIFY_VIBRATE_PREF_KEY, vibratePref.isChecked()).apply();
-        spe.putInt(MeetingConstants.NOTIFY_PREF_KEY, npPrefVal).apply();
+        spe.putBoolean(MeetingResources.getInstance()
+                .getString(R.string.notify_sound_pref_key), soundPref.isChecked()).apply();
+        spe.putBoolean(MeetingResources.getInstance()
+                .getString(R.string.notify_vibrate_pref_key), vibratePref.isChecked()).apply();
+        spe.putInt(MeetingResources.getInstance()
+                .getString(R.string.notify_pref_key), npPrefVal).apply();
     }
 
     /*
       Get the notification preferences.
      */
     private void getNotifyPreferences() {
-        soundPrefVal = sharedPreferences.getBoolean(MeetingConstants.NOTIFY_SOUND_PREF_KEY, false);
-        vibratePrefVal = sharedPreferences.getBoolean(MeetingConstants.NOTIFY_VIBRATE_PREF_KEY, false);
-        npPrefVal = sharedPreferences.getInt(MeetingConstants.NOTIFY_PREF_KEY,
+        soundPrefVal = sharedPreferences.getBoolean(MeetingResources.getInstance()
+                .getString(R.string.notify_sound_pref_key), false);
+        vibratePrefVal = sharedPreferences.getBoolean(MeetingResources.getInstance()
+                .getString(R.string.notify_vibrate_pref_key), false);
+        npPrefVal = sharedPreferences.getInt(MeetingResources.getInstance()
+                .getString(R.string.notify_pref_key),
                 MeetingResources.getInstance().getInteger(R.integer.notify_default_pref_val));
     }
 
