@@ -13,6 +13,7 @@ import com.mcssoft.racemeeting.interfaces.IItemClickListener;
 import com.mcssoft.racemeeting.interfaces.IItemLongClickListener;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingPreferences;
+import com.mcssoft.racemeeting.utility.MeetingResources;
 import com.mcssoft.racemeeting.utility.MeetingTime;
 
 import mcssoft.com.racemeeting.R;
@@ -153,7 +154,8 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingViewHolder> {
                     holder.getRaceDay().setText(null);
                 } else {
                     holder.getRaceDay().setBackgroundResource(R.drawable.tv_day_outline);
-                    holder.getRaceDay().setText(MeetingConstants.MEETING_SHOW_PREVIOUS);
+                    holder.getRaceDay().setText(MeetingResources.getInstance()
+                            .getString(R.string.meeting_show_previous));
                 }
             }
         }

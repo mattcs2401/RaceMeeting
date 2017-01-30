@@ -204,7 +204,8 @@ public class MeetingScheduler {
     //<editor-fold defaultstate="collapsed" desc="Region: Utility">
     private MainFragment getListingFragment() {
         return (MainFragment) activity.getFragmentManager()
-                .findFragmentByTag(MeetingConstants.DEFAULT_LISTING_FRAGMENT_TAG);
+                .findFragmentByTag(MeetingResources.getInstance()
+                        .getString(R.string.listing_fragment_tag));
     }
     //</editor-fold>
 

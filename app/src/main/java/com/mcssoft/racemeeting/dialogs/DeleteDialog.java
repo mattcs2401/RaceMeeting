@@ -13,6 +13,7 @@ import com.mcssoft.racemeeting.database.DatabaseHelper;
 import com.mcssoft.racemeeting.database.MeetingProvider;
 import com.mcssoft.racemeeting.database.SchemaConstants;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
+import com.mcssoft.racemeeting.utility.MeetingResources;
 import com.mcssoft.racemeeting.utility.MeetingTime;
 
 import mcssoft.com.racemeeting.R;
@@ -23,7 +24,8 @@ public class DeleteDialog extends DialogFragment implements  DialogInterface.OnC
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        rowId = getArguments().getLong(MeetingConstants.DELETE_DIALOG_ROWID);
+        rowId = getArguments().getLong(MeetingResources.getInstance()
+                .getString(R.string.delete_dialog_row_id));
         raceDetails = collateRaceDetails();
     }
 

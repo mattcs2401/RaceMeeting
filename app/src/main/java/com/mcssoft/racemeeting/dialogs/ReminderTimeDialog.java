@@ -63,23 +63,27 @@ public class ReminderTimeDialog extends DialogPreference
     private void checkReminderPreference() {
         int init_default = MeetingResources.getInstance().getInteger(R.integer.init_default);
         npPrefVal = PreferenceManager.getDefaultSharedPreferences(getContext())
-                .getInt(MeetingConstants.REMINDER_PREF_KEY, init_default);
+                .getInt(MeetingResources.getInstance()
+                        .getString(R.string.reminder_pref_key), init_default);
 
         if(npPrefVal == init_default) {
             npPrefVal = MeetingResources.getInstance().getInteger(R.integer.reminder_min_value);  // 0 or no reminder.
             SharedPreferences.Editor spe =
                     PreferenceManager.getDefaultSharedPreferences(getContext()).edit();
-            spe.putInt(MeetingConstants.REMINDER_PREF_KEY, npPrefVal).apply();
+            spe.putInt(MeetingResources.getInstance()
+                    .getString(R.string.reminder_pref_key), npPrefVal).apply();
         }
     }
 
     private void setLabel(int value) {
+        String[] reminder_labels = MeetingResources.getInstance()
+                .getStringArray(R.array.reminder_pref_labels);
         if(value == 0) {
-            tvMinutes.setText(MeetingConstants.REMINDER_LABELS[0]);
+            tvMinutes.setText(reminder_labels[0]);
         } else if(value == 1) {
-            tvMinutes.setText(MeetingConstants.REMINDER_LABELS[1]);
+            tvMinutes.setText(reminder_labels[1]);
         } else {
-            tvMinutes.setText(MeetingConstants.REMINDER_LABELS[2]);
+            tvMinutes.setText(reminder_labels[2]);
         }
     }
 

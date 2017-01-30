@@ -15,6 +15,7 @@ import com.mcssoft.racemeeting.fragment.EditFragment;
 import com.mcssoft.racemeeting.fragment.RaceCodesFragment;
 import com.mcssoft.racemeeting.interfaces.IShowCodes;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
+import com.mcssoft.racemeeting.utility.MeetingResources;
 
 import mcssoft.com.racemeeting.R;
 
@@ -33,18 +34,21 @@ public class EditActivity extends AppCompatActivity
             editFragment.setArguments(getIntent().getExtras());
 
             fragmentManager.beginTransaction()
-                    .add(R.id.edit_detail_container, editFragment, MeetingConstants.DEFAULT_EDIT_FRAGMENT_TAG)
+                    .add(R.id.edit_detail_container, editFragment,
+                            MeetingResources.getInstance().getString(R.string.edit_fragment_tag))
                     .commit();
         } else {
             editFragment = (EditFragment) fragmentManager
-                    .getFragment(savedInstanceState, MeetingConstants.DEFAULT_EDIT_FRAGMENT_TAG);
+                    .getFragment(savedInstanceState,
+                            MeetingResources.getInstance().getString(R.string.edit_fragment_tag));
         }
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        fragmentManager.putFragment(outState, MeetingConstants.DEFAULT_EDIT_FRAGMENT_TAG, editFragment);
+        fragmentManager.putFragment(outState,
+                MeetingResources.getInstance().getString(R.string.edit_fragment_tag), editFragment);
     }
 
     @Override
@@ -69,8 +73,9 @@ public class EditActivity extends AppCompatActivity
 
     public void onFinishCodes(Bundle args) {
         Log.d(LOG_TAG, "onFinishCodes");
-        String rbText = args.getString(MeetingConstants.FRAGMENT_RB_VAL);
-        int fragId = args.getInt(MeetingConstants.FRAGMENT_ID);
+        String rbText = args.getString(MeetingResources.getInstance()
+                .getString(R.string.dialog_btn_val));
+        int fragId = args.getInt(MeetingResources.getInstance().getString(R.string.fragment_id));
 
         FrameLayout frameLayout = (FrameLayout) findViewById(R.id.edit_detail_container);
 
@@ -106,24 +111,28 @@ public class EditActivity extends AppCompatActivity
     //<editor-fold defaultstate="collapsed" desc="Region: Utility">
     private void setCodesFragment(int fragId, View view) {
         Bundle args = new Bundle();
-        args.putInt(MeetingConstants.FRAGMENT_ID, fragId);
+        args.putInt(MeetingResources.getInstance().getString(R.string.fragment_id), fragId);
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         String etValue;
 
         switch (fragId) {
             case R.integer.city_codes_fragment_id:
                 etValue = ((EditText) view.findViewById(R.id.etCityCode)).getText().toString();
-                args.putString(MeetingConstants.FRAGMENT_RB_VAL, etValue);
+                args.putString(MeetingResources.getInstance()
+                        .getString(R.string.dialog_btn_val), etValue);
                 cityCodesFragment = new CityCodesFragment();
                 cityCodesFragment.setArguments(args);
-                ft.add(R.id.edit_detail_container, cityCodesFragment, MeetingConstants.CITY_CODES_FRAGMENT_TAG);
+                ft.add(R.id.edit_detail_container, cityCodesFragment,
+                        MeetingResources.getInstance().getString(R.string.city_codes_fragment_tag));
                 break;
             case R.integer.race_codes_fragment_id:
                 etValue = ((EditText) view.findViewById(R.id.etRaceCode)).getText().toString();
-                args.putString(MeetingConstants.FRAGMENT_RB_VAL, etValue);
+                args.putString(MeetingResources.getInstance()
+                        .getString(R.string.dialog_btn_val), etValue);
                 raceCodesFragment = new RaceCodesFragment();
                 raceCodesFragment.setArguments(args);
-                ft.add(R.id.edit_detail_container, raceCodesFragment, MeetingConstants.RACE_CODES_FRAGMENT_TAG);
+                ft.add(R.id.edit_detail_container, raceCodesFragment, MeetingResources.getInstance()
+                        .getString(R.string.race_codes_fragment_tag));
                 break;
         }
 

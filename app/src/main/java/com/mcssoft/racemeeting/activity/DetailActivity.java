@@ -9,6 +9,7 @@ import android.util.Log;
 import com.mcssoft.racemeeting.fragment.DetailFragment;
 import com.mcssoft.racemeeting.interfaces.IEditMeeting;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
+import com.mcssoft.racemeeting.utility.MeetingResources;
 
 import mcssoft.com.racemeeting.R;
 
@@ -30,11 +31,13 @@ public class DetailActivity extends AppCompatActivity implements IEditMeeting {
             detailFragment.setArguments(args);
 
             getFragmentManager().beginTransaction()
-                    .add(R.id.detail_container, detailFragment, MeetingConstants.DEFAULT_DETAIL_FRAGMENT_TAG)
+                    .add(R.id.detail_container, detailFragment,
+                            MeetingResources.getInstance().getString(R.string.detail_fragment_tag))
                     .commit();
         } else {
             detailFragment = (DetailFragment) getFragmentManager()
-                    .getFragment(savedInstanceState, MeetingConstants.DEFAULT_DETAIL_FRAGMENT_TAG);
+                    .getFragment(savedInstanceState,
+                            MeetingResources.getInstance().getString(R.string.detail_fragment_tag));
         }
     }
     //</editor-fold>

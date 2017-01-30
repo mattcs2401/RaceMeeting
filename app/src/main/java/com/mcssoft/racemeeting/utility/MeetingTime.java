@@ -61,11 +61,13 @@ public class MeetingTime {
         setTimeFormatFromPreferences();
 
         if(timeFormat.equals(MeetingConstants.TIME_FORMAT_PREF_12HR)) {
-            sdFormat = new SimpleDateFormat(MeetingConstants.TIME_FORMAT_12HR, Locale.getDefault());
+            sdFormat = new SimpleDateFormat(MeetingResources.getInstance()
+                    .getString(R.string.time_format_12hr), Locale.getDefault());
             time = sdFormat.format(calendar.getTime());
             time = time.replace("am","AM").replace("pm","PM");
         } else {
-            sdFormat = new SimpleDateFormat(MeetingConstants.TIME_FORMAT_24HR, Locale.getDefault());
+            sdFormat = new SimpleDateFormat(MeetingResources.getInstance()
+                    .getString(R.string.time_format_24hr), Locale.getDefault());
             time = sdFormat.format(calendar.getTime());
         }
 
@@ -78,7 +80,8 @@ public class MeetingTime {
 
         Calendar calendar = Calendar.getInstance(Locale.getDefault());
         calendar.setTime(new Date(timeInMillis));
-        sdFormat = new SimpleDateFormat(MeetingConstants.DATE_FORMAT, Locale.getDefault());
+        sdFormat = new SimpleDateFormat(MeetingResources.getInstance()
+                .getString(R.string.date_format), Locale.getDefault());
         ddMMyyyy = sdFormat.format(calendar.getTime());
         return ddMMyyyy;
     }

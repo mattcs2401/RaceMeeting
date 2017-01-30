@@ -31,6 +31,7 @@ import com.mcssoft.racemeeting.interfaces.IItemLongClickListener;
 import com.mcssoft.racemeeting.interfaces.INotifier;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingPreferences;
+import com.mcssoft.racemeeting.utility.MeetingResources;
 import com.mcssoft.racemeeting.utility.MeetingScheduler;
 import com.mcssoft.racemeeting.utility.MeetingTime;
 
@@ -76,8 +77,8 @@ public class MainFragment extends Fragment
         setRecyclerView(rootView);
 
         String records = checkRecordsExist();
-        if(records.equals(MeetingConstants.RACE_PRIOR_MEETINGS_EXIST) ||
-           records.equals(MeetingConstants.RACE_NO_MEETINGS)) {
+        if(records.equals(MeetingResources.getInstance().getString(R.string.race_prior_meetings_exist)) ||
+           records.equals(MeetingResources.getInstance().getString(R.string.race_no_meetings))) {
             meetingAdapter.setEmptyView(true);
         } else if(Integer.parseInt(records) > 0) {
             meetingAdapter.setEmptyView(false);
@@ -229,7 +230,8 @@ public class MainFragment extends Fragment
     private boolean getShowToday() {
         // If the 'Show only today' preference is set, this will return true.
         return (MeetingPreferences.getInstance().meetingShowPref()
-                .equals(MeetingConstants.RACE_SHOW_MEETINGS_DEFAULT_VAL));
+                .equals(MeetingResources.getInstance()
+                        .getString(R.string.race_show_meetings_default_val)));
     }
 
     private int getDbRowId(int position) {
@@ -239,7 +241,8 @@ public class MainFragment extends Fragment
     }
 
     private String checkRecordsExist() {
-        String records = MeetingConstants.RACE_NO_MEETINGS;     // simply a default value.
+        // simply a default value.
+        String records = MeetingResources.getInstance().getString(R.string.race_no_meetings);
         int count;
 
         if(getShowToday()) {
@@ -251,7 +254,8 @@ public class MainFragment extends Fragment
                 count = queryAll().getCount();
                 if(count > 0) {
                     // previous records exist.
-                    records = MeetingConstants.RACE_PRIOR_MEETINGS_EXIST;
+                    records = MeetingResources.getInstance()
+                            .getString(R.string.race_prior_meetings_exist) ;
                 }
             }
         } else {

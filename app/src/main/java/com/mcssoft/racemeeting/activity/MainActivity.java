@@ -42,13 +42,14 @@ public class MainActivity extends AppCompatActivity
         if(savedInstanceState == null) {
             getFragmentManager().beginTransaction()
                                 .replace(R.id.listing_container, mainFragment,
-                                        MeetingConstants.DEFAULT_LISTING_FRAGMENT_TAG)
+                                        MeetingResources.getInstance().getString(R.string.listing_fragment_tag))
                                 .addToBackStack(null)
                                 .commit();
         } else {
             // TBA ...
             mainFragment = (MainFragment) getFragmentManager()
-                    .getFragment(savedInstanceState, MeetingConstants.DEFAULT_LISTING_FRAGMENT_TAG);
+                    .getFragment(savedInstanceState,
+                            MeetingResources.getInstance().getString(R.string.listing_fragment_tag));
         }
     }
 
@@ -112,11 +113,11 @@ public class MainActivity extends AppCompatActivity
         DialogFragment df = new DeleteDialog();
 
         Bundle args = new Bundle();
-        args.putLong(MeetingConstants.DELETE_DIALOG_ROWID, rowId);
+        args.putLong(MeetingResources.getInstance().getString(R.string.delete_dialog_row_id), rowId);
         df.setArguments(args);
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
-        df.show(ft, MeetingConstants.DEFAULT_DELETE_DIALOG_FRAGMENT_TAG);
+        df.show(ft, MeetingResources.getInstance().getString(R.string.delete_dialog_fragment_tag));
     }
     //</editor-fold>
 

@@ -57,6 +57,14 @@ public class MeetingResources {
         return context.getResources().getBoolean(resId);
     }
 
+    public String getString(int resId) {
+        return context.getResources().getString(resId);
+    }
+
+    public String[] getStringArray(int resId) {
+        return context.getResources().getStringArray(resId);
+    }
+
     /**
      * Ensure instance values are made NULL.
      */

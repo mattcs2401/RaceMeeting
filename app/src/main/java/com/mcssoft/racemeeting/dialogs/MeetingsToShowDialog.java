@@ -14,6 +14,7 @@ import android.widget.RadioGroup;
 
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingPreferences;
+import com.mcssoft.racemeeting.utility.MeetingResources;
 
 import mcssoft.com.racemeeting.R;
 
@@ -86,24 +87,29 @@ public class MeetingsToShowDialog extends DialogPreference
 
         String newRbText = radioButton.getText().toString();
         String oldRbText = MeetingPreferences.getInstance().getDefaultSharedPreferences()
-                .getString(MeetingConstants.RACE_SHOW_MEETINGS_PREF_VAL_KEY, null);
+                .getString(MeetingResources.getInstance()
+                        .getString(R.string.race_show_meetings_pref_val_key), null);
 
         SharedPreferences.Editor spe
                 = MeetingPreferences.getInstance().getDefaultSharedPreferences().edit();
 
         if(!(oldRbText.equals(newRbText))) {
             // Only update if preference actually changed (i.e. a different one selected).
-            spe.putInt(MeetingConstants.RACE_SHOW_MEETINGS_PREF_ID_KEY, radioButtonId).apply();
-            spe.putString(MeetingConstants.RACE_SHOW_MEETINGS_PREF_VAL_KEY, newRbText).apply();
+            spe.putInt(MeetingResources.getInstance()
+                    .getString(R.string.race_show_meetings_pref_id_key), radioButtonId).apply();
+            spe.putString(MeetingResources.getInstance()
+                    .getString(R.string.race_show_meetings_pref_val_key), newRbText).apply();
             notifyChange = true;
         }
 
         boolean cbOldVal = MeetingPreferences.getInstance().getDefaultSharedPreferences()
-                .getBoolean(MeetingConstants.RACE_SHOW_MEETINGS_INCL_DATE_KEY, false);
+                .getBoolean(MeetingResources.getInstance()
+                        .getString(R.string.race_show_meetings_incl_date_key), false);
         boolean cbNewVal = checkBox.isChecked();
 
         if(cbOldVal != cbNewVal) {
-            spe.putBoolean(MeetingConstants.RACE_SHOW_MEETINGS_INCL_DATE_KEY, cbNewVal).apply();
+            spe.putBoolean(MeetingResources.getInstance()
+                    .getString(R.string.race_show_meetings_incl_date_key), cbNewVal).apply();
             notifyChange = true;
         }
 
@@ -117,7 +123,7 @@ public class MeetingsToShowDialog extends DialogPreference
     private void checkMeetingPreference() {
         // Has to be PreferenceManager if it's the 1st time the app is run.
         if(!(PreferenceManager.getDefaultSharedPreferences(getContext())
-                .contains(MeetingConstants.RACE_SHOW_MEETINGS_PREF_VAL_KEY))) {
+                .contains(MeetingResources.getInstance().getString(R.string.race_show_meetings_pref_val_key)))) {
             // If the preference doesn't exist, set the default for this preference.
 
             SharedPreferences.Editor spe =
@@ -131,17 +137,22 @@ public class MeetingsToShowDialog extends DialogPreference
             for(int ndx = 0; ndx < count; ndx++) {
                 RadioButton radioButton = (RadioButton) radioGroup.getChildAt(ndx);
                 String text = radioButton.getText().toString();
-                if(text.equals(MeetingConstants.RACE_SHOW_MEETINGS_DEFAULT_VAL)) {
+                if(text.equals(MeetingResources.getInstance()
+                        .getString(R.string.race_show_meetings_default_val))) {
                     int radioButtonId = radioButton.getId();
-                    spe.putInt(MeetingConstants.RACE_SHOW_MEETINGS_PREF_ID_KEY, radioButtonId).apply();
-                    spe.putString(MeetingConstants.RACE_SHOW_MEETINGS_PREF_VAL_KEY, text).apply();
+                    spe.putInt(MeetingResources.getInstance()
+                            .getString(R.string.race_show_meetings_pref_id_key), radioButtonId).apply();
+                    spe.putString(MeetingResources.getInstance()
+                            .getString(R.string.race_show_meetings_pref_val_key), text).apply();
                     // no need to keep going.
                     break;
                 }
             }
             // include the checkbox.
-            spe.putBoolean(MeetingConstants.RACE_SHOW_MEETINGS_INCL_DATE_KEY,
-                    getContext().getResources().getBoolean(R.bool.race_show_meetings_incl_date_default_val));
+            spe.putBoolean(MeetingResources.getInstance()
+                    .getString(R.string.race_show_meetings_incl_date_key),
+                    getContext().getResources()
+                            .getBoolean(R.bool.race_show_meetings_incl_date_default_val));
         }
     }
 

@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.app.DialogFragment;
 
 import com.mcssoft.racemeeting.utility.MeetingConstants;
+import com.mcssoft.racemeeting.utility.MeetingResources;
+
+import mcssoft.com.racemeeting.R;
 
 public class TimePickDialog extends DialogFragment {
 
@@ -16,15 +19,17 @@ public class TimePickDialog extends DialogFragment {
         boolean is24Hour = false;
         Bundle args = getArguments();
 
-        if(args.getString(MeetingConstants.TIME_FORMAT).equals(MeetingConstants.TIME_FORMAT_PREF_24HR_KEY)) {
+        if(args.getString(MeetingResources.getInstance().getString(R.string.time_format))
+                .equals(MeetingConstants.TIME_FORMAT_PREF_24HR_KEY)) {
             is24Hour = true;
         }
 
         return new android.app.TimePickerDialog(
                 getActivity(),
-                (OnTimeSetListener) getFragmentManager().findFragmentByTag(MeetingConstants.DEFAULT_EDIT_FRAGMENT_TAG),
-                args.getInt(MeetingConstants.HOUR),
-                args.getInt(MeetingConstants.MINS),
+                (OnTimeSetListener) getFragmentManager().findFragmentByTag(MeetingResources
+                        .getInstance().getString(R.string.edit_fragment_tag)),
+                args.getInt(MeetingResources.getInstance().getString(R.string.hour)),
+                args.getInt(MeetingResources.getInstance().getString(R.string.mins)),
                 is24Hour);
     }
 

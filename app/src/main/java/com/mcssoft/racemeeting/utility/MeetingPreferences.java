@@ -40,7 +40,8 @@ public class MeetingPreferences {
      */
     public String meetingShowPref() {
         return getDefaultSharedPreferences()
-                .getString(MeetingConstants.RACE_SHOW_MEETINGS_PREF_VAL_KEY, null);
+                .getString(MeetingResources.getInstance()
+                        .getString(R.string.race_show_meetings_pref_val_key), null);
     }
 
     /**
@@ -53,12 +54,14 @@ public class MeetingPreferences {
 
     public String meetingRaceCodePref() {
         return getDefaultSharedPreferences()
-                .getString(MeetingConstants.RACE_CODE_PREF_VAL_KEY, null);
+                .getString(MeetingResources.getInstance()
+                        .getString(R.string.race_code_pref_val_key), null);
     }
 
     public int meetingRaceCodeId() {
         return getDefaultSharedPreferences()
-                .getInt(MeetingConstants.RACE_CODE_PREF_ID_KEY, R.integer.init_default);
+                .getInt(MeetingResources.getInstance()
+                        .getString(R.string.race_code_pref_id_key), R.integer.init_default);
     }
 
     /**
@@ -101,8 +104,9 @@ public class MeetingPreferences {
      * @return The id of the currently selected radio button on preference save.
      */
     public int meetingRaceShowPref() {
-        return getDefaultSharedPreferences().getInt(MeetingConstants.RACE_SHOW_MEETINGS_PREF_ID_KEY,
-                R.integer.init_default);
+        return getDefaultSharedPreferences()
+                .getInt(MeetingResources.getInstance()
+                        .getString(R.string.race_show_meetings_pref_id_key), R.integer.init_default);
     }
 
     /**
@@ -111,7 +115,8 @@ public class MeetingPreferences {
      */
     public boolean meetingRaceShowDatePref() {
         return getDefaultSharedPreferences()
-                .getBoolean(MeetingConstants.RACE_SHOW_MEETINGS_INCL_DATE_KEY, false);
+                .getBoolean(MeetingResources.getInstance()
+                        .getString(R.string.race_show_meetings_incl_date_key), false);
     }
 
     /**

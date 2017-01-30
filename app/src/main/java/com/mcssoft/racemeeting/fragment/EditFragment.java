@@ -41,6 +41,7 @@ import com.mcssoft.racemeeting.interfaces.IShowCodes;
 import com.mcssoft.racemeeting.utility.MeetingEditText;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingPreferences;
+import com.mcssoft.racemeeting.utility.MeetingResources;
 import com.mcssoft.racemeeting.utility.MeetingTime;
 
 import mcssoft.com.racemeeting.R;
@@ -215,13 +216,14 @@ public class EditFragment extends Fragment
 
         hourMin = MeetingTime.getInstance().getTimeComponent(timeInMillis,R.integer.time_component_hour_minute);
 
-        args.putInt(MeetingConstants.HOUR, hourMin[0]);
-        args.putInt(MeetingConstants.MINS, hourMin[1]);
+        args.putInt(MeetingResources.getInstance().getString(R.string.hour), hourMin[0]);
+        args.putInt(MeetingResources.getInstance().getString(R.string.mins), hourMin[1]);
 
-        args.putString(MeetingConstants.TIME_FORMAT, MeetingTime.getInstance().getTimeFormatPrefKey());
+        args.putString(MeetingResources.getInstance().getString(R.string.time_format),
+                MeetingTime.getInstance().getTimeFormatPrefKey());
 
         df.setArguments(args);
-        df.show(ft, MeetingConstants.TIME_PICKER_TAG);
+        df.show(ft, MeetingResources.getInstance().getString(R.string.time_picker_tag));
     }
     //</editor-fold>
 
@@ -406,7 +408,8 @@ public class EditFragment extends Fragment
      * @return True if a default race code set, else false.
      */
     private boolean checkUseRaceCodePreference() {
-        return (!getRaceCodePreference().equals(MeetingConstants.RACE_CODE_NONE));
+        return (!getRaceCodePreference().equals(MeetingResources.getInstance()
+                .getString(R.string.race_code_none)));
     }
 
     /**

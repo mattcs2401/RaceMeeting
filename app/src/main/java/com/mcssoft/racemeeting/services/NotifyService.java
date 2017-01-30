@@ -17,6 +17,7 @@ import mcssoft.com.racemeeting.R;
 
 import com.mcssoft.racemeeting.fragment.MainFragment;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
+import com.mcssoft.racemeeting.utility.MeetingResources;
 
 public class NotifyService extends JobService {
 
@@ -48,7 +49,8 @@ public class NotifyService extends JobService {
             Log.d(LOG_TAG, "onStartJob");
 
             int iReminder = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
-                    .getInt(MeetingConstants.REMINDER_PREF_KEY, R.integer.init_default);
+                    .getInt(MeetingResources.getInstance()
+                            .getString(R.string.reminder_pref_key), R.integer.init_default);
 
             NotifyTask notifyTask = new NotifyTask(this, iReminder);
 //            mainFragment.onReceivedStartJobNotify(jobParams.getExtras());

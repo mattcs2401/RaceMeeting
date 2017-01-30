@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.mcssoft.racemeeting.interfaces.IShowCodes;
 import com.mcssoft.racemeeting.utility.MeetingConstants;
+import com.mcssoft.racemeeting.utility.MeetingResources;
 
 import mcssoft.com.racemeeting.R;
 
@@ -24,8 +25,8 @@ public class CityCodesFragment extends Fragment
     public void onCreate(Bundle state) {
         Log.d(LOG_TAG,"onCreate");
         super.onCreate(state);
-        fragId = getArguments().getInt(MeetingConstants.FRAGMENT_ID);
-        rbText = getArguments().getString(MeetingConstants.FRAGMENT_RB_VAL);
+        fragId = getArguments().getInt(MeetingResources.getInstance().getString(R.string.fragment_id)); //MeetingConstants.FRAGMENT_ID);
+        rbText = getArguments().getString(MeetingResources.getInstance().getString(R.string.dialog_btn_val));
     }
 
     @Override
@@ -58,8 +59,8 @@ public class CityCodesFragment extends Fragment
             rbText = rb.getText().toString();
 
             args = new Bundle();
-            args.putInt(MeetingConstants.FRAGMENT_ID, fragId);
-            args.putString(MeetingConstants.FRAGMENT_RB_VAL, rbText);
+            args.putInt(MeetingResources.getInstance().getString(R.string.fragment_id), fragId);
+            args.putString(MeetingResources.getInstance().getString(R.string.dialog_btn_val), rbText);
 
             Toast.makeText(getActivity(), "City Code " + rbText + " selected.", Toast.LENGTH_SHORT).show();
             fab.setVisibility(FloatingActionButton.VISIBLE);

@@ -118,4 +118,37 @@
     <!-- NotifyService exception. -->
     <string name="notify_service_exception">Unable to pass the NotifyService object back to the MainFragment.</string>
 
+    <!-- Misc -->
+    <string name="hour">hour</string>
+    <string name="mins">mins</string>
+    <string name="fragment_id">dialog_id</string>;
+    <string name="dialog_btn_val">dialog_btn_val</string>
+    <string name="city_codes_fragment_tag">city_codes_fragment_tag</string>
+    <string name="race_codes_fragment_tag">race_codes_fragment_tag</string>
+    <string name="time_picker_tag">time_picker_tag</string>
+    <string name="delete_dialog_row_id">delete_dialog_row_id</string>
+    <string name="time_format">time_format</string>
+    <string name="time_format_12hr">hh:mm aa</string>
+    <string name="time_format_24hr">kk:mm</string>
+    <string name="date_format">dd/MM/yyyy</string>
+    <string name="edit_fragment_tag">edit_fragment_tag</string>
+    <string name="detail_fragment_tag">detail_fragment_tag</string>
+    <string name="listing_fragment_tag">listing_fragment_tag</string>
+    <string name="delete_dialog_fragment_tag">delete_dialog_fragment_tag</string>
+    <string name="meeting_show_previous">P</string>
+    <string name="race_code_pref_val_key">race_code_pref_val_key</string>
+    <string name="race_code_pref_id_key">race_code_pref_id_key</string>
+    <string name="race_code_default_val">R</string>
+    <string name="race_code_none">None</string>
+    <string name="race_show_meetings_pref_val_key">race_show_meetings_pref_val_key</string>
+    <string name="race_show_meetings_pref_id_key">race_show_meetings_pref_id_key</string>
+    <string name="race_prior_meetings_exist">previous meetings exist</string>
+    <string name="race_no_meetings">0</string>
+    <string name="race_show_meetings_incl_date_key">race_show_meetings_incl_date_key</string>
+    <string name="race_show_meetings_default_val">Show only today</string>
+    <string name="reminder_pref_key">reminder_pref_key</string>
+    <string-array name="reminder_pref_labels">
+        <item>No reminder</item><item>minute</item><item>minutes</item>
+    </string-array>
+
 </resources>
