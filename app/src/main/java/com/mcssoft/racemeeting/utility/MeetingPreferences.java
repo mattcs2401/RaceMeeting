@@ -49,7 +49,8 @@ public class MeetingPreferences {
      * @return [0] preference (array) value, [1] preference text.
      */
     public boolean meetingTimeFormatPref() {
-        return getDefaultSharedPreferences().getBoolean(MeetingConstants.TIME_FORMAT_PREF_KEY, false);
+        return getDefaultSharedPreferences().getBoolean(MeetingResources.getInstance()
+                .getString(R.string.time_format_pref_key), false);
     }
 
     public String meetingRaceCodePref() {

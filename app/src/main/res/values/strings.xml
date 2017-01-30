@@ -155,5 +155,21 @@
     <string name="notify_pref_key">notify_pref_key</string>
     <string name="notify_sound_pref_key">notify_sound_pref_key</string>
     <string name="notify_vibrate_pref_key">notify_vibrate_pref_key</string>
+    <string name="time_format_pref_key">time_format_pref_key</string>
+    <string name="time_format_pref_12hr_key">time_format_pref_12hr_key</string>
+    <string name="time_format_pref_24hr_key">time_format_pref_24hr_key</string>
+    <string name="time_format_pref_12hr">12HR</string>
+    <string name="time_format_pref_24hr">24HR</string>
+    <string name="listing_service_handler">listing_service_handler</string>
+    <string name="notify_service_handler">notify_service_handler</string>
+    <string name="past_time_job_key">past_time_job_key</string>
+    <string name="prior_time_job_key">prior_time_job_key</string>
+    <string name="notify_required_key">notify_required_key</string>
+    <string name="notify_content_title">Racemeeting nearing start time.</string>
+    <string name="edit_existing_or_copy">edit_existing_or_copy</string>
+    <string name="edit_action_existing">edit_action_existing</string>
+    <string name="edit_action_new">edit_action_new</string>
+    <string name="edit_action_copy">edit_action_copy</string>
+    <string name="show_summary">show_summary</string>
 
 </resources>

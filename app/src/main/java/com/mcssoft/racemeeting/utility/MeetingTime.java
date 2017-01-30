@@ -60,7 +60,8 @@ public class MeetingTime {
 
         setTimeFormatFromPreferences();
 
-        if(timeFormat.equals(MeetingConstants.TIME_FORMAT_PREF_12HR)) {
+        if(timeFormat.equals(MeetingResources.getInstance()
+                .getString(R.string.time_format_pref_12hr))) {
             sdFormat = new SimpleDateFormat(MeetingResources.getInstance()
                     .getString(R.string.time_format_12hr), Locale.getDefault());
             time = sdFormat.format(calendar.getTime());
@@ -146,10 +147,14 @@ public class MeetingTime {
 
     public String getTimeFormatPrefKey() {
         String timeFormatPrefKey = null;
-        if (timeFormat.equals(MeetingConstants.TIME_FORMAT_PREF_12HR)) {
-            timeFormatPrefKey = MeetingConstants.TIME_FORMAT_PREF_12HR_KEY;
-        } else if (timeFormat.equals(MeetingConstants.TIME_FORMAT_PREF_24HR)) {
-            timeFormatPrefKey = MeetingConstants.TIME_FORMAT_PREF_24HR_KEY;
+        if (timeFormat.equals(MeetingResources.getInstance()
+                .getString(R.string.time_format_pref_12hr))) {
+            timeFormatPrefKey = MeetingResources.getInstance()
+                    .getString(R.string.time_format_pref_12hr_key);
+        } else if (timeFormat.equals(MeetingResources.getInstance()
+                .getString(R.string.time_format_pref_24hr))) {
+            timeFormatPrefKey = MeetingResources.getInstance()
+                    .getString(R.string.time_format_pref_24hr_key);
         }
         return timeFormatPrefKey;
     }
@@ -220,11 +225,12 @@ public class MeetingTime {
      */
     private void setTimeFormatFromPreferences() {
         if(PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean(MeetingConstants.TIME_FORMAT_PREF_KEY, false)) {
+                .getBoolean(MeetingResources.getInstance()
+                        .getString(R.string.time_format_pref_key), false)) {
 
-            timeFormat = MeetingConstants.TIME_FORMAT_PREF_24HR;
+            timeFormat = MeetingResources.getInstance().getString(R.string.time_format_pref_24hr);
         } else {
-            timeFormat = MeetingConstants.TIME_FORMAT_PREF_12HR;
+            timeFormat = MeetingResources.getInstance().getString(R.string.time_format_pref_12hr);
         }
     }
 

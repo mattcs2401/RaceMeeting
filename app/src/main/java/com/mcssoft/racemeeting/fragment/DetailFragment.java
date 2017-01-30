@@ -4,7 +4,6 @@ import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.ContentUris;
 import android.content.CursorLoader;
-import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
@@ -22,7 +21,7 @@ import android.widget.TextView;
 import com.mcssoft.racemeeting.database.MeetingProvider;
 import com.mcssoft.racemeeting.database.SchemaConstants;
 import com.mcssoft.racemeeting.interfaces.IEditMeeting;
-import com.mcssoft.racemeeting.utility.MeetingConstants;
+import com.mcssoft.racemeeting.utility.MeetingResources;
 import com.mcssoft.racemeeting.utility.MeetingTime;
 
 import mcssoft.com.racemeeting.R;
@@ -45,10 +44,10 @@ public class DetailFragment extends Fragment
         onCreateInitialise(rootView);
 
         Bundle args = getActivity().getIntent().getExtras();
-        rowId = ((long[])args.get(MeetingConstants.SHOW_SUMMARY))[0];
+        rowId = ((long[])args.get(MeetingResources.getInstance().getString(R.string.show_summary)))[0];
 
         if(rowId != R.integer.init_default) {
-            args.putLong(MeetingConstants.SHOW_SUMMARY, rowId);
+            args.putLong(MeetingResources.getInstance().getString(R.string.show_summary), rowId);
             getLoaderManager().initLoader(0, args, this);
         } else {
             // TBA
@@ -74,7 +73,7 @@ public class DetailFragment extends Fragment
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         Log.d(LOG_TAG, "onCreateLoader");
 
-        long rowId = args.getLong(MeetingConstants.SHOW_SUMMARY);
+        long rowId = args.getLong(MeetingResources.getInstance().getString(R.string.show_summary));
         Uri contentUri = ContentUris.withAppendedId(MeetingProvider.contentUri, rowId);
         return new CursorLoader(getActivity(),
                 contentUri,

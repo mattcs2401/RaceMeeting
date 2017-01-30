@@ -5,7 +5,6 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -14,7 +13,6 @@ import com.mcssoft.racemeeting.fragment.CityCodesFragment;
 import com.mcssoft.racemeeting.fragment.EditFragment;
 import com.mcssoft.racemeeting.fragment.RaceCodesFragment;
 import com.mcssoft.racemeeting.interfaces.IShowCodes;
-import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingResources;
 
 import mcssoft.com.racemeeting.R;

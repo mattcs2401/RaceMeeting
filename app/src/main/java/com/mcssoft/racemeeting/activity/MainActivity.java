@@ -20,7 +20,6 @@ import com.mcssoft.racemeeting.fragment.MainFragment;
 import com.mcssoft.racemeeting.interfaces.IDeleteMeeting;
 import com.mcssoft.racemeeting.interfaces.IEditMeeting;
 import com.mcssoft.racemeeting.interfaces.INotifier;
-import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingPreferences;
 import com.mcssoft.racemeeting.utility.MeetingResources;
 import com.mcssoft.racemeeting.utility.MeetingTime;
@@ -89,19 +88,22 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(this, EditActivity.class);
         switch (editType) {
             case R.integer.new_meeting:
-                intent.setAction(MeetingConstants.EDIT_ACTION_NEW);
+                intent.setAction(MeetingResources.getInstance().getString(R.string.edit_action_new));
                 break;
             case R.integer.edit_meeting:
-                intent.putExtra(MeetingConstants.EDIT_EXISTING_OR_COPY, dbRowId);
-                intent.setAction(MeetingConstants.EDIT_ACTION_EXISTING);
+                intent.putExtra(MeetingResources.getInstance()
+                        .getString(R.string.edit_existing_or_copy), dbRowId);
+                intent.setAction(MeetingResources.getInstance()
+                        .getString(R.string.edit_action_existing));
                 break;
             case R.integer.copy_meeting:
-                intent.putExtra(MeetingConstants.EDIT_EXISTING_OR_COPY, dbRowId);
-                intent.setAction(MeetingConstants.EDIT_ACTION_COPY);
+                intent.putExtra(MeetingResources.getInstance()
+                        .getString(R.string.edit_existing_or_copy), dbRowId);
+                intent.setAction(MeetingResources.getInstance().getString(R.string.edit_action_copy));
                 break;
             case R.integer.show_meeting:
                 intent = new Intent(this, DetailActivity.class);
-                intent.putExtra(MeetingConstants.SHOW_SUMMARY, dbRowId);
+                intent.putExtra(MeetingResources.getInstance().getString(R.string.show_summary), dbRowId);
                 break;
         }
         startActivity(intent);
@@ -124,7 +126,7 @@ public class MainActivity extends AppCompatActivity
     //<editor-fold defaultstate="collapsed" desc="Region: Interface - INotifier">
     public void onNotify(ArrayList<String[]> notifyValues) {
         Notification notification = new Notification.Builder(this)
-                .setContentTitle(MeetingConstants.CONTENT_TITLE)
+                .setContentTitle(MeetingResources.getInstance().getString(R.string.notify_content_title))
                 .setContentText(notificationContentText(notifyValues))
                 .setSmallIcon(R.drawable.r_icon_24dp)
                 .setLargeIcon(getBitmap(R.drawable.r_icon_32dp))  // testing API 22 doesn't do icon
@@ -173,7 +175,8 @@ public class MainActivity extends AppCompatActivity
     private Notification.Action getNotificationAction(ArrayList<String[]> notifyValues) {
 
         Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(MeetingConstants.SHOW_SUMMARY, Long.parseLong((notifyValues.get(0)[0])));
+        intent.putExtra(MeetingResources.getInstance()
+                .getString(R.string.show_summary), Long.parseLong((notifyValues.get(0)[0])));
 
         PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
         Notification.Action.Builder builder = new Notification.Action.Builder(0, "Detail", pIntent);

@@ -1,12 +1,10 @@
 package com.mcssoft.racemeeting.dialogs;
 
 import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.os.Bundle;
 import android.app.DialogFragment;
 
-import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingResources;
 
 import mcssoft.com.racemeeting.R;
@@ -20,7 +18,8 @@ public class TimePickDialog extends DialogFragment {
         Bundle args = getArguments();
 
         if(args.getString(MeetingResources.getInstance().getString(R.string.time_format))
-                .equals(MeetingConstants.TIME_FORMAT_PREF_24HR_KEY)) {
+                .equals(MeetingResources.getInstance()
+                        .getString(R.string.time_format_pref_24hr_key))) {
             is24Hour = true;
         }
 

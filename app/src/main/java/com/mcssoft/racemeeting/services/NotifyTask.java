@@ -12,7 +12,7 @@ import android.util.Log;
 import com.mcssoft.racemeeting.database.DatabaseHelper;
 import com.mcssoft.racemeeting.database.MeetingProvider;
 import com.mcssoft.racemeeting.database.SchemaConstants;
-import com.mcssoft.racemeeting.utility.MeetingConstants;
+import com.mcssoft.racemeeting.utility.MeetingResources;
 import com.mcssoft.racemeeting.utility.MeetingTime;
 
 import mcssoft.com.racemeeting.R;
@@ -51,7 +51,8 @@ public class NotifyTask extends AsyncTask<JobParameters, Void, JobParameters> {
                         }
                     }
                     if(row != null) {
-                        result.getExtras().putInt(MeetingConstants.NOTIFY_REQUIRED_KEY,
+                        result.getExtras().putInt(MeetingResources.getInstance()
+                                .getString(R.string.notify_required_key),
                                                   R.integer.notify_required);
                     }
                 }

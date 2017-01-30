@@ -29,7 +29,6 @@ import com.mcssoft.racemeeting.interfaces.IItemClickListener;
 import com.mcssoft.racemeeting.interfaces.IDeleteMeeting;
 import com.mcssoft.racemeeting.interfaces.IItemLongClickListener;
 import com.mcssoft.racemeeting.interfaces.INotifier;
-import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingPreferences;
 import com.mcssoft.racemeeting.utility.MeetingResources;
 import com.mcssoft.racemeeting.utility.MeetingScheduler;
@@ -116,8 +115,9 @@ public class MainFragment extends Fragment
         // have set the D_CHG_REQ column to Y on applicable records.
         Set<String> keys = results.keySet();
 
-        if(keys.contains(MeetingConstants.PAST_TIME_JOB_KEY)) {
-            if(results.getInt(MeetingConstants.PAST_TIME_JOB_KEY) == R.integer.listing_change_required) {
+        if(keys.contains(MeetingResources.getInstance().getString(R.string.past_time_job_key))) {
+            if(results.getInt(MeetingResources.getInstance()
+                    .getString(R.string.past_time_job_key)) == R.integer.listing_change_required) {
                 getLoaderManager().restartLoader(0, null, this);
             }
         }
@@ -129,12 +129,13 @@ public class MainFragment extends Fragment
         // The notify service returns back to here when the notify task is done.
         Set<String> keys = results.keySet();
 
-        if(keys.contains(MeetingConstants.PRIOR_TIME_JOB_KEY)) {
-            if(results.getInt(MeetingConstants.NOTIFY_REQUIRED_KEY) == R.integer.notify_required) {
+        if(keys.contains(MeetingResources.getInstance().getString(R.string.prior_time_job_key))) {
+            if(results.getInt(MeetingResources.getInstance()
+                    .getString(R.string.notify_required_key)) == R.integer.notify_required) {
 
                 // strip out the "non race value" keys.
-                keys.remove(MeetingConstants.PRIOR_TIME_JOB_KEY);
-                keys.remove(MeetingConstants.NOTIFY_REQUIRED_KEY);
+                keys.remove(MeetingResources.getInstance().getString(R.string.prior_time_job_key));
+                keys.remove(MeetingResources.getInstance().getString(R.string.notify_required_key));
 
                 ArrayList<String[]> al = new ArrayList<>();
 

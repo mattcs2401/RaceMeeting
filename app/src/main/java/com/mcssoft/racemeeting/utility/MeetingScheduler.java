@@ -62,14 +62,16 @@ public class MeetingScheduler {
             case R.integer.listing_service:
                 Log.d(LOG_TAG, "startListingService");
                 listingSvcIntent = new Intent(activity, ListingService.class);
-                listingSvcIntent.putExtra(MeetingConstants.LISTING_SERVICE_HANDLER, new Messenger(lHandler));
+                listingSvcIntent.putExtra(MeetingResources.getInstance()
+                        .getString(R.string.listing_service_handler), new Messenger(lHandler));
 //                listingSvcIntent.putExtra(R.integer.listing_service_ACTION, action);
                 activity.startService(listingSvcIntent);
                 break;
             case R.integer.notify_service:
                 Log.d(LOG_TAG, "startNotifyService");
                 notifySvcIntent = new Intent(activity, NotifyService.class);
-                notifySvcIntent.putExtra(MeetingConstants.NOTIFY_SERVICE_HANDLER, new Messenger(lHandler));
+                notifySvcIntent.putExtra(MeetingResources.getInstance()
+                        .getString(R.string.notify_service_handler), new Messenger(lHandler));
 //                notifySvcIntent.putExtra(R.integer.notify_service_ACTION, action);
                 activity.startService(notifySvcIntent);
                 break;
@@ -167,7 +169,8 @@ public class MeetingScheduler {
                     builder.setPeriodic(R.integer.thirty_seconds);
 
                     bundle = new PersistableBundle();
-                    bundle.putInt(MeetingConstants.PAST_TIME_JOB_KEY, R.integer.init_default); // key/value
+                    bundle.putInt(MeetingResources.getInstance()
+                            .getString(R.string.past_time_job_key), R.integer.init_default); // key/value
 
                     builder.setExtras(bundle);
 
@@ -186,7 +189,8 @@ public class MeetingScheduler {
                     builder.setPeriodic(R.integer.thirty_seconds);
 
                     bundle = new PersistableBundle();
-                    bundle.putInt(MeetingConstants.PRIOR_TIME_JOB_KEY, R.integer.init_default); // key/value
+                    bundle.putInt(MeetingResources.getInstance()
+                            .getString(R.string.prior_time_job_key), R.integer.init_default); // key/value
                     builder.setExtras(bundle);
                     JobInfo ji = builder.build();
 

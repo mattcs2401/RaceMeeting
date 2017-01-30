@@ -11,7 +11,7 @@ import android.util.Log;
 import com.mcssoft.racemeeting.database.DatabaseHelper;
 import com.mcssoft.racemeeting.database.MeetingProvider;
 import com.mcssoft.racemeeting.database.SchemaConstants;
-import com.mcssoft.racemeeting.utility.MeetingConstants;
+import com.mcssoft.racemeeting.utility.MeetingResources;
 import com.mcssoft.racemeeting.utility.MeetingTime;
 
 import mcssoft.com.racemeeting.R;
@@ -63,10 +63,12 @@ public class ListingTask extends AsyncTask<JobParameters, Void, JobParameters> {
                     cursor.close();
 
                     if(updated) {
-                        result.getExtras().putInt(MeetingConstants.PAST_TIME_JOB_KEY,
+                        result.getExtras().putInt(MeetingResources.getInstance()
+                                .getString(R.string.past_time_job_key),
                                 R.integer.listing_change_required);
                     } else {
-                        result.getExtras().putInt(MeetingConstants.PAST_TIME_JOB_KEY, 0);
+                        result.getExtras().putInt(MeetingResources.getInstance()
+                                .getString(R.string.past_time_job_key), 0);
                     }
                 }
             }

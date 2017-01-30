@@ -1,6 +1,5 @@
 package com.mcssoft.racemeeting.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +7,6 @@ import android.util.Log;
 
 import com.mcssoft.racemeeting.fragment.DetailFragment;
 import com.mcssoft.racemeeting.interfaces.IEditMeeting;
-import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingResources;
 
 import mcssoft.com.racemeeting.R;
@@ -46,8 +44,8 @@ public class DetailActivity extends AppCompatActivity implements IEditMeeting {
     @Override
     public void onEditMeeting(int editType, long... dbRowId) {
         Intent intent = new Intent(this, EditActivity.class);
-        intent.putExtra(MeetingConstants.EDIT_EXISTING_OR_COPY, dbRowId);
-        intent.setAction(MeetingConstants.EDIT_ACTION_EXISTING);
+        intent.putExtra(MeetingResources.getInstance().getString(R.string.edit_existing_or_copy), dbRowId);
+        intent.setAction(MeetingResources.getInstance().getString(R.string.edit_action_existing));
         startActivity(intent);
     }
     //</editor-fold>

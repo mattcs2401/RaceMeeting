@@ -16,7 +16,6 @@ import android.util.Log;
 import mcssoft.com.racemeeting.R;
 
 import com.mcssoft.racemeeting.fragment.MainFragment;
-import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingResources;
 
 public class NotifyService extends JobService {
@@ -26,7 +25,8 @@ public class NotifyService extends JobService {
         Log.d(LOG_TAG, "onStartComand");
 
         // the messenger object is effectively a reference to the handler in the MainFragment.
-        Messenger messenger = intent.getParcelableExtra(MeetingConstants.NOTIFY_SERVICE_HANDLER);
+        Messenger messenger = intent.getParcelableExtra(MeetingResources.getInstance()
+                .getString(R.string.notify_service_handler));
         // Dev doco: ... the best way to get one of these is to call Message.obtain()
         Message message = Message.obtain();
         //Dev doco: User-defined message code so that the recipient can identify what this message is about.
@@ -72,7 +72,8 @@ public class NotifyService extends JobService {
             return false;
         } else {
             Log.d(LOG_TAG, "onStopJob");
-            if(jobParams.getExtras().getInt(MeetingConstants.NOTIFY_REQUIRED_KEY) == R.integer.notify_required) {
+            if(jobParams.getExtras().getInt(MeetingResources.getInstance()
+                    .getString(R.string.notify_required_key)) == R.integer.notify_required) {
                 mainFragment.onReceivedStopJobNotify(jobParams.getExtras());
             }
             return true; // indicates to job manager to reschedule.

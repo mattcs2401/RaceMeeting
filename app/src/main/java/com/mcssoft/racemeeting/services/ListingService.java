@@ -4,7 +4,7 @@ package com.mcssoft.racemeeting.services;
 import mcssoft.com.racemeeting.R;
 
 import com.mcssoft.racemeeting.fragment.MainFragment;
-import com.mcssoft.racemeeting.utility.MeetingConstants;
+import com.mcssoft.racemeeting.utility.MeetingResources;
 
 import android.app.job.JobInfo;
 import android.app.job.JobParameters;
@@ -26,7 +26,8 @@ public class ListingService extends JobService {
         Log.d(LOG_TAG, "onStartComand");
 
         // the messenger object is effectively a reference to the handler in the MainFragment.
-        Messenger messenger = intent.getParcelableExtra(MeetingConstants.LISTING_SERVICE_HANDLER);
+        Messenger messenger = intent.getParcelableExtra(MeetingResources.getInstance()
+                .getString(R.string.listing_service_handler));
         // Dev doco: ... the best way to get one of these is to call Message.obtain()
         Message message = Message.obtain();
         //Dev doco: User-defined message code so that the recipient can identify what this message is about.

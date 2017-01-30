@@ -39,7 +39,6 @@ import com.mcssoft.racemeeting.database.SchemaConstants;
 import com.mcssoft.racemeeting.dialogs.TimePickDialog;
 import com.mcssoft.racemeeting.interfaces.IShowCodes;
 import com.mcssoft.racemeeting.utility.MeetingEditText;
-import com.mcssoft.racemeeting.utility.MeetingConstants;
 import com.mcssoft.racemeeting.utility.MeetingPreferences;
 import com.mcssoft.racemeeting.utility.MeetingResources;
 import com.mcssoft.racemeeting.utility.MeetingTime;
@@ -67,7 +66,15 @@ public class EditFragment extends Fragment
         onCreateInitialise(rootView);
 
         intent = getActivity().getIntent();
-        editAction = intent.getAction();
+        String action = intent.getAction();
+
+        if(action.equals(MeetingResources.getInstance().getString(R.string.edit_action_new))) {
+            editAction = R.string.edit_action_new;
+        } else if (action.equals(MeetingResources.getInstance().getString(R.string.edit_action_existing))) {
+            editAction = R.string.edit_action_existing;
+        } else if (action.equals(MeetingResources.getInstance().getString(R.string.edit_action_copy))) {
+            editAction = R.string.edit_action_copy;
+        }
 
         doEditAction();
 
@@ -161,9 +168,9 @@ public class EditFragment extends Fragment
         Log.d(LOG_TAG, "onCreateLoader");
         long dbRowId = R.integer.init_default;  // simply an initialiser else complains.
 
-        if((editAction.equals(MeetingConstants.EDIT_ACTION_EXISTING)) ||
-                (editAction.equals(MeetingConstants.EDIT_ACTION_COPY))) {
-            dbRowId = args.getLong(MeetingConstants.EDIT_EXISTING_OR_COPY);
+        if((editAction == R.string.edit_action_existing) ||
+                (editAction == R.string.edit_action_copy)) {
+            dbRowId = args.getLong(MeetingResources.getInstance().getString(R.string.edit_existing_or_copy));
         }
 
         Uri contentUri = ContentUris.withAppendedId(MeetingProvider.contentUri, dbRowId);
@@ -193,7 +200,7 @@ public class EditFragment extends Fragment
         dispChgReq = cursor.getString(cursor.getColumnIndexOrThrow(SchemaConstants.COLUMN_D_CHG_REQ));
         notified = cursor.getString(cursor.getColumnIndexOrThrow(SchemaConstants.COLUMN_NOTIFIED));
 
-        if(editAction.equals(MeetingConstants.EDIT_ACTION_COPY)) {
+        if(editAction == R.string.edit_action_copy) {
             setCache();
         }
     }
@@ -232,7 +239,7 @@ public class EditFragment extends Fragment
         Bundle args = new Bundle();
         boolean getLoader = false;
         switch(editAction) {
-            case MeetingConstants.EDIT_ACTION_NEW:
+            case R.string.edit_action_new:
                 actionBar.setTitle(R.string.app_name_new);
                 updateBackground(R.integer.new_meeting);
                 timeInMillis = MeetingTime.getInstance().getTimeInMillis();
@@ -242,18 +249,19 @@ public class EditFragment extends Fragment
                     etRaceCode.setText(getRaceCodePreference());
                 }
                 break;
-            case MeetingConstants.EDIT_ACTION_EXISTING:
+            case R.string.edit_action_existing:
                 actionBar.setTitle(R.string.app_name_edit);
                 getLoader = true;
                 break;
-            case MeetingConstants.EDIT_ACTION_COPY:
+            case R.string.edit_action_copy:
                 actionBar.setTitle(R.string.app_name_copy);
                 getLoader = true;
                 break;
         }
         if(getLoader) {
             updateBackground(R.integer.edit_meeting);
-            args.putLong(MeetingConstants.EDIT_EXISTING_OR_COPY, getRowIdFromArgs());
+            args.putLong(MeetingResources.getInstance()
+                    .getString(R.string.edit_existing_or_copy), getRowIdFromArgs());
             getLoaderManager().initLoader(0, args, this);
         }
     }
@@ -277,7 +285,7 @@ public class EditFragment extends Fragment
 
     private boolean checkAgainstCache() {
         boolean isValid = true;
-        if(editAction.equals(MeetingConstants.EDIT_ACTION_COPY)) {
+        if(editAction == R.string.edit_action_copy) {
             if(etCityCodeCache.equals(etCityCode.getText().toString()) &&
                     etRaceCodeCache.equals(etRaceCode.getText().toString()) &&
                     etRaceNumCache.equals(etRaceNum.getText().toString()) &&
@@ -309,8 +317,7 @@ public class EditFragment extends Fragment
         contentValues.put(SchemaConstants.COLUMN_RACE_SEL, etRaceSel.getText().toString());
         contentValues.put(SchemaConstants.COLUMN_DATE_TIME, timeInMillis);
 
-        if(editAction.equals(MeetingConstants.EDIT_ACTION_NEW) ||
-           editAction.equals(MeetingConstants.EDIT_ACTION_COPY)) {
+        if((editAction == R.string.edit_action_new) || (editAction == R.string.edit_action_copy)) {
 
             contentValues.put(SchemaConstants.COLUMN_D_CHG_REQ, "N");
             contentValues.put(SchemaConstants.COLUMN_NOTIFIED, "N");
@@ -321,7 +328,7 @@ public class EditFragment extends Fragment
             if(dbRowId < 1) {
                 throw new IllegalStateException(R.string.error_path + itemUri.toString());
             }
-        } else if(editAction.equals(MeetingConstants.EDIT_ACTION_EXISTING)) {
+        } else if(editAction == R.string.edit_action_existing) {
 
             // Reset display change required.
             if ((timeInMillis > MeetingTime.getInstance().getTimeInMillis()) && (dispChgReq.equals("Y"))) {
@@ -436,7 +443,8 @@ public class EditFragment extends Fragment
 
     private long getRowIdFromArgs() {
         // Note: array is only one element.
-        return  ((long[])intent.getExtras().get(MeetingConstants.EDIT_EXISTING_OR_COPY))[0];
+        return  ((long[])intent.getExtras().get(MeetingResources.getInstance()
+                .getString(R.string.edit_existing_or_copy)))[0];
     }
     //</editor-fold>
 
@@ -460,7 +468,7 @@ public class EditFragment extends Fragment
     private long timeInMillis;         // time in milli sec.
     private String dispChgReq;            // display change required flag.
     private String notified;
-    private String editAction;       // activity action tag.
+    private int editAction;       // activity action tag.
 
     private String LOG_TAG = this.getClass().getCanonicalName();
     //</editor-fold>
