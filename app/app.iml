@@ -49,6 +49,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src/debug/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/shaders" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestDebug/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testDebug/assets" type="java-test-resource" />
@@ -86,17 +93,17 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-classes" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-runtime-classes" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-safeguard" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-verifier" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant-run-apk" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant-run-resources" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant-run-support" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/javaPrecompile" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jniLibs" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/lint" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/prebuild" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/reload-dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/restart-dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/rs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/shaders" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/split-apk" />
@@ -111,20 +118,20 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="constraint-layout-solver-1.0.2" level="project" />
     <orderEntry type="library" name="constraint-layout-1.0.2" level="project" />
-    <orderEntry type="library" name="transition-25.3.1" level="project" />
-    <orderEntry type="library" name="design-25.3.1" level="project" />
-    <orderEntry type="library" name="support-core-ui-25.3.1" level="project" />
-    <orderEntry type="library" name="cardview-v7-25.3.1" level="project" />
-    <orderEntry type="library" name="support-v4-25.3.1" level="project" />
-    <orderEntry type="library" name="support-media-compat-25.3.1" level="project" />
-    <orderEntry type="library" name="recyclerview-v7-25.3.1" level="project" />
-    <orderEntry type="library" name="support-annotations-25.3.1" level="project" />
-    <orderEntry type="library" name="support-vector-drawable-25.3.1" level="project" />
-    <orderEntry type="library" name="appcompat-v7-25.3.1" level="project" />
-    <orderEntry type="library" name="animated-vector-drawable-25.3.1" level="project" />
-    <orderEntry type="library" name="support-compat-25.3.1" level="project" />
-    <orderEntry type="library" name="support-fragment-25.3.1" level="project" />
-    <orderEntry type="library" name="support-core-utils-25.3.1" level="project" />
+    <orderEntry type="library" name="transition-25.4.0" level="project" />
+    <orderEntry type="library" name="design-25.4.0" level="project" />
+    <orderEntry type="library" name="cardview-v7-25.4.0" level="project" />
+    <orderEntry type="library" name="support-core-ui-25.4.0" level="project" />
+    <orderEntry type="library" name="support-v4-25.4.0" level="project" />
+    <orderEntry type="library" name="support-media-compat-25.4.0" level="project" />
+    <orderEntry type="library" name="recyclerview-v7-25.4.0" level="project" />
+    <orderEntry type="library" name="support-annotations-25.4.0" level="project" />
+    <orderEntry type="library" name="appcompat-v7-25.4.0" level="project" />
+    <orderEntry type="library" name="support-vector-drawable-25.4.0" level="project" />
+    <orderEntry type="library" name="animated-vector-drawable-25.4.0" level="project" />
+    <orderEntry type="library" name="support-compat-25.4.0" level="project" />
+    <orderEntry type="library" name="support-fragment-25.4.0" level="project" />
+    <orderEntry type="library" name="support-core-utils-25.4.0" level="project" />
     <orderEntry type="library" name="android-android-25" level="project" />
   </component>
 </module>
