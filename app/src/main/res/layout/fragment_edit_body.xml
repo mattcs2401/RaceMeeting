@@ -28,11 +28,12 @@
         android:textAppearance="@android:style/TextAppearance.Material.Large"
         android:gravity="center_vertical|center_horizontal"
         android:layout_marginStart="40dp"
-        app:layout_constraintLeft_toRightOf="@+id/tvRaceCity"
         android:textColor="#000000"
         android:textStyle="bold"
         android:typeface="normal"
-        tools:layout_editor_absoluteY="0dp" />
+        app:layout_constraintLeft_toRightOf="@+id/tvRaceCity"
+        android:layout_marginTop="?android:attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:text="Race Code"
@@ -130,17 +131,16 @@
         android:typeface="normal"/>
 
     <EditText
-        android:layout_width="98dp"
-        android:layout_height="wrap_content"
         android:id="@+id/etRaceTime"
-        android:textAppearance="@android:style/TextAppearance.Material.Large"
-        android:gravity="center_vertical|center_horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/etRaceSel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:layout_constraintLeft_toLeftOf="@+id/etRaceSel"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
         android:textColor="#000000"
         android:textStyle="bold"
-        android:typeface="normal" />
+        android:typeface="normal"
+        app:layout_constraintLeft_toLeftOf="@+id/etRaceSel"
+        app:layout_constraintTop_toBottomOf="@+id/etRaceSel" />
 
     <Button
         android:text="Save"
