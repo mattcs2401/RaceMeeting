@@ -14,7 +14,7 @@
         style="@style/FloatingActionButtonLarge"
         android:layout_margin="@dimen/fab_margin"
         android:src="@android:drawable/ic_input_add"
-        app:layout_anchor="@id/id_city_codes"
+        app:layout_anchor="@id/id_city_codes_detail"
         app:layout_anchorGravity="top|end"
         android:visibility="invisible" />
 

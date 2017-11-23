@@ -4,15 +4,15 @@
     style="@style/layout_fill_both"
     android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/tv_race_code_label"
-            style="@style/text_style_base"
-            android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
-            android:text="@string/lbl_sel_race_code"
-            android:gravity="center_horizontal"
-            android:textColor="?attr/colorPrimary"
-            android:background="?android:attr/colorBackground" />
+    <TextView
+        android:id="@+id/tv_race_code_label"
+        style="@style/text_style_base"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:text="@string/lbl_sel_race_code"
+        android:gravity="center_horizontal"
+        android:textColor="?attr/colorPrimary"
+        android:background="?android:attr/colorBackground" />
 
     <RadioGroup
         android:id="@+id/rg_race_codes"

@@ -43,9 +43,9 @@ public class CityCodesFragment extends Fragment
     //<editor-fold defaultstate="collapsed" desc="Region: Listeners">
     @Override
     public void onClick(View view) {
-//        if(view.getId() == R.id.id_fab_city_codes) {
-//            ((IShowCodes) getActivity()).onFinishCodes(args);
-//        }
+        if(view.getId() == R.id.id_fab_city_codes) {
+            ((IShowCodes) getActivity()).onFinishCodes(args);
+        }
     }
 
     // Radio group listener.
