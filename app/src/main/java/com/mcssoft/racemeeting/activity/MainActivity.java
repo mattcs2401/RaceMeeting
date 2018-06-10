@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Region: Interface - Utility">
+    //<editor-fold defaultstate="collapsed" desc="Region: Utility">
     private void initialise() {
         setContentView(R.layout.activity_main);
         mainFragment = new MainFragment();
